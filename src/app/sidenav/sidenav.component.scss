@@ -1,0 +1,18 @@
+.sidenav-button{
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 24;
+}
+.user-view span{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  text-shadow: 0 2px 3px #222;
+}
+
+.user-view span i{
+  border: grey 1px solid;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+}

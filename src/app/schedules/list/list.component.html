@@ -1,0 +1,37 @@
+<!--<mz-collection>-->
+<!--  <a (click)="getTitle(laboratory.data.name)" *ngFor="let laboratory of laboratories | async" class="waves-effect waves-light" mz-collection-link routerLink="{{laboratory.id}}">-->
+<!--    <mz-collection-item [avatar]="true">-->
+<!--      <i *ngIf="laboratory.data.maintenance == false" mz-avatar mz-icon-mdi [icon]="'lan'" class="orange-text grey darken-3"></i>-->
+<!--      <i *ngIf="laboratory.data.maintenance == true" mz-avatar mz-icon-mdi [icon]="'wrench'" class="grey-text text-darken-3 orange darken-2"></i>-->
+<!--      <div class="title" *ngFor="let computers of laboratory.computers | async; index as i; last as isLast">-->
+<!--        <div *ngIf="isLast" class="orange-text"><i mz-icon-mdi [icon]="'desktop-classic'" [size]="'24'"></i>&nbsp;&nbsp;{{i+1}}</div>-->
+<!--      </div>-->
+<!--      <div class="grey-text">{{laboratory.data.name | uppercase}}</div>-->
+<!--    </mz-collection-item>-->
+<!--  </a>-->
+<!--</mz-collection>-->
+
+
+<div class="fixed-action-btn">
+  <a mz-button [large]="true" [float]="true" class="blue">
+    <i mz-icon-mdi class="" [size]="'24px'" [icon]="'pencil'"></i>
+  </a>
+  <ul>
+    <!--<li>
+      <a routerLink="detail" mz-button [large]="false" [float]="true" class="blue-grey darken-3">
+        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'filter-variant'"></i>
+      </a>
+    </li>-->
+    <li>
+      <a routerLink="filter" mz-button [large]="true" [float]="true" class="blue-grey darken-3">
+        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'view-module'"></i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="new" mz-button [large]="true" [float]="true" class="blue-grey darken-3">
+        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'plus'"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+

@@ -1,0 +1,173 @@
+<div class="container" *ngIf="showFormSignUp; else showSpinner">
+  <form [formGroup]="signUpForm" novalidate>
+
+    <div [align]="'right'">
+      <i mz-icon-mdi
+         class="grey-text"
+         [icon]="'calendar-plus'"
+         [size]="'48px'">
+      </i>
+    </div>
+
+    <mz-datepicker-container>
+      <i mz-icon-mdi mz-input-prefix
+         [icon]="'calendar'">
+      </i>
+      <input mz-datepicker
+             [label]="'Date of schedule'"
+             [options]="datepickerOptions"
+             id="datepicker"
+             placeholder="Select your schedule date"
+             type="text">
+    </mz-datepicker-container>
+
+    <mz-timepicker-container [inline]="false" >
+      <i mz-icon-mdi mz-input-prefix
+         [icon]="'clock-outline'">
+      </i>
+      <input mz-timepicker
+             [label]="'Begin Time'"
+             [options]="timepickerOptions"
+             id="beginTime"
+             placeholder="Select time"
+             type="time">
+    </mz-timepicker-container>
+
+    <mz-timepicker-container [inline]="false">
+      <i mz-icon-mdi mz-input-prefix
+         [icon]="'clock-outline'">
+      </i>
+      <input mz-timepicker
+             [label]="'End Time'"
+             [options]="timepickerOptions"
+             id="endTime"
+             placeholder="Select time"
+             type="time">
+    </mz-timepicker-container>
+
+    <mz-select-container>
+      <i mz-icon-mdi mz-input-prefix
+         [icon]="'google-classroom'">
+      </i>
+      <select mz-select
+              id="options-select"
+              [label]="'Laboratory'"
+              [placeholder]="'Select a laboratory'"
+      >
+        <option data-icon="" class="left circle">Lab. Informatica 1</option>
+        <option data-icon="" class="left circle">Lab. Informatica 2</option>
+        <option data-icon="" class="left circle">Lab. Informatica 3</option>
+        <option data-icon="" class="left circle">Lab. Informatica 4</option>
+      </select>
+    </mz-select-container>
+
+    <mz-checkbox-container>
+      <input mz-checkbox [filledIn]="true" [align]="'left'"
+             [label]="'Recurso extras'"
+             id="checkbox-id"
+             type="checkbox">
+    </mz-checkbox-container>
+
+    <mz-textarea-container>
+      <input mz-input [label]="'Recurso extras'" type="text">
+    </mz-textarea-container>
+
+    <!--<mz-input-container>
+      <input mz-input mz-validation required
+             id="name"
+             formControlName="name"
+             type="text"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.name"
+             [label]="'Name'" />
+    </mz-input-container>
+
+    <mz-input-container>
+      <input mz-input mz-validation required
+             id="email"
+             formControlName="email"
+             type="email"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.email"
+             [label]="'Email'" />
+    </mz-input-container>
+
+    <mz-input-container>
+      <input mz-input mz-validation required
+             id="password"
+             formControlName="password"
+             type="password"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.password"
+             [label]="'Password'" />
+    </mz-input-container>
+
+    <mz-input-container >
+      <input mz-input mz-validation required
+             id="confirmPassword"
+             formControlName="confirmPassword"
+             type="password"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.confirmPassword"
+             [label]="'Confirm password'" />
+    </mz-input-container>
+
+    <mz-input-container>
+      <button
+        class="green"
+        mz-button
+        [flat]="false"
+        [large]="false"
+        [float]="false"
+        [disabled]="!signUpForm.valid"
+        type="submit">Sign up</button>
+    </mz-input-container>
+
+    <mz-input-container>
+      <div class="fixed-action-btn">
+        <button
+          id="info-button"
+          (click)="newSchedule()"
+          mz-button
+          [flat]="false"
+          [large]="true"
+          [float]="true"
+          class="orange">
+          <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
+        </button>
+
+      </div>
+    </mz-input-container>-->
+
+    <!--<mz-collection>
+      <a *ngFor="let laboratory of laboratories | async" class="waves-effect waves-light" mz-collection-link routerLink="{{laboratory.id}}">
+        <mz-collection-item [avatar]="true">
+          <i *ngIf="laboratory.data.maintenance == false" mz-avatar mz-icon-mdi [icon]="'lan'" class="orange-text grey darken-3"></i>
+          <i *ngIf="laboratory.data.maintenance == true" mz-avatar mz-icon-mdi [icon]="'wrench'" class="grey-text text-darken-3 orange darken-2"></i>
+          <div class="title" *ngFor="let computers of laboratory.computers | async; index as i; last as isLast">
+            <div *ngIf="isLast" class="orange-text"><i mz-icon-mdi [icon]="'desktop-classic'" [size]="'24'"></i>&nbsp;&nbsp;{{i+1}}</div>
+          </div>
+          <div class="grey-text">{{laboratory.data.name | uppercase}}</div>
+        </mz-collection-item>
+      </a>
+    </mz-collection>-->
+
+  </form>
+</div>
+<ng-template #showSpinner>
+  <div class="preloader-container">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

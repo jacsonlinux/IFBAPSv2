@@ -1,0 +1,82 @@
+<div class="container" *ngIf="showFormLogin; else showSpinner">
+  <form [formGroup]="logInForm" novalidate>
+    <div [align]="'right'">
+      <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'lock-outline'"></i>
+    </div>
+    <mz-input-container>
+      <input mz-input mz-validation required
+             id="email"
+             formControlName="email"
+             type="email"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.email"
+             [label]="'Email'" />
+    </mz-input-container>
+    <mz-input-container >
+      <input mz-input mz-validation required
+             id="password"
+             formControlName="password"
+             type="password"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.password"
+             [label]="'Password'" />
+    </mz-input-container>
+    <mz-input-container>
+      <button
+        (click)="captchaRef.execute()"
+        class="green"
+        mz-button
+        [flat]="false"
+        [large]="false"
+        [float]="false"
+        [disabled]="!logInForm.valid"
+        type="submit">log in</button>
+    </mz-input-container>
+    <mz-input-container>
+      <a class="grey-text" routerLink="../registration">Sign up here!</a>
+      <a class="grey-text right" routerLink="../forgot-password">Forgot password?</a>
+    </mz-input-container>
+    <mz-input-container>
+      <div class="fixed-action-btn">
+        <button
+          id="google-button"
+          (click)="featureDiscovery.open()"
+          mz-button
+          [flat]="false"
+          [large]="true"
+          [float]="true"
+          class="blue">
+          <i mz-icon-mdi [size]="'36px'" [icon]="'google'"></i>
+        </button>
+        <mz-feature-discovery class="blue" [targetId]="'google-button'" #featureDiscovery>
+          <h5>Hello!</h5>
+          <p>If you are a common User, enter your social account by <a (click)="logInGoogle()">clicking here ;)</a></p>
+        </mz-feature-discovery>
+      </div>
+    </mz-input-container>
+    <re-captcha
+      theme="dark"
+      #captchaRef="reCaptcha"
+      siteKey="6Ldpu2sUAAAAAL9T4QMtW9km-QBwHKiE5ZpTc2q8"
+      size="invisible"
+      (resolved)="$event && onSubmit($event)"
+    ></re-captcha>
+  </form>
+</div>
+<ng-template #showSpinner>
+  <div class="preloader-container">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

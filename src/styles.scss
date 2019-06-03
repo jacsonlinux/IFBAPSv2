@@ -1,1 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./_variables";
+
+*{
+  //font-family: Consolas, monospace !important;
+  //font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background-color: #263238; //blue-grey darken-4
+  color: #fff; // blue-grey lighten-5
+}
+
+.preloader-container {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.center-jack-container {
+  display: flex;
+  min-height: 70vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.indicator {
+  background-color: orange !important;
+  height: 3px !important;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #eceff1 !important; //blue-grey lighten-5
+  background-color: #37474f !important; //blue-grey darken-3
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: #ffcc80 /*orange lighten-5*/  !important;
+}
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: orange  !important;
+}
+
+.collection {
+  border: none !important;
+}
+.collection .collection-item.avatar{
+  min-height: auto !important;
+}
+.collection a.collection-item{
+  color: #b0bec5 !important; //blue-grey lighten-3
+  border-bottom: 1px solid #37474f !important; //blue-grey darken-3
+}
+.collection .collection-item {
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+mz-collection-item {
+  background-color: transparent !important;
+}
+mz-collection a {
+  padding: 0 !important;
+
+}
+
+mz-tab ul {
+  background-color: transparent !important;
+}
+mz-tab ul li a{
+  color: grey !important;
+}
+mz-radio-button-container p label{
+  margin-right: 50px !important;
+}
+
+.collapsible-header {
+  color: orange !important;
+  background: #212121 !important;
+  border-bottom: 1px solid #424242 !important;
+}
+.collapsible{
+  border: none !important;
+}
+.collapsible-body {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background-color: #424242!important;
+  border-bottom: 1px solid orange !important;
+}
+
+.brand-logo{
+  font-size: larger !important;
+}
+
+.small-text{
+  font-size: small !important;
+}
+.large-text {
+  font-size: large !important;
+}

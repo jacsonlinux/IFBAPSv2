@@ -1,0 +1,32 @@
+<div class="center">
+  <div class="row">
+    <h1>IFBA</h1>
+  </div>
+  <div class="row">
+    <h6>PORTO SEGURO</h6>
+    <h6>Laboratory Management System</h6>
+  </div>
+  <div class="row">
+    <button class="pulse" routerLink="/authentication/login">
+      <i mz-icon-mdi
+         [class]="''"
+         [align]="'center'"
+         [icon]="'power'"
+         [size]="'48px'">
+      </i>
+    </button>
+  </div>
+  <div class="footer">
+    <mz-dropdown
+      [constrainWidth]="false"
+      [id]="'dropdown'"
+      [dropdownButtonId]="'btn-dropdown'"
+      [inDuration]="300"
+      [outDuration]="300" >
+      <mz-dropdown-item><a href="#" >@danieldemarco</a></mz-dropdown-item>
+      <mz-dropdown-item><a href="#" >@jacsonlinux</a></mz-dropdown-item>
+      <mz-dropdown-item><a href="#" >@robertagbritto</a></mz-dropdown-item>
+    </mz-dropdown>
+    <a routerLink="/privacy-policy">Privacy Policy</a> | <a routerLink="/terms-of-service">Terms of Service</a> | <a  class="" id="btn-dropdown" href="javascript:void(0)" >Developers</a>
+  </div>
+</div>
