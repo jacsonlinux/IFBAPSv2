@@ -1,0 +1,192 @@
+{
+  "version": "3.42.0",
+  "system": {
+    "manufacturer": "Dell Inc.",
+    "model": "OptiPlex 7010",
+    "version": "01",
+    "serial": "FD630Y1",
+    "uuid": "4C4C4544-0044-3610-8033-C6C04F305931",
+    "sku": "OptiPlex 7010"
+  },
+  "bios": {
+    "vendor": "Dell Inc.",
+    "version": "A15",
+    "releaseDate": "2013-08-12",
+    "revision": "4.6"
+  },
+  "baseboard": {
+    "manufacturer": "Dell Inc.",
+    "model": "0YXT71",
+    "version": "A01",
+    "serial": "/FD630Y1/BR10819395019B/",
+    "assetTag": "Not Specified"
+  },
+  "os": {
+    "platform": "linux",
+    "distro": "Ubuntu",
+    "release": "18.04",
+    "codename": "bionic",
+    "kernel": "4.15.0-23-generic",
+    "arch": "x64",
+    "hostname": "linux",
+    "logofile": "ubuntu"
+  },
+  "versions": {
+    "kernel": "4.15.0-23-generic",
+    "openssl": "1.1.0h",
+    "node": "10.4.1",
+    "v8": "6.7.288.45-node.7",
+    "npm": "6.1.0",
+    "yarn": "",
+    "pm2": "",
+    "gulp": "",
+    "grunt": "",
+    "git": "2.17.1",
+    "tsc": "",
+    "mysql": "",
+    "redis": "",
+    "mongodb": "",
+    "nginx": "",
+    "php": ""
+  },
+  "cpu": {
+    "manufacturer": "Intel®",
+    "brand": "Core™ i5-3570",
+    "vendor": "GenuineIntel",
+    "family": "6",
+    "model": "58",
+    "stepping": "9",
+    "revision": "",
+    "voltage": "",
+    "speed": "3.40",
+    "speedmin": "1.60",
+    "speedmax": "3.80",
+    "cores": 4,
+    "cache": {
+      "l1d": 32768,
+      "l1i": 32768,
+      "l2": 262144,
+      "l3": 6291456
+    },
+    "flags": ""
+  },
+  "graphics": {
+    "controllers": [
+      {
+        "vendor": "Intel Corporation",
+        "model": "Xeon E3-1200 v2/3rd Gen Core processor Graphics Controller ",
+        "bus": "",
+        "vram": 256,
+        "vramDynamic": false
+      }
+    ],
+    "displays": [
+      {
+        "connection": "VGA-1",
+        "main": true,
+        "builtin": false,
+        "model": "E2011",
+        "resolutionx": 1600,
+        "resolutiony": 900,
+        "sizex": 443,
+        "sizey": 249,
+        "pixeldepth": 24
+      }
+    ]
+  },
+  "net": [
+    {
+      "iface": "lo",
+      "ip4": "127.0.0.1",
+      "ip6": "::1",
+      "mac": "",
+      "internal": true
+    },
+    {
+      "iface": "eno1",
+      "ip4": "192.168.1.159",
+      "ip6": "fe80::1a75:8475:fa97:1a7c",
+      "mac": "74:86:7a:fc:48:86",
+      "internal": false
+    },
+    {
+      "iface": "wlp2s0",
+      "ip4": "192.168.0.102",
+      "ip6": "fe80::c2c5:e840:4108:9a0b",
+      "mac": "0c:84:dc:9d:81:3d",
+      "internal": false
+    }
+  ],
+  "memLayout": [
+    {
+      "size": 2147483648,
+      "bank": "Not Specified",
+      "type": "DDR3",
+      "clockSpeed": 1333,
+      "formFactor": "DIMM",
+      "manufacturer": "02B5",
+      "partNum": "[Empty]",
+      "serialNum": "0111B8B3",
+      "voltageConfigured": -1,
+      "voltageMin": -1,
+      "voltageMax": -1
+    },
+    {
+      "size": 2147483648,
+      "bank": "Not Specified",
+      "type": "DDR3",
+      "clockSpeed": 1333,
+      "formFactor": "DIMM",
+      "manufacturer": "0194",
+      "partNum": "SH564568FH8N0TNSDG",
+      "serialNum": "05685E4A",
+      "voltageConfigured": -1,
+      "voltageMin": -1,
+      "voltageMax": -1
+    },
+    {
+      "size": 2147483648,
+      "bank": "Not Specified",
+      "type": "DDR3",
+      "clockSpeed": 1333,
+      "formFactor": "DIMM",
+      "manufacturer": "02B5",
+      "partNum": "[Empty]",
+      "serialNum": "01119567",
+      "voltageConfigured": -1,
+      "voltageMin": -1,
+      "voltageMax": -1
+    },
+    {
+      "size": 2147483648,
+      "bank": "Not Specified",
+      "type": "DDR3",
+      "clockSpeed": 1333,
+      "formFactor": "DIMM",
+      "manufacturer": "0194",
+      "partNum": "SH564568FH8N0TNSDG",
+      "serialNum": "05685DD2",
+      "voltageConfigured": -1,
+      "voltageMin": -1,
+      "voltageMax": -1
+    }
+  ],
+  "diskLayout": [
+    {
+      "type": "HD",
+      "name": "WDC WD2500AAKX-7",
+      "vendor": "Western Digital",
+      "size": 250000000000,
+      "bytesPerSector": -1,
+      "totalCylinders": -1,
+      "totalHeads": -1,
+      "totalSectors": -1,
+      "totalTracks": -1,
+      "tracksPerCylinder": -1,
+      "sectorsPerTrack": -1,
+      "firmwareRevision": "1H19",
+      "serialNum": "WD-WMC2E0975188",
+      "interfaceType": ""
+    }
+  ]
+}
