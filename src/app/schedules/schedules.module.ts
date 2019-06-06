@@ -17,7 +17,7 @@ import {
   MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [

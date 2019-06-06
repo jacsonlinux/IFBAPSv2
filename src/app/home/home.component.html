@@ -1,5 +1,9 @@
-<div class="center-jack-container">
+<!--<div class="center-jack-container">
   <img src="../../assets/icons/icon-152x152.png">
-</div>
+</div>-->
 
-
+<mz-input-container>
+  <input mz-input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mz-input-container>

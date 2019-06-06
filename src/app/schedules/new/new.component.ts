@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
-import {SchedulesService} from '../schedules.service';
-import {MustMatch} from '../../_helpers/must-match.validator';
-import {Laboratory} from '../../class/Laboratory';
+import { SchedulesService } from '../schedules.service';
+import { MustMatch } from '../../_helpers/must-match.validator';
+import { Laboratory } from '../../class/Laboratory';
 
 @Component({
   selector: 'app-new',
@@ -40,7 +40,6 @@ export class NewComponent implements OnInit {
 
   signUpForm: FormGroup;
   showFormSignUp: boolean;
-
   laboratories;
 
   public timepickerOptions: Pickadate.TimeOptions = {
@@ -66,13 +65,15 @@ export class NewComponent implements OnInit {
     selectYears: 10,    // Creates a dropdown of 10 years to control year,
   };
 
-
   constructor(
     private scheduleService: SchedulesService,
     private router: Router,
     private formBuilder: FormBuilder,
     private toastService: MzToastService
   ) {
+
+
+
     this.laboratories = this.scheduleService.getLaboratories().map(res => res);
     console.log('RegistrationComponent');
 
