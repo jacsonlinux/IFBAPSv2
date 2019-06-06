@@ -52,25 +52,27 @@ export class LoginComponent implements OnInit {
   onSubmit(token) {
     if (token) {
       const data = this.logInForm.value;
-      this.showFormLogin = false;
-      this.authenticationService
-        .logIn(data)
-        .then(res => {
-          if (!res.uid) {
-            this.buildForm();
-            this.showFormLogin = true;
-            this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
-          } else if (!res.emailVerified) {
-            res.sendEmailVerification()
-              .then(() => { this.authenticationService.signOut(); })
-              .catch(err => err.message);
-            this.buildForm();
-            this.showFormLogin = true;
-            this.toastService.show('The email was not verified. Check the email' +
-              ' before logging in.', 5000, 'red darken-4 white-text center');
-          }
-        })
-        .catch(err => err.message);
+      if ((data.email != null) && (data.passward != null)) {
+        this.showFormLogin = false;
+        this.authenticationService
+          .logIn(data)
+          .then(res => {
+            if (!res.uid) {
+              this.buildForm();
+              this.showFormLogin = true;
+              this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
+            } else if (!res.emailVerified) {
+              res.sendEmailVerification()
+                .then(() => { this.authenticationService.signOut(); })
+                .catch(err => err.message);
+              this.buildForm();
+              this.showFormLogin = true;
+              this.toastService.show('The email was not verified. Check the email' +
+                ' before logging in.', 5000, 'red darken-4 white-text center');
+            }
+          })
+          .catch(err => err.message);
+      }
     }
   }
   ngOnInit() {
