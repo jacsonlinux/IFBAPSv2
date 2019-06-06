@@ -30,13 +30,11 @@
             "styles": [
               "src/styles.scss",
               "node_modules/materialize-css/dist/css/materialize.min.css",
-              "node_modules/@mdi/font/css/materialdesignicons.min.css",
-              "node_modules/materialize-stepper/dist/css/mstepper.min.css"
+              "node_modules/@mdi/font/css/materialdesignicons.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/materialize-css/dist/js/materialize.min.js",
-              "node_modules/materialize-stepper/dist/js/mstepper.min.js"
+              "node_modules/materialize-css/dist/js/materialize.min.js"
             ],
             "es5BrowserSupport": true
           },
