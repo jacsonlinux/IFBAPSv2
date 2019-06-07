@@ -43,30 +43,52 @@
              [errorMessageResource]="errorMessageResources.confirmPassword"
              [label]="'Confirm password'" />
     </mz-input-container>
-    <mz-input-container>
+
+
+    <mz-input-container *ngIf="!signUpForm.valid; else btn" >
       <button
-        (click)="captchaRef.execute()"
-        class="green"
+        id="btnLoginDisable"
         mz-button
-        [flat]="false"
+        [flat]="true"
         [large]="false"
         [float]="false"
-        [disabled]="!signUpForm.valid"
-        type="submit">Sign up</button>
+        [disabled]="true"
+        type="button">Sign up</button>
     </mz-input-container>
+
+
+
+
+    <ng-template #btn>
+      <mz-input-container>
+        <button id="btnLoginEnable"
+          (click)="captchaRef.execute()"
+          class="green white-text"
+          mz-button
+          [flat]="true"
+          [large]="false"
+          [float]="false"
+          [disabled]="!signUpForm.valid"
+          type="submit">Sign up</button>
+      </mz-input-container>
+    </ng-template>
+
+
+
     <mz-input-container>
       <div class="fixed-action-btn">
         <button
+          type="button"
           id="info-button"
           (click)="featureDiscovery.open()"
           mz-button
           [flat]="false"
           [large]="true"
           [float]="true"
-          class="orange">
+          class="blue">
           <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
         </button>
-        <mz-feature-discovery class="orange" [targetId]="'info-button'" #featureDiscovery>
+        <mz-feature-discovery class="blue darken-4" [targetId]="'info-button'" #featureDiscovery>
           <h5>Warning</h5>
           <p>Register only for IFBA servers. If you are a regular user, enter your social account by <a (click)="logInGoogle()">clicking here!</a></p>
         </mz-feature-discovery>

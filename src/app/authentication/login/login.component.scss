@@ -3,6 +3,7 @@ button {
 }
 
 p a {
+  margin-top: 30px;
   color: white;
   font-size: large;
   text-shadow: 0 1px 2px #0c2c48;
@@ -11,4 +12,21 @@ p a {
 .fixed-action-btn {
   left: 20px !important;
   bottom: 20px !important;
+}
+
+#btnLoginDisable {
+  border-radius: 50px;
+  border: 1px solid grey;
+  height: 50px;
+}
+
+#btnLoginEnable {
+  text-shadow: 0 1px 2px darkgreen;
+  border-radius: 50px;
+  border: 1px solid green;
+  height: 50px;
+}
+
+mz-input-container a {
+  margin-top: 20px;
 }
