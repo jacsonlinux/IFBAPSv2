@@ -10,8 +10,12 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  show: boolean;
+
   showFormLogin: boolean;
   logInForm: FormGroup;
+
   errorMessageResources = {
     email: {
       required: 'Email is required.',
@@ -20,6 +24,7 @@ export class LoginComponent implements OnInit {
     },
     password: {required: 'Password is required.'}
   };
+
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
@@ -38,6 +43,7 @@ export class LoginComponent implements OnInit {
       .then(() => {this.router.navigate(['/home']); })
       .catch(err => err.message );
   }
+
   buildForm() {
     this.logInForm = this.formBuilder.group({
       // reCaptcha: new FormControl(null, Validators.required),
@@ -49,6 +55,7 @@ export class LoginComponent implements OnInit {
       password: [null, Validators.compose([Validators.required])],
     });
   }
+
   onSubmit(token) {
     if (token) {
       const data = this.logInForm.value;
@@ -75,6 +82,7 @@ export class LoginComponent implements OnInit {
         .catch(err => err.message);
     }
   }
+
   ngOnInit() {
     this.buildForm();
     this.showFormLogin = true;
