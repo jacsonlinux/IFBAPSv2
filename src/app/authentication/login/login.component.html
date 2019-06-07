@@ -1,8 +1,12 @@
 <div class="container" *ngIf="showFormLogin; else showSpinner">
   <form [formGroup]="logInForm" novalidate>
+
+
+
     <div [align]="'right'">
       <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'lock-outline'"></i>
     </div>
+
     <mz-input-container>
       <input mz-input mz-validation required
              id="email"
@@ -22,25 +26,27 @@
              [label]="'Password'" />
     </mz-input-container>
     <mz-input-container *ngIf="!logInForm.valid; else btn">
-      <button id="btnLoginDisable"
+
+      <button class="btnDisable"
               mz-button
               [flat]="true"
               [large]="false"
               [float]="false"
               [disabled]="true"
               type="button">log In</button>
+
     </mz-input-container>
     <ng-template #btn>
       <mz-input-container>
-        <button id="btnLoginEnable"
-                (click)="captchaRef.execute()"
-                class="green white-text"
-                mz-button
-                [flat]="true"
-                [large]="false"
-                [float]="false"
-                [disabled]="!logInForm.valid"
-                type="submit">log in</button>
+        <button
+          (click)="captchaRef.execute()"
+          class="green white-text btnEnable "
+          mz-button
+          [flat]="true"
+          [large]="false"
+          [float]="false"
+          [disabled]="!logInForm.valid"
+          type="submit">log in</button>
       </mz-input-container>
     </ng-template>
     <mz-input-container>
@@ -62,7 +68,7 @@
         </button>
         <mz-feature-discovery class="blue darken-4" [targetId]="'google-button'" #featureDiscovery>
           <h5>Hello!</h5>
-          <p>If you are a common User, enter your social account by <a (click)="logInGoogle()">clicking here ;)</a></p>
+          <p>If you are a common User, enter your social account by <button style="padding: 0; width: 130px; height: 30px;" mz-button [flat]="true" class="white-text" (click)="logInGoogle()">clicking here ;)</button></p>
         </mz-feature-discovery>
       </div>
     </mz-input-container>

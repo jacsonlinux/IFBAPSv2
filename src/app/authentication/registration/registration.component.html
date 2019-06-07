@@ -44,10 +44,9 @@
              [label]="'Confirm password'" />
     </mz-input-container>
 
-
     <mz-input-container *ngIf="!signUpForm.valid; else btn" >
       <button
-        id="btnLoginDisable"
+        class="btnDisable"
         mz-button
         [flat]="true"
         [large]="false"
@@ -56,14 +55,11 @@
         type="button">Sign up</button>
     </mz-input-container>
 
-
-
-
     <ng-template #btn>
       <mz-input-container>
-        <button id="btnLoginEnable"
+        <button
           (click)="captchaRef.execute()"
-          class="green white-text"
+          class="green white-text btnEnable"
           mz-button
           [flat]="true"
           [large]="false"
@@ -72,8 +68,6 @@
           type="submit">Sign up</button>
       </mz-input-container>
     </ng-template>
-
-
 
     <mz-input-container>
       <div class="fixed-action-btn">
