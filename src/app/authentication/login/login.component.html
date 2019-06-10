@@ -1,12 +1,8 @@
 <div class="container" *ngIf="showFormLogin; else showSpinner">
   <form [formGroup]="logInForm" novalidate>
-
-
-
     <div [align]="'right'">
       <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'lock-outline'"></i>
     </div>
-
     <mz-input-container>
       <input mz-input mz-validation required
              id="email"
@@ -26,7 +22,6 @@
              [label]="'Password'" />
     </mz-input-container>
     <mz-input-container *ngIf="!logInForm.valid; else btn">
-
       <button class="btnDisable"
               mz-button
               [flat]="true"
@@ -34,7 +29,6 @@
               [float]="false"
               [disabled]="true"
               type="button">log In</button>
-
     </mz-input-container>
     <ng-template #btn>
       <mz-input-container>

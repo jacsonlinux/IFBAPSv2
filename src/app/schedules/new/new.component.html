@@ -1,6 +1,5 @@
 <div class="container" *ngIf="showFormSignUp; else showSpinner">
   <form [formGroup]="signUpForm" novalidate>
-
     <div [align]="'right'">
       <i mz-icon-mdi
          class="grey-text"
@@ -11,25 +10,39 @@
 
 
 
-    <!--<mz-input-container class="example-full-width">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker touchUi #picker></mat-datepicker>
-      <button mat-raised-button (click)="picker.open()">Open</button>
-    </mz-input-container>
--->
+    <label>
+      Date
+      <input [owlDateTimeTrigger]="dt6" [owlDateTime]="dt6">
+      <owl-date-time
+        [pickerType]="'calendar'" #dt6>
+      </owl-date-time>
+    </label>
 
 
-    <!--<mz-datepicker-container>
-      <i mz-icon-mdi mz-input-prefix
-         [icon]="'calendar'">
-      </i>
-      <input mz-datepicker
-             [label]="'Date of schedule'"
-             [options]="datepickerOptions"
-             id="datepicker"
-             placeholder="Select your schedule date"
-             type="date">
+
+
+   <!-- <button></button>
+
+    <mz-datepicker-container>
+      <i mz-icon-mdi mz-input-prefix [icon]="'calendar'"></i>
+      <input
+
+        autocomplete="off"
+        mz-datepicker
+        label="Date of schedule"
+        id="'datepicker'"
+        type="date">
     </mz-datepicker-container>-->
+
+    <!-- placeholder="Select your schedule date"             [options]="datepickerOptions"
+    -->
+
+
+
+
+
+
+
 
     <!--<mz-timepicker-container [inline]="false" >
       <i mz-icon-mdi mz-input-prefix
@@ -41,9 +54,8 @@
              id="beginTime"
              placeholder="Select time"
              type="time">
-    </mz-timepicker-container>-->
-
-    <!--<mz-timepicker-container [inline]="false">
+    </mz-timepicker-container>
+    <mz-timepicker-container [inline]="false">
       <i mz-icon-mdi mz-input-prefix
          [icon]="'clock-outline'">
       </i>
@@ -53,9 +65,8 @@
              id="endTime"
              placeholder="Select time"
              type="time">
-    </mz-timepicker-container>-->
-
-    <!--<mz-select-container>
+    </mz-timepicker-container>
+    <mz-select-container>
       <i mz-icon-mdi mz-input-prefix
          [icon]="'google-classroom'">
       </i>
@@ -69,17 +80,40 @@
         <option data-icon="" class="left circle">Lab. Informatica 3</option>
         <option data-icon="" class="left circle">Lab. Informatica 4</option>
       </select>
-    </mz-select-container>-->
+    </mz-select-container>
+    <mz-input-container *ngIf="!signUpForm.valid; else btn">
+      <button
+        class="right btnDisable"
+        mz-button
+        [flat]="true"
+        [large]="false"
+        [float]="false"
+        [disabled]="true"
+        type="button">new
+      </button>
+    </mz-input-container>
+    <ng-template #btn>
+      <mz-input-container>
+        <button
+          (click)="captchaRef.execute()"
+          class="right green white-text btnEnable"
+          mz-button
+          [flat]="true"
+          [large]="false"
+          [float]="false"
+          [disabled]="!signUpForm.valid"
+          type="submit">new
+        </button>
+      </mz-input-container>
+    </ng-template>
+    <re-captcha
+      theme="dark"
+      #captchaRef="reCaptcha"
+      siteKey="6Ldpu2sUAAAAAL9T4QMtW9km-QBwHKiE5ZpTc2q8"
+      size="invisible"
+      (resolved)="$event && onSubmit($event)"
+    ></re-captcha>-->
 
-    <!--<button
-      class="green right"
-      mz-button
-      [flat]="false"
-      [large]="false"
-      [float]="false"
-      [disabled]="!signUpForm.valid"
-      type="submit">Sign up
-    </button>-->
 
     <!--<mz-checkbox-container>
       <input mz-checkbox [filledIn]="true" [align]="'left'"
@@ -87,7 +121,6 @@
              id="checkbox-id"
              type="checkbox">
     </mz-checkbox-container>-->
-
     <!--<mz-textarea-container>
       <i mz-icon-mdi mz-textarea-prefix
          [icon]="'message-reply-text'">
@@ -98,7 +131,6 @@
                 placeholder="Enter your comment"
                 length="150"></textarea>
     </mz-textarea-container>-->
-
     <!--<mz-input-container>
       <input mz-input mz-validation required
              id="name"
@@ -165,7 +197,6 @@
 
       </div>
     </mz-input-container>-->
-
     <!--<mz-collection>
       <a *ngFor="let laboratory of laboratories | async" class="waves-effect waves-light" mz-collection-link routerLink="{{laboratory.id}}">
         <mz-collection-item [avatar]="true">
@@ -178,7 +209,6 @@
         </mz-collection-item>
       </a>
     </mz-collection>-->
-
   </form>
 </div>
 <ng-template #showSpinner>
@@ -198,4 +228,3 @@
     </div>
   </div>
 </ng-template>
-
