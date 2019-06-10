@@ -54,15 +54,18 @@ export class NewComponent implements OnInit {
   };
 
   public datepickerOptions: Pickadate.DateOptions = {
-    clear: '',
+    /*clear: '',
     close: '',
     today: '',
+    editable: false,
     closeOnClear: true,
     closeOnSelect: true,
+    // onClose: () => alert('Close has been invoked.'),
+    // onOpen: () => alert('Open has been invoked.'),
     format: 'dddd, dd mmm, yyyy', // Visible date format (defaulted to formatSubmit if provided otherwise 'd mmmm, yyyy')
     formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
     selectMonths: true, // Creates a dropdown to control month
-    selectYears: 10,    // Creates a dropdown of 10 years to control year,
+    selectYears: 10,    // Creates a dropdown of 10 years to control year,*/
   };
 
   constructor(

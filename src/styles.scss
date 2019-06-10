@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 @import "./_variables";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 *{
   //font-family: Consolas, monospace !important;
@@ -114,9 +113,12 @@ mz-radio-button-container p label{
   border: 1px solid grey !important;
   height: 50px !important;
 }
-
 .btnEnable {
   border-radius: 50px !important;
   border: 1px solid green !important;
   height: 50px !important;
+}
+
+thead {
+  border-bottom: none !important;
 }

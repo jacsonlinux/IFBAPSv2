@@ -10,43 +10,16 @@ import { SchedulesService } from './schedules.service';
 import { SchedulesRoutingModule } from './schedules-routing.module';
 import {
   MzButtonModule, MzCheckboxModule,
-  MzCollectionModule, MzDatepickerModule,
+  MzCollectionModule,
   MzIconMdiModule,
   MzInputModule,
-  MzSelectModule, MzTextareaModule, MzTimepickerModule,
+  MzSelectModule, MzTextareaModule,
   MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
 import { ReactiveFormsModule} from '@angular/forms';
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-  MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-} from '@angular/material';
+import {RecaptchaModule} from 'ng-recaptcha';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -67,46 +40,11 @@ import {
     MzValidationModule,
     MzCollectionModule,
     MzSelectModule,
-    MzTimepickerModule,
-    MzDatepickerModule,
     MzCheckboxModule,
     MzTextareaModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
-
+    RecaptchaModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [SchedulesService]
 })

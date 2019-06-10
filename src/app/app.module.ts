@@ -17,7 +17,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import {ServerGuard} from './guard/server.guard';
+import { ServerGuard } from './guard/server.guard';
 import { AuthGuard } from './guard/auth.guard';
 
 import {
@@ -26,9 +26,9 @@ import {
   MzSidenavModule, MzSpinnerModule
 } from 'ngx-materialize';
 
-import {AngularFireModule} from '@angular/fire';
-import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -53,13 +53,13 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     MzSidenavModule,
     MzDropdownModule,
     MzMediaModule,
+    MzInputModule,
     MzFeatureDiscoveryModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    AppRoutingModule,
-    MzInputModule
+    AppRoutingModule
   ],
   providers: [ AuthGuard, ServerGuard],
   bootstrap: [ AppComponent ]
