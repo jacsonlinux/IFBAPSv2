@@ -1,214 +1,103 @@
-<div class="container" *ngIf="showFormSignUp; else showSpinner">
-  <form [formGroup]="signUpForm" novalidate>
+<div class="container" *ngIf="showForm; else showSpinner">
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
     <div [align]="'right'">
       <i mz-icon-mdi
          class="grey-text"
-         [icon]="'calendar-plus'"
+         [icon]="'calendar-clock'"
          [size]="'48px'">
       </i>
     </div>
+    <mz-input-container>
+      <input [errorMessageResource]="errorMessageResources.date"
+             formControlName="date" id="'date'" required   mz-validation
+             [owlDateTime]="date" [owlDateTimeTrigger]="date" placeholder="Date">
+      <owl-date-time pickerType="calendar" backdropClass="blue-grey" pickerMode="dialog" #date></owl-date-time>
+    </mz-input-container>
 
 
-
-    <label>
-      Date
-      <input [owlDateTimeTrigger]="dt6" [owlDateTime]="dt6">
-      <owl-date-time
-        [pickerType]="'calendar'" #dt6>
-      </owl-date-time>
-    </label>
-
-
-
-
-   <!-- <button></button>
-
-    <mz-datepicker-container>
-      <i mz-icon-mdi mz-input-prefix [icon]="'calendar'"></i>
+    <mz-input-container>
       <input
+        [errorMessageResource]="errorMessageResources.startTime"
+        formControlName="startTime"
+        id="'startTime'"
+        required
+        mz-validation
+        [owlDateTime]="startTime"
+        [owlDateTimeTrigger]="startTime"
+        placeholder="Start Time">
+      <owl-date-time
+        hour12Timer="false"
+        pickerType="timer"
+        backdropClass="blue-grey"
+        pickerMode="dialog"
+        #startTime>
+      </owl-date-time>
+    </mz-input-container>
 
-        autocomplete="off"
-        mz-datepicker
-        label="Date of schedule"
-        id="'datepicker'"
-        type="date">
+    <mz-input-container>
+      <input [errorMessageResource]="errorMessageResources.endTime"
+             formControlName="endTime" id="'endTime'"
+             required  mz-validation [owlDateTime]="endTime" [owlDateTimeTrigger]="endTime" placeholder="End Time">
+      <owl-date-time hour12Timer="false" pickerType="timer" backdropClass="blue-grey"
+                     pickerMode="dialog" #endTime></owl-date-time>
+    </mz-input-container>
+
+
+
+    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
+    <input required mz-datepicker mz-validation
+           id="'startTime'"
+           type="text"
+           formControlName="begin"
+           autocomplete="off"
+           label="Date of schedule"
+           [options]="datepickerOptions"
+           [errorMessageResource]="errorMessageResources.date" >
+  </mz-datepicker-container>-->
+    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
+      <input required mz-datepicker mz-validation
+             id="'endTime'"
+             type="text"
+             formControlName="endTime"
+             autocomplete="off"
+             label="Date of schedule"
+             [options]="datepickerOptions"
+             [errorMessageResource]="errorMessageResources.date" >
     </mz-datepicker-container>-->
-
-    <!-- placeholder="Select your schedule date"             [options]="datepickerOptions"
-    -->
-
-
-
-
-
-
-
-
-    <!--<mz-timepicker-container [inline]="false" >
-      <i mz-icon-mdi mz-input-prefix
-         [icon]="'clock-outline'">
-      </i>
-      <input mz-timepicker
-             [label]="'Begin Time'"
-             [options]="timepickerOptions"
-             id="beginTime"
-             placeholder="Select time"
-             type="time">
-    </mz-timepicker-container>
-    <mz-timepicker-container [inline]="false">
-      <i mz-icon-mdi mz-input-prefix
-         [icon]="'clock-outline'">
-      </i>
-      <input mz-timepicker
-             [label]="'End Time'"
-             [options]="timepickerOptions"
-             id="endTime"
-             placeholder="Select time"
-             type="time">
-    </mz-timepicker-container>
-    <mz-select-container>
-      <i mz-icon-mdi mz-input-prefix
-         [icon]="'google-classroom'">
-      </i>
-      <select mz-select
+    <mz-select-container (click)="$event.stopPropagation()" >
+      <select mz-select mz-validation required
               id="options-select"
-              [label]="'Laboratory'"
-              [placeholder]="'Select a laboratory'"
-      >
+              label="Laboratory"
+              formControlName="local"
+              [placeholder]="'Select a sector'"
+              [errorMessageResource]="errorMessageResources.local">
         <option data-icon="" class="left circle">Lab. Informatica 1</option>
         <option data-icon="" class="left circle">Lab. Informatica 2</option>
         <option data-icon="" class="left circle">Lab. Informatica 3</option>
         <option data-icon="" class="left circle">Lab. Informatica 4</option>
       </select>
     </mz-select-container>
-    <mz-input-container *ngIf="!signUpForm.valid; else btn">
-      <button
-        class="right btnDisable"
-        mz-button
-        [flat]="true"
-        [large]="false"
-        [float]="false"
-        [disabled]="true"
-        type="button">new
+    <div class="fixed-action-btn">
+      <button *ngIf="!scheduleForm.valid"
+              mz-button
+              [flat]="false"
+              [large]="true"
+              [float]="true"
+              [disabled]="true"
+              type="button"
+      ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
       </button>
-    </mz-input-container>
-    <ng-template #btn>
-      <mz-input-container>
-        <button
-          (click)="captchaRef.execute()"
-          class="right green white-text btnEnable"
-          mz-button
-          [flat]="true"
-          [large]="false"
-          [float]="false"
-          [disabled]="!signUpForm.valid"
-          type="submit">new
-        </button>
-      </mz-input-container>
-    </ng-template>
-    <re-captcha
-      theme="dark"
-      #captchaRef="reCaptcha"
-      siteKey="6Ldpu2sUAAAAAL9T4QMtW9km-QBwHKiE5ZpTc2q8"
-      size="invisible"
-      (resolved)="$event && onSubmit($event)"
-    ></re-captcha>-->
-
-
-    <!--<mz-checkbox-container>
-      <input mz-checkbox [filledIn]="true" [align]="'left'"
-             [label]="'Recurso extras'"
-             id="checkbox-id"
-             type="checkbox">
-    </mz-checkbox-container>-->
-    <!--<mz-textarea-container>
-      <i mz-icon-mdi mz-textarea-prefix
-         [icon]="'message-reply-text'">
-      </i>
-      <textarea mz-textarea
-                [label]="'Comment'"
-                id="comment-textarea"
-                placeholder="Enter your comment"
-                length="150"></textarea>
-    </mz-textarea-container>-->
-    <!--<mz-input-container>
-      <input mz-input mz-validation required
-             id="name"
-             formControlName="name"
-             type="text"
-             autocomplete="off"
-             [errorMessageResource]="errorMessageResources.name"
-             [label]="'Name'" />
-    </mz-input-container>
-
-    <mz-input-container>
-      <input mz-input mz-validation required
-             id="email"
-             formControlName="email"
-             type="email"
-             autocomplete="off"
-             [errorMessageResource]="errorMessageResources.email"
-             [label]="'Email'" />
-    </mz-input-container>
-
-    <mz-input-container>
-      <input mz-input mz-validation required
-             id="password"
-             formControlName="password"
-             type="password"
-             autocomplete="off"
-             [errorMessageResource]="errorMessageResources.password"
-             [label]="'Password'" />
-    </mz-input-container>
-
-    <mz-input-container >
-      <input mz-input mz-validation required
-             id="confirmPassword"
-             formControlName="confirmPassword"
-             type="password"
-             autocomplete="off"
-             [errorMessageResource]="errorMessageResources.confirmPassword"
-             [label]="'Confirm password'" />
-    </mz-input-container>
-
-    <mz-input-container>
-      <button
-        class="green"
-        mz-button
-        [flat]="false"
-        [large]="false"
-        [float]="false"
-        [disabled]="!signUpForm.valid"
-        type="submit">Sign up</button>
-    </mz-input-container>
-
-    <mz-input-container>
-      <div class="fixed-action-btn">
-        <button
-          id="info-button"
-          (click)="newSchedule()"
-          mz-button
-          [flat]="false"
-          [large]="true"
-          [float]="true"
-          class="orange">
-          <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
-        </button>
-
-      </div>
-    </mz-input-container>-->
-    <!--<mz-collection>
-      <a *ngFor="let laboratory of laboratories | async" class="waves-effect waves-light" mz-collection-link routerLink="{{laboratory.id}}">
-        <mz-collection-item [avatar]="true">
-          <i *ngIf="laboratory.data.maintenance == false" mz-avatar mz-icon-mdi [icon]="'lan'" class="orange-text grey darken-3"></i>
-          <i *ngIf="laboratory.data.maintenance == true" mz-avatar mz-icon-mdi [icon]="'wrench'" class="grey-text text-darken-3 orange darken-2"></i>
-          <div class="title" *ngFor="let computers of laboratory.computers | async; index as i; last as isLast">
-            <div *ngIf="isLast" class="orange-text"><i mz-icon-mdi [icon]="'desktop-classic'" [size]="'24'"></i>&nbsp;&nbsp;{{i+1}}</div>
-          </div>
-          <div class="grey-text">{{laboratory.data.name | uppercase}}</div>
-        </mz-collection-item>
-      </a>
-    </mz-collection>-->
+      <button *ngIf="scheduleForm.valid"
+              class="blue"
+              mz-button
+              [flat]="false"
+              [large]="true"
+              [float]="true"
+              [disabled]="!scheduleForm.valid"
+              type="submit"
+      ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
+      </button>
+    </div>
   </form>
 </div>
 <ng-template #showSpinner>
@@ -228,3 +117,129 @@
     </div>
   </div>
 </ng-template>
+
+<!--<mz-input-container class="fixed-action-btn">
+    <button *ngIf="!scheduleForm.valid; else btn"
+            class="green"
+            mz-button
+            [flat]="false"
+            [large]="true"
+            [float]="true"
+            [disabled]="true"
+            type="submit">
+      <i mz-icon-mdi [icon]="'send'"></i>
+    </button>
+    &lt;!&ndash;<ng-template #btn>
+      <button
+        class="blue"
+        mz-button
+        [flat]="false"
+        [large]="true"
+        [float]="true"
+        [disabled]="!scheduleForm.valid"
+        type="submit">
+        <i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
+      </button>
+    </ng-template>&ndash;&gt;
+  </mz-input-container>-->
+<!--<re-captcha (click)="captchaRef.execute()"
+  theme="dark"
+  #captchaRef="reCaptcha"
+  siteKey="6Ldpu2sUAAAAAL9T4QMtW9km-QBwHKiE5ZpTc2q8"
+  size="invisible"
+  (resolved)="$event && onSubmit($event)"
+></re-captcha>-->
+<!--<mz-checkbox-container>
+  <input mz-checkbox [filledIn]="true" [align]="'left'"
+         [label]="'Recurso extras'"
+         id="checkbox-id"
+         type="checkbox">
+</mz-checkbox-container>-->
+<!--<mz-textarea-container>
+  <i mz-icon-mdi mz-textarea-prefix
+     [icon]="'message-reply-text'">
+  </i>
+  <textarea mz-textarea
+            [label]="'Comment'"
+            id="comment-textarea"
+            placeholder="Enter your comment"
+            length="150"></textarea>
+</mz-textarea-container>-->
+<!--<mz-input-container>
+  <input mz-input mz-validation required
+         id="name"
+         formControlName="name"
+         type="text"
+         autocomplete="off"
+         [errorMessageResource]="errorMessageResources.name"
+         [label]="'Name'" />
+</mz-input-container>
+
+<mz-input-container>
+  <input mz-input mz-validation required
+         id="email"
+         formControlName="email"
+         type="email"
+         autocomplete="off"
+         [errorMessageResource]="errorMessageResources.email"
+         [label]="'Email'" />
+</mz-input-container>
+
+<mz-input-container>
+  <input mz-input mz-validation required
+         id="password"
+         formControlName="password"
+         type="password"
+         autocomplete="off"
+         [errorMessageResource]="errorMessageResources.password"
+         [label]="'Password'" />
+</mz-input-container>
+
+<mz-input-container >
+  <input mz-input mz-validation required
+         id="confirmPassword"
+         formControlName="confirmPassword"
+         type="password"
+         autocomplete="off"
+         [errorMessageResource]="errorMessageResources.confirmPassword"
+         [label]="'Confirm password'" />
+</mz-input-container>
+
+<mz-input-container>
+  <button
+    class="green"
+    mz-button
+    [flat]="false"
+    [large]="false"
+    [float]="false"
+    [disabled]="!signUpForm.valid"
+    type="submit">Sign up</button>
+</mz-input-container>
+
+<mz-input-container>
+  <div class="fixed-action-btn">
+    <button
+      id="info-button"
+      (click)="newSchedule()"
+      mz-button
+      [flat]="false"
+      [large]="true"
+      [float]="true"
+      class="orange">
+      <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
+    </button>
+
+  </div>
+</mz-input-container>-->
+<!--<mz-collection>
+  <a *ngFor="let laboratory of laboratories | async" class="waves-effect waves-light" mz-collection-link routerLink="{{laboratory.id}}">
+    <mz-collection-item [avatar]="true">
+      <i *ngIf="laboratory.data.maintenance == false" mz-avatar mz-icon-mdi [icon]="'lan'" class="orange-text grey darken-3"></i>
+      <i *ngIf="laboratory.data.maintenance == true" mz-avatar mz-icon-mdi [icon]="'wrench'" class="grey-text text-darken-3 orange darken-2"></i>
+      <div class="title" *ngFor="let computers of laboratory.computers | async; index as i; last as isLast">
+        <div *ngIf="isLast" class="orange-text"><i mz-icon-mdi [icon]="'desktop-classic'" [size]="'24'"></i>&nbsp;&nbsp;{{i+1}}</div>
+      </div>
+      <div class="grey-text">{{laboratory.data.name | uppercase}}</div>
+    </mz-collection-item>
+  </a>
+</mz-collection>-->

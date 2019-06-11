@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SchedulesService} from '../schedules.service';
 
 @Component({
   selector: 'app-list',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  schedules;
 
-  constructor() { }
+  constructor(private schedulesService: SchedulesService) {
+    console.log('ListComponent');
+    this.schedules = this.schedulesService.getSchedules().map(res => res);
+    console.log(this.schedules);
+  }
 
-  ngOnInit() {
+  ngOnInit() { this.schedulesService.changeTitle('');
+  }
+
+  getTitle(title) {
+    this.schedulesService.changeTitle(title);
   }
 
 }

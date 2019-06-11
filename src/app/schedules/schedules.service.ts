@@ -8,11 +8,22 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 
 export interface Laboratory { name: string; maintenance: boolean; computers: any; applications: any; }
 export interface LaboratoryId extends Laboratory { id: string; }
+
+export interface Schedule {
+  date: any;
+  end: any;
+  begin: any;
+  local: string;
+  user: string;
+}
+export interface ScheduleId extends Schedule { id: string; }
+
 export interface Computer {
   active: boolean;
   data: object;
 }
 export interface ComputerId extends Computer { id: string; }
+
 export interface Application {
   name: string;
   version: string;
@@ -33,6 +44,9 @@ export class SchedulesService {
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
 
+  scheduleCollection: AngularFirestoreCollection<any>;
+  schedules: Observable<any>;
+
   computerCollection: AngularFirestoreCollection<any>;
   computers: Observable<any>;
 
@@ -45,11 +59,26 @@ export class SchedulesService {
   laboratoryDoc: AngularFirestoreDocument<any>;
   laboratory: Observable<any>;
 
+  scheduleDoc: AngularFirestoreDocument<any>;
+  schedule: Observable<any>;
+
   constructor(
     private angularFirestore: AngularFirestore,
     private toastService: MzToastService,
   ) {
     console.log('LaboratoriesService');
+  }
+
+  getSchedules() {
+    this.scheduleCollection = this.angularFirestore.collection<Schedule>('schedules', ref => ref.orderBy('date'));
+    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Schedule;
+        const id = a.payload.doc.id;
+        return { id, data };
+      });
+    });
+    return this.schedules;
   }
 
   changeTitle(title) {
