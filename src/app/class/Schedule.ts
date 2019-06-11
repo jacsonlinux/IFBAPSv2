@@ -1,7 +1,7 @@
 export class Schedule {
-  laboratory: string;
-  endDate: any;
-  beginDate: any;
+  date: any;
+  local: string;
+  end: any;
+  begin: any;
   user: string;
-  resource: string;
 }

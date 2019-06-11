@@ -16,7 +16,20 @@ export class NewComponent implements OnInit {
   laboratory: Laboratory = new Laboratory();
 
   errorMessageResources = {
-    name: {
+    date: {
+      required: 'Date is required',
+      pattern: 'Date invalid!'
+    },
+    startTime: {
+      required: 'Start time is required',
+    },
+    endTime: {
+      required: 'End time is required',
+    },
+    local: {
+      required: 'Sector is required',
+    },
+    /*name: {
       required: 'Name is required.',
       // minlength: 'O nome deve ter pelo menos 4 caracteres.',
       // maxlength: 'O nome não pode ter mais de 64 caracteres.'
@@ -35,37 +48,36 @@ export class NewComponent implements OnInit {
     confirmPassword: {
       required: 'Confirm password.',
       mustMatch: 'Password is not match.'
-    }
+    }*/
   };
 
-  signUpForm: FormGroup;
-  showFormSignUp: boolean;
+  scheduleForm: FormGroup;
+  showForm: boolean;
   laboratories;
 
   public timepickerOptions: Pickadate.TimeOptions = {
     default: 'now',
     fromnow: 0,
     twelvehour: false,
-    donetext: '',
-    cleartext: '',
-    canceltext: '',
-    autoclose: true,
+    donetext: 'OK',
+    cleartext: 'CLEAR',
+    canceltext: 'CLOSE',
+    autoclose: false,
     ampmclickable: true,
   };
 
   public datepickerOptions: Pickadate.DateOptions = {
-    /*clear: '',
-    close: '',
-    today: '',
+
+    clear: 'CLEAR',
+    close: 'CLOSE',
+    today: 'OK',
     editable: false,
     closeOnClear: true,
     closeOnSelect: true,
-    // onClose: () => alert('Close has been invoked.'),
-    // onOpen: () => alert('Open has been invoked.'),
     format: 'dddd, dd mmm, yyyy', // Visible date format (defaulted to formatSubmit if provided otherwise 'd mmmm, yyyy')
     formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
     selectMonths: true, // Creates a dropdown to control month
-    selectYears: 10,    // Creates a dropdown of 10 years to control year,*/
+    selectYears: 10,    // Creates a dropdown of 10 years to control year,
   };
 
   constructor(
@@ -74,16 +86,37 @@ export class NewComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastService: MzToastService
   ) {
-
-
-
     this.laboratories = this.scheduleService.getLaboratories().map(res => res);
     console.log('RegistrationComponent');
-
   }
 
   buildForm() {
-    this.signUpForm = this.formBuilder.group({
+    this.scheduleForm = this.formBuilder.group({
+      date: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern('')
+        // Validators.minLength(4),
+        // Validators.maxLength(64)
+      ])],
+
+
+
+      startTime: [null, Validators.compose([
+        Validators.required
+        // Validators.minLength(4),
+        // Validators.maxLength(64)
+      ])],
+      endTime: [null, Validators.compose([
+        Validators.required
+        // Validators.minLength(4),
+        // Validators.maxLength(64)
+      ])],
+      local: [null, Validators.compose([
+        Validators.required
+        // Validators.minLength(4),
+        // Validators.maxLength(64)
+      ])]
+      /*,
       name: [null, Validators.compose([
         Validators.required
         // Validators.minLength(4),
@@ -102,34 +135,35 @@ export class NewComponent implements OnInit {
       ])],
       confirmPassword: [null, Validators.compose([
         Validators.required
-      ])]
-    }, { validator: MustMatch('password', 'confirmPassword') });
+      ])]*/
+    }/*, { validator: MustMatch('password', 'confirmPassword') }*/);
   }
 
-  newSchedule() { }
+  onSubmit() {
+    const data = this.scheduleForm.value;
+    console.log(data.date);
+    console.log(data.startTime);
+    console.log(data.endTime);
+    // console.log(data.begin.toLocaleString('en-us', {  hour: 'numeric', minute: 'numeric', hour12: true }));
+    // this.showForm = false;
+    // this.scheduleService
+    //   .signUp(data)
+    //   .then(res => {
+    //     if (res === true) {
+    //       this.toastService.show('Registration successfully Complete. Check your email', 5000, 'green darken-4 white-text center');
+    //     } else {
+    //       this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
+    //       this.showFormSignUp = true;
+    //       this.buildForm();
+    //     }
+    //   })
+    //   .catch(err => err.message);
 
-  onSubmit(token) {
-    if (token) {
-      const data = this.signUpForm.value;
-      this.showFormSignUp = false;
-      // this.scheduleService
-      //   .signUp(data)
-      //   .then(res => {
-      //     if (res === true) {
-      //       this.toastService.show('Registration successfully Complete. Check your email', 5000, 'green darken-4 white-text center');
-      //     } else {
-      //       this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
-      //       this.showFormSignUp = true;
-      //       this.buildForm();
-      //     }
-      //   })
-      //   .catch(err => err.message);
-    }
   }
 
   ngOnInit() {
     this.buildForm();
-    this.showFormSignUp = true;
+    this.showForm = true;
   }
 }
 

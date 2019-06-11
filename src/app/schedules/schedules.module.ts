@@ -10,16 +10,16 @@ import { SchedulesService } from './schedules.service';
 import { SchedulesRoutingModule } from './schedules-routing.module';
 import {
   MzButtonModule, MzCheckboxModule,
-  MzCollectionModule,
-  MzIconMdiModule,
+  MzCollectionModule, MzDatepickerModule,
+  MzIconMdiModule, MzIconModule,
   MzInputModule,
-  MzSelectModule, MzTextareaModule,
+  MzSelectModule, MzTextareaModule, MzTimepickerModule,
   MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
 import { ReactiveFormsModule} from '@angular/forms';
 import {RecaptchaModule} from 'ng-recaptcha';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -43,10 +43,16 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
     MzCheckboxModule,
     MzTextareaModule,
     RecaptchaModule,
+    MzIconModule,
+    MzDatepickerModule,
+    MzTimepickerModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule
   ],
-  providers: [SchedulesService]
+  providers: [
+    {provide: OWL_DATE_TIME_LOCALE, useValue: 'pt-br'},
+    SchedulesService
+  ]
 })
 
 export class SchedulesModule { }
