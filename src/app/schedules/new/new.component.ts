@@ -18,7 +18,6 @@ export class NewComponent implements OnInit {
   errorMessageResources = {
     date: {
       required: 'Date is required',
-      pattern: 'Date invalid!'
     },
     startTime: {
       required: 'Start time is required',
@@ -75,7 +74,7 @@ export class NewComponent implements OnInit {
     closeOnClear: true,
     closeOnSelect: true,
     format: 'dddd, dd mmm, yyyy', // Visible date format (defaulted to formatSubmit if provided otherwise 'd mmmm, yyyy')
-    formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
+    // formatSubmit: 'yyyy-mm-dd',   // Return value format (used to set/get value)
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 10,    // Creates a dropdown of 10 years to control year,
   };
@@ -93,15 +92,9 @@ export class NewComponent implements OnInit {
   buildForm() {
     this.scheduleForm = this.formBuilder.group({
       date: [null, Validators.compose([
-        Validators.required,
-        Validators.pattern('')
-        // Validators.minLength(4),
-        // Validators.maxLength(64)
+        Validators.required
       ])],
-
-
-
-      startTime: [null, Validators.compose([
+      /*startTime: [null, Validators.compose([
         Validators.required
         // Validators.minLength(4),
         // Validators.maxLength(64)
@@ -115,7 +108,7 @@ export class NewComponent implements OnInit {
         Validators.required
         // Validators.minLength(4),
         // Validators.maxLength(64)
-      ])]
+      ])]*/
       /*,
       name: [null, Validators.compose([
         Validators.required
@@ -141,9 +134,8 @@ export class NewComponent implements OnInit {
 
   onSubmit() {
     const data = this.scheduleForm.value;
-    console.log(data.date);
-    console.log(data.startTime);
-    console.log(data.endTime);
+    const date = new Date(data.date);
+    console.log(date.getTime());
     // console.log(data.begin.toLocaleString('en-us', {  hour: 'numeric', minute: 'numeric', hour12: true }));
     // this.showForm = false;
     // this.scheduleService
@@ -158,7 +150,6 @@ export class NewComponent implements OnInit {
     //     }
     //   })
     //   .catch(err => err.message);
-
   }
 
   ngOnInit() {

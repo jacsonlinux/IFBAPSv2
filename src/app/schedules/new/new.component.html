@@ -1,5 +1,6 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
+
     <div [align]="'right'">
       <i mz-icon-mdi
          class="grey-text"
@@ -7,63 +8,46 @@
          [size]="'48px'">
       </i>
     </div>
-    <mz-input-container>
-      <input [errorMessageResource]="errorMessageResources.date"
-             formControlName="date" id="'date'" required   mz-validation
-             [owlDateTime]="date" [owlDateTimeTrigger]="date" placeholder="Date">
-      <owl-date-time pickerType="calendar" backdropClass="blue-grey" pickerMode="dialog" #date></owl-date-time>
-    </mz-input-container>
 
-
-    <mz-input-container>
-      <input
-        [errorMessageResource]="errorMessageResources.startTime"
-        formControlName="startTime"
-        id="'startTime'"
-        required
-        mz-validation
-        [owlDateTime]="startTime"
-        [owlDateTimeTrigger]="startTime"
-        placeholder="Start Time">
-      <owl-date-time
-        hour12Timer="false"
-        pickerType="timer"
-        backdropClass="blue-grey"
-        pickerMode="dialog"
-        #startTime>
-      </owl-date-time>
-    </mz-input-container>
-
-    <mz-input-container>
-      <input [errorMessageResource]="errorMessageResources.endTime"
-             formControlName="endTime" id="'endTime'"
-             required  mz-validation [owlDateTime]="endTime" [owlDateTimeTrigger]="endTime" placeholder="End Time">
-      <owl-date-time hour12Timer="false" pickerType="timer" backdropClass="blue-grey"
-                     pickerMode="dialog" #endTime></owl-date-time>
-    </mz-input-container>
-
-
-
-    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
-    <input required mz-datepicker mz-validation
-           id="'startTime'"
-           type="text"
-           formControlName="begin"
-           autocomplete="off"
-           label="Date of schedule"
-           [options]="datepickerOptions"
-           [errorMessageResource]="errorMessageResources.date" >
-  </mz-datepicker-container>-->
-    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
+    <mz-datepicker-container (click)="$event.stopPropagation()">
       <input required mz-datepicker mz-validation
-             id="'endTime'"
+             id="'date'"
              type="text"
-             formControlName="endTime"
+             formControlName="date"
              autocomplete="off"
              label="Date of schedule"
              [options]="datepickerOptions"
              [errorMessageResource]="errorMessageResources.date" >
-    </mz-datepicker-container>-->
+    </mz-datepicker-container>
+
+    <!--<div class="row">
+      <mz-timepicker-container class="col l6 m6 s6" (click)="$event.stopPropagation()">
+        <input mz-timepicker
+               required
+               mz-validation
+               label="Start time"
+               placeholder="Start time"
+               [options]="timepickerOptions"
+               id="startTime"
+               type="time"
+               formControlName="startTime"
+               [errorMessageResource]="errorMessageResources.startTime">
+      </mz-timepicker-container>
+
+      <mz-timepicker-container class="col l6 m6 s6" (click)="$event.stopPropagation()">
+        <input mz-timepicker
+               required
+               mz-validation
+               label="End time"
+               placeholder="End time"
+               [options]="timepickerOptions"
+               id="endTime"
+               type="time"
+               formControlName="endTime"
+               [errorMessageResource]="errorMessageResources.endTime">
+      </mz-timepicker-container>
+    </div>
+
     <mz-select-container (click)="$event.stopPropagation()" >
       <select mz-select mz-validation required
               id="options-select"
@@ -76,7 +60,8 @@
         <option data-icon="" class="left circle">Lab. Informatica 3</option>
         <option data-icon="" class="left circle">Lab. Informatica 4</option>
       </select>
-    </mz-select-container>
+    </mz-select-container>-->
+
     <div class="fixed-action-btn">
       <button *ngIf="!scheduleForm.valid"
               mz-button
@@ -98,6 +83,7 @@
       ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
       </button>
     </div>
+
   </form>
 </div>
 <ng-template #showSpinner>
@@ -117,6 +103,55 @@
     </div>
   </div>
 </ng-template>
+
+
+<!--<mz-datepicker-container (click)="$event.stopPropagation()">
+  <input required mz-datepicker mz-validation
+         id="'endTime'"
+         type="text"
+         formControlName="endTime"
+         autocomplete="off"
+         label="Date of schedule"
+         [options]="datepickerOptions"
+         [errorMessageResource]="errorMessageResources.date" >
+</mz-datepicker-container>-->
+<!--<input mz-input mz-validation required
+       id="date"
+       label="Date"
+       [errorMessageResource]="errorMessageResources.date"
+       formControlName="date"
+       [owlDateTime]="date"
+       [owlDateTimeTrigger]="date">
+<owl-date-time
+  #date
+  pickerType="calendar"
+  backdropClass="blue-grey"
+  pickerMode="dialog"
+>
+</owl-date-time>
+
+<input
+  [errorMessageResource]="errorMessageResources.startTime"
+  formControlName="startTime"
+  id="'startTime'"
+  required
+  mz-validation
+  [owlDateTime]="startTime"
+  [owlDateTimeTrigger]="startTime"
+  placeholder="Start Time">
+<owl-date-time
+  hour12Timer="false"
+  pickerType="timer"
+  backdropClass="blue-grey"
+  pickerMode="dialog"
+  #startTime>
+</owl-date-time>
+
+<input [errorMessageResource]="errorMessageResources.endTime"
+       formControlName="endTime" id="'endTime'"
+       required  mz-validation [owlDateTime]="endTime" [owlDateTimeTrigger]="endTime" placeholder="End Time">
+<owl-date-time hour12Timer="false" pickerType="timer" backdropClass="blue-grey"
+               pickerMode="dialog" #endTime></owl-date-time>-->
 
 <!--<mz-input-container class="fixed-action-btn">
     <button *ngIf="!scheduleForm.valid; else btn"
