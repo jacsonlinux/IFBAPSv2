@@ -8,46 +8,40 @@
          [size]="'48px'">
       </i>
     </div>
-
     <mz-datepicker-container (click)="$event.stopPropagation()">
       <input required mz-datepicker mz-validation
-             id="'date'"
+             id="'dateSchedule'"
              type="text"
-             formControlName="date"
+             formControlName="dateSchedule"
              autocomplete="off"
              label="Date of schedule"
              [options]="datepickerOptions"
-             [errorMessageResource]="errorMessageResources.date" >
+             [errorMessageResource]="errorMessageResources.dateSchedule" >
     </mz-datepicker-container>
-
-    <!--<div class="row">
-      <mz-timepicker-container class="col l6 m6 s6" (click)="$event.stopPropagation()">
-        <input mz-timepicker
-               required
-               mz-validation
-               label="Start time"
-               placeholder="Start time"
-               [options]="timepickerOptions"
-               id="startTime"
-               type="time"
-               formControlName="startTime"
-               [errorMessageResource]="errorMessageResources.startTime">
-      </mz-timepicker-container>
-
-      <mz-timepicker-container class="col l6 m6 s6" (click)="$event.stopPropagation()">
-        <input mz-timepicker
-               required
-               mz-validation
-               label="End time"
-               placeholder="End time"
-               [options]="timepickerOptions"
-               id="endTime"
-               type="time"
-               formControlName="endTime"
-               [errorMessageResource]="errorMessageResources.endTime">
-      </mz-timepicker-container>
-    </div>
-
+    <mz-timepicker-container (click)="$event.stopPropagation()">
+      <input mz-timepicker
+             required
+             mz-validation
+             label="Start time"
+             placeholder="Start time"
+             [options]="timepickerOptions"
+             id="startTime"
+             type="time"
+             formControlName="startTime"
+             [errorMessageResource]="errorMessageResources.startTime">
+    </mz-timepicker-container>
+    <mz-timepicker-container (click)="$event.stopPropagation()">
+      <input mz-timepicker
+             required
+             mz-validation
+             label="End time"
+             placeholder="End time"
+             [options]="timepickerOptions"
+             id="endTime"
+             type="time"
+             formControlName="endTime"
+             [errorMessageResource]="errorMessageResources.endTime">
+    </mz-timepicker-container>
     <mz-select-container (click)="$event.stopPropagation()" >
       <select mz-select mz-validation required
               id="options-select"
@@ -60,7 +54,7 @@
         <option data-icon="" class="left circle">Lab. Informatica 3</option>
         <option data-icon="" class="left circle">Lab. Informatica 4</option>
       </select>
-    </mz-select-container>-->
+    </mz-select-container>
 
     <div class="fixed-action-btn">
       <button *ngIf="!scheduleForm.valid"
