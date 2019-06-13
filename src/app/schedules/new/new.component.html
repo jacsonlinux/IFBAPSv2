@@ -1,6 +1,5 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
-
     <div [align]="'right'">
       <i mz-icon-mdi
          class="grey-text"
@@ -55,7 +54,6 @@
         <option data-icon="" class="left circle">Lab. Informatica 4</option>
       </select>
     </mz-select-container>
-
     <div class="fixed-action-btn">
       <button *ngIf="!scheduleForm.valid"
               mz-button
@@ -77,7 +75,6 @@
       ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
       </button>
     </div>
-
   </form>
 </div>
 <ng-template #showSpinner>
