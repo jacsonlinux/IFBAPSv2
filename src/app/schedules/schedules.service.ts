@@ -4,17 +4,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { MzToastService } from 'ngx-materialize';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 export interface Laboratory { name: string; maintenance: boolean; computers: any; applications: any; }
 export interface LaboratoryId extends Laboratory { id: string; }
 
 export interface Schedule {
-  date: any;
-  end: any;
-  begin: any;
+  startTime: any;
+  endTime: any;
   local: string;
-  user: string;
+  /*user: string;*/
 }
 export interface ScheduleId extends Schedule { id: string; }
 
@@ -83,6 +82,12 @@ export class SchedulesService {
 
   changeTitle(title) {
     this.titleSource.next(title);
+  }
+
+  newSchedule(data) {
+    return this.angularFirestore.collection('schedules').add(data)
+      .then(() => true )
+      .catch(err => err.message);
   }
 
   changeComputer(computer) {

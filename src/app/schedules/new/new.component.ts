@@ -5,6 +5,8 @@ import { MzToastService } from 'ngx-materialize';
 import { SchedulesService } from '../schedules.service';
 import { MustMatch } from '../../_helpers/must-match.validator';
 import { Laboratory } from '../../class/Laboratory';
+import {Schedule} from '../../class/Schedule';
+import {AuthenticationService} from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-new',
@@ -14,6 +16,8 @@ import { Laboratory } from '../../class/Laboratory';
 export class NewComponent implements OnInit {
 
   laboratory: Laboratory = new Laboratory();
+
+  schedule: Schedule = new Schedule();
 
   errorMessageResources = {
     dateSchedule: {
@@ -57,6 +61,7 @@ export class NewComponent implements OnInit {
   dateSchedule;
   startTime;
   endTime;
+  local;
 
   public timepickerOptions: Pickadate.TimeOptions = {
     default: 'now',
@@ -90,6 +95,7 @@ export class NewComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private toastService: MzToastService,
+    private autheticationService: AuthenticationService
   ) {
     this.laboratories = this.scheduleService.getLaboratories().map(res => res);
     console.log('RegistrationComponent');
@@ -137,37 +143,48 @@ export class NewComponent implements OnInit {
     }/*, { validator: MustMatch('password', 'confirmPassword') }*/);
   }
 
-  onSubmit(index: number) {
+  onSubmit() {
     const data = this.scheduleForm.value;
     this.dateSchedule = data.dateSchedule;
     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
-    console.log(this.startTime.getTime());
-    console.log(this.endTime.getTime());
-    if (this.startTime >= this.endTime) {
-      this.toastService.show('The start time can not be greater than or equal to the end time!', 5000, 'red');
-      this.scheduleForm.reset();
-    }
-    // console.log(data.begin.toLocaleString('en-us', {  hour: 'numeric', minute: 'numeric', hour12: true }));
-    // this.showForm = false;
-    // this.scheduleService
-    //   .signUp(data)
-    //   .then(res => {
-    //     if (res === true) {
-    //       this.toastService.show('Registration successfully Complete. Check your email', 5000, 'green darken-4 white-text center');
-    //     } else {
-    //       this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
-    //       this.showFormSignUp = true;
-    //       this.buildForm();
-    //     }
-    //   })
-    //   .catch(err => err.message);
-  }
+    this.local = data.local;
 
+    this.schedule.startTime = this.startTime;
+    this.schedule.endTime = this.endTime;
+    this.schedule.local = this.local;
+
+
+    const x = JSON.stringify(this.schedule);
+
+    const y = JSON.parse(x);
+
+    if (this.startTime >= this.endTime) {
+      this.toastService.show('The start time can not be greater than or equal to the end time!', 6000, 'red darken-4');
+      this.scheduleForm.reset();
+    } else {
+      this.showForm = false;
+      this.scheduleService
+        .newSchedule(y)
+        .then(res => {
+          console.log(res);
+          if (res === true) {
+            this.toastService.show('Registration successfully Complete. Check your email', 5000, 'green darken-4 white-text center');
+          } else {
+            this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
+            this.showForm = true;
+            this.buildForm();
+          }
+        })
+        .catch(err => err.message);
+    }
+
+  }
 
   ngOnInit() {
     this.buildForm();
     this.showForm = true;
+    this.autheticationService.user.subscribe(user => this.schedule.user = user.uid );
   }
 }
 
