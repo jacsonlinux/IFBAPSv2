@@ -55,7 +55,7 @@
       </select>
     </mz-select-container>
     <div class="fixed-action-btn">
-      <button *ngIf="!scheduleForm.valid"
+      <button *ngIf="scheduleForm.valid"
               mz-button
               [flat]="false"
               [large]="true"
@@ -64,13 +64,13 @@
               type="button"
       ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
       </button>
-      <button *ngIf="scheduleForm.valid"
+      <button *ngIf="!scheduleForm.valid"
               class="blue"
               mz-button
               [flat]="false"
               [large]="true"
               [float]="true"
-              [disabled]="!scheduleForm.valid"
+              [disabled]="scheduleForm.valid"
               type="submit"
       ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
       </button>

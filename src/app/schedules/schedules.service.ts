@@ -13,7 +13,7 @@ export interface Schedule {
   startTime: any;
   endTime: any;
   local: string;
-  /*user: string;*/
+  user: string;
 }
 export interface ScheduleId extends Schedule { id: string; }
 
@@ -68,8 +68,12 @@ export class SchedulesService {
     console.log('LaboratoriesService');
   }
 
+  changeTitle(title) {
+    this.titleSource.next(title);
+  }
+
   getSchedules() {
-    this.scheduleCollection = this.angularFirestore.collection<Schedule>('schedules', ref => ref.orderBy('date'));
+    this.scheduleCollection = this.angularFirestore.collection<Schedule>('schedules', ref => ref.orderBy('startTime'));
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Schedule;
@@ -80,14 +84,28 @@ export class SchedulesService {
     return this.schedules;
   }
 
-  changeTitle(title) {
-    this.titleSource.next(title);
+  newSchedule(data) {
+    console.log(data);
+    this.schedule = this.angularFirestore
+      .collection<Schedule>('schedules', ref =>  ref.where('local', '==', 'Lab. Informatica 4'))
+      .valueChanges(res => res );
+    console.log(this.schedule);
+
+    /*return this.angularFirestore.collection('schedules').add(data)
+      .then(() => true )
+      .catch(err => err.message);*/
   }
 
-  newSchedule(data) {
-    return this.angularFirestore.collection('schedules').add(data)
-      .then(() => true )
-      .catch(err => err.message);
+  getLaboratories() {
+    this.laboratoryCollection = this.angularFirestore.collection<Laboratory>('laboratories', ref => ref.orderBy('name'));
+    this.laboratories = this.laboratoryCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Laboratory;
+        const id = a.payload.doc.id;
+        return { id, data };
+      });
+    });
+    return this.laboratories;
   }
 
   changeComputer(computer) {
@@ -106,18 +124,6 @@ export class SchedulesService {
           .collection<Computer>('computers');
         const computers = this.computerCollection.valueChanges();
         return { id, data, computers};
-      });
-    });
-    return this.laboratories;
-  }
-
-  getLaboratories() {
-    this.laboratoryCollection = this.angularFirestore.collection<Laboratory>('laboratories', ref => ref.orderBy('name'));
-    this.laboratories = this.laboratoryCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Laboratory;
-        const id = a.payload.doc.id;
-        return { id, data };
       });
     });
     return this.laboratories;
