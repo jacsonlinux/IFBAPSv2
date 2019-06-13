@@ -1,9 +1,16 @@
 <mz-collection>
-  <a *ngFor="let schedule of schedules| async" class="waves-effect waves-light" mz-collection-link routerLink="{{schedule.id}}">
-    <mz-collection-item>
-      <div class="grey-text">{{schedule.id | uppercase}}</div>
-    </mz-collection-item>
-  </a>
+  <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect waves-light">
+    <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
+    <div class="title">{{schedule.data.local}}</div>
+    <div class="grey-text">
+      <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'calendar-outline'"></i>-->
+      {{schedule.data.startTime | date: 'mediumDate'}}
+      &nbsp;
+      <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'clock-outline'"></i>-->
+      <span> {{schedule.data.startTime | date:'h:mm'}} - {{schedule.data.endTime | date:'h:mm'}}</span>
+    </div>
+    <a mz-secondary-content routerLink="{{schedule.id}}"><i mz-icon-mdi class="blue-grey-text" [icon]="'eye-outline'"></i></a>
+  </mz-collection-item>
 </mz-collection>
 <div class="fixed-action-btn">
   <a mz-button [large]="true" [float]="true" class="blue">

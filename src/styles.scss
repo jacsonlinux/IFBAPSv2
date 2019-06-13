@@ -57,11 +57,12 @@ body {
 }
 .collection a.collection-item{
   color: #b0bec5 !important; //blue-grey lighten-3
-  border-bottom: 1px solid #37474f !important; //blue-grey darken-3
+  // border-bottom: 1px solid #37474f !important; //blue-grey darken-3
 }
 .collection .collection-item {
   background-color: transparent !important;
-  border-bottom: none !important;
+  border-bottom: 1px solid #37474f !important; //blue-grey darken-3
+  //border-bottom: none !important;
 }
 
 mz-collection-item {

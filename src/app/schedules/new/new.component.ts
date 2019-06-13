@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, AbstractControl, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
 import { SchedulesService } from '../schedules.service';
 import { MustMatch } from '../../_helpers/must-match.validator';
@@ -144,7 +144,26 @@ export class NewComponent implements OnInit {
   }
 
   onSubmit() {
-    const data = this.scheduleForm.value;
+
+    const data = {
+      startTime: '2019-06-04T10:40:00.000Z',
+      endTime: '2019-06-04T10:40:00.000Z',
+      local: 'Lab. Informatica 4',
+      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2'
+    };
+    this.scheduleService.newSchedule(data);
+      /*.then(res => {
+        /!*if (res === true) {
+          this.toastService.show('Registration successfully Complete.', 5000, 'green darken-4 white-text center');
+          this.router.navigate(['../schedules']);
+        } else {
+          this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
+          this.showForm = true;
+          this.buildForm();
+        }*!/
+      })*/
+      /*.catch(err => err.message);*/
+    /*const data = this.scheduleForm.value;
     this.dateSchedule = data.dateSchedule;
     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
@@ -154,22 +173,17 @@ export class NewComponent implements OnInit {
     this.schedule.endTime = this.endTime;
     this.schedule.local = this.local;
 
-
-    const x = JSON.stringify(this.schedule);
-
-    const y = JSON.parse(x);
-
     if (this.startTime >= this.endTime) {
       this.toastService.show('The start time can not be greater than or equal to the end time!', 6000, 'red darken-4');
       this.scheduleForm.reset();
     } else {
       this.showForm = false;
       this.scheduleService
-        .newSchedule(y)
+        .newSchedule(JSON.stringify(this.schedule))
         .then(res => {
-          console.log(res);
           if (res === true) {
-            this.toastService.show('Registration successfully Complete. Check your email', 5000, 'green darken-4 white-text center');
+            this.toastService.show('Registration successfully Complete.', 5000, 'green darken-4 white-text center');
+            this.router.navigate(['../schedules']);
           } else {
             this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
             this.showForm = true;
@@ -177,7 +191,7 @@ export class NewComponent implements OnInit {
           }
         })
         .catch(err => err.message);
-    }
+    }*/
 
   }
 
@@ -186,5 +200,6 @@ export class NewComponent implements OnInit {
     this.showForm = true;
     this.autheticationService.user.subscribe(user => this.schedule.user = user.uid );
   }
+
 }
 
