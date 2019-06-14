@@ -8,33 +8,37 @@ import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { NewComponent } from './new/new.component';
 import { FilterComponent } from './filter/filter.component';
+import { PlaceComponent } from './place/place.component';
+import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 
 const SCHEDULES_ROUTES: Routes = [
-  {path: '', component: SchedulesComponent,
+  {
+    path: '', component: SchedulesComponent,
     children : [
       { path: '',
+        data: {title: 'SCHEDULE PLACE'},
+        component: PlaceComponent
+      },
+      { path: ':id',
+        data: {title: 'SCHEDULE LIST'},
         component: ListComponent
-      },
-      { path: 'new',
-        component: NewComponent,
-        data: {title: 'NEW SCHEDULE'},
-        canActivate: [ServerGuard]
-      },
-      { path: ':id',
-        component: DetailComponent,
-        data: {title: 'SCHEDULE DETAIL'}
-      },
-      { path: ':id',
-        component: FilterComponent,
-        data: {title: 'FILTER DETAIL'},
-        canActivate: [ServerGuard]
       },
       { path: ':id/new',
         component: NewComponent,
-        data: {title: 'NEW SCHEDULE'},
+        data: {title: 'SCHEDULE NEW'},
         canActivate: [ServerGuard]
-      }
-    ] }
+      },
+      { path: 'detail/:id',
+        component: DetailComponent,
+        data: {title: 'SCHEDULE DETAIL'}
+      },
+      { path: 'filter/:id',
+        component: FilterComponent,
+        data: {title: 'SCHEDULE FILTER'},
+        canActivate: [ServerGuard]
+      },
+    ]
+  }
 ];
 @NgModule({
   imports: [ RouterModule.forChild(SCHEDULES_ROUTES) ],

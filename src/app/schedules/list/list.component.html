@@ -1,7 +1,7 @@
 <mz-collection>
   <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect waves-light">
     <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
-    <div class="title">{{schedule.data.local}}</div>
+    <div class="title">{{schedule.data.place}}</div>
     <div class="grey-text">
       <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'calendar-outline'"></i>-->
       {{schedule.data.startTime | date: 'mediumDate'}}
@@ -9,17 +9,19 @@
       <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'clock-outline'"></i>-->
       <span> {{schedule.data.startTime | date:'h:mm'}} - {{schedule.data.endTime | date:'h:mm'}}</span>
     </div>
-    <a mz-secondary-content routerLink="{{schedule.id}}"><i mz-icon-mdi class="blue-grey-text" [icon]="'eye-outline'"></i></a>
+    <a mz-secondary-content routerLink="{{schedule.id}}"><i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i></a>
   </mz-collection-item>
 </mz-collection>
-<div class="fixed-action-btn">
+<div class="fixed-action-btn"><a routerLink="new" mz-button [large]="true" [float]="true" class="blue"><i mz-icon-mdi [icon]="'plus'"></i></a></div>
+
+<!--<div class="fixed-action-btn">
   <a mz-button [large]="true" [float]="true" class="blue">
     <i mz-icon-mdi class="" [size]="'24px'" [icon]="'pencil'"></i>
   </a>
   <ul>
     <li>
       <a routerLink="filter" mz-button [large]="true" [float]="true" class="blue-grey darken-3">
-        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'view-module'"></i>
+        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'filter-variant'"></i>
       </a>
     </li>
     <li>
@@ -28,4 +30,5 @@
       </a>
     </li>
   </ul>
-</div>
+</div>-->
+

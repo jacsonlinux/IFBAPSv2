@@ -1,6 +1,6 @@
 export class Schedule {
   startTime: any;
   endTime: any;
-  local: any;
+  place: string;
   user: any;
 }
