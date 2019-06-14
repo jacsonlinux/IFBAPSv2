@@ -12,10 +12,15 @@ export interface LaboratoryId extends Laboratory { id: string; }
 export interface Schedule {
   startTime: any;
   endTime: any;
-  local: string;
+  place: string;
   user: string;
 }
 export interface ScheduleId extends Schedule { id: string; }
+
+export interface Place {
+  name: string;
+}
+export interface PlaceId extends Place { id: string; }
 
 export interface Computer {
   active: boolean;
@@ -46,6 +51,9 @@ export class SchedulesService {
   scheduleCollection: AngularFirestoreCollection<any>;
   schedules: Observable<any>;
 
+  placeCollection: AngularFirestoreCollection<any>;
+  places: Observable<any>;
+
   computerCollection: AngularFirestoreCollection<any>;
   computers: Observable<any>;
 
@@ -72,8 +80,19 @@ export class SchedulesService {
     this.titleSource.next(title);
   }
 
-  getSchedules() {
-    this.scheduleCollection = this.angularFirestore.collection<Schedule>('schedules', ref => ref.orderBy('startTime'));
+  newSchedule(data) {
+    data = JSON.parse(data);
+    return this.angularFirestore.collection('schedules').add(data)
+      .then(() => true )
+      .catch(err => err.message);
+  }
+
+  getSchedules(place: string, user: string) {
+    this.scheduleCollection = this.angularFirestore
+      .collection<Schedule>('schedules', ref => ref
+        .where('place', '==', place)
+        .where( 'user', '==', user)
+      );
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Schedule;
@@ -84,16 +103,16 @@ export class SchedulesService {
     return this.schedules;
   }
 
-  newSchedule(data) {
-    console.log(data);
-    this.schedule = this.angularFirestore
-      .collection<Schedule>('schedules', ref =>  ref.where('local', '==', 'Lab. Informatica 4'))
-      .valueChanges(res => res );
-    console.log(this.schedule);
-
-    /*return this.angularFirestore.collection('schedules').add(data)
-      .then(() => true )
-      .catch(err => err.message);*/
+  getPlaces() {
+    this.placeCollection = this.angularFirestore.collection<Place>('places', ref => ref.orderBy('name'));
+    this.places = this.placeCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Place;
+        const id = a.payload.doc.id;
+        return { id, data };
+      });
+    });
+    return this.places;
   }
 
   getLaboratories() {

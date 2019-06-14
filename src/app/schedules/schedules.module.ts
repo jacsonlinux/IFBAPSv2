@@ -8,6 +8,8 @@ import { SchedulesComponent } from './schedules.component';
 import { FilterComponent } from './filter/filter.component';
 import { SchedulesService } from './schedules.service';
 import { SchedulesRoutingModule } from './schedules-routing.module';
+import { PlaceComponent } from './place/place.component';
+
 import {
   MzButtonModule, MzCheckboxModule,
   MzCollectionModule, MzDatepickerModule,
@@ -27,7 +29,8 @@ import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from '
     ListComponent,
     NewComponent,
     SchedulesComponent,
-    FilterComponent
+    FilterComponent,
+    PlaceComponent
   ],
   imports: [
     CommonModule,

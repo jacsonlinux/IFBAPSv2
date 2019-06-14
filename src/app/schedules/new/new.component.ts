@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
 import { SchedulesService } from '../schedules.service';
-import { MustMatch } from '../../_helpers/must-match.validator';
-import { Laboratory } from '../../class/Laboratory';
+// import { MustMatch } from '../../_helpers/must-match.validator';
+// import { Laboratory } from '../../class/Laboratory';
 import {Schedule} from '../../class/Schedule';
 import {AuthenticationService} from '../../authentication/authentication.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-new',
@@ -15,7 +16,7 @@ import {AuthenticationService} from '../../authentication/authentication.service
 })
 export class NewComponent implements OnInit {
 
-  laboratory: Laboratory = new Laboratory();
+  // laboratory: Laboratory = new Laboratory();
 
   schedule: Schedule = new Schedule();
 
@@ -28,10 +29,10 @@ export class NewComponent implements OnInit {
     },
     endTime: {
       required: 'End time is required',
-    },
+    }/*,
     local: {
       required: 'Sector is required',
-    },
+    },*/
     /*name: {
       required: 'Name is required.',
       // minlength: 'O nome deve ter pelo menos 4 caracteres.',
@@ -56,12 +57,12 @@ export class NewComponent implements OnInit {
 
   scheduleForm: FormGroup;
   showForm: boolean;
-  laboratories;
+  // laboratories;
 
   dateSchedule;
   startTime;
   endTime;
-  local;
+  // local;
 
   public timepickerOptions: Pickadate.TimeOptions = {
     default: 'now',
@@ -95,9 +96,11 @@ export class NewComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private toastService: MzToastService,
-    private autheticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.laboratories = this.scheduleService.getLaboratories().map(res => res);
+    // this.laboratories = this.scheduleService.getLaboratories().map(res => res);
     console.log('RegistrationComponent');
   }
 
@@ -115,12 +118,12 @@ export class NewComponent implements OnInit {
         Validators.required
         // Validators.minLength(4),
         // Validators.maxLength(64)
-      ])],
-      local: [null, Validators.compose([
+      ])]
+      /*local: [null, Validators.compose([
         Validators.required
         // Validators.minLength(4),
         // Validators.maxLength(64)
-      ])]
+      ])]*/
       // name: [null, Validators.compose([
       //   Validators.required
       //   // Validators.minLength(4),
@@ -145,36 +148,36 @@ export class NewComponent implements OnInit {
 
   onSubmit() {
 
-    const data = {
-      startTime: '2019-06-04T10:40:00.000Z',
-      endTime: '2019-06-04T10:40:00.000Z',
-      local: 'Lab. Informatica 4',
-      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2'
-    };
-    this.scheduleService.newSchedule(data);
-      /*.then(res => {
-        /!*if (res === true) {
-          this.toastService.show('Registration successfully Complete.', 5000, 'green darken-4 white-text center');
-          this.router.navigate(['../schedules']);
-        } else {
-          this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
-          this.showForm = true;
-          this.buildForm();
-        }*!/
-      })*/
-      /*.catch(err => err.message);*/
-    /*const data = this.scheduleForm.value;
+    /* const data = {
+       startTime: '2019-06-04T10:40:00.000Z',
+       endTime: '2019-06-04T10:40:00.000Z',
+       local: 'Lab. Informatica 4',
+       user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2'
+     };
+     this.scheduleService.newSchedule(data);
+       /!*.then(res => {
+         /!*if (res === true) {
+           this.toastService.show('Registration successfully Complete.', 5000, 'green darken-4 white-text center');
+           this.router.navigate(['../schedules']);
+         } else {
+           this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
+           this.showForm = true;
+           this.buildForm();
+         }*!/
+       })*!/
+       /!*.catch(err => err.message);*!/*/
+
+    const data = this.scheduleForm.value;
+
     this.dateSchedule = data.dateSchedule;
     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
-    this.local = data.local;
 
     this.schedule.startTime = this.startTime;
     this.schedule.endTime = this.endTime;
-    this.schedule.local = this.local;
 
     if (this.startTime >= this.endTime) {
-      this.toastService.show('The start time can not be greater than or equal to the end time!', 6000, 'red darken-4');
+      this.toastService.show('The start time can not be greater than or equal to the end time!', 5000, 'red darken-4');
       this.scheduleForm.reset();
     } else {
       this.showForm = false;
@@ -183,7 +186,8 @@ export class NewComponent implements OnInit {
         .then(res => {
           if (res === true) {
             this.toastService.show('Registration successfully Complete.', 5000, 'green darken-4 white-text center');
-            this.router.navigate(['../schedules']);
+            this.location.back();
+            // this.router.navigate(['../schedules']);
           } else {
             this.toastService.show(`${res}`, 5000, 'red darken-4 white-text center');
             this.showForm = true;
@@ -191,14 +195,14 @@ export class NewComponent implements OnInit {
           }
         })
         .catch(err => err.message);
-    }*/
-
+    }
   }
 
   ngOnInit() {
     this.buildForm();
     this.showForm = true;
-    this.autheticationService.user.subscribe(user => this.schedule.user = user.uid );
+    this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
+    this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
 }
