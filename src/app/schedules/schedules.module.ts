@@ -14,14 +14,15 @@ import {
   MzButtonModule, MzCheckboxModule,
   MzCollectionModule, MzDatepickerModule,
   MzIconMdiModule, MzIconModule,
-  MzInputModule,
+  MzInputModule, MzModalModule, MzModalService,
   MzSelectModule, MzTextareaModule, MzTimepickerModule,
   MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
-import { ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from '
     NewComponent,
     SchedulesComponent,
     FilterComponent,
-    PlaceComponent
+    PlaceComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -50,11 +52,16 @@ import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from '
     MzDatepickerModule,
     MzTimepickerModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    MzModalModule,
+    FormsModule
   ],
   providers: [
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'pt-br'},
     SchedulesService
+  ],
+  entryComponents: [
+    ModalComponent
   ]
 })
 
