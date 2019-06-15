@@ -52,6 +52,10 @@ body {
 .collection {
   border: none !important;
 }
+.collection .collection-item.avatar .secondary-content {
+  top: 10px !important;
+  right: 10px !important;
+}
 .collection .collection-item.avatar{
   min-height: auto !important;
 }
@@ -132,3 +136,6 @@ thead {
   padding: 0 !important;
   margin-bottom: 1px !important;
 }
+
+
+

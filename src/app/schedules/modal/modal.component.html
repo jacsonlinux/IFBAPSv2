@@ -1,0 +1,34 @@
+
+<!--<mz-modal>
+  <mz-modal-header>
+    Modal Title
+  </mz-modal-header>
+  <mz-modal-content>
+    Modal Content
+    <mz-input-container>
+      <input mz-input
+             id="input"
+             [label]="inputLabel"
+             [(ngModel)]="scheduleID"
+             type="text">
+    </mz-input-container>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(false)">Disagree</button>
+    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(true)">Agree</button>
+  </mz-modal-footer>
+</mz-modal>-->
+
+
+<mz-modal class="blue-grey-text"  [fullscreen]="false" [fixedFooter]="false" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    <h4 class="orange-text">Cancel Schedule</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    Are you sure? {{scheduleID}}
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" [large]="false" mz-modal-close (click)="setModalAgreementValue(false)">No</button>
+    <button mz-button [flat]="true" [large]="false" mz-modal-close (click)="setModalAgreementValue(true, scheduleID)">Yes</button>
+  </mz-modal-footer>
+</mz-modal>

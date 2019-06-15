@@ -1,12 +1,12 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
-    <div [align]="'right'">
+    <!--<div [align]="'right'">
       <i mz-icon-mdi
          class="grey-text"
          [icon]="'calendar-clock'"
          [size]="'48px'">
       </i>
-    </div>
+    </div>-->
     <mz-datepicker-container (click)="$event.stopPropagation()">
       <input required mz-datepicker mz-validation
              id="'dateSchedule'"

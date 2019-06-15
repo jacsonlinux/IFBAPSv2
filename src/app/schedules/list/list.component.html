@@ -1,18 +1,52 @@
 <mz-collection>
-  <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect waves-light">
+  <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect">
     <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
-    <div class="title">{{schedule.data.place}}</div>
-    <div class="grey-text">
-      <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'calendar-outline'"></i>-->
-      {{schedule.data.startTime | date: 'mediumDate'}}
-      &nbsp;
-      <!--<i mz-icon-mdi [size]="'16px'" class="" [icon]="'clock-outline'"></i>-->
-      <span> {{schedule.data.startTime | date:'h:mm'}} - {{schedule.data.endTime | date:'h:mm'}}</span>
+    <div class="title grey-text">{{schedule.data.startTime | date: 'fullDate'}}</div>
+    <div class="small-text">
+      <i> {{schedule.data.startTime | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime | date:'shortTime'}}</i>
     </div>
-    <a mz-secondary-content routerLink="{{schedule.id}}"><i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i></a>
+    <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="openServiceModal(schedule.id)">
+      <i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i>
+    </button>
   </mz-collection-item>
 </mz-collection>
-<div class="fixed-action-btn"><a routerLink="new" mz-button [large]="true" [float]="true" class="blue"><i mz-icon-mdi [icon]="'plus'"></i></a></div>
+<div class="fixed-action-btn">
+  <a routerLink="new" mz-button [large]="true" [float]="true" class="blue"><i mz-icon-mdi [icon]="'plus'"></i></a>
+</div>
+
+
+<p>
+  <b>inputValue:</b> {{ modalComponentRef?.instance.scheduleID }}<br>
+  <b>agreed:</b> {{ modalComponentRef?.instance.agreed }}
+</p>
+
+
+<!--<button mz-button (click)="modalExample.open()">Modal</button>
+
+<p>
+  <b>inputValue:</b> {{ inputValue }}<br>
+  <b>agreed:</b> {{ agreed }}
+</p>
+
+<mz-modal #modalExample>
+  <mz-modal-header>
+    Modal Title
+  </mz-modal-header>
+  <mz-modal-content>
+    Modal Content
+    <mz-input-container>
+      <input mz-input
+             id="input"
+             [label]="inputLabel"
+             [(ngModel)]="inputValue"
+             type="text">
+    </mz-input-container>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(false)">Disagree</button>
+    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(true)">Agree</button>
+  </mz-modal-footer>
+</mz-modal>-->
 
 <!--<div class="fixed-action-btn">
   <a mz-button [large]="true" [float]="true" class="blue">
