@@ -84,6 +84,7 @@ export class SchedulesService {
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', place)
         .where( 'user', '==', user)
+        .orderBy('startTime', 'asc')
       );
     this.schedules = this.scheduleCollection
       .snapshotChanges().map(actions => {
@@ -112,8 +113,19 @@ export class SchedulesService {
     return this.places;
   }
 
-  newSchedule(data) {
+  /*newSchedule(data) {
     data = JSON.parse(data);
+    return this.angularFirestore
+      .collection('schedules')
+      .add(data)
+      .then(() => true )
+      .catch(err => err.message);
+  }*/
+
+  newSchedule(data) {
+    // data = JSON.parse(data);
+
+    console.log(data);
     return this.angularFirestore
       .collection('schedules')
       .add(data)

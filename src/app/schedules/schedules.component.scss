@@ -1,0 +1,13 @@
+.row {
+  padding: 5px 0 5px 0;
+  margin-bottom: 0;
+}
+
+.row div {
+  border-bottom: 1px solid #455a64;
+  border-top: 1px solid #455a64;
+  border-right: 1px solid #455a64;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 5px 15px 5px 18px;
+}
