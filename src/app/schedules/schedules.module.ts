@@ -11,18 +11,24 @@ import { SchedulesRoutingModule } from './schedules-routing.module';
 import { PlaceComponent } from './place/place.component';
 
 import {
-  MzButtonModule, MzCheckboxModule,
-  MzCollectionModule, MzDatepickerModule,
-  MzIconMdiModule, MzIconModule,
-  MzInputModule, MzModalModule, MzModalService,
-  MzSelectModule, MzTextareaModule, MzTimepickerModule,
+  MzBadgeModule,
+  MzButtonModule,
+  MzCheckboxModule,
+  MzCollectionModule,
+  MzDatepickerModule,
+  MzIconMdiModule,
+  MzIconModule,
+  MzInputModule,
+  MzModalModule, MzNavbarModule,
+  MzSelectModule,
+  MzTextareaModule,
+  MzTimepickerModule,
   MzToastModule,
   MzValidationModule
 } from 'ngx-materialize';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RecaptchaModule} from 'ng-recaptcha';
-import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import { ModalComponent } from './modal/modal.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -31,8 +37,7 @@ import { ModalComponent } from './modal/modal.component';
     NewComponent,
     SchedulesComponent,
     FilterComponent,
-    PlaceComponent,
-    ModalComponent
+    PlaceComponent
   ],
   imports: [
     CommonModule,
@@ -51,17 +56,13 @@ import { ModalComponent } from './modal/modal.component';
     MzIconModule,
     MzDatepickerModule,
     MzTimepickerModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
     MzModalModule,
-    FormsModule
+    FormsModule,
+    MzBadgeModule,
+    MzNavbarModule
   ],
   providers: [
-    {provide: OWL_DATE_TIME_LOCALE, useValue: 'pt-br'},
     SchedulesService
-  ],
-  entryComponents: [
-    ModalComponent
   ]
 })
 

@@ -1,8 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "./_variables";
-@import "~ng-pick-datetime/assets/style/picker.min.css";
-
 
 *{
   //font-family: Consolas, monospace !important;
@@ -113,6 +111,10 @@ mz-radio-button-container p label{
   font-size: large !important;
 }
 
+.fontArial{
+  font-family: Arial;
+}
+
 .btnDisable {
   border-radius: 50px !important;
   border: 1px solid grey !important;
@@ -124,6 +126,9 @@ mz-radio-button-container p label{
   height: 50px !important;
 }
 
+.text-bold {
+  font-weight: bold !important;
+}
 
 thead {
   border: none !important;

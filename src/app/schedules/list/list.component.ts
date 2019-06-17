@@ -1,10 +1,11 @@
-import {Component, ComponentRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SchedulesService } from '../schedules.service';
 import { Schedule } from '../../class/Schedule';
 import { AuthenticationService } from '../../authentication/authentication.service';
-import { MzModalService } from 'ngx-materialize';
-import { ModalComponent } from '../modal/modal.component';
+import { MzModalService, MzToastService } from 'ngx-materialize';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-list',
@@ -15,31 +16,36 @@ export class ListComponent implements OnInit {
 
   schedules;
   schedule: Schedule = new Schedule();
+  scheduleID: string;
 
-  public modalComponentRef: ComponentRef<ModalComponent>;
+  public modalOptions: Materialize.ModalOptions = {
+    dismissible: false,
+    opacity: 0.5,
+    startingTop: '30%',
+    endingTop: '20%'
+  };
 
   constructor(
+    private location: Location,
     private modalService: MzModalService,
+    private toastService: MzToastService,
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService
   ) { console.log('ListComponent'); }
 
-  public agreed: boolean;
-  public inputValue: string;
 
-  setModalAgreementValue(value: boolean) {
-    this.agreed = value;
+  optionModalValue(value: boolean) {
+    if (value) {
+      this.schedulesService.deleteSchedule(this.scheduleID)
+        .then(res => { if (res) {
+          this.toastService.show('Scheduling deleted!', 3000, 'red fontArial white-text');
+        }})
+        .catch(err => err.message);
+    }
   }
 
- /* openServiceModal(id) {
-
-    this.modalService.open(ModalComponent, { scheduleID: id });
-
-  }*/
-
   ngOnInit() {
-    this.schedulesService.changeTitle('');
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
     this.authenticationService.user.subscribe(user => {
       this.schedule.user = user.uid;
@@ -47,15 +53,5 @@ export class ListComponent implements OnInit {
         .getSchedules(this.schedule.place, this.schedule.user).map(res => res);
     });
   }
-
-  getTitle(title) { this.schedulesService.changeTitle(title); }
-
-  openServiceModal(id) {
-    // need to cast for now as the return type of MzModalService.open is MzBaseModal (this will be fix in a near futur)
-    this.modalComponentRef = this.modalService.open(ModalComponent, { scheduleID: id  }) as ComponentRef<ModalComponent>;
-
-    console.log(id);
-  }
-
 
 }

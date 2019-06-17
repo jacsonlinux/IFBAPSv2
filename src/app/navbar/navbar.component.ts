@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
 })
 
 export class NavbarComponent implements OnInit {
+
   title: string;
   showMenu = false;
   message;
@@ -20,8 +21,9 @@ export class NavbarComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-  ) {
-    console.log('NavbarComponent');
+  ) { console.log('NavbarComponent');   }
+
+  ngOnInit() {
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .map(() => this.activatedRoute)
@@ -34,10 +36,10 @@ export class NavbarComponent implements OnInit {
       .subscribe((event) => {
         this.title = event.title;
       });
-  }
-  ngOnInit() {
+
     this.authenticationService.showMenuEmitter.subscribe( show => this.showMenu = show );
   }
+
   back() {
     this.location.back();
   }

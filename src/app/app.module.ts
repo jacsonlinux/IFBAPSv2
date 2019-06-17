@@ -29,6 +29,7 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {SchedulesService} from './schedules/schedules.service';
 
 
 @NgModule({
@@ -61,7 +62,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireAuthModule,
     AppRoutingModule
   ],
-  providers: [ AuthGuard, ServerGuard],
+  providers: [ AuthGuard, ServerGuard, SchedulesService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

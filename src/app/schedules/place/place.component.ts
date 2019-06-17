@@ -9,17 +9,19 @@ import { Place } from '../../class/Place';
 })
 export class PlaceComponent implements OnInit {
 
-  places;
   place = new Place();
+  places;
+  title;
 
-  constructor(private schedulesService: SchedulesService) {
-    console.log('PlaceComponent');
-    this.places = this.schedulesService.getPlaces().map(res => res);
-  }
-
-  ngOnInit() { this.schedulesService.changeTitle(''); }
+  constructor(private schedulesService: SchedulesService) { console.log('PlaceComponent'); }
 
   getTitle(title) { this.schedulesService.changeTitle(title); }
+
+  ngOnInit() {
+    this.places = this.schedulesService.getPlaces().map(res => res);
+    this.schedulesService.changeTitle('');
+  }
+
 
 }
 
