@@ -9,7 +9,6 @@ import { DetailComponent } from './detail/detail.component';
 import { NewComponent } from './new/new.component';
 import { FilterComponent } from './filter/filter.component';
 import { PlaceComponent } from './place/place.component';
-import {PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 
 const SCHEDULES_ROUTES: Routes = [
   {

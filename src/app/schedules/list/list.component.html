@@ -5,64 +5,23 @@
     <div class="small-text">
       <i> {{schedule.data.startTime | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime | date:'shortTime'}}</i>
     </div>
-    <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="openServiceModal(schedule.id)">
+    <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="modal.openModal(); scheduleID = schedule.id">
       <i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i>
     </button>
   </mz-collection-item>
 </mz-collection>
+<mz-modal #modal class="blue-grey-text"  [fullscreen]="false" [fixedFooter]="false" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    <h4 class="orange-text">Cancel Schedule</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    Are you sure?
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" [large]="false" mz-modal-close (click)="optionModalValue(false)">No</button>
+    <button mz-button [flat]="true" [large]="false" mz-modal-close (click)="optionModalValue(true)">Yes</button>
+  </mz-modal-footer>
+</mz-modal>
 <div class="fixed-action-btn">
   <a routerLink="new" mz-button [large]="true" [float]="true" class="blue"><i mz-icon-mdi [icon]="'plus'"></i></a>
 </div>
-
-
-<p>
-  <b>inputValue:</b> {{ modalComponentRef?.instance.scheduleID }}<br>
-  <b>agreed:</b> {{ modalComponentRef?.instance.agreed }}
-</p>
-
-
-<!--<button mz-button (click)="modalExample.open()">Modal</button>
-
-<p>
-  <b>inputValue:</b> {{ inputValue }}<br>
-  <b>agreed:</b> {{ agreed }}
-</p>
-
-<mz-modal #modalExample>
-  <mz-modal-header>
-    Modal Title
-  </mz-modal-header>
-  <mz-modal-content>
-    Modal Content
-    <mz-input-container>
-      <input mz-input
-             id="input"
-             [label]="inputLabel"
-             [(ngModel)]="inputValue"
-             type="text">
-    </mz-input-container>
-  </mz-modal-content>
-  <mz-modal-footer>
-    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(false)">Disagree</button>
-    <button mz-button [flat]="true" mz-modal-close (click)="setModalAgreementValue(true)">Agree</button>
-  </mz-modal-footer>
-</mz-modal>-->
-
-<!--<div class="fixed-action-btn">
-  <a mz-button [large]="true" [float]="true" class="blue">
-    <i mz-icon-mdi class="" [size]="'24px'" [icon]="'pencil'"></i>
-  </a>
-  <ul>
-    <li>
-      <a routerLink="filter" mz-button [large]="true" [float]="true" class="blue-grey darken-3">
-        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'filter-variant'"></i>
-      </a>
-    </li>
-    <li>
-      <a routerLink="new" mz-button [large]="true" [float]="true" class="blue-grey darken-3">
-        <i mz-icon-mdi class="blue-text" [size]="'24px'" [icon]="'plus'"></i>
-      </a>
-    </li>
-  </ul>
-</div>-->
-

@@ -19,6 +19,8 @@ export interface ScheduleId extends Schedule { id: string; }
 
 export interface Place {
   name: string;
+  email: string;
+  sector: string;
 }
 export interface PlaceId extends Place { id: string; }
 
@@ -42,8 +44,6 @@ export class SchedulesService {
 
   private titleSource = new BehaviorSubject(null);
   currentTitle = this.titleSource.asObservable();
-
-  computerBackup: object;
 
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
@@ -71,7 +71,6 @@ export class SchedulesService {
 
   constructor(
     private angularFirestore: AngularFirestore,
-    private toastService: MzToastService,
   ) {
     console.log('LaboratoriesService');
   }
@@ -80,39 +79,55 @@ export class SchedulesService {
     this.titleSource.next(title);
   }
 
-  newSchedule(data) {
-    data = JSON.parse(data);
-    return this.angularFirestore.collection('schedules').add(data)
-      .then(() => true )
-      .catch(err => err.message);
-  }
-
   getSchedules(place: string, user: string) {
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', place)
         .where( 'user', '==', user)
       );
-    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Schedule;
-        const id = a.payload.doc.id;
-        return { id, data };
+    this.schedules = this.scheduleCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Schedule;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
       });
-    });
     return this.schedules;
   }
 
   getPlaces() {
-    this.placeCollection = this.angularFirestore.collection<Place>('places', ref => ref.orderBy('name'));
-    this.places = this.placeCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Place;
-        const id = a.payload.doc.id;
-        return { id, data };
+    this.placeCollection = this.angularFirestore
+      .collection<Place>('places', ref => ref
+        .orderBy('name'));
+
+    this.places = this.placeCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Place;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
       });
-    });
     return this.places;
+  }
+
+  newSchedule(data) {
+    data = JSON.parse(data);
+    return this.angularFirestore
+      .collection('schedules')
+      .add(data)
+      .then(() => true )
+      .catch(err => err.message);
+  }
+
+  deleteSchedule(scheduleID: string) {
+    return  this.angularFirestore
+      .collection('schedules')
+      .doc(scheduleID)
+      .delete()
+      .then(() => true )
+      .catch(err => err.message);
   }
 
   getLaboratories() {
@@ -216,31 +231,6 @@ export class SchedulesService {
     return this.angularFirestore.collection('laboratories/' + laboratoryId + '/computers').add(computer)
       .then(() => true )
       .catch(err => err.message);
-  }
-
-  deleteComputer(computerId, laboratoryId) {
-    this.angularFirestore
-      .collection('laboratories')
-      .doc(laboratoryId)
-      .collection('computers')
-      .doc(computerId).ref.get().then((res) => {
-      this.computerBackup = {'computer': res.data(), 'laboratory': laboratoryId };
-      console.log('backup feito!', this.computerBackup);
-      this.angularFirestore
-        .collection('laboratories')
-        .doc(laboratoryId)
-        .collection('computers')
-        .doc(computerId)
-        .delete().then(() => {
-        this.showToast();
-      }).catch(err => err.message);
-    });
-  }
-
-  showToast() {
-    this.toastService.show(
-      `<span>1 excluído</span><a class="btn-flat orange-text" onclick="alert('Falta implementar.')"><b>DESFAZER</b></a>`,
-      4000 );
   }
 
 }
