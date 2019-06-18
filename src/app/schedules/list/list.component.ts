@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   }
 
 
-  enviar() {
+  /*enviar() {
     const data = {
       place: 'j5XeONPpvQIBEzd6JXGU',
       user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2',
@@ -54,7 +54,7 @@ export class ListComponent implements OnInit {
       endTime: '2019-05-14T20:54:00.000Z'
     };
     this.schedulesService.newSchedule(data).then(res => { console.log(res); }).catch(err => err.message);
-  }
+  }*/
 
   ngOnInit() {
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
