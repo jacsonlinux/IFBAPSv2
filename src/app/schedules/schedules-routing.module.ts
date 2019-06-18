@@ -19,12 +19,12 @@ const SCHEDULES_ROUTES: Routes = [
         component: PlaceComponent
       },
       { path: ':id',
-        data: {title: 'SCHEDULE LIST'},
+        data: {title: 'MY SCHEDULE'},
         component: ListComponent
       },
       { path: ':id/new',
         component: NewComponent,
-        data: {title: 'SCHEDULE NEW'},
+        data: {title: 'NEW SCHEDULE'},
         canActivate: [ServerGuard]
       },
       { path: 'detail/:id',
