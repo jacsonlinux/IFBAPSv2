@@ -1,7 +1,10 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
+
     <mz-datepicker-container (click)="$event.stopPropagation()">
-      <input required mz-datepicker mz-validation
+      <input mz-datepicker
+             required
+             mz-validation
              id="'dateSchedule'"
              type="text"
              formControlName="dateSchedule"
@@ -10,30 +13,31 @@
              [options]="datepickerOptions"
              [errorMessageResource]="errorMessageResources.dateSchedule" >
     </mz-datepicker-container>
-    <mz-timepicker-container (click)="$event.stopPropagation()">
+
+    <mz-timepicker-container>
       <input mz-timepicker
              required
              mz-validation
              label="Start time"
-             placeholder="Start time"
              [options]="timepickerOptions"
              id="startTime"
-             type="time"
+             type="text"
              formControlName="startTime"
              [errorMessageResource]="errorMessageResources.startTime">
     </mz-timepicker-container>
-    <mz-timepicker-container (click)="$event.stopPropagation()">
+
+    <mz-timepicker-container>
       <input mz-timepicker
              required
              mz-validation
              label="End time"
-             placeholder="End time"
              [options]="timepickerOptions"
              id="endTime"
-             type="time"
+             type="text"
              formControlName="endTime"
              [errorMessageResource]="errorMessageResources.endTime">
     </mz-timepicker-container>
+
     <div class="fixed-action-btn">
       <button *ngIf="!scheduleForm.valid"
               mz-button

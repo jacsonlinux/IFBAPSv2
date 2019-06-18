@@ -113,16 +113,16 @@ export class SchedulesService {
     return this.places;
   }
 
-  /*newSchedule(data) {
+  newSchedule(data) {
     data = JSON.parse(data);
     return this.angularFirestore
       .collection('schedules')
       .add(data)
       .then(() => true )
       .catch(err => err.message);
-  }*/
+  }
 
-  newSchedule(data) {
+  /*newSchedule(data) {
     // data = JSON.parse(data);
 
     console.log(data);
@@ -131,7 +131,7 @@ export class SchedulesService {
       .add(data)
       .then(() => true )
       .catch(err => err.message);
-  }
+  }*/
 
   deleteSchedule(scheduleID: string) {
     return  this.angularFirestore
