@@ -1,15 +1,14 @@
-
 <!--<button (click)="enviar()" >enviar </button>-->
 <mz-collection>
   <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect">
-    <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
-    <div class="title grey-text">{{schedule.data.startTime | date: 'fullDate'}}</div>
-    <div class="small-text">
-      <i> {{schedule.data.startTime | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime | date:'shortTime'}}</i>
-    </div>
-    <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="modal.openModal(); scheduleID = schedule.id">
-      <i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i>
-    </button>
+      <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
+      <div class="title grey-text">{{schedule.data.startTime.toDate() | date: 'fullDate'}}</div>
+      <div class="small-text">
+        <i> {{schedule.data.startTime.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime.toDate() | date:'shortTime'}}</i>
+      </div>
+      <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="modal.openModal(); scheduleID = schedule.id">
+        <i mz-icon-mdi class="blue-grey-text" [icon]="'delete'"></i>
+      </button>
   </mz-collection-item>
 </mz-collection>
 <mz-modal #modal class="blue-grey-text"  [fullscreen]="false" [fixedFooter]="false" [bottomSheet]="false" [options]="modalOptions">
