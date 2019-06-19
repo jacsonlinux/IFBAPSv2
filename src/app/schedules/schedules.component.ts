@@ -12,6 +12,10 @@ export class SchedulesComponent implements OnInit {
 
   constructor(private schedulesService: SchedulesService) { }
 
+  new() {
+    this.schedulesService.newScheduleTest();
+  }
+
   ngOnInit() { this.schedulesService.currentTitle.subscribe(title => this.title = title); }
 
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SchedulesService } from '../schedules.service';
 import { Schedule } from '../../class/Schedule';
-import { AuthenticationService } from '../../authentication/authentication.service';
+// import { AuthenticationService } from '../../authentication/authentication.service';
 import { MzModalService, MzToastService } from 'ngx-materialize';
 import {Location} from '@angular/common';
 
@@ -18,6 +18,10 @@ export class ListComponent implements OnInit {
   schedule: Schedule = new Schedule();
   scheduleID: string;
 
+  show: boolean;
+
+  now = new Date();
+
   public modalOptions: Materialize.ModalOptions = {
     dismissible: false,
     opacity: 0.5,
@@ -31,7 +35,7 @@ export class ListComponent implements OnInit {
     private toastService: MzToastService,
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
-    private authenticationService: AuthenticationService
+    // private authenticationService: AuthenticationService
   ) { console.log('ListComponent'); }
 
 
@@ -58,11 +62,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
-    this.authenticationService.user.subscribe(user => {
+    this.schedules = this.schedulesService.getSchedules(this.schedule.place).map(res => res );
+    /*this.authenticationService.user.subscribe(user => {
       this.schedule.user = user.uid;
       this.schedules = this.schedulesService
         .getSchedules(this.schedule.place, this.schedule.user).map(res => res);
-    });
+    });*/
   }
 
 }

@@ -86,12 +86,46 @@ export class NewComponent implements OnInit {
     });
   }
 
+  /* onSubmit() {
+
+     const data = this.scheduleForm.value;
+
+     this.dateSchedule = data.dateSchedule;
+     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
+     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
+
+     this.schedule.startTime = this.startTime;
+     this.schedule.endTime = this.endTime;
+
+     if (this.startTime >= this.endTime) {
+       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
+       this.scheduleForm.reset();
+     } else {
+       this.showForm = false;
+       this.scheduleService
+         .newSchedule(JSON.stringify(this.schedule))
+         .then(res => {
+           if (res === true) {
+             this.toastService.show('Registered schedule!', 3000, 'green fontArial white-text');
+             this.location.back();
+           } else {
+             this.toastService.show(`${res}`, 3000, 'red fontArial white-text');
+             this.showForm = true;
+             this.buildForm();
+           }
+         })
+         .catch(err => err.message);
+     }
+   }*/
+
   onSubmit() {
 
     const data = this.scheduleForm.value;
 
     this.dateSchedule = data.dateSchedule;
+
     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
+
     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
 
     this.schedule.startTime = this.startTime;
@@ -101,9 +135,16 @@ export class NewComponent implements OnInit {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
       this.scheduleForm.reset();
     } else {
+
       this.showForm = false;
+
       this.scheduleService
-        .newSchedule(JSON.stringify(this.schedule))
+        .newSchedule(
+          { endTime: this.schedule.endTime,
+            place: this.schedule.place,
+            startTime: this.schedule.startTime,
+            user: this.schedule.user
+          })
         .then(res => {
           if (res === true) {
             this.toastService.show('Registered schedule!', 3000, 'green fontArial white-text');
@@ -116,6 +157,9 @@ export class NewComponent implements OnInit {
         })
         .catch(err => err.message);
     }
+
+
+
   }
 
   ngOnInit() {

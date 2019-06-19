@@ -79,10 +79,31 @@ export class SchedulesService {
     this.titleSource.next(title);
   }
 
-  getSchedules(place: string, user: string) {
+  getSchedules(place: string) {
+    const now = new Date();
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', place)
+        /*.where('startTime', '<', now)*/
+        .orderBy('startTime', 'asc')
+      );
+    this.schedules = this.scheduleCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Schedule;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
+      });
+    return this.schedules;
+  }
+
+  getSchedulesFilter(place: string, user: string ) {
+    const now = new Date();
+    this.scheduleCollection = this.angularFirestore
+      .collection<Schedule>('schedules', ref => ref
+        .where('place', '==', place)
+        .where('startTime', '>', now)
         .where( 'user', '==', user)
         .orderBy('startTime', 'asc')
       );
@@ -113,8 +134,59 @@ export class SchedulesService {
     return this.places;
   }
 
-  newSchedule(data) {
-    data = JSON.parse(data);
+
+
+
+
+
+
+
+  newScheduleTest() {
+
+    const dataTest = {
+      startTime: new Date(2019, 6, 19, 18, 0),
+      endTime: new Date(2019, 6, 19, 19, 0),
+      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2',
+      place: '0yK9MrgM5zREi92oxRmm'
+    };
+
+    this.scheduleCollection = this.angularFirestore
+      .collection<Schedule>('schedules', ref => ref
+        .where('startTime', '==', dataTest.startTime)
+        .where('endTime', '==', dataTest.endTime)
+      );
+
+
+
+
+    /*if ((startTime == 15) && (endTime == 16)) {
+      entrar retorna o arry de objeto
+    }*/
+
+    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
+      return actions.map(res => {
+        const data1 = res.payload.doc.data() as Schedule;
+        const id = res.payload.doc.id;
+        console.log(data1);
+        return { id, data1 };
+      });
+    });
+
+    this.schedules.forEach(res => console.log(res));
+
+    /*this.angularFirestore
+      .collection('schedules')
+      .add(dataTest)
+      .then(() => true )
+      .catch(err => err.message);*/
+
+
+
+
+  }
+
+  newSchedule(data: object) {
+    console.log(data);
     return this.angularFirestore
       .collection('schedules')
       .add(data)
