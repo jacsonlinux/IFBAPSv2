@@ -1,9 +1,7 @@
-import { Injectable} from '@angular/core';
-
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { MzToastService } from 'ngx-materialize';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 export interface Laboratory { name: string; maintenance: boolean; computers: any; applications: any; }
@@ -21,6 +19,7 @@ export interface Place {
   name: string;
   email: string;
   sector: string;
+  status: boolean;
 }
 export interface PlaceId extends Place { id: string; }
 
@@ -42,8 +41,8 @@ export class SchedulesService {
   private computerSource = new BehaviorSubject(null);
   currentComputer = this.computerSource.asObservable();
 
-  private titleSource = new BehaviorSubject(null);
-  currentTitle = this.titleSource.asObservable();
+  private subtitleSource = new BehaviorSubject(null);
+  currentSubtitle = this.subtitleSource.asObservable();
 
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
@@ -60,6 +59,9 @@ export class SchedulesService {
   applicationCollection: AngularFirestoreCollection<any>;
   applications: Observable<any>;
 
+  placeDoc: AngularFirestoreDocument<any>;
+  place: Observable<any>;
+
   computerDoc: AngularFirestoreDocument<any>;
   computer: Observable<any>;
 
@@ -69,22 +71,18 @@ export class SchedulesService {
   scheduleDoc: AngularFirestoreDocument<any>;
   schedule: Observable<any>;
 
-  constructor(
-    private angularFirestore: AngularFirestore,
-  ) {
-    console.log('LaboratoriesService');
+  constructor( private angularFirestore: AngularFirestore ) { console.log('SchedulesService'); }
+
+  changeSubtitle(subtitle) {
+    this.subtitleSource.next(subtitle);
   }
 
-  changeTitle(title) {
-    this.titleSource.next(title);
-  }
-
-  getSchedules(place: string) {
+  getSchedules(placeID: string) {
     const now = new Date();
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
-        .where('place', '==', place)
-        /*.where('startTime', '<', now)*/
+        .where('place', '==', placeID)
+        .where('startTime', '>', now)
         .orderBy('startTime', 'asc')
       );
     this.schedules = this.scheduleCollection
@@ -98,13 +96,13 @@ export class SchedulesService {
     return this.schedules;
   }
 
-  getSchedulesFilter(place: string, user: string ) {
+  getSchedulesUser(place: string, user: string ) {
     const now = new Date();
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', place)
-        .where('startTime', '>', now)
         .where( 'user', '==', user)
+        .where('startTime', '>', now)
         .orderBy('startTime', 'asc')
       );
     this.schedules = this.scheduleCollection
@@ -134,58 +132,72 @@ export class SchedulesService {
     return this.places;
   }
 
+  getPlace(placeID: string) {
+    this.placeDoc = this.angularFirestore.doc('places/' + placeID);
+    this.place = this.placeDoc.valueChanges();
+    return this.place;
+  }
 
+  checkSchedule() {
 
-
-
-
-
-
-  newScheduleTest() {
-
-    const dataTest = {
-      startTime: new Date(2019, 6, 19, 18, 0),
-      endTime: new Date(2019, 6, 19, 19, 0),
-      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2',
-      place: '0yK9MrgM5zREi92oxRmm'
+    const schedule = {
+      startTime: new Date(2019, 5, 23, 6, 0, 0),
+      endTime: new Date(2019, 5, 23, 10  , 0, 0),
+      user: 'I7iqCOar1xSyxAQ0YFptGhQcSPr1',
+      place: 'j5XeONPpvQIBEzd6JXGU'
     };
+
+    this.newSchedule(schedule);
+
+    const beginDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate());
+    const endDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate(), 23, 59, 59);
 
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
-        .where('startTime', '==', dataTest.startTime)
-        .where('endTime', '==', dataTest.endTime)
+        .where('startTime', '>=', beginDay)
+        .where('startTime', '<=', endDay)
+        .orderBy('startTime', 'asc')
       );
-
-
-
-
-    /*if ((startTime == 15) && (endTime == 16)) {
-      entrar retorna o arry de objeto
-    }*/
 
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
       return actions.map(res => {
-        const data1 = res.payload.doc.data() as Schedule;
+        const data = res.payload.doc.data() as Schedule;
         const id = res.payload.doc.id;
-        console.log(data1);
-        return { id, data1 };
+        return { id, data };
       });
     });
 
-    this.schedules.forEach(res => console.log(res));
+    this.schedules.subscribe(res => {
+      for (const i of res) {
+        console.log(i.data.startTime.toDate());
+        /*if (Date.parse(i.data.startTime.toDate()) > Date.parse(i.data.endTime.toDate())) {
+          console.log('false');
+          return false;
+        } else if (Date.parse(i.data.endTime.toDate()) < Date.parse(i.data.startTime.toDate())) {
+          console.log(':((()');
+        } else {
+          console.log('true');
+          return true;
+        }*/
 
-    /*this.angularFirestore
-      .collection('schedules')
-      .add(dataTest)
-      .then(() => true )
-      .catch(err => err.message);*/
+      }
+      /*for (const i in res) { console.log(i); }*/
+      /*for (let i = 0; i < res.length; i++) { console.log(i); }*/
+    });
+
+
+
+
+
+
+
 
 
 
 
   }
 
-  newSchedule(data: object) {
+  newSchedule(data) {
     console.log(data);
     return this.angularFirestore
       .collection('schedules')
@@ -193,17 +205,6 @@ export class SchedulesService {
       .then(() => true )
       .catch(err => err.message);
   }
-
-  /*newSchedule(data) {
-    // data = JSON.parse(data);
-
-    console.log(data);
-    return this.angularFirestore
-      .collection('schedules')
-      .add(data)
-      .then(() => true )
-      .catch(err => err.message);
-  }*/
 
   deleteSchedule(scheduleID: string) {
     return  this.angularFirestore
@@ -212,6 +213,29 @@ export class SchedulesService {
       .delete()
       .then(() => true )
       .catch(err => err.message);
+  }
+
+  getSchedulesDay(schedule) {
+
+    const beginDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate());
+    const endDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate(), 23, 59, 59);
+
+    this.scheduleCollection = this.angularFirestore
+      .collection<Schedule>('schedules', ref => ref
+        .where('startTime', '>=', beginDay)
+        .where('startTime', '<=', endDay)
+        .orderBy('startTime', 'asc')
+      );
+
+    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
+      return actions.map(res => {
+        const data = res.payload.doc.data() as Schedule;
+        const id = res.payload.doc.id;
+        return { id, data };
+      });
+    });
+
+    return this.schedules;
   }
 
   getLaboratories() {

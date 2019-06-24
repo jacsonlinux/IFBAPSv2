@@ -15,11 +15,11 @@ const SCHEDULES_ROUTES: Routes = [
     path: '', component: SchedulesComponent,
     children : [
       { path: '',
-        data: {title: 'SCHEDULE PLACE'},
-        component: PlaceComponent
+        data: {title: 'SCHEDULE PLACE' },
+        component: PlaceComponent,
       },
-      { path: ':id',
-        data: {title: 'MY SCHEDULE'},
+      { path: ':id/list',
+        data: {title: 'ALL SCHEDULE' },
         component: ListComponent
       },
       { path: ':id/new',
@@ -31,9 +31,9 @@ const SCHEDULES_ROUTES: Routes = [
         component: DetailComponent,
         data: {title: 'SCHEDULE DETAIL'}
       },
-      { path: 'filter/:id',
+      { path: ':id/filter',
         component: FilterComponent,
-        data: {title: 'SCHEDULE FILTER'},
+        data: {title: 'MY SCHEDULE'},
         canActivate: [ServerGuard]
       },
     ]

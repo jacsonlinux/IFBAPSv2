@@ -1,3 +1,27 @@
-<p>
-  filter works!
-</p>
+<mz-collection>
+  <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect">
+    <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
+    <div class="title">{{schedule.data.startTime.toDate() | date: 'fullDate'}}</div>
+    <div class=" grey-text">
+      {{schedule.data.startTime.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime.toDate() | date:'shortTime'}}
+    </div>
+     <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="modal.openModal(); scheduleID = schedule.id">
+       <i mz-icon-mdi class="red-text" [icon]="'delete-outline'"></i>
+     </button>
+  </mz-collection-item>
+</mz-collection>
+<div class="fixed-action-btn">
+  <a routerLink="../new"  mz-button [large]="true" [float]="true" class="blue"> <i mz-icon-mdi class="" [size]="'24px'" [icon]="'plus'"></i> </a>
+</div>
+<mz-modal #modal class="blue-grey-text"  [fullscreen]="false" [fixedFooter]="false" [bottomSheet]="false" [options]="modalOptions">
+  <mz-modal-header>
+    <h4 class="blue-grey-text">Cancel Schedule</h4>
+  </mz-modal-header>
+  <mz-modal-content>
+    Are you sure?
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button [flat]="true" [large]="false" class="blue-grey-text" mz-modal-close (click)="optionModalValue(false)">No</button>
+    <button mz-button [flat]="true" [large]="false" class="blue-grey-text" mz-modal-close (click)="optionModalValue(true)">Yes</button>
+  </mz-modal-footer>
+</mz-modal>
