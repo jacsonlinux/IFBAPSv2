@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -29,8 +29,12 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import {SchedulesService} from './schedules/schedules.service';
 
+/*import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {DemoUtilsModule} from './demo-utils/module';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';*/
 
 @NgModule({
   declarations: [
@@ -60,9 +64,16 @@ import {SchedulesService} from './schedules/schedules.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    /*HttpClientModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    DemoUtilsModule,*/
+    /*FormsModule*/
   ],
-  providers: [ AuthGuard, ServerGuard, SchedulesService],
+  providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

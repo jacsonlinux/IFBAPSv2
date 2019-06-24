@@ -20,7 +20,7 @@ import {
   MzIconModule,
   MzInputModule,
   MzModalModule, MzNavbarModule,
-  MzSelectModule,
+  MzSelectModule, MzSpinnerModule,
   MzTextareaModule,
   MzTimepickerModule,
   MzToastModule,
@@ -29,6 +29,7 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     NewComponent,
     SchedulesComponent,
     FilterComponent,
-    PlaceComponent
+    PlaceComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MzModalModule,
     FormsModule,
     MzBadgeModule,
-    MzNavbarModule
+    MzNavbarModule,
+    MzSpinnerModule
   ],
   providers: [
     SchedulesService

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { SchedulesService} from '../schedules.service';
 import { Place } from '../../class/Place';
 
@@ -11,17 +11,18 @@ export class PlaceComponent implements OnInit {
 
   place = new Place();
   places;
-  title;
 
-  constructor(private schedulesService: SchedulesService) { console.log('PlaceComponent'); }
-
-  getTitle(title) { this.schedulesService.changeTitle(title); }
+  constructor( private schedulesService: SchedulesService ) {
+    console.log('PlaceComponent');
+  }
 
   ngOnInit() {
     this.places = this.schedulesService.getPlaces().map(res => res);
-    this.schedulesService.changeTitle('');
+    this.schedulesService.changeSubtitle('');
   }
 
+  getSubtitle(subtitle) {
+    this.schedulesService.changeSubtitle(subtitle);
+  }
 
 }
-

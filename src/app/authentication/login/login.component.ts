@@ -11,8 +11,6 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  show: boolean;
-
   showFormLogin: boolean;
   logInForm: FormGroup;
 
