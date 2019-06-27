@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
 import 'rxjs/add/operator/mergeMap';
 import { Location } from '@angular/common';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter, map, mergeMap} from 'rxjs/operators';
-import {Title} from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
 
   title: string;
   showMenu = false;
-  message;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -50,4 +49,3 @@ export class NavbarComponent implements OnInit {
     this.location.back();
   }
 }
-

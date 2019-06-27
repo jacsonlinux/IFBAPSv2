@@ -8,10 +8,11 @@ export interface Laboratory { name: string; maintenance: boolean; computers: any
 export interface LaboratoryId extends Laboratory { id: string; }
 
 export interface Schedule {
-  startTime: any;
-  endTime: any;
-  place: string;
-  user: string;
+  title: any;
+  start: any;
+  end: any;
+  place: any;
+  user: any;
 }
 export interface ScheduleId extends Schedule { id: string; }
 
@@ -82,8 +83,8 @@ export class SchedulesService {
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', placeID)
-        .where('startTime', '>', now)
-        .orderBy('startTime', 'asc')
+        .where('start', '>', now)
+        .orderBy('start', 'asc')
       );
     this.schedules = this.scheduleCollection
       .snapshotChanges().map(actions => {
@@ -102,8 +103,8 @@ export class SchedulesService {
       .collection<Schedule>('schedules', ref => ref
         .where('place', '==', place)
         .where( 'user', '==', user)
-        .where('startTime', '>', now)
-        .orderBy('startTime', 'asc')
+        .where('start', '>', now)
+        .orderBy('start', 'asc')
       );
     this.schedules = this.scheduleCollection
       .snapshotChanges().map(actions => {
@@ -141,22 +142,22 @@ export class SchedulesService {
   checkSchedule() {
 
     const schedule = {
-      startTime: new Date(2019, 5, 23, 6, 0, 0),
-      endTime: new Date(2019, 5, 23, 10  , 0, 0),
+      start: new Date(2019, 5, 23, 6, 0, 0),
+      end: new Date(2019, 5, 23, 10  , 0, 0),
       user: 'I7iqCOar1xSyxAQ0YFptGhQcSPr1',
       place: 'j5XeONPpvQIBEzd6JXGU'
     };
 
     this.newSchedule(schedule);
 
-    const beginDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate());
-    const endDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate(), 23, 59, 59);
+    const beginDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate());
+    const endDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
 
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
-        .where('startTime', '>=', beginDay)
-        .where('startTime', '<=', endDay)
-        .orderBy('startTime', 'asc')
+        .where('start', '>=', beginDay)
+        .where('start', '<=', endDay)
+        .orderBy('start', 'asc')
       );
 
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
@@ -169,11 +170,11 @@ export class SchedulesService {
 
     this.schedules.subscribe(res => {
       for (const i of res) {
-        console.log(i.data.startTime.toDate());
-        /*if (Date.parse(i.data.startTime.toDate()) > Date.parse(i.data.endTime.toDate())) {
+        console.log(i.data.start.toDate());
+        /*if (Date.parse(i.data.start.toDate()) > Date.parse(i.data.end.toDate())) {
           console.log('false');
           return false;
-        } else if (Date.parse(i.data.endTime.toDate()) < Date.parse(i.data.startTime.toDate())) {
+        } else if (Date.parse(i.data.end.toDate()) < Date.parse(i.data.start.toDate())) {
           console.log(':((()');
         } else {
           console.log('true');
@@ -198,7 +199,6 @@ export class SchedulesService {
   }
 
   newSchedule(data) {
-    console.log(data);
     return this.angularFirestore
       .collection('schedules')
       .add(data)
@@ -217,14 +217,14 @@ export class SchedulesService {
 
   getSchedulesDay(schedule) {
 
-    const beginDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate());
-    const endDay = new Date(schedule.startTime.getFullYear(), schedule.startTime.getMonth(), schedule.startTime.getDate(), 23, 59, 59);
+    const beginDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate());
+    const endDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
 
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
-        .where('startTime', '>=', beginDay)
-        .where('startTime', '<=', endDay)
-        .orderBy('startTime', 'asc')
+        .where('start', '>=', beginDay)
+        .where('start', '<=', endDay)
+        .orderBy('start', 'asc')
       );
 
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {

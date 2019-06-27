@@ -29,7 +29,12 @@ import {
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { NavbarComponent } from './navbar/navbar.component';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { UtilsModule} from './calendar/utils/module';
+import { HttpClientModule } from '@angular/common/http';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     SchedulesComponent,
     FilterComponent,
     PlaceComponent,
-    NavbarComponent
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -62,11 +67,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     MzBadgeModule,
     MzNavbarModule,
-    MzSpinnerModule
+    MzSpinnerModule,
+    HttpClientModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    UtilsModule
   ],
-  providers: [
-    SchedulesService
-  ]
+  providers: [ SchedulesService ]
 })
 
 export class SchedulesModule { }

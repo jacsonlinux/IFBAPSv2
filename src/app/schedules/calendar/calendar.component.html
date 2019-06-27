@@ -1,0 +1,60 @@
+<mwl-utils-calendar-header
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  (viewDateChange)="fetchEvents()"
+  (viewChange)="fetchEvents()"
+>
+</mwl-utils-calendar-header>
+
+<!--<div class="row" *ngIf="!(subtitle==null)" >
+  <div class="right">
+    <span id="span1" class="right blue">PLACE</span>
+    <span id="span2" class="right blue-grey-text">{{subtitle | uppercase}}</span>
+  </div>
+</div>-->
+
+<div *ngIf="events$ | async; let events else loading;">
+  <div style="margin-bottom: 57px" [ngSwitch]="view">
+    <mwl-calendar-month-view
+      (dblclick)="show('show')"
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (dayClicked)="dayClicked($event.day)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event)"
+      [activeDayIsOpen]="activeDayIsOpen" >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [refresh]="refresh"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-day-view>
+  </div>
+</div>
+
+<button (click)="filter()">FILTER</button>
+
+<ng-template #loading>
+  <div class="center-jack-container">
+    <mz-spinner
+      [color]="'blue'"
+      [size]="'medium'">
+    </mz-spinner>
+  </div>
+</ng-template>
+
+
+<!--[@.disabled]="true" disable transition-->
