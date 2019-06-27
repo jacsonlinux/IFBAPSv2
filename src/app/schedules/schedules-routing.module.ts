@@ -9,6 +9,7 @@ import { DetailComponent } from './detail/detail.component';
 import { NewComponent } from './new/new.component';
 import { FilterComponent } from './filter/filter.component';
 import { PlaceComponent } from './place/place.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const SCHEDULES_ROUTES: Routes = [
   {
@@ -17,6 +18,10 @@ const SCHEDULES_ROUTES: Routes = [
       { path: '',
         data: {title: 'SCHEDULE PLACE' },
         component: PlaceComponent,
+      },
+      { path: ':id/calendar',
+        data: {title: 'SCHEDULE CALENDAR' },
+        component: CalendarComponent
       },
       { path: ':id/list',
         data: {title: 'ALL SCHEDULE' },

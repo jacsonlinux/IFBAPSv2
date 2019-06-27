@@ -1,9 +1,9 @@
 <mz-collection>
   <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect">
     <i mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
-    <div class="title">{{schedule.data.startTime.toDate() | date: 'fullDate'}}</div>
+    <div class="title">{{schedule.data.start.toDate() | date: 'fullDate'}}</div>
     <div class=" grey-text">
-      {{schedule.data.startTime.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime.toDate() | date:'shortTime'}}
+      {{schedule.data.start.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.end.toDate() | date:'shortTime'}}
     </div>
      <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="modal.openModal(); scheduleID = schedule.id">
        <i mz-icon-mdi class="red-text" [icon]="'delete-outline'"></i>

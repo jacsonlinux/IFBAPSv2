@@ -2,9 +2,9 @@
   <mz-collection-item [avatar]="true" *ngFor="let schedule of schedules | async" class="waves-effect">
     <i *ngIf="schedule.data.user != user" mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="blue-grey darken-4 blue-grey-text" style="border: solid 1px #607d8b"></i>
     <i *ngIf="schedule.data.user == user" mz-avatar mz-icon-mdi [icon]="'calendar-clock'" class="green"></i>
-    <div class="title">{{schedule.data.startTime.toDate() | date: 'fullDate'}}</div>
+    <div class="title">{{schedule.data.start.toDate() | date: 'fullDate'}}</div>
     <div class=" blue-grey-text">
-      {{schedule.data.startTime.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.endTime.toDate() | date:'shortTime'}}
+      {{schedule.data.start.toDate() | date:'shortTime'}}&nbsp;&nbsp;-&nbsp;&nbsp;{{schedule.data.end.toDate() | date:'shortTime'}}
     </div>
     <button mz-button [flat]="true" [float]="true" mz-secondary-content (click)="details(schedule.id)" >
       <i mz-icon-mdi class="blue-grey-text" [size]="''" [icon]="'eye-outline'"></i>

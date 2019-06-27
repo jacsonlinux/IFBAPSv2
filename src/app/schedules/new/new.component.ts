@@ -20,10 +20,10 @@ export class NewComponent implements OnInit {
     dateSchedule: {
       required: 'Date is required',
     },
-    startTime: {
+    start: {
       required: 'Start time is required',
     },
-    endTime: {
+    end: {
       required: 'End time is required',
     }
   };
@@ -32,8 +32,8 @@ export class NewComponent implements OnInit {
   showForm: boolean;
 
   dateSchedule;
-  startTime;
-  endTime;
+  start;
+  end;
 
   public timepickerOptions: Pickadate.TimeOptions = {
     default: 'now',
@@ -76,11 +76,11 @@ export class NewComponent implements OnInit {
       dateSchedule: [null, Validators.compose([
         Validators.required
       ])],
-      startTime: [null, Validators.compose([
+      start: [null, Validators.compose([
         Validators.required,
 
       ])],
-      endTime: [null, Validators.compose([
+      end: [null, Validators.compose([
         Validators.required
       ])]
     });
@@ -91,13 +91,13 @@ export class NewComponent implements OnInit {
      const data = this.scheduleForm.value;
 
      this.dateSchedule = data.dateSchedule;
-     this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
-     this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
+     this.start = new Date(this.dateSchedule + ' ' + data.start + ':00');
+     this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
 
-     this.schedule.startTime = this.startTime;
-     this.schedule.endTime = this.endTime;
+     this.schedule.start = this.start;
+     this.schedule.end = this.end;
 
-     if (this.startTime >= this.endTime) {
+     if (this.start >= this.end) {
        this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
        this.scheduleForm.reset();
      } else {
@@ -118,20 +118,21 @@ export class NewComponent implements OnInit {
      }
    }*/
 
+
   onSubmit() {
 
     const data = this.scheduleForm.value;
 
     this.dateSchedule = data.dateSchedule;
 
-    this.startTime = new Date(this.dateSchedule + ' ' + data.startTime + ':00');
+    this.start = new Date(this.dateSchedule + ' ' + data.start + ':00');
 
-    this.endTime = new  Date(this.dateSchedule + ' ' + data.endTime + ':00');
+    this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
 
-    this.schedule.startTime = this.startTime;
-    this.schedule.endTime = this.endTime;
+    this.schedule.start = this.start;
+    this.schedule.end = this.end;
 
-    if (this.startTime >= this.endTime) {
+    if (this.start >= this.end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
       this.scheduleForm.reset();
     } else {
@@ -140,9 +141,9 @@ export class NewComponent implements OnInit {
 
       this.scheduleService
         .newSchedule(
-          { endTime: this.schedule.endTime,
+          { end: this.schedule.end,
             place: this.schedule.place,
-            startTime: this.schedule.startTime,
+            start: this.schedule.start,
             user: this.schedule.user
           })
         .then(res => {

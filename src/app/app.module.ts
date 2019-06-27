@@ -30,11 +30,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-/*import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import {DemoUtilsModule} from './demo-utils/module';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';*/
+
 
 @NgModule({
   declarations: [
@@ -64,14 +60,7 @@ import {HttpClientModule} from '@angular/common/http';*/
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    AppRoutingModule,
-    /*HttpClientModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    DemoUtilsModule,*/
-    /*FormsModule*/
+    AppRoutingModule
   ],
   providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]

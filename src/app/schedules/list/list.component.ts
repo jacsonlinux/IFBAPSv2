@@ -16,13 +16,11 @@ export class ListComponent implements OnInit {
   show: boolean;
   showSpinner: boolean;
 
-  now = new Date();
-
   constructor(
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService
-  ) { console.log('ListComponent'); this.show = false; console.log(this.now); }
+  ) { console.log('ListComponent'); this.show = false; }
 
   details(id: string) { console.log(id); }
 
