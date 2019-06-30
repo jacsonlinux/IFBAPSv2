@@ -70,12 +70,24 @@
           <i mz-icon-mdi class="blue-grey-text" [icon]="'calendar-today'" [size]="'24px'" ></i>
         </button>
         <button
+          *ngIf="filterActive"
           mz-button
           [flat]="true"
           [large]="true"
           [float]="true"
+          (click)="viewChange.emit('month')"
         >
-          <i mz-icon-mdi class="orange-text" [icon]="'filter-variant'" [size]="'24px'" ></i>
+          <i mz-icon-mdi class="yellow-text" [icon]="'filter-variant'" [size]="'24px'" ></i>
+        </button>
+        <button
+          *ngIf="!filterActive"
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="true"
+          (click)="filter.emit()"
+        >
+          <i mz-icon-mdi class="grey-text" [rotate]="'180'"  [icon]="'filter-variant'" [size]="'24px'" ></i>
         </button>
         <button
           routerLink="../new"
@@ -93,7 +105,6 @@
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
     <mz-navbar  [navbarClass]="'blue-grey darken-4'">
-
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item>
           <button
@@ -128,18 +139,30 @@
           </button>
         </mz-navbar-item>
       </mz-navbar-item-container>
-
       <mz-navbar-item-container [align]="'right'">
         <mz-navbar-item *ngIf="smallResolution | async">
           <button
+            *ngIf="filterActive"
             mz-button
             [flat]="true"
             [large]="true"
             [float]="true"
+            (click)="viewChange.emit('month')"
           >
-            <i mz-icon-mdi class="orange-text" [icon]="'filter-variant'" [size]="'24px'" ></i>
+            <i mz-icon-mdi class="yellow-text" [icon]="'filter-variant'" [size]="'24px'" ></i>
           </button>
           <button
+            *ngIf="!filterActive"
+            mz-button
+            [flat]="true"
+            [large]="true"
+            [float]="true"
+            (click)="filter.emit()"
+          >
+            <i mz-icon-mdi class="grey-text" [rotate]="'180'"  [icon]="'filter-variant'" [size]="'24px'" ></i>
+          </button>
+          <button
+            routerLink="../new"
             mz-button
             [flat]="true"
             [large]="true"
@@ -149,16 +172,11 @@
           </button>
         </mz-navbar-item>
       </mz-navbar-item-container>
-
-
     </mz-navbar>
   </div>
 </div>
 <div id="bottom" class="navbar-fixed" *ngIf="smallResolution | async">
   <mz-navbar  [navbarClass]="'blue-grey darken-4'">
-
-
-
     <mz-navbar-item-container [align]="'left'">
       <mz-navbar-item>
         <button
@@ -232,8 +250,5 @@
         </button>
       </mz-navbar-item>
     </mz-navbar-item-container>
-
-
-
   </mz-navbar>
 </div>

@@ -24,6 +24,14 @@ export interface Place {
 }
 export interface PlaceId extends Place { id: string; }
 
+export interface User {
+  displayName: string;
+  email: string;
+  photoURL: string;
+  profile: string;
+}
+export interface UserId extends User { id: string; }
+
 export interface Computer {
   active: boolean;
   data: object;
@@ -54,6 +62,9 @@ export class SchedulesService {
   placeCollection: AngularFirestoreCollection<any>;
   places: Observable<any>;
 
+  userCollection: AngularFirestoreCollection<any>;
+  users: Observable<any>;
+
   computerCollection: AngularFirestoreCollection<any>;
   computers: Observable<any>;
 
@@ -62,6 +73,9 @@ export class SchedulesService {
 
   placeDoc: AngularFirestoreDocument<any>;
   place: Observable<any>;
+
+  userDoc: AngularFirestoreDocument<any>;
+  user: Observable<any>;
 
   computerDoc: AngularFirestoreDocument<any>;
   computer: Observable<any>;
@@ -137,6 +151,12 @@ export class SchedulesService {
     this.placeDoc = this.angularFirestore.doc('places/' + placeID);
     this.place = this.placeDoc.valueChanges();
     return this.place;
+  }
+
+  getUser(userID: string) {
+    this.userDoc = this.angularFirestore.doc('users/' + userID);
+    this.user = this.userDoc.valueChanges();
+    return this.user;
   }
 
   checkSchedule() {

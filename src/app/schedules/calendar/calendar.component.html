@@ -1,36 +1,29 @@
 <mwl-utils-calendar-header
+  [filterActive]="filterActive"
   [(view)]="view"
   [(viewDate)]="viewDate"
+  (filter)="fetchUserEvents()"
   (viewDateChange)="fetchEvents()"
-  (viewChange)="fetchEvents()"
->
+  (viewChange)="fetchEvents()">
 </mwl-utils-calendar-header>
-
-<!--<div class="row" *ngIf="!(subtitle==null)" >
-  <div class="right">
-    <span id="span1" class="right blue">PLACE</span>
-    <span id="span2" class="right blue-grey-text">{{subtitle | uppercase}}</span>
-  </div>
-</div>-->
-
 <div *ngIf="events$ | async; let events else loading;">
   <div style="margin-bottom: 57px" [ngSwitch]="view">
-    <mwl-calendar-month-view
-      (dblclick)="show('show')"
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (dayClicked)="dayClicked($event.day)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      (eventClicked)="eventClicked($event.event)"
-      [activeDayIsOpen]="activeDayIsOpen" >
-    </mwl-calendar-month-view>
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (dayClicked)="dayClicked($event.day)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+        (eventClicked)="eventClicked($event.event); modal.openModal()"
+        [activeDayIsOpen]="activeDayIsOpen"
+      >
+      </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="'week'"
       [viewDate]="viewDate"
       [events]="events"
       (eventTimesChanged)="eventTimesChanged($event)"
-      (eventClicked)="eventClicked($event.event)"
+      (eventClicked)="eventClicked($event.event); modal.openModal()"
     >
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
@@ -39,13 +32,36 @@
       [viewDate]="viewDate"
       [events]="events"
       (eventTimesChanged)="eventTimesChanged($event)"
-      (eventClicked)="eventClicked($event.event)"
+      (eventClicked)="eventClicked($event.event); modal.openModal()"
     >
     </mwl-calendar-day-view>
   </div>
 </div>
 
-<button (click)="filter()">FILTER</button>
+<mz-modal
+  #modal
+  class="blue-grey-text"
+  [fullscreen]="smallResolution | async"
+  [fixedFooter]="true"
+  [bottomSheet]="smallResolution | async"
+  [options]="modalOptions"
+>
+  <mz-modal-header>
+    <h5>{{schedule.title}}</h5>
+  </mz-modal-header>
+  <mz-modal-content>
+    <div style="border-radius: 10px; border: 1px solid #607d8b; padding: 5px;">
+      <p><b>Date:&nbsp;</b>{{schedule.start | date }}</p>
+      <p><b>Schedule:&nbsp;</b> {{schedule.start | date: 'shortTime' }} - {{schedule.end | date: 'shortTime' }}</p>
+      <p><b>Place:&nbsp;</b>{{schedule.place}}</p>
+      <p><b>User:&nbsp;</b>{{schedule.user}}</p>
+    </div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <small>SID: {{schedule.id}}</small>
+    <button class="blue-grey-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>CLOSE</button>
+  </mz-modal-footer>
+</mz-modal>
 
 <ng-template #loading>
   <div class="center-jack-container">
@@ -57,4 +73,15 @@
 </ng-template>
 
 
+
+
+<!--<button mz-button [flat]="true" [large]="false" class="blue-grey-text" mz-modal-close (click)="optionModalValue(false)">No</button>
+<button mz-button [flat]="true" [large]="false" class="blue-grey-text" mz-modal-close (click)="optionModalValue(true)">Yes</button>-->
+
+<!--<div class="row" *ngIf="!(subtitle==null)" >
+  <div class="right">
+    <span id="span1" class="right blue">PLACE</span>
+    <span id="span2" class="right blue-grey-text">{{subtitle | uppercase}}</span>
+  </div>
+</div>-->
 <!--[@.disabled]="true" disable transition-->
