@@ -1,36 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
-import {
-  CalendarDateFormatter,
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import { CalendarDateFormatter, CalendarEvent, CalendarEventTimesChangedEvent } from 'angular-calendar';
 import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
-
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
-import {
-  isSameMonth, isSameDay, startOfMonth, endOfMonth,
-  startOfWeek, endOfWeek, startOfDay, endOfDay,
-  format, subDays, addHours, addDays
-} from 'date-fns';
-
-import {Observable, Subject} from 'rxjs';
-
-import {AuthenticationService} from '../../authentication/authentication.service';
-import {CustomDateFormatter} from '../../class/CustomDateFormatter';
-import {colors} from './utils/colors';
-import {SchedulesService} from '../schedules.service';
-import {ActivatedRoute} from '@angular/router';
-import {Schedule} from '../../class/Schedule';
-
-interface Film {
-  id: number;
-  title: string;
-  release_date: string;
-}
+import { isSameMonth, isSameDay } from 'date-fns';
+import { Observable, Subject } from 'rxjs';
+import { AuthenticationService } from '../../authentication/authentication.service';
+import { CustomDateFormatter } from '../../class/CustomDateFormatter';
+import { colors} from './utils/colors';
+import { SchedulesService } from '../schedules.service';
+import { ActivatedRoute } from '@angular/router';
+import { Schedule } from '../../class/Schedule';
+import {MzMediaService} from 'ngx-materialize';
 
 function getTimezoneOffsetString(date: Date): string {
   const timezoneOffset = date.getTimezoneOffset();
@@ -39,7 +19,6 @@ function getTimezoneOffsetString(date: Date): string {
   ).padStart(2, '0');
   const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
   const direction = timezoneOffset > 0 ? '-' : '+';
-
   return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
 }
 
@@ -57,73 +36,22 @@ function getTimezoneOffsetString(date: Date): string {
 })
 export class CalendarComponent implements OnInit {
 
-  placeID;
+  public smallResolution: Observable<boolean>;
+  public largeResolution: Observable<boolean>;
+
+  placeID: string;
   schedules;
-  user;
-  subtitle;
+  user: string;
+  subtitle: string;
+  filterActive: boolean;
+
+  schedule = new Schedule();
 
   view = 'month';
 
   viewDate: Date = new Date();
 
-  actions: CalendarEventAction[] = [
-    /*{
-      label: '<i class="material-icons">edit</i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },*/
-    /*{
-      label: '<i class="red-text material-icons">delete</i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }*/
-  ];
-
-  // events: CalendarEvent[] = [];
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent[] = [];
 
   events$: Observable<Array<CalendarEvent<{ schedule: Schedule }>>>;
 
@@ -137,58 +65,37 @@ export class CalendarComponent implements OnInit {
 
   private readonly darkThemeClass = 'dark-theme';
 
+  public modalOptions: Materialize.ModalOptions = {
+    dismissible: false,
+    opacity: 0.5,
+    startingTop: '30%',
+    endingTop: '20%'
+  };
+
   constructor(
+    private mediaService: MzMediaService,
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private http: HttpClient,
-    @Inject(DOCUMENT) private document,
+    @Inject(DOCUMENT) private document
   ) {
     console.log('CalendarComponent');
     this.placeID = this.activatedRoute.snapshot.paramMap.get('id');
     this.authenticationService.user.subscribe(res => this.user = res.uid);
+    this.smallResolution = this.mediaService.isActive('s'); // small screen resolution
+    this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
   }
 
-  /*fetchEvents(): void {
-    const getStart: any = {
-      month: startOfMonth,
-      week: startOfWeek,
-      day: startOfDay
-    }[this.view];
-
-    const getEnd: any = {
-      month: endOfMonth,
-      week: endOfWeek,
-      day: endOfDay
-    }[this.view];
-
-    const params = new HttpParams()
-      .set(
-        'primary_release_date.gte',
-        format(getStart(this.viewDate), 'YYYY-MM-DD')
-      )
-      .set(
-        'primary_release_date.lte',
-        format(getEnd(this.viewDate), 'YYYY-MM-DD')
-      )
-      .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-    this.events$ = this.http
-      .get('https://api.themoviedb.org/3/discover/movie', { params })
-      .pipe(
-        map(({ results }: { results: Film[] }) => {
-          return results.map((film: Film) => {
-            return {
-              title: film.title,
-              start: new Date(film.release_date + getTimezoneOffsetString(this.viewDate) ),
-              color: colors.yellow,
-              allDay: true,
-              meta: { film }
-            };
-          });
-        })
-      );
-  }*/
+  optionModalValue(value: boolean) {
+    // console.log(value);
+    /*if (value) {
+      this.schedulesService.deleteSchedule('this.scheduleID')
+        .then(res => { if (res) {
+          // this.toastService.show('Scheduling deleted!', 3000, 'red fontArial white-text');
+        }})
+        .catch(err => err.message);
+    }*/
+  }
 
   dayClicked({ date, events }: {
     date: Date;
@@ -209,29 +116,48 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  eventClicked(event: CalendarEvent<{ schedule: Schedule }>): void {
-    console.log(event);
-    /*window.open(
-      `https://www.themoviedb.org/movie/${event.meta.film.id}`,
-      '_blank'
-    );*/
-  }
-
-  fetchEvents() {
+  fetchEvents(): void {
+    this.filterActive = false;
     this.events$ = this.schedulesService.getSchedules(this.placeID).map(res => {
       return res.map(schedule => {
         return {
+          id: schedule.id,
           start: new Date(schedule.data.start.toDate()),
           end: new Date(schedule.data.end.toDate()),
           title: schedule.data.title,
           color: colors.yellow,
-          // actions: this.actions,
           resizable: {
             beforeStart: false,
             afterEnd: false
           },
           draggable: false,
           allDay: false,
+          user: schedule.data.user,
+          place: schedule.data.place,
+          meta: {schedule}
+        };
+      });
+    } );
+  }
+
+  fetchUserEvents(): void {
+    this.filterActive = true;
+    this.events$ = this.schedulesService.getSchedulesUser(this.placeID, this.user).map(res => {
+      return res.map(schedule => {
+        return {
+          id: schedule.id,
+          start: new Date(schedule.data.start.toDate()),
+          end: new Date(schedule.data.end.toDate()),
+          title: schedule.data.title,
+          color: colors.blue,
+          resizable: {
+            beforeStart: false,
+            afterEnd: false
+          },
+          draggable: false,
+          allDay: false,
+          user: schedule.data.user,
+          place: schedule.data.place,
           meta: {schedule}
         };
       });
@@ -259,31 +185,20 @@ export class CalendarComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });*/
   }
 
-  filter() {
-    console.log(this.user);
+  eventClicked(event: CalendarEvent<{ schedule: Schedule }>): void {
 
-    this.events$ = this.schedulesService.getSchedulesUser(this.placeID, this.user).map(res => {
-      return res.map(schedule => {
-        return {
-          start: new Date(schedule.data.start.toDate()),
-          end: new Date(schedule.data.end.toDate()),
-          title: schedule.data.title,
-          color: colors.blue,
-          // actions: this.actions,
-          resizable: {
-            beforeStart: false,
-            afterEnd: false
-          },
-          draggable: false,
-          allDay: false,
-          meta: {schedule}
-        };
-      });
-    } );
-  }
+    /*this.schedulesService.getPlace(event.place).subscribe(res => this.schedule.place = res.name);
+    this.schedulesService.getUser(event.user).subscribe(res =>  this.schedule.user = res.displayName);*/
 
-  show(show) {
-    console.log(show);
+    this.schedule.user = event.user;
+    this.schedule.place = event.place;
+
+    this.schedule.title = event.title;
+    this.schedule.start = event.start;
+    this.schedule.end = event.end;
+    this.schedule.id = event.id;
+
+    console.log(event);
   }
 
   ngOnInit() {

@@ -21,7 +21,9 @@ export class CalendarHeaderComponent {
 
   }
 
-  @Input() view: string;
+  @Input() view;
+
+  @Input() filterActive: boolean;
 
   @Input() viewDate: Date;
 
@@ -30,4 +32,6 @@ export class CalendarHeaderComponent {
   @Output() viewChange: EventEmitter<string> = new EventEmitter();
 
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
+
+  @Output() filter: EventEmitter<Date> = new EventEmitter();
 }

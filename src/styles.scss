@@ -235,6 +235,40 @@ thead {
   bottom: 0px !important;
 }
 
+.bottom{
+  position: fixed !important;
+  bottom: 0px !important;
+}
+
+
+/*.fixed-action-btn{
+  position: fixed !important;
+  right:23px !important;
+  bottom:23px !important;
+  padding-top:15px !important;
+  margin-bottom:0 !important;
+  z-index:997 !important;
+}*/
+
+mwl-calendar-month-cell,
+mwl-calendar-day-view-hour-segment,
+mwl-calendar-week-view-hour-segment {
+  touch-action: auto !important;
+}
+
+/*.cal-month-view .cal-event {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: none !important;
+  margin: 2px;
+}*/
+
+.grecaptcha-badge {
+  display: none !important;
+}
+
+
 
 
 /*#eceff1 blue-grey lighten-5
