@@ -3,7 +3,10 @@
   <mz-collection-item (click)="getSubtitle(place.data.name)" *ngFor="let place of places | async" mz-collection-link routerLink="{{place.id}}/calendar" [avatar]="true" class="waves-effect waves-light">
     <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue"></i>
     <div class="title">{{place.data.name | uppercase}}</div>
-    <div class="blue-grey-text"><i mz-icon-mdi [icon]="'account-check'" [align]="'left'" [size]="'18px'" style="margin-right: 5px !important;"></i>{{place.data.email}}</div>
+    <div class="blue-grey-text">
+      <!--<i mz-icon-mdi [icon]="'account-check'" [align]="'left'" [size]="'18px'" style="margin-right: 5px !important;"></i>-->
+      {{place.data.email}}
+    </div>
     <div *ngIf="place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" [size]="'24px'" class="green-text"></i></div>
     <div *ngIf="!place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'close-circle-outline'" [size]="'24px'" class="orange-text"></i></div>
   </mz-collection-item>
