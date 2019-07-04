@@ -8,16 +8,16 @@
 </mwl-utils-calendar-header>
 <div *ngIf="events$ | async; let events else loading;">
   <div style="margin-bottom: 57px" [ngSwitch]="view">
-      <mwl-calendar-month-view
-        *ngSwitchCase="'month'"
-        [viewDate]="viewDate"
-        [events]="events"
-        (dayClicked)="dayClicked($event.day)"
-        (eventTimesChanged)="eventTimesChanged($event)"
-        (eventClicked)="eventClicked($event.event); modal.openModal()"
-        [activeDayIsOpen]="activeDayIsOpen"
-      >
-      </mwl-calendar-month-view>
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (dayClicked)="dayClicked($event.day)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event); modal.openModal()"
+      [activeDayIsOpen]="activeDayIsOpen"
+    >
+    </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="'week'"
       [viewDate]="viewDate"
