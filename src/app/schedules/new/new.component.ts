@@ -118,34 +118,27 @@ export class NewComponent implements OnInit {
      }
    }*/
 
-
   onSubmit() {
-
     const data = this.scheduleForm.value;
-
     this.dateSchedule = data.dateSchedule;
-
     this.start = new Date(this.dateSchedule + ' ' + data.start + ':00');
-
     this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
-
     this.schedule.start = this.start;
     this.schedule.end = this.end;
-
+    this.schedule.title = 'Title Test';
     if (this.start >= this.end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
       this.scheduleForm.reset();
     } else {
-
       this.showForm = false;
-
       this.scheduleService
-        .newSchedule(
-          { end: this.schedule.end,
-            place: this.schedule.place,
-            start: this.schedule.start,
-            user: this.schedule.user
-          })
+        .newSchedule({
+          end: this.schedule.end,
+          place: this.schedule.place,
+          start: this.schedule.start,
+          user: this.schedule.user,
+          title: this.schedule.title
+        })
         .then(res => {
           if (res === true) {
             this.toastService.show('Registered schedule!', 3000, 'green fontArial white-text');
@@ -158,10 +151,11 @@ export class NewComponent implements OnInit {
         })
         .catch(err => err.message);
     }
-
-
-
   }
+
+  // newSchedule() { this.scheduleService.validateSchedule(this.schedule); }
+  // this.scheduleService.validateSchedule().subscribe(res => res);
+
 
   ngOnInit() {
     this.buildForm();
@@ -171,3 +165,23 @@ export class NewComponent implements OnInit {
   }
 
 }
+
+/*this.schedules.subscribe(schedules => {
+      if (schedules.length === 0) {
+        console.log('pode agendar esse periodo!');
+      } else {
+        const periods = [];
+        for (const entry of schedules) {
+          periods.push({
+            start: entry.data.start.toDate(),
+            end: entry.data.end.toDate()
+          });
+        }
+        const testPeriod = {
+          start: schedule.start,
+          end: schedule.end
+        };
+        const x = this.validatePeriod(testPeriod, periods);
+        console.log(x);
+      }
+    });*/

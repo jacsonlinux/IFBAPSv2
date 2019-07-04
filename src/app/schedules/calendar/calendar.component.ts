@@ -1,5 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
-import { CalendarDateFormatter, CalendarEvent, CalendarEventTimesChangedEvent } from 'angular-calendar';
+import {
+  CalendarDateFormatter,
+  CalendarDayViewBeforeRenderEvent,
+  CalendarEvent,
+  CalendarEventTimesChangedEvent
+} from 'angular-calendar';
 import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
 import { isSameMonth, isSameDay } from 'date-fns';

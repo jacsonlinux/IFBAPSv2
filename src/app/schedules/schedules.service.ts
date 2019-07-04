@@ -88,6 +88,19 @@ export class SchedulesService {
 
   constructor( private angularFirestore: AngularFirestore ) { console.log('SchedulesService'); }
 
+  /*validatePeriod = (testPeriod, periods): boolean => {
+    for (let i = 0; periods.length; i++) {
+      const period = periods[i];
+      if (period.start < testPeriod.start && period.end > testPeriod.start) {
+        return false;
+      }
+      if (period.start > testPeriod.start && period.start < testPeriod.end) {
+        return false;
+      }
+    }
+    return true;
+  }*/
+
   changeSubtitle(subtitle) {
     this.subtitleSource.next(subtitle);
   }
@@ -147,81 +160,10 @@ export class SchedulesService {
     return this.places;
   }
 
-  getPlace(placeID: string) {
-    this.placeDoc = this.angularFirestore.doc('places/' + placeID);
-    this.place = this.placeDoc.valueChanges();
-    return this.place;
-  }
-
-  getUser(userID: string) {
-    this.userDoc = this.angularFirestore.doc('users/' + userID);
-    this.user = this.userDoc.valueChanges();
-    return this.user;
-  }
-
-  checkSchedule() {
-
-    const schedule = {
-      start: new Date(2019, 5, 23, 6, 0, 0),
-      end: new Date(2019, 5, 23, 10  , 0, 0),
-      user: 'I7iqCOar1xSyxAQ0YFptGhQcSPr1',
-      place: 'j5XeONPpvQIBEzd6JXGU'
-    };
-
-    this.newSchedule(schedule);
-
-    const beginDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate());
-    const endDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
-
-    this.scheduleCollection = this.angularFirestore
-      .collection<Schedule>('schedules', ref => ref
-        .where('start', '>=', beginDay)
-        .where('start', '<=', endDay)
-        .orderBy('start', 'asc')
-      );
-
-    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
-      return actions.map(res => {
-        const data = res.payload.doc.data() as Schedule;
-        const id = res.payload.doc.id;
-        return { id, data };
-      });
-    });
-
-    this.schedules.subscribe(res => {
-      for (const i of res) {
-        console.log(i.data.start.toDate());
-        /*if (Date.parse(i.data.start.toDate()) > Date.parse(i.data.end.toDate())) {
-          console.log('false');
-          return false;
-        } else if (Date.parse(i.data.end.toDate()) < Date.parse(i.data.start.toDate())) {
-          console.log(':((()');
-        } else {
-          console.log('true');
-          return true;
-        }*/
-
-      }
-      /*for (const i in res) { console.log(i); }*/
-      /*for (let i = 0; i < res.length; i++) { console.log(i); }*/
-    });
-
-
-
-
-
-
-
-
-
-
-
-  }
-
-  newSchedule(data) {
+  newSchedule(schedule) {
     return this.angularFirestore
       .collection('schedules')
-      .add(data)
+      .add(schedule)
       .then(() => true )
       .catch(err => err.message);
   }
@@ -233,6 +175,73 @@ export class SchedulesService {
       .delete()
       .then(() => true )
       .catch(err => err.message);
+  }
+
+  validateSchedule(schedule: Schedule) {
+
+    console.log(schedule);
+
+    /*const schedule = {
+      start: new Date(2019, 6, 25, 2, 0, 0),
+      end: new Date(2019, 6, 25, 4  , 0, 0),
+      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2',
+      place: 'j5XeONPpvQIBEzd6JXGU',
+      title: 'Programming logic class'
+    };*/
+
+    const start = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate());
+
+    const end = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
+
+    this.scheduleCollection = this.angularFirestore
+      .collection<Schedule>('schedules', ref => ref
+        .where('start', '>=', start)
+        .where('start', '<=', end)
+        .orderBy('start', 'asc')
+      );
+
+    this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
+      return actions.map(res => {
+        const data = res.payload.doc.data() as Schedule;
+        const id = res.payload.doc.id;
+        return { id, data };
+      });
+    });
+
+    return this.schedules;
+
+    /*this.schedules.subscribe(schedules => {
+      if (schedules.length === 0) {
+        console.log('pode agendar esse periodo!');
+      } else {
+        const periods = [];
+        for (const entry of schedules) {
+          periods.push({
+            start: entry.data.start.toDate(),
+            end: entry.data.end.toDate()
+          });
+        }
+        const testPeriod = {
+          start: schedule.start,
+          end: schedule.end
+        };
+        const x = this.validatePeriod(testPeriod, periods);
+        console.log(x);
+      }
+    });*/
+
+  }
+
+  getPlace(placeID: string) {
+    this.placeDoc = this.angularFirestore.doc('places/' + placeID);
+    this.place = this.placeDoc.valueChanges();
+    return this.place;
+  }
+
+  getUser(userID: string) {
+    this.userDoc = this.angularFirestore.doc('users/' + userID);
+    this.user = this.userDoc.valueChanges();
+    return this.user;
   }
 
   getSchedulesDay(schedule) {
