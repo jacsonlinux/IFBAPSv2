@@ -160,14 +160,6 @@ export class SchedulesService {
     return this.places;
   }
 
-  newSchedule(schedule) {
-    return this.angularFirestore
-      .collection('schedules')
-      .add(schedule)
-      .then(() => true )
-      .catch(err => err.message);
-  }
-
   deleteSchedule(scheduleID: string) {
     return  this.angularFirestore
       .collection('schedules')
@@ -177,29 +169,23 @@ export class SchedulesService {
       .catch(err => err.message);
   }
 
+  newSchedule(schedule) {
+    return this.angularFirestore
+      .collection('schedules')
+      .add(schedule)
+      .then(() => true )
+      .catch(err => err.message);
+  }
+
   validateSchedule(schedule: Schedule) {
-
-    console.log(schedule);
-
-    /*const schedule = {
-      start: new Date(2019, 6, 25, 2, 0, 0),
-      end: new Date(2019, 6, 25, 4  , 0, 0),
-      user: 'gZzVb7Cs9HcXoX8NvtUoalOZB2R2',
-      place: 'j5XeONPpvQIBEzd6JXGU',
-      title: 'Programming logic class'
-    };*/
-
     const start = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate());
-
     const end = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
-
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
         .where('start', '>=', start)
         .where('start', '<=', end)
         .orderBy('start', 'asc')
       );
-
     this.schedules = this.scheduleCollection.snapshotChanges().map(actions => {
       return actions.map(res => {
         const data = res.payload.doc.data() as Schedule;
@@ -207,29 +193,7 @@ export class SchedulesService {
         return { id, data };
       });
     });
-
     return this.schedules;
-
-    /*this.schedules.subscribe(schedules => {
-      if (schedules.length === 0) {
-        console.log('pode agendar esse periodo!');
-      } else {
-        const periods = [];
-        for (const entry of schedules) {
-          periods.push({
-            start: entry.data.start.toDate(),
-            end: entry.data.end.toDate()
-          });
-        }
-        const testPeriod = {
-          start: schedule.start,
-          end: schedule.end
-        };
-        const x = this.validatePeriod(testPeriod, periods);
-        console.log(x);
-      }
-    });*/
-
   }
 
   getPlace(placeID: string) {
@@ -365,7 +329,8 @@ export class SchedulesService {
   }
 
   newComputer(computer, laboratoryId) {
-    return this.angularFirestore.collection('laboratories/' + laboratoryId + '/computers').add(computer)
+    return this.angularFirestore.collection('laboratories/' + laboratoryId + '/computers')
+      .add(computer)
       .then(() => true )
       .catch(err => err.message);
   }

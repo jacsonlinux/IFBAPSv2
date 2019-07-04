@@ -188,7 +188,7 @@
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="viewDateChange.next(viewDate)"
-        ><i mz-icon-mdi [icon]="'chevron-left'" [size]="'24px'" ></i></button>
+        ><i mz-icon-mdi [icon]="'chevron-left'" [size]="'16px'" ></i></button>
         <button
           mz-button
           [flat]="true"
@@ -207,16 +207,16 @@
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="viewDateChange.next(viewDate)"
-        ><i mz-icon-mdi [icon]="'chevron-right'" [size]="'24px'" ></i></button>
+        ><i mz-icon-mdi [icon]="'chevron-right'" [size]="'16px'" ></i></button>
       </mz-navbar-item>
     </mz-navbar-item-container>
-    <a class="center brand-logo" *ngIf="largeResolution | async">
+    <!--<a class="center brand-logo" *ngIf="largeResolution | async">
       {{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase | uppercase}}
-    </a>
+    </a>-->
     <a class="right brand-logo" *ngIf="smallResolution | async">
-      {{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase | uppercase}}
+      <small class="small-text">{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</small>
     </a>
-    <mz-navbar-item-container [align]="'right'">
+    <!--<mz-navbar-item-container [align]="'right'">
       <mz-navbar-item *ngIf="largeResolution | async">
         <button
           mz-button
@@ -249,6 +249,6 @@
           <i mz-icon-mdi [icon]="'calendar-today'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
-    </mz-navbar-item-container>
+    </mz-navbar-item-container>-->
   </mz-navbar>
 </div>
