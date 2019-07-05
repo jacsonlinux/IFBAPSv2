@@ -17,8 +17,8 @@ export class RegistrationComponent implements OnInit {
   errorMessageResources = {
     name: {
       required: 'Name is required.',
-      // minlength: 'O nome deve ter pelo menos 4 caracteres.',
-      // maxlength: 'O nome não pode ter mais de 64 caracteres.'
+      minlength: 'Name complete is required.',
+      maxlength: 'It can not be longer than 64 characters.',
     },
     email: {
       required: 'Email is required.',
@@ -56,9 +56,9 @@ export class RegistrationComponent implements OnInit {
   buildForm() {
     this.signUpForm = this.formBuilder.group({
       name: [null, Validators.compose([
-        Validators.required
-        // Validators.minLength(4),
-        // Validators.maxLength(64)
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(64)
       ])],
       email: [null, Validators.compose([
         Validators.required,

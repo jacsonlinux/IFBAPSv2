@@ -116,12 +116,12 @@ mz-radio-button-container p label{
 }
 
 .btnDisable {
-  border-radius: 50px !important;
+  border-radius: 15px !important;
   border: 1px solid grey !important;
   height: 50px !important;
 }
 .btnEnable {
-  border-radius: 50px !important;
+  border-radius: 15px !important;
   border: 1px solid green !important;
   height: 50px !important;
 }
@@ -264,8 +264,6 @@ thead {
   margin: 2px !important;
 }
 
-
-
 #bottom{
   position: fixed !important;
   bottom: 0px !important;
@@ -276,29 +274,11 @@ thead {
   bottom: 0px !important;
 }
 
-
-/*.fixed-action-btn{
-  position: fixed !important;
-  right:23px !important;
-  bottom:23px !important;
-  padding-top:15px !important;
-  margin-bottom:0 !important;
-  z-index:997 !important;
-}*/
-
 mwl-calendar-month-cell,
 mwl-calendar-day-view-hour-segment,
 mwl-calendar-week-view-hour-segment {
   touch-action: auto !important;
 }
-
-/*.cal-month-view .cal-event {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: none !important;
-  margin: 2px;
-}*/
 
 .grecaptcha-badge {
   display: none !important;
@@ -308,17 +288,6 @@ mwl-calendar-week-view-hour-segment {
   background-color: hotpink !important;
 }
 
-
-/*#eceff1 blue-grey lighten-5
-#cfd8dc blue-grey lighten-4
-#b0bec5 blue-grey lighten-3
-#90a4ae blue-grey lighten-2
-#78909c blue-grey lighten-1
-#607d8b blue-grey
-#546e7a blue-grey darken-1
-#455a64 blue-grey darken-2
-#37474f blue-grey darken-3
-#263238 blue-grey darken-4*/
-
-
-
+mz-error-message .invalid {
+  float: right !important;
+}
