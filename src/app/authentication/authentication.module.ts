@@ -19,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -39,13 +40,14 @@ import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
     HttpClientModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot(),
-    RecaptchaFormsModule,
+    RecaptchaFormsModule
   ],
   declarations: [
     AuthenticationComponent,
     ForgotPasswordComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    FooterComponent
   ],
   providers: [ AuthenticationService ],
 })

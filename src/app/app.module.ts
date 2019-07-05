@@ -29,6 +29,7 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -42,7 +43,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     PrivacyPolicyComponent,
     SidenavComponent,
     TermsOfServiceComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

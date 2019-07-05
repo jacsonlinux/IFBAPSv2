@@ -1,5 +1,5 @@
 <div class="container" *ngIf="showFormLogin; else showSpinner">
-  <form [formGroup]="logInForm" novalidate>
+  <form [formGroup]="logInForm" novalidate >
     <div [align]="'right'">
       <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'lock-outline'"></i>
     </div>
@@ -30,6 +30,13 @@
               [disabled]="true"
               type="button">log In</button>
     </mz-input-container>
+    <div class="" style="margin-top: 20px">
+      <a class="grey-text left" routerLink="../registration">Sign up here!</a>
+      <a class="grey-text right" routerLink="../forgot-password">Forgot password?</a>
+      <br/>
+      <br/>
+      <a class="grey-text right" (click)="logInGoogle()" >User public?</a>
+    </div>
     <ng-template #btn>
       <mz-input-container>
         <button
@@ -43,29 +50,6 @@
           type="submit">log in</button>
       </mz-input-container>
     </ng-template>
-    <mz-input-container>
-      <a class="grey-text left" routerLink="../registration">Sign up here!</a>
-      <a class="grey-text right" routerLink="../forgot-password">Forgot password?</a>
-    </mz-input-container>
-    <!--<mz-input-container>
-      <div class="fixed-action-btn">
-        <button
-          type="button"
-          id="google-button"
-          (click)="featureDiscovery.open()"
-          mz-button
-          [flat]="false"
-          [large]="true"
-          [float]="true"
-          class="blue">
-          <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
-        </button>
-        <mz-feature-discovery class="blue darken-4" [targetId]="'google-button'" #featureDiscovery>
-          <h5>Hello!</h5>
-          <p>If you are a common User, enter your social account by <button style="padding: 0; width: 130px; height: 30px;" mz-button [flat]="true" class="white-text" (click)="logInGoogle()">clicking here ;)</button></p>
-        </mz-feature-discovery>
-      </div>
-    </mz-input-container>-->
     <re-captcha
       theme="dark"
       #captchaRef="reCaptcha"
@@ -75,7 +59,6 @@
     ></re-captcha>
   </form>
 </div>
-
 <ng-template #showSpinner>
   <div class="center-jack-container">
     <mz-spinner
@@ -84,3 +67,4 @@
     </mz-spinner>
   </div>
 </ng-template>
+<app-footer></app-footer>

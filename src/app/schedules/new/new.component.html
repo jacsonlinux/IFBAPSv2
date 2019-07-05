@@ -1,6 +1,8 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
-
+    <div [align]="'right'">
+      <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'calendar-clock'"></i>
+    </div>
     <mz-datepicker-container (click)="$event.stopPropagation()">
       <input mz-datepicker
              required
@@ -13,11 +15,11 @@
              [options]="datepickerOptions"
              [errorMessageResource]="errorMessageResources.dateSchedule" >
     </mz-datepicker-container>
-
     <mz-timepicker-container>
       <input mz-timepicker
              required
              mz-validation
+             autocomplete="off"
              label="Start time"
              [options]="timepickerOptions"
              id="start"
@@ -25,11 +27,11 @@
              formControlName="start"
              [errorMessageResource]="errorMessageResources.start">
     </mz-timepicker-container>
-
     <mz-timepicker-container>
       <input mz-timepicker
              required
              mz-validation
+             autocomplete="off"
              label="End time"
              [options]="timepickerOptions"
              id="end"
@@ -37,28 +39,36 @@
              formControlName="end"
              [errorMessageResource]="errorMessageResources.end">
     </mz-timepicker-container>
-
-    <div class="fixed-action-btn">
-      <button *ngIf="!scheduleForm.valid"
+    <mz-input-container>
+      <input mz-input mz-validation required
+             id="title"
+             formControlName="title"
+             type="text"
+             autocomplete="off"
+             [errorMessageResource]="errorMessageResources.title"
+             [label]="'Title'" />
+    </mz-input-container>
+    <mz-input-container *ngIf="!scheduleForm.valid; else btn">
+      <button class="btnDisable"
               mz-button
-              [flat]="false"
-              [large]="true"
-              [float]="true"
+              [flat]="true"
+              [large]="false"
+              [float]="false"
               [disabled]="true"
-              type="button"
-      ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
-      </button>
-      <button *ngIf="scheduleForm.valid"
-              class="blue"
-              mz-button
-              [flat]="false"
-              [large]="true"
-              [float]="true"
-              [disabled]="!scheduleForm.valid"
-              type="submit"
-      ><i mz-icon-mdi [size]="'24px'" [icon]="'send'"></i>
-      </button>
-    </div>
+              type="button">New</button>
+    </mz-input-container>
+    <ng-template #btn>
+      <mz-input-container>
+        <button
+          class="green white-text btnEnable "
+          mz-button
+          [flat]="true"
+          [large]="false"
+          [float]="false"
+          [disabled]="!scheduleForm.valid"
+          type="submit">New</button>
+      </mz-input-container>
+    </ng-template>
   </form>
 </div>
 <ng-template #showSpinner>
