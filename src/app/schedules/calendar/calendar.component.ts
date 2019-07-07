@@ -207,9 +207,12 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.document.body.classList.add(this.darkThemeClass);
+    // this.document.body.classList.add(this.darkThemeClass);
     this.fetchEvents();
     this.schedulesService.currentSubtitle.subscribe(subtitle => this.subtitle = subtitle);
   }
 
 }
+
+
+

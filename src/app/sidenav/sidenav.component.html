@@ -1,6 +1,6 @@
 <div *ngIf="showMenu">
   <mz-sidenav
-    [backgroundClass]="'grey'"
+    [backgroundClass]="''"
     [id]="'sidenav'"
     [collapseButtonId]="'btn-sidenav'"
     [edge]="'left'"
@@ -56,6 +56,21 @@
     <mz-sidenav-divider></mz-sidenav-divider>
     <mz-sidenav-link>
       <a (click)="logOut()"><i mz-icon-mdi [align]="'right'" [icon]="'logout'"></i>Logout</a>
+    </mz-sidenav-link>
+    <mz-sidenav-link>
+      <div style="padding: 0 32px 0 32px; position: absolute; bottom: 55px">
+        <mz-checkbox-container>
+          <input mz-checkbox
+                 [label]="'Dark theme'"
+                 [filledIn]="true"
+                 id="checkbox-id"
+                 type="checkbox">
+        </mz-checkbox-container>
+      </div>
+
+
+
+
     </mz-sidenav-link>
   </mz-sidenav>
   <!-- <button
