@@ -3,13 +3,12 @@
 @import "./_variables";
 
 *{
-  //font-family: Consolas, monospace !important;
   font-family: "Helvetica Neue", Arial, sans-serif !important;
 }
 
 body {
-  background-color: #263238; //blue-grey darken-4
-  color: #fff; // blue-grey lighten-5
+  // background-color: #263238;
+  // color: #fff;
 }
 
 .preloader-container {
@@ -111,17 +110,13 @@ mz-radio-button-container p label{
   font-size: large !important;
 }
 
-.fontArial{
-  font-family: Arial;
-}
-
 .btnDisable {
-  border-radius: 15px !important;
+  border-radius: 50px !important;
   border: 1px solid grey !important;
   height: 50px !important;
 }
 .btnEnable {
-  border-radius: 15px !important;
+  border-radius: 50px !important;
   border: 1px solid green !important;
   height: 50px !important;
 }
@@ -141,6 +136,9 @@ thead {
   padding: 0 !important;
   margin-bottom: 1px !important;
 }
+
+
+// CALENDAR SCSS
 
 @import '~angular-calendar/scss/angular-calendar.scss';
 
@@ -205,9 +203,6 @@ thead {
   }
 }
 
-
-
-
 .cal-month-view .cal-open-day-events {
   border-bottom: solid 1px darkslategrey !important;
   box-shadow: none !important;
@@ -264,16 +259,6 @@ thead {
   margin: 2px !important;
 }
 
-#bottom{
-  position: fixed !important;
-  bottom: 0px !important;
-}
-
-.bottom{
-  position: fixed !important;
-  bottom: 0px !important;
-}
-
 mwl-calendar-month-cell,
 mwl-calendar-day-view-hour-segment,
 mwl-calendar-week-view-hour-segment {
@@ -282,12 +267,4 @@ mwl-calendar-week-view-hour-segment {
 
 .grecaptcha-badge {
   display: none !important;
-}
-
-.bg-pink {
-  background-color: hotpink !important;
-}
-
-mz-error-message .invalid {
-  float: right !important;
 }
