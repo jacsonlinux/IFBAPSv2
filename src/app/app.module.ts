@@ -21,9 +21,9 @@ import { ServerGuard } from './guard/server.guard';
 import { AuthGuard } from './guard/auth.guard';
 
 import {
-  MzButtonModule, MzDropdownModule, MzFeatureDiscoveryModule, MzIconMdiModule, MzInputModule,
+  MzButtonModule, MzCheckboxModule, MzDropdownModule, MzFeatureDiscoveryModule, MzIconMdiModule, MzInputModule,
   MzMediaModule, MzNavbarModule,
-  MzSidenavModule, MzSpinnerModule
+  MzSidenavModule, MzSpinnerModule, MzSwitchModule
 } from 'ngx-materialize';
 
 import { AngularFireModule } from '@angular/fire';
@@ -62,7 +62,9 @@ import { FooterComponent } from './footer/footer.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MzSwitchModule,
+    MzCheckboxModule
   ],
   providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]
