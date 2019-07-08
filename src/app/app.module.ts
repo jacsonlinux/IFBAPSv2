@@ -30,6 +30,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FooterComponent } from './footer/footer.component';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -64,7 +65,8 @@ import { FooterComponent } from './footer/footer.component';
     AngularFireAuthModule,
     AppRoutingModule,
     MzSwitchModule,
-    MzCheckboxModule
+    MzCheckboxModule,
+    FormsModule
   ],
   providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]
