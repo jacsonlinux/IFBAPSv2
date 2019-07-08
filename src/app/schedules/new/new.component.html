@@ -39,15 +39,16 @@
              formControlName="end"
              [errorMessageResource]="errorMessageResources.end">
     </mz-timepicker-container>
-    <mz-input-container>
-      <input mz-input mz-validation required
-             id="title"
-             formControlName="title"
-             type="text"
-             autocomplete="off"
-             [errorMessageResource]="errorMessageResources.title"
-             [label]="'Title'" />
-    </mz-input-container>
+    <mz-select-container>
+      <select mz-select mz-validation required
+              id="activityTitle"
+              formControlName="activityTitle"
+              [errorMessageResource]="errorMessageResources.activityTitle"
+              [label]="'Activity'"
+              [placeholder]="'Choose your activity'">
+        <option *ngFor="let activityOption of activityOptions" [ngValue]="activityOption">{{ activityOption.text }}</option>
+      </select>
+    </mz-select-container>
     <mz-input-container *ngIf="!scheduleForm.valid; else btn">
       <button class="btnDisable"
               mz-button
