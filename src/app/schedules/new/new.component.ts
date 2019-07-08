@@ -15,6 +15,17 @@ import { Subscription } from 'rxjs-compat/Subscription';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
+  activityOptions = [
+    { text: 'Culture,music, arts, literature' },
+    { text: 'Health care, pharmaceutical, and medical sector' },
+    { text: 'Manufacturing industries' },
+    { text: 'Telecommunications and information technology' },
+    { text: 'Transport, shipping, trucking and infrastructures' },
+    { text: 'Financial services' },
+    { text: 'Research, science, biotechnology, etc.' },
+    { text: 'Media and film industry' },
+  ];
+
   schedule = new Schedule();
 
   errorMessageResources = {
@@ -29,7 +40,10 @@ export class NewComponent implements OnInit, OnDestroy {
     },
     title: {
       required: 'Title is required',
-      maxlength: 'It can not be longer than 64 characters.',
+      maxlength: 'It can not be longer than 40 characters.',
+    },
+    activityTitle: {
+      required: 'Activity is required.',
     },
   };
 
@@ -90,9 +104,8 @@ export class NewComponent implements OnInit, OnDestroy {
       end: [null, Validators.compose([
         Validators.required
       ])],
-      title: [null, Validators.compose([
-        Validators.required,
-        Validators.maxLength(64)
+      activityTitle: ['', Validators.compose( [
+        Validators.required
       ])]
     });
   }
@@ -134,7 +147,7 @@ export class NewComponent implements OnInit, OnDestroy {
     this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
     this.schedule.start = this.start;
     this.schedule.end = this.end;
-    this.schedule.title = data.title;
+    this.schedule.title = data.activityTitle.text;
     if (this.start >= this.end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
       this.scheduleForm.reset();

@@ -15,7 +15,7 @@ import { colors} from './utils/colors';
 import { SchedulesService } from '../schedules.service';
 import { ActivatedRoute } from '@angular/router';
 import { Schedule } from '../../class/Schedule';
-import {MzMediaService} from 'ngx-materialize';
+import { MzMediaService } from 'ngx-materialize';
 
 function getTimezoneOffsetString(date: Date): string {
   const timezoneOffset = date.getTimezoneOffset();
@@ -156,10 +156,10 @@ export class CalendarComponent implements OnInit {
           title: schedule.data.title,
           color: colors.blue,
           resizable: {
-            beforeStart: false,
-            afterEnd: false
+            beforeStart: true,
+            afterEnd: true
           },
-          draggable: false,
+          draggable: true,
           allDay: false,
           user: schedule.data.user,
           place: schedule.data.place,
