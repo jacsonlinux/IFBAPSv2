@@ -57,14 +57,14 @@
     <mz-sidenav-link>
       <a (click)="logOut()"><i mz-icon-mdi [align]="'right'" [icon]="'logout'"></i>Logout</a>
     </mz-sidenav-link>
-    <mz-sidenav-link>
+    <!--<mz-sidenav-link>
       <div style="padding: 0 32px 0 32px; position: absolute; bottom: 55px">
         <mz-checkbox-container>
           <input mz-checkbox
-                 [checked]="true"
+                 [(ngModel)]="checkboxValue"
                  [label]="'Dark theme'"
                  [filledIn]="true"
-                 id="checkbox-id"
+                 id="darkTheme"
                  type="checkbox">
         </mz-checkbox-container>
       </div>
@@ -72,7 +72,7 @@
 
 
 
-    </mz-sidenav-link>
+    </mz-sidenav-link>-->
   </mz-sidenav>
   <!-- <button
      mz-button

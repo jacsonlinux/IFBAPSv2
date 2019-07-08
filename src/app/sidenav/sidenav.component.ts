@@ -8,6 +8,8 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class SidenavComponent implements OnInit {
   showMenu = false;
+  checkboxValue = false;
+
   constructor(
     public authenticationService: AuthenticationService
   ) {
