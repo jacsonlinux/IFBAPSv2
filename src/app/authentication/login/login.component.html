@@ -1,8 +1,13 @@
 <div class="container" *ngIf="showFormLogin; else showSpinner">
-  <form [formGroup]="logInForm" novalidate >
-    <div [align]="'right'">
+  <div class="row">
+    <div class="left grey-text">
+      <div style="border-bottom: 3px solid grey; font-size: x-large; margin-left: 10px; margin-top: 20px"><b>LOGIN</b></div>
+    </div>
+    <div class="right">
       <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'lock-outline'"></i>
     </div>
+  </div>
+  <form [formGroup]="logInForm" novalidate >
     <mz-input-container>
       <input mz-input mz-validation required
              id="email"
