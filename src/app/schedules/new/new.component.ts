@@ -110,13 +110,13 @@ export class NewComponent implements OnInit, OnDestroy {
     });
   }
 
-  validatePeriod = (testPeriod, periods): boolean => {
+  validatePeriod(periodForCheck, periods): boolean {
     for (let i = 0; i < periods.length; i++) {
       const period = periods[i];
-      if (period.start < testPeriod.start && period.end > testPeriod.start) {
+      if (period.start < periodForCheck.start && period.end > periodForCheck.start) {
         return false;
       }
-      if (period.start > testPeriod.start && period.start < testPeriod.end) {
+      if (period.start > periodForCheck.start && period.start < periodForCheck.end) {
         return false;
       }
     }
@@ -160,7 +160,8 @@ export class NewComponent implements OnInit, OnDestroy {
         user: this.schedule.user,
         title: this.schedule.title
       };
-      this.subscription = this.scheduleService.validateSchedule(schedule).subscribe(schedules => {
+      this.subscription = this.scheduleService.validateSchedule(schedule)
+        .subscribe(schedules => {
         if (schedules.length === 0) {
           this.newSchedule(schedule);
         } else {
@@ -171,11 +172,11 @@ export class NewComponent implements OnInit, OnDestroy {
               end: entry.data.end.toDate()
             });
           }
-          const period = {
+          const periodForCheck = {
             start: schedule.start,
             end: schedule.end
           };
-          const valid = this.validatePeriod(period, periods);
+          const valid = this.validatePeriod(periodForCheck, periods);
           if (valid) {
             this.newSchedule(schedule);
           } else {
