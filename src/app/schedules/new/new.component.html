@@ -1,9 +1,28 @@
 <div class="container" *ngIf="showForm; else showSpinner">
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
-    <div [align]="'right'">
-      <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'calendar-clock'"></i>
+
+
+
+
+    <div class="row">
+
+      <div class="left grey-text"
+           style="
+           margin-left: 10px;
+           margin-top: 27px;
+            font-size: medium;
+            border-bottom: 3px solid grey; "
+
+      >
+        WEDNESDAY, JULY 19, 2020
+      </div>
+
+      <div class="right">
+        <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'calendar-clock'"></i>
+      </div>
+
     </div>
-    <mz-datepicker-container (click)="$event.stopPropagation()">
+    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
       <input mz-datepicker
              required
              mz-validation
@@ -14,62 +33,76 @@
              label="Date of schedule"
              [options]="datepickerOptions"
              [errorMessageResource]="errorMessageResources.dateSchedule" >
-    </mz-datepicker-container>
-    <mz-timepicker-container>
-      <input mz-timepicker
-             required
-             mz-validation
-             autocomplete="off"
-             label="Start time"
-             [options]="timepickerOptions"
-             id="start"
-             type="text"
-             formControlName="start"
-             [errorMessageResource]="errorMessageResources.start">
-    </mz-timepicker-container>
-    <mz-timepicker-container>
-      <input mz-timepicker
-             required
-             mz-validation
-             autocomplete="off"
-             label="End time"
-             [options]="timepickerOptions"
-             id="end"
-             type="text"
-             formControlName="end"
-             [errorMessageResource]="errorMessageResources.end">
-    </mz-timepicker-container>
-    <mz-select-container>
-      <select mz-select mz-validation required
-              id="activityTitle"
-              formControlName="activityTitle"
-              [errorMessageResource]="errorMessageResources.activityTitle"
-              [label]="'Activity'"
-              [placeholder]="'Choose your activity'">
-        <option *ngFor="let activityOption of activityOptions" [ngValue]="activityOption">{{ activityOption.text }}</option>
-      </select>
-    </mz-select-container>
-    <mz-input-container *ngIf="!scheduleForm.valid; else btn">
-      <button class="btnDisable"
-              mz-button
-              [flat]="true"
-              [large]="false"
-              [float]="false"
-              [disabled]="true"
-              type="button">New</button>
-    </mz-input-container>
-    <ng-template #btn>
-      <mz-input-container>
-        <button
-          class="green white-text btnEnable "
-          mz-button
-          [flat]="true"
-          [large]="false"
-          [float]="false"
-          [disabled]="!scheduleForm.valid"
-          type="submit">New</button>
+    </mz-datepicker-container>-->
+    <div style="border: 1px solid grey; padding: 5px 10px 30px 10px; border-radius: 10px">
+      <div class="row">
+
+        <div class="left" style="width: 130px; margin-left: 10px; margin-right: 41px">
+
+          <mz-timepicker-container>
+            <input mz-timepicker
+                   required
+                   mz-validation
+                   autocomplete="off"
+                   label="Start time"
+                   [options]="timepickerOptions"
+                   id="start"
+                   type="text"
+                   formControlName="start"
+                   [errorMessageResource]="errorMessageResources.start">
+          </mz-timepicker-container>
+
+        </div>
+
+        <div class="left" style="width: 130px">
+          <mz-timepicker-container>
+            <input mz-timepicker
+                   required
+                   mz-validation
+                   autocomplete="off"
+                   label="End time"
+                   [options]="timepickerOptions"
+                   id="end"
+                   type="text"
+                   formControlName="end"
+                   [errorMessageResource]="errorMessageResources.end">
+          </mz-timepicker-container>
+        </div>
+
+      </div>
+      <mz-select-container >
+        <select mz-select mz-validation required
+                id="activityTitle"
+                formControlName="activityTitle"
+                [errorMessageResource]="errorMessageResources.activityTitle"
+                [label]="'Activity'"
+                [placeholder]="'Choose your activity'">
+          <option *ngFor="let activityOption of activityOptions" [ngValue]="activityOption">{{ activityOption.text }}</option>
+        </select>
+      </mz-select-container>
+      <br/>
+      <mz-input-container *ngIf="!scheduleForm.valid; else btn">
+        <button class="btnDisable"
+                mz-button
+                [flat]="true"
+                [large]="false"
+                [float]="false"
+                [disabled]="true"
+                type="button">New</button>
       </mz-input-container>
-    </ng-template>
+      <ng-template #btn>
+        <mz-input-container>
+          <button
+            class="green white-text btnEnable "
+            mz-button
+            [flat]="true"
+            [large]="false"
+            [float]="false"
+            [disabled]="!scheduleForm.valid"
+            type="submit">New</button>
+        </mz-input-container>
+      </ng-template>
+    </div>
   </form>
 </div>
 <ng-template #showSpinner>
