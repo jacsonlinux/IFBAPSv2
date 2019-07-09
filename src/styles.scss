@@ -108,13 +108,14 @@ mz-radio-button-container p label{
 }
 
 .small-text{
-  font-size: small !important;
+  font-size: smaller !important;
 }
 .large-text {
   font-size: large !important;
 }
 
 .btnDisable {
+  z-index: 0 !important;
   border-radius: 10px !important;
   border: 1px solid grey !important;
   // height: 50px !important;
