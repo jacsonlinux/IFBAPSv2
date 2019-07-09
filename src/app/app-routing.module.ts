@@ -9,10 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const APP_ROUTES: Routes = [
-  {path: '',
+  /*{path: '',
     component: FrontPageComponent,
     data: {title: 'FRONTPAGE'}
-  },
+  },*/
   {path: 'privacy-policy',
     component: PrivacyPolicyComponent,
     data: {title: 'PRIVACY POLICY'}
