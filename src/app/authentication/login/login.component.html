@@ -42,7 +42,8 @@
       <a class="grey-text right" routerLink="../forgot-password">Forgot password?</a>
       <br/>
       <br/>
-      <a class="grey-text right" (click)="logInGoogle()" >User public?</a>
+      <a id="userPublic" mz-button  [large]="false" [float]="false" [flat]="true"
+         class="blue-grey text-darken-4 right" (click)="logInGoogle()" >User public</a>
     </div>
     <ng-template #btn>
       <mz-input-container>
@@ -65,6 +66,7 @@
       (resolved)="$event && onSubmit($event)"
     ></re-captcha>
   </form>
+  <!--<app-footer></app-footer>-->
 </div>
 <ng-template #showSpinner>
   <div class="center-jack-container">
@@ -74,4 +76,4 @@
     </mz-spinner>
   </div>
 </ng-template>
-<app-footer></app-footer>
+
