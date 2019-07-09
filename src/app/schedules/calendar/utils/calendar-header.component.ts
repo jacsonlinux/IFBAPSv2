@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {MzMediaService} from 'ngx-materialize';
-import {Observable} from 'rxjs';
+import { MzMediaService } from 'ngx-materialize';
+import { Observable } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,6 +10,8 @@ import {Observable} from 'rxjs';
 })
 export class CalendarHeaderComponent {
 
+  show: boolean;
+
 
   public smallResolution: Observable<boolean>;
   public largeResolution: Observable<boolean>;
@@ -18,7 +20,7 @@ export class CalendarHeaderComponent {
     console.log('CalendarComponent');
     this.smallResolution = this.mediaService.isActive('s'); // small screen resolution
     this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
-
+    this.show = false;
   }
 
   @Input() view;
