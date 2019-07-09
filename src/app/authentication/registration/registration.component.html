@@ -1,12 +1,13 @@
 <div class="container" *ngIf="showFormSignUp; else showSpinner">
+  <div style="position: fixed; top: 15px;" [align]="'left'" class="large-text grey-text">Sign up for the app</div>
+  <div [align]="'right'">
+    <i mz-icon-mdi
+       class="grey-text"
+       [icon]="'account-plus-outline'"
+       [size]="'36px'">
+    </i>
+  </div>
   <form [formGroup]="signUpForm" novalidate>
-    <div [align]="'right'">
-      <i mz-icon-mdi
-         class="grey-text"
-         [icon]="'account-plus-outline'"
-         [size]="'48px'">
-      </i>
-    </div>
     <mz-input-container>
       <input mz-input mz-validation required
              id="name"
@@ -66,25 +67,6 @@
           type="submit">Sign up</button>
       </mz-input-container>
     </ng-template>
-    <!--<mz-input-container>
-      <div class="fixed-action-btn">
-        <button
-          type="button"
-          id="info-button"
-          (click)="featureDiscovery.open()"
-          mz-button
-          [flat]="false"
-          [large]="true"
-          [float]="true"
-          class="blue">
-          <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
-        </button>
-        <mz-feature-discovery class="blue darken-4" [targetId]="'info-button'" #featureDiscovery>
-          <h5>Warning</h5>
-          <p>Register only for IFBA servers. If you are a regular user, enter your social account by <a (click)="logInGoogle()">clicking here!</a></p>
-        </mz-feature-discovery>
-      </div>
-    </mz-input-container>-->
     <re-captcha
       theme="dark"
       #captchaRef="reCaptcha"
@@ -102,4 +84,3 @@
     </mz-spinner>
   </div>
 </ng-template>
-<app-footer></app-footer>
