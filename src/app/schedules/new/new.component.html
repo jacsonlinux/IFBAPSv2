@@ -1,44 +1,16 @@
 <div class="container" *ngIf="showForm; else showSpinner">
-  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
 
 
-
-
-    <div class="row">
-
-      <div class="left grey-text"
-           style="
-           margin-left: 10px;
-           margin-top: 27px;
-            font-size: medium;
-            border-bottom: 3px solid grey; "
-
-      >
-        WEDNESDAY, JULY 19, 2020
-      </div>
-
-      <div class="right">
-        <i mz-icon-mdi class="grey-text" [size]="'48px'" [icon]="'calendar-clock'"></i>
-      </div>
-
+  <header>
+    <div [align]="'right'">
+      <i mz-icon-mdi class="grey-text" [size]="'36px'" [icon]="'calendar-clock'"></i>
     </div>
-    <!--<mz-datepicker-container (click)="$event.stopPropagation()">
-      <input mz-datepicker
-             required
-             mz-validation
-             id="'dateSchedule'"
-             type="text"
-             formControlName="dateSchedule"
-             autocomplete="off"
-             label="Date of schedule"
-             [options]="datepickerOptions"
-             [errorMessageResource]="errorMessageResources.dateSchedule" >
-    </mz-datepicker-container>-->
+  </header>
+
+  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
     <div style="border: 1px solid grey; padding: 5px 10px 30px 10px; border-radius: 10px">
       <div class="row">
-
-        <div class="left" style="width: 130px; margin-left: 10px; margin-right: 41px">
-
+        <div class="left" style="width: 100px; margin-left: 10px; margin-right: 21px">
           <mz-timepicker-container>
             <input mz-timepicker
                    required
@@ -53,8 +25,7 @@
           </mz-timepicker-container>
 
         </div>
-
-        <div class="left" style="width: 130px">
+        <div class="left" style="width: 100px">
           <mz-timepicker-container>
             <input mz-timepicker
                    required
@@ -68,7 +39,6 @@
                    [errorMessageResource]="errorMessageResources.end">
           </mz-timepicker-container>
         </div>
-
       </div>
       <mz-select-container >
         <select mz-select mz-validation required
@@ -80,7 +50,7 @@
           <option *ngFor="let activityOption of activityOptions" [ngValue]="activityOption">{{ activityOption.text }}</option>
         </select>
       </mz-select-container>
-      <br/>
+      <div style="height: 3px"></div>
       <mz-input-container *ngIf="!scheduleForm.valid; else btn">
         <button class="btnDisable"
                 mz-button
@@ -103,6 +73,8 @@
         </mz-input-container>
       </ng-template>
     </div>
+
+
   </form>
 </div>
 <ng-template #showSpinner>
@@ -113,3 +85,16 @@
     </mz-spinner>
   </div>
 </ng-template>
+
+
+
+<!--<div class="left grey-text"
+     style="
+       margin-left: 10px;
+       margin-top: 27px;
+        font-size: medium;
+        border-bottom: 3px solid grey; "
+
+>
+  WEDNESDAY, JULY 19, 2020
+</div>-->
