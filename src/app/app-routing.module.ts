@@ -13,6 +13,10 @@ const APP_ROUTES: Routes = [
     component: FrontPageComponent,
     data: {title: 'FRONTPAGE'}
   },*/
+  { path: '',
+    loadChildren: './authentication/authentication.module#AuthenticationModule',
+    data: {title: 'AUTHENTICATION'}
+  },
   {path: 'privacy-policy',
     component: PrivacyPolicyComponent,
     data: {title: 'PRIVACY POLICY'}
@@ -30,10 +34,6 @@ const APP_ROUTES: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
     data: {title: 'HOME'}
-  },
-  { path: 'authentication',
-    loadChildren: './authentication/authentication.module#AuthenticationModule',
-    data: {title: 'AUTHENTICATION'}
   },
   { path: 'schedules',
     loadChildren: './schedules/schedules.module#SchedulesModule',

@@ -115,7 +115,7 @@ export class AuthenticationService {
       .signOut()
       .then(() => {
         this.showMenuEmitter.emit(false);
-        this.router.navigate(['/authentication/login']).catch(err => err.message);
+        this.router.navigate(['']).catch(err => err.message);
       })
       .catch(err => err.message);
   }
