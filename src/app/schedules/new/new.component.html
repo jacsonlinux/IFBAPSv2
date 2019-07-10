@@ -1,12 +1,12 @@
 <div class="container" *ngIf="showForm; else showSpinner">
-
-
-  <header>
-    <div [align]="'right'">
-      <i mz-icon-mdi class="grey-text" [size]="'36px'" [icon]="'calendar-clock'"></i>
-    </div>
-  </header>
-
+  <div style="position: absolute; margin-top: 15px" [align]="'left'" class="large-text grey-text">New schedules / {{date | date}}</div>
+  <div [align]="'right'">
+    <i mz-icon-mdi
+       class="grey-text"
+       [icon]="'clock'"
+       [size]="'36px'">
+    </i>
+  </div>
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
     <div style="border: 1px solid grey; padding: 5px 10px 30px 10px; border-radius: 10px">
       <div class="row">
@@ -23,7 +23,6 @@
                    formControlName="start"
                    [errorMessageResource]="errorMessageResources.start">
           </mz-timepicker-container>
-
         </div>
         <div class="left" style="width: 100px">
           <mz-timepicker-container>
@@ -73,10 +72,9 @@
         </mz-input-container>
       </ng-template>
     </div>
-
-
   </form>
 </div>
+
 <ng-template #showSpinner>
   <div class="center-jack-container">
     <mz-spinner
@@ -85,16 +83,3 @@
     </mz-spinner>
   </div>
 </ng-template>
-
-
-
-<!--<div class="left grey-text"
-     style="
-       margin-left: 10px;
-       margin-top: 27px;
-        font-size: medium;
-        border-bottom: 3px solid grey; "
-
->
-  WEDNESDAY, JULY 19, 2020
-</div>-->

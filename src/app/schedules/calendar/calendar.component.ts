@@ -107,8 +107,8 @@ export class CalendarComponent implements OnInit {
     events: Array<CalendarEvent<{ schedule: Schedule }>>;
   }): void {
     console.log(date);
-    console.log(events);
-    if (isSameMonth(date, this.viewDate)) {
+    this.schedulesService.changeDate(date);
+    /*if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
@@ -118,7 +118,7 @@ export class CalendarComponent implements OnInit {
         this.activeDayIsOpen = true;
         this.viewDate = date;
       }
-    }
+    }*/
   }
 
   fetchEvents(): void {
