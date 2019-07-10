@@ -56,6 +56,10 @@ export class SchedulesService {
   private selectedDate = new BehaviorSubject(null);
   currentDate = this.selectedDate.asObservable();
 
+/*
+  private placeNameSource = new BehaviorSubject(null);
+  currentPlaceName = this.placeNameSource.asObservable();*/
+
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
 
@@ -111,6 +115,10 @@ export class SchedulesService {
   changeSubtitle(subtitle) {
     this.subtitleSource.next(subtitle);
   }
+
+  /*changePlaceName(placeName) {
+    this.placeNameSource.next(placeName);
+  }*/
 
   getSchedules(placeID: string) {
     const now = new Date();

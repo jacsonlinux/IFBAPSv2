@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
 import 'rxjs/add/operator/mergeMap';
 import { Location } from '@angular/common';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,10 +23,12 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private authenticationService: AuthenticationService,
+    private appService: AppService
   ) { console.log('NavbarComponent');   }
 
   ngOnInit() {
-    this.router.events
+    console.log(window.location.href);
+    /*this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         map(() => this.activatedRoute),
@@ -41,8 +43,23 @@ export class NavbarComponent implements OnInit {
       ).subscribe((event) => {
       this.title = event.title;
     });
+*/
+    this.appService.currentPlaceName.subscribe(res => {
+      this.title = res;
+
+      /*if (this.title === null) {
+        this.appService.changePlaceName(null);
+      }*/
+
+      if (this.title === null && this.router.url === '/') {
+        this.router.navigate(['home']);
+      }
+
+    });
+
 
     this.authenticationService.showMenuEmitter.subscribe( show => this.showMenu = show );
+
   }
 
   back() {

@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 
     this.document.body.classList.add(this.darkThemeClass);
 
-    this.router.events
+   /* this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
         map(() => this.activatedRoute),
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
         mergeMap((route) => route.data),
       ).subscribe((event) => {
         this.titleService.setTitle(event.title);
-    });
+    });*/
 
   }
 
