@@ -15,8 +15,6 @@ import { Subscription } from 'rxjs-compat/Subscription';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
-  date: Date;
-
   activityOptions = [
     { text: 'Culture,music, arts, literature' },
     { text: 'Health care, pharmaceutical, and medical sector' },
@@ -31,9 +29,6 @@ export class NewComponent implements OnInit, OnDestroy {
   schedule = new Schedule();
 
   errorMessageResources = {
-    dateSchedule: {
-      required: 'Date is required',
-    },
     start: {
       required: 'Start time is required',
     },
@@ -69,19 +64,6 @@ export class NewComponent implements OnInit, OnDestroy {
     ampmclickable: true
   };
 
-  public datepickerOptions: Pickadate.DateOptions = {
-    clear: 'CLEAR',
-    close: 'CLOSE',
-    today: 'OK',
-    editable: false,
-    closeOnClear: true,
-    closeOnSelect: true,
-    format: 'dddd, dd mmm, yyyy',
-    formatSubmit: 'dddd, dd mmm, yyyy',
-    selectMonths: true,
-    selectYears: 10
-  };
-
   constructor(
     private scheduleService: SchedulesService,
     private router: Router,
@@ -96,9 +78,6 @@ export class NewComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.scheduleForm = this.formBuilder.group({
-      dateSchedule: [null, Validators.compose([
-        Validators.required
-      ])],
       start: [null, Validators.compose([
         Validators.required,
 
@@ -106,7 +85,7 @@ export class NewComponent implements OnInit, OnDestroy {
       end: [null, Validators.compose([
         Validators.required
       ])],
-      activityTitle: ['', Validators.compose( [
+      activityTitle: [null, Validators.compose( [
         Validators.required
       ])]
     });
@@ -131,12 +110,13 @@ export class NewComponent implements OnInit, OnDestroy {
       .newSchedule(schedule)
       .then(res => {
         if (res === true) {
-          this.toastService.show('Registered schedule!', 3000, 'green fontArial white-text');
+          this.showForm = false;
           this.location.back();
+          this.toastService.show('Registered schedule!', 3000, 'green white-text');
         } else {
-          this.toastService.show(`${res}`, 3000, 'red fontArial white-text');
+          this.toastService.show(`${res}`, 5000, 'red white-text');
           this.showForm = true;
-          this.buildForm();
+          this.scheduleForm.reset();
         }
       })
       .catch(err => err.message);
@@ -144,17 +124,18 @@ export class NewComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const data = this.scheduleForm.value;
-    this.dateSchedule = data.dateSchedule;
     this.start = new Date(this.dateSchedule + ' ' + data.start + ':00');
     this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
-    this.schedule.start = this.start;
-    this.schedule.end = this.end;
-    this.schedule.title = data.activityTitle.text;
     if (this.start >= this.end) {
-      this.toastService.show('Start can not be greater than or equal to end', 5000, 'red fontArial white-text');
+      this.toastService.show('Start can not be greater than or equal to end', 5000, 'red white-text');
       this.scheduleForm.reset();
     } else {
       this.showForm = false;
+
+      this.schedule.start = this.start;
+      this.schedule.end = this.end;
+      this.schedule.title = data.activityTitle.text;
+
       const schedule = {
         end: this.schedule.end,
         place: this.schedule.place,
@@ -183,7 +164,8 @@ export class NewComponent implements OnInit, OnDestroy {
               this.newSchedule(schedule);
             } else {
               this.subscription.unsubscribe();
-              this.toastService.show('Invalid period schedule!', 3000, 'red fontArial white-text');
+              this.toastService.show('Invalid period schedule!', 5000, 'red white-text');
+              this.scheduleForm.reset();
               this.showForm = true;
             }
           }
@@ -196,9 +178,21 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.scheduleService.currentDate.subscribe(date => this.date = date);
     this.buildForm();
     this.showForm = true;
+    this.scheduleService.currentDate.subscribe(res => {
+      if (res == null) {
+        this.location.back();
+        // this.router.navigate(['/calendar']).catch(err => err.message);
+      } else {
+        this.dateSchedule = res;
+        this.dateSchedule = new Date(
+          this.dateSchedule.getFullYear(),
+          this.dateSchedule.getMonth(),
+          this.dateSchedule.getDate()
+        ).toDateString();
+      }
+    });
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
   }

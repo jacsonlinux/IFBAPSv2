@@ -276,7 +276,7 @@ mwl-calendar-week-view-hour-segment {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px !important;
+  width: 8px !important;
 }
 
 /* Track */
@@ -295,4 +295,11 @@ mwl-calendar-week-view-hour-segment {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #0d47a1 !important;
+}
+
+.navbar-fixed-bottom {
+  z-index: 99 !important;
+  width: 100% !important;
+  position: fixed !important;
+  bottom: 0 !important;
 }

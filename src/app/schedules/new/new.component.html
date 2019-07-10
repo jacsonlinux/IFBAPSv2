@@ -1,22 +1,24 @@
 <div class="container" *ngIf="showForm; else showSpinner">
-  <div style="position: absolute; margin-top: 15px" [align]="'left'" class="large-text grey-text">New schedules / {{date | date}}</div>
-  <div [align]="'right'">
-    <i mz-icon-mdi
-       class="grey-text"
-       [icon]="'clock'"
-       [size]="'36px'">
-    </i>
+  <div class="blue-grey-text" style=" margin-top: 20px; margin-bottom: 20px; border-radius: 5px; padding: 2px 10px 2px 10px">
+    <div [align]="'left'">{{dateSchedule | date: 'fullDate'}}
+      <i mz-icon-mdi style="position: relative; top: -8px"
+         [align]="'right'"
+         class="blue-grey-text"
+         [icon]="'calendar-clock'"
+         [size]="'24px'">
+      </i>
+    </div>
   </div>
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
     <div style="border: 1px solid grey; padding: 5px 10px 30px 10px; border-radius: 10px">
       <div class="row">
-        <div class="left" style="width: 100px; margin-left: 10px; margin-right: 21px">
+        <div class="left" style="width: 110px; margin-left: 10px; margin-right: 21px">
           <mz-timepicker-container>
             <input mz-timepicker
                    required
                    mz-validation
                    autocomplete="off"
-                   label="Start time"
+                   [label]="'Start time'"
                    [options]="timepickerOptions"
                    id="start"
                    type="text"
@@ -24,7 +26,7 @@
                    [errorMessageResource]="errorMessageResources.start">
           </mz-timepicker-container>
         </div>
-        <div class="left" style="width: 100px">
+        <div class="left" style="width: 110px">
           <mz-timepicker-container>
             <input mz-timepicker
                    required
@@ -74,7 +76,6 @@
     </div>
   </form>
 </div>
-
 <ng-template #showSpinner>
   <div class="center-jack-container">
     <mz-spinner
