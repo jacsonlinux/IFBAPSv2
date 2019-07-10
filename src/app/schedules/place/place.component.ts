@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { SchedulesService} from '../schedules.service';
-import { Place } from '../../class/Place';
+import { AppService } from '../../app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-place',
@@ -9,20 +10,24 @@ import { Place } from '../../class/Place';
 })
 export class PlaceComponent implements OnInit {
 
-  place = new Place();
   places;
 
-  constructor( private schedulesService: SchedulesService ) {
+  constructor( private schedulesService: SchedulesService, private appService: AppService, private router: Router) {
     console.log('PlaceComponent');
+  }
+
+  clickPlace(placeName) {
+    // console.log(this.schedulesService.currentPlaceName.subscribe(res => console.log(res)));
+    this.appService.changePlaceName(placeName);
   }
 
   ngOnInit() {
     this.places = this.schedulesService.getPlaces().map(res => res);
-    this.schedulesService.changeSubtitle('');
-  }
+    console.log(this.router.url);
 
-  getSubtitle(subtitle) {
-    this.schedulesService.changeSubtitle(subtitle);
+    if (this.router.url === '/schedules') {
+      this.appService.changePlaceName(null);
+    }
   }
 
 }

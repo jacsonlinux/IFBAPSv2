@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
 import { SchedulesService } from '../schedules.service';
@@ -66,7 +66,6 @@ export class NewComponent implements OnInit, OnDestroy {
 
   constructor(
     private scheduleService: SchedulesService,
-    private router: Router,
     private formBuilder: FormBuilder,
     private toastService: MzToastService,
     private authenticationService: AuthenticationService,
@@ -180,12 +179,11 @@ export class NewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.buildForm();
     this.showForm = true;
-    this.scheduleService.currentDate.subscribe(res => {
-      if (res == null) {
+    this.scheduleService.currentDate.subscribe(date => {
+      if (date === null) {
         this.location.back();
-        // this.router.navigate(['/calendar']).catch(err => err.message);
       } else {
-        this.dateSchedule = res;
+        this.dateSchedule = date;
         this.dateSchedule = new Date(
           this.dateSchedule.getFullYear(),
           this.dateSchedule.getMonth(),

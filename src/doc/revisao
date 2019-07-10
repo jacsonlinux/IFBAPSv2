@@ -1,0 +1,23 @@
+Mudanças a serem implementadas na Aplicação
+
+OK - Quando clicar no + preencher automaticamente o input com o dia selecionado
+
+OK - O botão de Novo Agendamento(+) deixar apenas na visualização do dia selecionado para o agendamento.
+OK - Tela de Login ter o título “LOGIN”.
+
+OK - Colocar título no registro de usuário.
+
+* Revisar Políticas de Privacidade.
+* Implementar troca de tema, claro e escuro.
+* Notificar o usuário
+* bloquear periodos passados
+*** colocar spinner login durante a checagem de da autencticação
+
+>> Implementar o titulo no local selecionado na NAVBAR.
+
+
+Daniel * Implementar esqueceu a senha.
+
+Daniel * Converter para o Portugol Studio o método Validate Período.
+
+Daniel * Limpar o código;

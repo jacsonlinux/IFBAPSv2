@@ -6,7 +6,7 @@ import {
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
 import 'rxjs/add/operator/filter';
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT, Location} from '@angular/common';
 import { isSameMonth, isSameDay } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { AuthenticationService } from '../../authentication/authentication.service';
@@ -16,6 +16,7 @@ import { SchedulesService } from '../schedules.service';
 import { ActivatedRoute } from '@angular/router';
 import { Schedule } from '../../class/Schedule';
 import { MzMediaService } from 'ngx-materialize';
+import {AppService} from '../../app.service';
 
 function getTimezoneOffsetString(date: Date): string {
   const timezoneOffset = date.getTimezoneOffset();
@@ -47,8 +48,8 @@ export class CalendarComponent implements OnInit {
   placeID: string;
   schedules;
   user: string;
-  subtitle: string;
   filterActive: boolean;
+  placeName: string;
 
   schedule = new Schedule();
 
@@ -78,10 +79,12 @@ export class CalendarComponent implements OnInit {
   };
 
   constructor(
+    private appService: AppService,
     private mediaService: MzMediaService,
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
+    private location: Location,
     @Inject(DOCUMENT) private document
   ) {
     console.log('CalendarComponent');
@@ -209,7 +212,19 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     // this.document.body.classList.add(this.darkThemeClass);
     this.fetchEvents();
-    this.schedulesService.currentSubtitle.subscribe(subtitle => this.subtitle = subtitle);
+    // this.appService.changePlaceName(null);
+
+
+    /*this.schedulesService.currentPlaceName.subscribe(placeName => {
+      if (placeName === null) {
+        this.location.back();
+      }
+    });*/
+
+
+    // this.schedulesService.currentPlaceName.subscribe(res => this.placeName = res);
+
+    console.log(this.placeName);
   }
 
 }
