@@ -40,7 +40,7 @@
       </mz-navbar-item>
     </mz-navbar-item-container>
     <a class="center brand-logo">
-      {{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase | uppercase}}
+      {{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase}}
     </a>
     <mz-navbar-item-container [align]="'right'">
       <mz-navbar-item *ngIf="view == 'day'">
@@ -131,8 +131,8 @@
         </mz-navbar-item>
       </mz-navbar-item-container>
       <mz-navbar-item-container [align]="'right'">
-        <mz-navbar-item class="brand-logo right small-text">
-          {{ viewDate | calendarDate: view + 'ViewTitle':locale | uppercase }}
+        <mz-navbar-item class="brand-logo right">
+          {{ viewDate | calendarDate: view + 'ViewTitle':locale }}
         </mz-navbar-item>
       </mz-navbar-item-container>
     </mz-navbar>
