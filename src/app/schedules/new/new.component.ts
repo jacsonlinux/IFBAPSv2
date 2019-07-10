@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs-compat/Subscription';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
+  date: Date;
+
   activityOptions = [
     { text: 'Culture,music, arts, literature' },
     { text: 'Health care, pharmaceutical, and medical sector' },
@@ -162,30 +164,30 @@ export class NewComponent implements OnInit, OnDestroy {
       };
       this.subscription = this.scheduleService.validateSchedule(schedule)
         .subscribe(schedules => {
-        if (schedules.length === 0) {
-          this.newSchedule(schedule);
-        } else {
-          const periods = [];
-          for (const entry of schedules) {
-            periods.push({
-              start: entry.data.start.toDate(),
-              end: entry.data.end.toDate()
-            });
-          }
-          const periodForCheck = {
-            start: schedule.start,
-            end: schedule.end
-          };
-          const valid = this.validatePeriod(periodForCheck, periods);
-          if (valid) {
+          if (schedules.length === 0) {
             this.newSchedule(schedule);
           } else {
-            this.subscription.unsubscribe();
-            this.toastService.show('Invalid period schedule!', 3000, 'red fontArial white-text');
-            this.showForm = true;
+            const periods = [];
+            for (const entry of schedules) {
+              periods.push({
+                start: entry.data.start.toDate(),
+                end: entry.data.end.toDate()
+              });
+            }
+            const periodForCheck = {
+              start: schedule.start,
+              end: schedule.end
+            };
+            const valid = this.validatePeriod(periodForCheck, periods);
+            if (valid) {
+              this.newSchedule(schedule);
+            } else {
+              this.subscription.unsubscribe();
+              this.toastService.show('Invalid period schedule!', 3000, 'red fontArial white-text');
+              this.showForm = true;
+            }
           }
-        }
-      });
+        });
     }
   }
 
@@ -194,6 +196,7 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.scheduleService.currentDate.subscribe(date => this.date = date);
     this.buildForm();
     this.showForm = true;
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );

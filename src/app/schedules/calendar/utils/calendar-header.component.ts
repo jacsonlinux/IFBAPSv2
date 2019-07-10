@@ -12,7 +12,6 @@ export class CalendarHeaderComponent {
 
   show: boolean;
 
-
   public smallResolution: Observable<boolean>;
   public largeResolution: Observable<boolean>;
 
@@ -36,4 +35,5 @@ export class CalendarHeaderComponent {
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
 
   @Output() filter: EventEmitter<Date> = new EventEmitter();
+
 }

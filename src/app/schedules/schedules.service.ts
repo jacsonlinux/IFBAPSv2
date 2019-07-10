@@ -53,6 +53,9 @@ export class SchedulesService {
   private subtitleSource = new BehaviorSubject(null);
   currentSubtitle = this.subtitleSource.asObservable();
 
+  private selectedDate = new BehaviorSubject(null);
+  currentDate = this.selectedDate.asObservable();
+
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
 
@@ -100,6 +103,10 @@ export class SchedulesService {
     }
     return true;
   }*/
+
+  changeDate(date) {
+    this.selectedDate.next(date);
+  }
 
   changeSubtitle(subtitle) {
     this.subtitleSource.next(subtitle);

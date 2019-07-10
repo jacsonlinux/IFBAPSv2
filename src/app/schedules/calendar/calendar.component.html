@@ -14,18 +14,10 @@
       [events]="events"
       (eventTimesChanged)="eventTimesChanged($event)"
       [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="viewDate = $event.day.date; view = 'day'"
+      (dayClicked)="viewDate = $event.day.date; view = 'day'; dayClicked($event.day)"
     >
       >
     </mwl-calendar-month-view>
-    <!--<mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      (eventClicked)="eventClicked($event.event); modal.openModal()"
-    >
-    </mwl-calendar-week-view>-->
     <mwl-calendar-day-view
       *ngSwitchCase="'day'"
       [refresh]="refresh"
@@ -69,6 +61,8 @@
     </mz-spinner>
   </div>
 </ng-template>
+
+
 
 <!--(eventClicked)="eventClicked($event.event); modal.openModal()"-->
 <!--(dayClicked)="dayClicked($event.day)"-->
