@@ -96,7 +96,7 @@ export class CalendarComponent implements OnInit {
     /*if (value) {
       this.schedulesService.deleteSchedule('this.scheduleID')
         .then(res => { if (res) {
-          // this.toastService.show('Scheduling deleted!', 3000, 'red fontArial white-text');
+          // this.toastService.show('Scheduling deleted!', 3000, 'red white-text');
         }})
         .catch(err => err.message);
     }*/
