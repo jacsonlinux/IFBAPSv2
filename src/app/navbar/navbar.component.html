@@ -1,7 +1,7 @@
 <div class="navbar-fixed" *ngIf="showMenu">
   <mz-navbar  [navbarClass]="'blue-grey darken-2'">
     <a class="brand-logo center">
-      {{title | titlecase }}
+      <b>{{title | titlecase | uppercase}}</b>
     </a>
     <mz-navbar-item-container [align]="'left'">
       <mz-navbar-item>
@@ -16,17 +16,17 @@
         </button>
       </mz-navbar-item>
     </mz-navbar-item-container>
-   <!-- <mz-navbar-item-container [align]="'right'" *ngIf="title != 'HOME'">
-      <mz-navbar-item>
-        <button
-          (click)="back()"
-          mz-button
-          [flat]="true"
-          [float]="true"
-          [large]="true">
-          <i mz-icon-mdi [icon]="'arrow-left'"></i>
-        </button>
-      </mz-navbar-item>
-    </mz-navbar-item-container>-->
+    <!-- <mz-navbar-item-container [align]="'right'" *ngIf="title != 'HOME'">
+       <mz-navbar-item>
+         <button
+           (click)="back()"
+           mz-button
+           [flat]="true"
+           [float]="true"
+           [large]="true">
+           <i mz-icon-mdi [icon]="'arrow-left'"></i>
+         </button>
+       </mz-navbar-item>
+     </mz-navbar-item-container>-->
   </mz-navbar>
 </div>

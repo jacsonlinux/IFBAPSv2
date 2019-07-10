@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
     }*/
   }
 
-  dayClicked({ date, events }: {
+  dayClicked({date, events}: {
     date: Date;
     events: Array<CalendarEvent<{ schedule: Schedule }>>;
   }): void {
@@ -145,7 +145,7 @@ export class CalendarComponent implements OnInit {
           meta: {schedule}
         };
       });
-    } );
+    });
   }
 
   fetchUserEvents(): void {
@@ -169,10 +169,10 @@ export class CalendarComponent implements OnInit {
           meta: {schedule}
         };
       });
-    } );
+    });
   }
 
-  eventTimesChanged( { event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map(iEvent => {
       console.log(newStart);
       if (iEvent === event) {
@@ -188,7 +188,7 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    console.log({event, action });
+    console.log({event, action});
     /*this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });*/
   }
@@ -210,24 +210,9 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.document.body.classList.add(this.darkThemeClass);
     this.fetchEvents();
-    // this.appService.changePlaceName(null);
-
-
-    /*this.schedulesService.currentPlaceName.subscribe(placeName => {
-      if (placeName === null) {
-        this.location.back();
-      }
-    });*/
-
-
-    // this.schedulesService.currentPlaceName.subscribe(res => this.placeName = res);
-
-    console.log(this.placeName);
+    this.schedulesService.getPlace(this.placeID).subscribe(res => {
+      this.appService.changePlaceName(res.name);
+    });
   }
-
 }
-
-
-
