@@ -56,9 +56,9 @@ export class SchedulesService {
   private selectedDate = new BehaviorSubject(null);
   currentDate = this.selectedDate.asObservable();
 
-/*
-  private placeNameSource = new BehaviorSubject(null);
-  currentPlaceName = this.placeNameSource.asObservable();*/
+  /*
+    private placeNameSource = new BehaviorSubject(null);
+    currentPlaceName = this.placeNameSource.asObservable();*/
 
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
@@ -194,13 +194,22 @@ export class SchedulesService {
 
   validateSchedule(schedule: Schedule) {
 
-    const startDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 0, 0, 0);
+    const startDay = new Date(
+      schedule.start.getFullYear(),
+      schedule.start.getMonth(),
+      schedule.start.getDate(),
+      0, 0, 0);
 
-    const endDay = new Date(schedule.start.getFullYear(), schedule.start.getMonth(), schedule.start.getDate(), 23, 59, 59);
+    const endDay = new Date(
+      schedule.start.getFullYear(),
+      schedule.start.getMonth(),
+      schedule.start.getDate(),
+      23, 59, 59);
 
 
     this.scheduleCollection = this.angularFirestore
       .collection<Schedule>('schedules', ref => ref
+        .where('place', '==', schedule.place)
         .where('start', '>=', startDay)
         .where('start', '<=', endDay)
         .orderBy('start', 'asc')

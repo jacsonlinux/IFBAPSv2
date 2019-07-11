@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
-import { FrontPageComponent } from './front-page/front-page.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -9,10 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const APP_ROUTES: Routes = [
-  /*{path: '',
-    component: FrontPageComponent,
-    data: {title: 'FRONTPAGE'}
-  },*/
   { path: '',
     loadChildren: './authentication/authentication.module#AuthenticationModule',
     data: {title: 'AUTHENTICATION'}

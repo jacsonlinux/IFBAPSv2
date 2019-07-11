@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
 import 'rxjs/add/operator/filter';
+import {AppService} from '../app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ import 'rxjs/add/operator/filter';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private authenticationService: AuthenticationService ) { console.log('HomeComponent'); }
+  constructor( private authenticationService: AuthenticationService, private appService: AppService, private router: Router ) { console.log('HomeComponent'); }
 
   ngOnInit() {
     this.authenticationService.user
@@ -18,6 +20,15 @@ export class HomeComponent implements OnInit {
       .subscribe(user => {
         if (user) { }
       });
+
+
+    console.log(this.router.url);
+
+    if (this.router.url === '/home') {
+      this.appService.changePlaceName('HOME');
+    }
+
+
   }
 
 }

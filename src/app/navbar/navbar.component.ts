@@ -27,39 +27,13 @@ export class NavbarComponent implements OnInit {
   ) { console.log('NavbarComponent');   }
 
   ngOnInit() {
-    console.log(window.location.href);
-    /*this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.activatedRoute),
-        map((route) => {
-          while (route.firstChild) {
-            route = route.firstChild;
-          }
-          return route;
-        }),
-        filter((route) => route.outlet === 'primary'),
-        mergeMap((route) => route.data),
-      ).subscribe((event) => {
-      this.title = event.title;
-    });
-*/
     this.appService.currentPlaceName.subscribe(res => {
       this.title = res;
-
-      /*if (this.title === null) {
-        this.appService.changePlaceName(null);
-      }*/
-
       if (this.title === null && this.router.url === '/') {
         this.router.navigate(['home']);
       }
-
     });
-
-
     this.authenticationService.showMenuEmitter.subscribe( show => this.showMenu = show );
-
   }
 
   back() {

@@ -12,10 +12,8 @@
                       [avatar]="true"
                       class="waves-effect waves-light">
     <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue"></i>
-    <div class="title">{{place.data.name | uppercase}}</div>
-    <div class="blue-grey-text">
-      <b>...</b>
-    </div>
+    <div class="title">{{place.data.name}}</div>
+    <div class="blue-grey-text">&nbsp;</div>
     <div *ngIf="place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" [size]="'24px'" class="green-text"></i></div>
     <div *ngIf="!place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'close-circle-outline'" [size]="'24px'" class="orange-text"></i></div>
   </mz-collection-item>
