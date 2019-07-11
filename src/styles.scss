@@ -26,8 +26,13 @@
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
-  color: #eceff1 !important;
+  color: #a0a2a3 !important;
   background-color: #37474f !important;
+}
+
+.dropdown-content {
+  background-color: transparent !important;
+  border-radius: 5px !important;
 }
 
 .switch label input[type=checkbox]:checked+.lever {

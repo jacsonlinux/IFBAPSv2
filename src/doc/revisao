@@ -11,11 +11,12 @@ OK - Colocar título no registro de usuário.
 * Implementar troca de tema, claro e escuro.
 * Notificar o usuário
 * bloquear periodos passados
-*** colocar spinner login durante a checagem de da autencticação
 
->> Implementar o titulo no local selecionado na NAVBAR.
+OK - colocar spinner login durante a checagem de da autencticação
 
+OK - Implementar o titulo no local selecionado na NAVBAR.
 
+Daniel * Catalogar salas de aula e laboratorios. Obs.: ver com a professora antes
 Daniel * Implementar esqueceu a senha.
 
 Daniel * Converter para o Portugol Studio o método Validate Período.

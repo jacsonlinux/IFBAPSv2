@@ -5,9 +5,9 @@ import 'rxjs/add/observable/empty';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {auth} from 'firebase';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 interface User {
   uid: string;
@@ -64,7 +64,6 @@ export class AuthenticationService {
     return this.angularFireAuth
       .auth
       .signInWithEmailAndPassword(data.email, data.password)
-      // .then(res => !res.user.emailVerified ? 'The email was not verified. Check the email before logging in.' : res.user)
       .then(res => res.user)
       .catch(err => err.message);
   }

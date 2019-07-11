@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { SchedulesService} from '../schedules.service';
+import { Component, OnInit } from '@angular/core';
+import { SchedulesService } from '../schedules.service';
 import { AppService } from '../../app.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-place',
@@ -17,16 +17,13 @@ export class PlaceComponent implements OnInit {
   }
 
   clickPlace(placeName) {
-    // console.log(this.schedulesService.currentPlaceName.subscribe(res => console.log(res)));
     this.appService.changePlaceName(placeName);
   }
 
   ngOnInit() {
     this.places = this.schedulesService.getPlaces().map(res => res);
-    console.log(this.router.url);
-
     if (this.router.url === '/schedules') {
-      this.appService.changePlaceName('SCHEDULES');
+      this.appService.changePlaceName('Scheduling Places');
     }
   }
 

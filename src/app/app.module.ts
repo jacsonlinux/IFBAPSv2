@@ -6,7 +6,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { FrontPageComponent } from './front-page/front-page.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -29,23 +28,20 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FooterComponent } from './footer/footer.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FrontPageComponent,
     HomeComponent,
     NavbarComponent,
     PageNotFoundComponent,
     PrivacyPolicyComponent,
     SidenavComponent,
     TermsOfServiceComponent,
-    UnauthorizedComponent,
-    FooterComponent
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
