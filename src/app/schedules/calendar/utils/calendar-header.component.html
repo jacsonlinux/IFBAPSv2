@@ -45,6 +45,18 @@
     <mz-navbar-item-container [align]="'right'">
       <mz-navbar-item *ngIf="view == 'day'">
         <button
+          class="blue"
+          routerLink="../new"
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="true"
+        >
+          <i mz-icon-mdi class="blue-text" [icon]="'plus'" [size]="'24px'" ></i>
+        </button>
+      </mz-navbar-item>
+      <mz-navbar-item *ngIf="view == 'day'">
+        <button
           mz-button
           [flat]="true"
           [large]="true"
@@ -52,7 +64,7 @@
           (click)="viewChange.emit('month')"
           [class.active]="view === 'month'"
         >
-          <i mz-icon-mdi class="blue-grey-text" [icon]="'calendar-month'" [size]="'24px'" ></i>
+          <i mz-icon-mdi [icon]="'calendar-month'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
       <!--<mz-navbar-item *ngIf="view == 'month'">
@@ -88,28 +100,31 @@
           [float]="true"
           (click)="filter.emit()"
         >
-          <i mz-icon-mdi class="grey-text" [rotate]="'180'"  [icon]="'filter-variant'" [size]="'24px'" ></i>
+          <i mz-icon-mdi [rotate]="'180'"  [icon]="'filter-variant'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
     </mz-navbar-item-container>
   </mz-navbar>
-  <div *ngIf="view == 'day'" class="fixed-action-btn">
+  <!--<div *ngIf="view == 'day'" class="fixed-action-btn">
     <a routerLink="../new" mz-button [large]="true" [float]="true" class="blue">
       <i mz-icon-mdi [size]="'24px'" [icon]="'plus'"></i>
     </a>
-  </div>
+  </div>-->
 </div>
 
 
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
     <mz-navbar  [navbarClass]="'blue-grey darken-4'">
+
+
+
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item>
           <button
             mz-button
             [flat]="true"
-            [large]="true"
+            [large]="false"
             [float]="true"
             mwlCalendarPreviousView
             [view]="view"
@@ -117,11 +132,30 @@
             (viewDateChange)="viewDateChange.next(viewDate)"
           ><i mz-icon-mdi [icon]="'chevron-left'" [size]="'16px'" ></i></button>
         </mz-navbar-item>
+      </mz-navbar-item-container>
+
+
+
+      <mz-navbar-item-container *ngIf="view == 'month'">
+        <mz-navbar-item class="brand-logo">
+          {{ viewDate | calendarDate: view + 'ViewTitle':locale }}
+        </mz-navbar-item>
+      </mz-navbar-item-container>
+
+      <mz-navbar-item-container *ngIf="view == 'day'">
+        <mz-navbar-item class="brand-logo">
+          {{ viewDate | calendarDate: view + 'ViewTitle':locale | date: 'EEE, MMM d, y' }}
+        </mz-navbar-item>
+      </mz-navbar-item-container>
+
+
+
+      <mz-navbar-item-container [align]="'right'">
         <mz-navbar-item>
           <button
             mz-button
             [flat]="true"
-            [large]="true"
+            [large]="false"
             [float]="true"
             mwlCalendarNextView
             [view]="view"
@@ -130,11 +164,20 @@
           ><i mz-icon-mdi [icon]="'chevron-right'" [size]="'16px'" ></i></button>
         </mz-navbar-item>
       </mz-navbar-item-container>
-      <mz-navbar-item-container [align]="'right'">
+
+
+
+
+
+
+
+
+
+      <!--<mz-navbar-item-container [align]="'right'">
         <mz-navbar-item class="brand-logo right">
           {{ viewDate | calendarDate: view + 'ViewTitle':locale }}
         </mz-navbar-item>
-      </mz-navbar-item-container>
+      </mz-navbar-item-container>-->
     </mz-navbar>
   </div>
   <div class="navbar-fixed-bottom">
@@ -174,7 +217,7 @@
             (click)="viewChange.emit('month')"
             [class.active]="view === 'month'"
           >
-            <i mz-icon-mdi class="grey-text" [icon]="'calendar-month'" [size]="'16px'" ></i>
+            <i mz-icon-mdi [icon]="'calendar-month'" [size]="'16px'" ></i>
           </button>
         </mz-navbar-item>
         <mz-navbar-item>
@@ -198,7 +241,7 @@
             [float]="true"
             (click)="filter.emit()"
           >
-            <i mz-icon-mdi class="grey-text" [rotate]="'180'"  [icon]="'filter-variant'" [size]="'16px'" ></i>
+            <i mz-icon-mdi [rotate]="'180'"  [icon]="'filter-variant'" [size]="'16px'" ></i>
           </button>
         </mz-navbar-item>
       </mz-navbar-item-container>
