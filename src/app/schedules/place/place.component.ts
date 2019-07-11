@@ -26,7 +26,7 @@ export class PlaceComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url === '/schedules') {
-      this.appService.changePlaceName(null);
+      this.appService.changePlaceName('SCHEDULES');
     }
   }
 

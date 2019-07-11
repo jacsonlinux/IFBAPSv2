@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       .map(authState => !!authState && authState.emailVerified )
       .do(authenticated => {
         if (!authenticated) {
-          this.router.navigate(['authentication/login']).catch(err => err.message);
+          this.router.navigate(['']).catch(err => err.message);
         } else {
           this.authenticationService.showMenuEmitter.emit(true);
         }

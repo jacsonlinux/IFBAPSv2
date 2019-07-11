@@ -70,7 +70,7 @@ export class NewComponent implements OnInit, OnDestroy {
     private toastService: MzToastService,
     private authenticationService: AuthenticationService,
     private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     console.log('NewComponent');
   }
@@ -130,11 +130,9 @@ export class NewComponent implements OnInit, OnDestroy {
       this.scheduleForm.reset();
     } else {
       this.showForm = false;
-
       this.schedule.start = this.start;
       this.schedule.end = this.end;
       this.schedule.title = data.activityTitle.text;
-
       const schedule = {
         end: this.schedule.end,
         place: this.schedule.place,
