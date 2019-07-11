@@ -10,7 +10,7 @@ import {DOCUMENT, Location} from '@angular/common';
 import { isSameMonth, isSameDay } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { AuthenticationService } from '../../authentication/authentication.service';
-import { CustomDateFormatter } from '../../class/CustomDateFormatter';
+import { CustomDateFormatter } from './utils/CustomDateFormatter';
 import { colors} from './utils/colors';
 import { SchedulesService } from '../schedules.service';
 import { ActivatedRoute } from '@angular/router';
@@ -212,7 +212,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.fetchEvents();
     this.schedulesService.getPlace(this.placeID).subscribe(res => {
-      this.appService.changePlaceName(res.name);
+      this.appService.changePlaceName(res.description);
     });
   }
 }

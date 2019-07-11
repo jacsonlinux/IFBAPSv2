@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
 import { AuthenticationService } from '../authentication.service';
 
@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
 
   showFormLogin: boolean;
   logInForm: FormGroup;
-
   errorMessageResources = {
     email: {
       required: 'Email is required.',
@@ -30,12 +29,16 @@ export class LoginComponent implements OnInit {
     private toastService: MzToastService
   ) {
     console.log('LoginComponent');
+    this.showFormLogin = false;
     this.authenticationService.user.subscribe((user) => {
       if (user) {
-        // this.router.navigate(['home']).catch(err => err.message); }
-        this.router.navigate(['home']).catch(err => err.message); }
+        this.router.navigate(['home']).catch(err => err.message);
+      } else {
+        this.showFormLogin = true;
+      }
     });
   }
+
   logInGoogle() {
     this.authenticationService.logInGoogle()
       .then(() => {this.router.navigate(['/home']); })
@@ -44,7 +47,6 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     this.logInForm = this.formBuilder.group({
-      // reCaptcha: new FormControl(null, Validators.required),
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@ifba.edu.br'),
