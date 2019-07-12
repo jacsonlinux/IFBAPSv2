@@ -1,5 +1,6 @@
 <mwl-utils-calendar-header
   [filterActive]="filterActive"
+  [user]="user"
   [(view)]="view"
   [(viewDate)]="viewDate"
   (filter)="fetchUserEvents()"
@@ -41,15 +42,16 @@
     <h5>{{schedule.title}}</h5>
   </mz-modal-header>
   <mz-modal-content>
-    <div style="border-radius: 10px; border: 1px solid #607d8b; padding: 5px;">
+    <div style="border-radius: 5px; border: 1px solid #607d8b; padding: 5px;">
       <p><b>Date:&nbsp;</b>{{schedule.start | date }}</p>
       <p><b>Schedule:&nbsp;</b> {{schedule.start | date: 'shortTime' }} - {{schedule.end | date: 'shortTime' }}</p>
-      <p><b>Place:&nbsp;</b>{{schedule.place}}</p>
-      <p><b>User:&nbsp;</b>{{schedule.user}}</p>
+      <p><b>Place:&nbsp;</b>{{placeName}} ({{placeDescription}})</p>
+      <p><b>Owner:&nbsp;</b><i>missing implement</i></p>
     </div>
+    <small class="right blue-grey darken-4 grey-text" style="margin-top: 10px; padding: 3px 10px 3px 10px; border-radius: 10px;">SID: {{schedule.id}}</small>
   </mz-modal-content>
   <mz-modal-footer>
-    <small>SID: {{schedule.id}}</small>
+    <button (click)="cancelSchedule(schedule.id)" *ngIf="user?.uid === schedule.user" class="red-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>DELETE</button>
     <button class="blue-grey-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>CLOSE</button>
   </mz-modal-footer>
 </mz-modal>
@@ -61,7 +63,6 @@
     </mz-spinner>
   </div>
 </ng-template>
-{{placeName}}
 
 
 <!--(eventClicked)="eventClicked($event.event); modal.openModal()"-->

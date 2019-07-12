@@ -15,8 +15,9 @@ import { colors} from './utils/colors';
 import { SchedulesService } from '../schedules.service';
 import { ActivatedRoute } from '@angular/router';
 import { Schedule } from '../../class/Schedule';
-import { MzMediaService } from 'ngx-materialize';
+import {MzMediaService, MzToastService} from 'ngx-materialize';
 import {AppService} from '../../app.service';
+import {User} from '../../class/User';
 
 function getTimezoneOffsetString(date: Date): string {
   const timezoneOffset = date.getTimezoneOffset();
@@ -47,9 +48,10 @@ export class CalendarComponent implements OnInit {
 
   placeID: string;
   schedules;
-  user: string;
+  user: User;
   filterActive: boolean;
   placeName: string;
+  placeDescription: string;
 
   schedule = new Schedule();
 
@@ -85,11 +87,12 @@ export class CalendarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private location: Location,
+    private toastService: MzToastService,
     @Inject(DOCUMENT) private document
   ) {
     console.log('CalendarComponent');
     this.placeID = this.activatedRoute.snapshot.paramMap.get('id');
-    this.authenticationService.user.subscribe(res => this.user = res.uid);
+
     this.smallResolution = this.mediaService.isActive('s'); // small screen resolution
     this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
   }
@@ -150,7 +153,7 @@ export class CalendarComponent implements OnInit {
 
   fetchUserEvents(): void {
     this.filterActive = true;
-    this.events$ = this.schedulesService.getSchedulesUser(this.placeID, this.user).map(res => {
+    this.events$ = this.schedulesService.getSchedulesUser(this.placeID, this.user.uid).map(res => {
       return res.map(schedule => {
         return {
           id: schedule.id,
@@ -193,25 +196,41 @@ export class CalendarComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });*/
   }
 
-  eventClicked(event: CalendarEvent<{ schedule: Schedule }>): void {
-
-    /*this.schedulesService.getPlace(event.place).subscribe(res => this.schedule.place = res.name);
-    this.schedulesService.getUser(event.user).subscribe(res =>  this.schedule.user = res.displayName);*/
-
-    this.schedule.user = event.user;
-    this.schedule.place = event.place;
-
-    this.schedule.title = event.title;
-    this.schedule.start = event.start;
-    this.schedule.end = event.end;
-    this.schedule.id = event.id;
-
-    console.log(event);
+  eventClicked(schedule: CalendarEvent<{ schedule: Schedule }>): void {
+    this.schedule.user = schedule.user;
+    this.schedule.place = schedule.place;
+    this.schedule.title = schedule.title;
+    this.schedule.start = schedule.start;
+    this.schedule.end = schedule.end;
+    this.schedule.id = schedule.id;
   }
 
+  cancelSchedule(scheduleID) {
+    this.schedulesService.deleteSchedule(scheduleID)
+      .then(res => { if (res) {
+        this.toastService.show('Scheduling deleted!', 3000, 'orange white-text');
+      }})
+      .catch(err => err.message);
+
+  }
+
+  /*optionModalValue(value: boolean) {
+    if (value) {
+      this.schedulesService.deleteSchedule(this.scheduleID)
+        .then(res => { if (res) {
+          this.toastService.show('Scheduling deleted!', 3000, 'red white-text');
+        }})
+        .catch(err => err.message);
+    }
+  }*/
+
+
   ngOnInit() {
+    this.authenticationService.user.subscribe(res => this.user = res );
     this.fetchEvents();
     this.schedulesService.getPlace(this.placeID).subscribe(res => {
+      this.placeDescription = res.description;
+      this.placeName = res.name;
       this.appService.changePlaceName(res.description);
     });
   }
