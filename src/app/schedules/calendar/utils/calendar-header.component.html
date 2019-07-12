@@ -43,7 +43,7 @@
       {{ viewDate | calendarDate: view + 'ViewTitle':locale | titlecase}}
     </a>
     <mz-navbar-item-container [align]="'right'">
-      <mz-navbar-item *ngIf="view == 'day'">
+      <mz-navbar-item *ngIf="view == 'day' && user?.profile !== 'public'">
         <button
           class="blue"
           routerLink="../new"
@@ -81,7 +81,7 @@
       </mz-navbar-item>-->
       <mz-navbar-item>
         <button
-          *ngIf="filterActive"
+          *ngIf="filterActive && user?.profile !== 'public'"
           mz-button
           [flat]="true"
           [large]="true"
@@ -93,7 +93,7 @@
       </mz-navbar-item>
       <mz-navbar-item>
         <button
-          *ngIf="!filterActive"
+          *ngIf="!filterActive && user?.profile !== 'public'"
           mz-button
           [flat]="true"
           [large]="true"
@@ -112,13 +112,9 @@
   </div>-->
 </div>
 
-
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
     <mz-navbar  [navbarClass]="'blue-grey darken-4'">
-
-
-
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item>
           <button
@@ -133,23 +129,16 @@
           ><i mz-icon-mdi [icon]="'chevron-left'" [size]="'16px'" ></i></button>
         </mz-navbar-item>
       </mz-navbar-item-container>
-
-
-
       <mz-navbar-item-container *ngIf="view == 'month'">
         <mz-navbar-item class="brand-logo">
           {{ viewDate | calendarDate: view + 'ViewTitle':locale }}
         </mz-navbar-item>
       </mz-navbar-item-container>
-
       <mz-navbar-item-container *ngIf="view == 'day'">
         <mz-navbar-item class="brand-logo">
           {{ viewDate | calendarDate: view + 'ViewTitle':locale | date: 'EEE, MMM d, y' }}
         </mz-navbar-item>
       </mz-navbar-item-container>
-
-
-
       <mz-navbar-item-container [align]="'right'">
         <mz-navbar-item>
           <button
@@ -164,15 +153,6 @@
           ><i mz-icon-mdi [icon]="'chevron-right'" [size]="'16px'" ></i></button>
         </mz-navbar-item>
       </mz-navbar-item-container>
-
-
-
-
-
-
-
-
-
       <!--<mz-navbar-item-container [align]="'right'">
         <mz-navbar-item class="brand-logo right">
           {{ viewDate | calendarDate: view + 'ViewTitle':locale }}
@@ -197,7 +177,7 @@
         </mz-navbar-item>
       </mz-navbar-item-container>
       <mz-navbar-item-container [align]="'right'">
-        <mz-navbar-item *ngIf="view == 'day'">
+        <mz-navbar-item *ngIf="view == 'day' && user?.profile !== 'public'">
           <button
             routerLink="../new"
             mz-button
@@ -222,7 +202,7 @@
         </mz-navbar-item>
         <mz-navbar-item>
           <button
-            *ngIf="filterActive"
+            *ngIf="filterActive && user?.profile !== 'public'"
             mz-button
             [flat]="true"
             [large]="true"
@@ -234,7 +214,7 @@
         </mz-navbar-item>
         <mz-navbar-item>
           <button
-            *ngIf="!filterActive"
+            *ngIf="!filterActive && user?.profile !== 'public'"
             mz-button
             [flat]="true"
             [large]="true"
@@ -248,3 +228,4 @@
     </mz-navbar>
   </div>
 </div>
+

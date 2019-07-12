@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MzMediaService } from 'ngx-materialize';
 import { Observable } from 'rxjs';
+import {User} from '../../../class/User';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -27,6 +28,8 @@ export class CalendarHeaderComponent {
   @Input() filterActive: boolean;
 
   @Input() viewDate: Date;
+
+  @Input() user: User;
 
   @Input() locale = 'en';
 
