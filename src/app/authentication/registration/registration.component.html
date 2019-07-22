@@ -46,21 +46,20 @@
     </mz-input-container>
     <mz-input-container *ngIf="!signUpForm.valid; else btn" >
       <button
-        class="btnDisable"
         mz-button
-        [flat]="true"
+        [flat]="false"
         [large]="false"
         [float]="false"
-        [disabled]="true"
+        [disabled]="!signUpForm.valid"
         type="button">Sign up</button>
     </mz-input-container>
     <ng-template #btn>
       <mz-input-container>
         <button
           (click)="captchaRef.execute()"
-          class="green white-text btnEnable"
+          class="green white-text"
           mz-button
-          [flat]="true"
+          [flat]="false"
           [large]="false"
           [float]="false"
           [disabled]="!signUpForm.valid"
