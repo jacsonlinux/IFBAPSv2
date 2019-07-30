@@ -9,6 +9,7 @@
       <div class="grey-text" style="margin-top: 21px;  margin-right: 3px; font-size: 11px; text-transform: uppercase">Laboratory Management System</div>
     </div>
   </header>
+
   <form [formGroup]="logInForm" novalidate>
     <mz-input-container>
       <input mz-input mz-validation required
@@ -73,23 +74,7 @@
       (resolved)="$event && onSubmit($event)"
     ></re-captcha>
   </form>
-  <!--<div style="margin-top: 20px" class="small-text">
-    <mz-dropdown
-      [constrainWidth]="false"
-      [id]="'dropdown'"
-      [dropdownButtonId]="'btn-dropdown'"
-      [inDuration]="300"
-      [outDuration]="300" >
-      <mz-dropdown-item><a href="#" >@danieldemarco</a></mz-dropdown-item>
-      <mz-dropdown-item><a href="#" >@jacsonlinux</a></mz-dropdown-item>
-      <mz-dropdown-item><a href="#" >@robertagbritto</a></mz-dropdown-item>
-    </mz-dropdown>
-    <a routerLink="/privacy-policy">Privacy</a>
-    <span class="grey-text">&nbsp;|&nbsp;</span>
-    <a routerLink="/terms-of-service">Service</a>
-    <span class="grey-text">&nbsp;|&nbsp;</span>
-    <a  class="" id="btn-dropdown" href="javascript:void(0)" >Developers</a>
-  </div>-->
+
 </div>
 <ng-template #showSpinner>
   <div class="center-jack-container">
