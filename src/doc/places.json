@@ -1,0 +1,42 @@
+{
+  "block_a": [
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"},
+    {"name": "C08", "description": "Sala de Aula"}
+  ],
+  "block_b": [
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"},
+    {"name":  "C03", "description":  "Sala de Aula"}
+  ],
+  "block_c": [
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"},
+    {"name":  "C05", "description":  "Laboratório de Infomática"}
+  ]
+}
