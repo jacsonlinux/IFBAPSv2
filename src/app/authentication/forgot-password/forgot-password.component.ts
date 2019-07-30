@@ -7,10 +7,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  passReset: boolean;
-  userForm: any;
-  showFormLogin: boolean;
-  logInForm: FormGroup;
+
+  showFormForgotPassword: boolean;
+  forgotPasswordForm: FormGroup;
   errorMessageResources = {
     email: {
       required: 'Email is required.',
@@ -23,24 +22,35 @@ export class ForgotPasswordComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  resetPassword() {
-    this.authenticationService.resetPassword(this.userForm.value.email).then(() => this.passReset = true);
+  onSubmit(token) {
+    // pesquisar toastService
+    // ver no materialize
+    if (token) {
+      this.showFormForgotPassword = false;
+      const email = this.forgotPasswordForm.value.email;
+      this.authenticationService.resetPassword(email)
+        .then(res => {
+          this.buildForm();
+          this.showFormForgotPassword = true;
+          console.log(res);
+        })
+        .catch(err => err.message);
+    }
   }
 
   buildForm() {
-    this.logInForm = this.formBuilder.group({
+    this.forgotPasswordForm = this.formBuilder.group({
       email: [null, Validators.compose([
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@ifba.edu.br'),
         Validators.email
-      ])],
-      password: [null, Validators.compose([Validators.required])],
+      ])]
     });
   }
 
   ngOnInit() {
     this.buildForm();
-    this.showFormLogin = true;
+    this.showFormForgotPassword = true;
   }
 
 }
