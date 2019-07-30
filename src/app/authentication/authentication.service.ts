@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
+import {error} from "selenium-webdriver";
 
 interface User {
   uid: string;
@@ -120,5 +121,10 @@ export class AuthenticationService {
   }
 
   profile() { return this.user.map(user => user.profile); }
+
+  resetPassword(email: string) {
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email).
+    then(() => console.log('email sent')).catch((error) => console.log(error));
+  }
 
 }
