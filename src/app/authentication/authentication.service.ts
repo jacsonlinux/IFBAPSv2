@@ -125,7 +125,7 @@ export class AuthenticationService {
   resetPassword(email: string) {
     return this.angularFireAuth.auth.sendPasswordResetEmail(email).
     then(() => {
-      return 'Check your e-mail';
+      return null;
     }).catch(err => err.message);
   }
 

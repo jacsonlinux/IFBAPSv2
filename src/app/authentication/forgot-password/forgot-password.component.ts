@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../authentication.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MzToastService} from 'ngx-materialize';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -19,12 +20,11 @@ export class ForgotPasswordComponent implements OnInit {
   };
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastService: MzToastService
   ) {}
-
   onSubmit(token) {
-    // pesquisar toastService
-    // ver no materialize
+
     if (token) {
       this.showFormForgotPassword = false;
       const email = this.forgotPasswordForm.value.email;
@@ -33,6 +33,11 @@ export class ForgotPasswordComponent implements OnInit {
           this.buildForm();
           this.showFormForgotPassword = true;
           console.log(res);
+          if (res == null) {
+            this.toastService.show('Check your e-mail', 5000, 'green darken-4 white-text center');
+          } else {
+            this.toastService.show('Unregistered User', 5000, 'red darken-4 white-text center');
+          }
         })
         .catch(err => err.message);
     }
