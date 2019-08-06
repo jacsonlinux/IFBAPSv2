@@ -230,6 +230,10 @@ export class SchedulesService {
     return this.place;
   }
 
+  setPlaces(data) {
+    console.log(data);
+  }
+
   getUser(userID: string) {
     this.userDoc = this.angularFirestore.doc('users/' + userID);
     this.user = this.userDoc.valueChanges();
