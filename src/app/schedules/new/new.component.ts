@@ -91,6 +91,7 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   validatePeriod(periodForCheck, periods): boolean {
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < periods.length; i++) {
       const period = periods[i];
       if (period.start < periodForCheck.start && period.end > periodForCheck.start) {
@@ -104,6 +105,7 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   newSchedule(schedule): void {
+    this.showForm = false;
     this.subscription.unsubscribe();
     this.scheduleService
       .newSchedule(schedule)
@@ -112,6 +114,7 @@ export class NewComponent implements OnInit, OnDestroy {
           this.showForm = false;
           this.location.back();
           this.toastService.show('Registered schedule!', 3000, 'green white-text');
+
         } else {
           this.toastService.show(`${res}`, 5000, 'red white-text');
           this.showForm = true;

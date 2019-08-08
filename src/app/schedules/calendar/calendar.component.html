@@ -45,7 +45,7 @@
     <div style="border-radius: 5px; border: 1px solid #607d8b; padding: 5px;">
       <p><b>Date:&nbsp;</b>{{schedule.start | date }}</p>
       <p><b>Schedule:&nbsp;</b> {{schedule.start | date: 'shortTime' }} - {{schedule.end | date: 'shortTime' }}</p>
-      <p><b>Place:&nbsp;</b>{{placeName}} ({{placeDescription}})</p>
+      <p><b>Place:&nbsp;</b>{{placeCode}} ({{placeDescription}})</p>
       <p><b>Owner:&nbsp;</b><i>missing implement</i></p>
     </div>
     <small class="right blue-grey darken-4 grey-text" style="margin-top: 10px; padding: 3px 10px 3px 10px; border-radius: 10px;">SID: {{schedule.id}}</small>

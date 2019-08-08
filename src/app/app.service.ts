@@ -7,12 +7,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AppService {
 
 
-  private placeNameSource = new BehaviorSubject(null);
-  currentPlaceName = this.placeNameSource.asObservable();
+  private placeTitleSource = new BehaviorSubject(null);
+  currentPlaceTitle = this.placeTitleSource.asObservable();
 
   constructor() { }
 
-  changePlaceName(placeName) {
-    this.placeNameSource.next(placeName);
+  changePlaceTitle(placeCode) {
+    this.placeTitleSource.next(placeCode);
   }
 }
