@@ -1,6 +1,7 @@
 export class Place {
-  name: string;
+  block: string;
+  code: string;
+  description: string;
   email: string;
-  sector: string;
   status: boolean;
 }

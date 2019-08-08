@@ -50,7 +50,7 @@ export class CalendarComponent implements OnInit {
   schedules;
   user: User;
   filterActive: boolean;
-  placeName: string;
+  placeCode: string;
   placeDescription: string;
 
   schedule = new Schedule();
@@ -74,6 +74,8 @@ export class CalendarComponent implements OnInit {
   private readonly darkThemeClass = 'dark-theme';
 
   public modalOptions: Materialize.ModalOptions = {
+    inDuration: 150,
+    outDuration: 150,
     dismissible: false,
     opacity: 0.5,
     startingTop: '30%',
@@ -92,7 +94,6 @@ export class CalendarComponent implements OnInit {
   ) {
     console.log('CalendarComponent');
     this.placeID = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.smallResolution = this.mediaService.isActive('s'); // small screen resolution
     this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
   }
@@ -224,14 +225,19 @@ export class CalendarComponent implements OnInit {
     }
   }*/
 
-
   ngOnInit() {
     this.authenticationService.user.subscribe(res => this.user = res );
     this.fetchEvents();
     this.schedulesService.getPlace(this.placeID).subscribe(res => {
       this.placeDescription = res.description;
-      this.placeName = res.name;
-      this.appService.changePlaceName(res.description);
+      this.placeCode = res.code;
+      this.smallResolution.subscribe(smallResolution => {
+        if (smallResolution) {
+          this.appService.changePlaceTitle('ROOM ' + this.placeCode);
+        } else {
+          this.appService.changePlaceTitle('ROOM ' + this.placeCode + ' - ' + this.placeDescription);
+        }
+      });
     });
   }
 }

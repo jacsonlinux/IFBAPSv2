@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
   ) { console.log('NavbarComponent');   }
 
   ngOnInit() {
-    this.appService.currentPlaceName.subscribe(res => {
+    this.appService.currentPlaceTitle.subscribe(res => {
       this.title = res;
       if (this.title === null && this.router.url === '/') {
         this.router.navigate(['home']);

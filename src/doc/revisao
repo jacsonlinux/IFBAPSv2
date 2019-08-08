@@ -9,15 +9,21 @@ OK - Colocar título no registro de usuário.
 
 * Revisar Políticas de Privacidade.
 * Implementar troca de tema, claro e escuro.
-* Notificar o usuário
+* Notificar o usuário(responsavel)
 * bloquear periodos passados
 
 OK - colocar spinner login durante a checagem de da autencticação
 
 OK - Implementar o titulo no local selecionado na NAVBAR.
 
-Daniel * Catalogar salas de aula e laboratorios. Obs.: ver com a professora antes
-Daniel * Implementar esqueceu a senha.
+OK - Daniel * Catalogar salas de aula e laboratorios. Obs.: ver com a professora antes
+OK - Daniel * Implementar esqueceu a senha.
+
+
+* colocar tooltip no (code) da navbar com a descrição da sala, só pra smartphone
+* DESCRIÇÃO tamanho max de caracter --- limit
+
+
 
 Daniel * Converter para o Portugol Studio o método Validate Período.
 

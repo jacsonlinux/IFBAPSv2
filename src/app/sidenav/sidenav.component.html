@@ -6,10 +6,10 @@
     [edge]="'left'"
     [closeOnClick]="true">
     <mz-sidenav-header>
-      <div class="user-view blue-grey darken-3">
-        <span class="grey-text"><i>{{(authenticationService.user | async)?.profile | uppercase}}</i></span>
+      <div class="user-view green darken-4">
+       <!-- <span class="red-text"><i>{{(authenticationService.user | async)?.profile | uppercase}}</i></span>-->
         <img alt="img_user" class="circle avatar" src="{{(authenticationService.user | async)?.photoURL}}">
-        <div class="grey-text name">{{(authenticationService.user | async)?.displayName}}</div>
+        <div class="white-text name">{{(authenticationService.user | async)?.displayName}}</div>
         <!--<div class="white-text name">{{(authenticationService.user | async)?.profile}}</div>-->
         <div class="grey-text email">{{(authenticationService.user | async)?.email}}</div>
       </div>

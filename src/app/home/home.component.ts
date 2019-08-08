@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     console.log(this.router.url);
 
     if (this.router.url === '/home') {
-      this.appService.changePlaceName('HOME');
+      this.appService.changePlaceTitle('HOME');
     }
 
 

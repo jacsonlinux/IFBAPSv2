@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
-import {error} from "selenium-webdriver";
 
 interface User {
   uid: string;
