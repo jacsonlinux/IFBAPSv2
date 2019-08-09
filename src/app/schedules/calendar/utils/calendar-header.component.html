@@ -1,6 +1,6 @@
 <div *ngIf="largeResolution | async">
   <br/>
-  <mz-navbar  [navbarClass]="'blue-grey darken-4'">
+  <mz-navbar>
     <mz-navbar-item-container [align]="'left'">
       <mz-navbar-item>
         <button
@@ -105,16 +105,10 @@
       </mz-navbar-item>
     </mz-navbar-item-container>
   </mz-navbar>
-  <!--<div *ngIf="view == 'day'" class="fixed-action-btn">
-    <a routerLink="../new" mz-button [large]="true" [float]="true" class="blue">
-      <i mz-icon-mdi [size]="'24px'" [icon]="'plus'"></i>
-    </a>
-  </div>-->
 </div>
-
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
-    <mz-navbar  [navbarClass]="'blue-grey darken-4'">
+    <mz-navbar  [navbarClass]="'grey darken-3'">
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item>
           <button
@@ -161,7 +155,7 @@
     </mz-navbar>
   </div>
   <div class="navbar-fixed-bottom">
-    <mz-navbar  [navbarClass]="'blue-grey darken-4'">
+    <mz-navbar  [navbarClass]="'grey darken-3'">
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item class="brand-logo left">
           <button
@@ -228,4 +222,3 @@
     </mz-navbar>
   </div>
 </div>
-
