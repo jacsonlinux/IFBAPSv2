@@ -131,9 +131,10 @@ thead {
 .dark-theme {
   $bg-dark-primary: #121212;
   $bg-dark-secondary: #272727;
+  $bg-dark-ternary: #373737;
   $bg-active: #37474f;
   $text-color: #eceff1;
-  $border-color: #333333;
+  $border-color: #455a64;
 
   @include cal-theme(
       (
@@ -143,7 +144,7 @@ thead {
         bg-active: $bg-active,
         border-color: $border-color,
         gray: $bg-dark-secondary,
-        today-bg: $bg-dark-secondary,
+        today-bg: $bg-active,
         event-color-primary: $bg-dark-secondary
       )
   );
@@ -201,7 +202,7 @@ thead {
   }
 
   #sidenav .divider {
-    background: $border-color !important;
+    background: $bg-dark-ternary !important;
   }
 
 }
