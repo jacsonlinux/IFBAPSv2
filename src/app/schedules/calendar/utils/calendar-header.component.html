@@ -1,6 +1,6 @@
 <div *ngIf="largeResolution | async">
   <br/>
-  <mz-navbar>
+  <mz-navbar [navbarClass]="'blue-grey darken-4'">
     <mz-navbar-item-container [align]="'left'">
       <mz-navbar-item>
         <button
@@ -108,7 +108,7 @@
 </div>
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
-    <mz-navbar  [navbarClass]="'grey darken-3'">
+    <mz-navbar  [navbarClass]="'blue-grey darken-4'">
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item>
           <button
@@ -155,7 +155,7 @@
     </mz-navbar>
   </div>
   <div class="navbar-fixed-bottom">
-    <mz-navbar  [navbarClass]="'grey darken-3'">
+    <mz-navbar  [navbarClass]="'blue-grey darken-4'">
       <mz-navbar-item-container [align]="'left'">
         <mz-navbar-item class="brand-logo left">
           <button
