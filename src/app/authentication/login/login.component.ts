@@ -57,9 +57,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(token) {
+    this.showFormLogin = false;
     if (token) {
       const data = this.logInForm.value;
-      this.showFormLogin = false;
       this.authenticationService
         .logIn(data)
         .then(res => {
