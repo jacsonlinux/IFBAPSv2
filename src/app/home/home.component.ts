@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
   constructor( private authenticationService: AuthenticationService, private appService: AppService, private router: Router ) { console.log('HomeComponent'); }
 
   ngOnInit() {
