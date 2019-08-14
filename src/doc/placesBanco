@@ -1,0 +1,50 @@
+addPlaces() {
+    const places = [
+     {code: 'A02', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A03', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A04', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A05', description: 'Lab. Informática I ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A06', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A08', description: 'Lab. Informática II ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A09', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A10', description: 'Lab. Electronics and Electricity ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A11', description: 'Lab. Technical Drawing ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A12', description: 'Science and Tec Specialization. Environmental - Lab. Chemistry ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A14', description: 'Postgrad. Science and Tec. Environmental LITE - Lab. Interd de Tec. Educational. ', Status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A17', description: 'Auditorium', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A18', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A19', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A20', description: 'Lab. Sensory Analysis', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A21', description: 'Lab. Instrumental PPGCTA and CTEAM ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A22', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'A24', description: 'Lab. Chemistry ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'A'},
+      {code: 'A26', description: 'Refectory', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'A'},
+      {code: 'C01', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C02', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C03', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C04', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C05', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C07', description: 'Lab. Informática I ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C08', description: 'Lab. Informática II ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C09', description: 'Lab. Networking ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C10', description: 'Lab. Assembly and Maintenance Guide ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C11', description: 'Lab. Food Processing ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C12', description: 'Lab. Biology and Microbiology ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C14', description: 'Lab. Distillation and Extraction of Essential Oils', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C17', description: 'Lab. Química Geral / Órganica ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C18', description: 'Lab. General Chemistry / Inorganic / Physical Chemistry ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C19', description: 'Lab. Biofuels / Unit Op. / Transport Phenomena ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C20', description: 'Lab. Physics / Mathematics', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C21', description: 'Lab. Humanities', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C22', description: 'Lab. Indigenous Intercultural ', status: true, email: 'jacsoncorrea@ifba.edu.br ', block: 'C'},
+      {code: 'C27', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'},
+      {code: 'C28', description: 'Classroom', status: true, email: 'jacsoncorrea@ifba.edu.br', block: 'C'}
+    ];
+    for (const entry of places) {
+      this.angularFirestore
+        .collection('places')
+        .add(entry)
+        .then(() => true)
+        .catch(err => err.message);
+    }
+  }

@@ -119,8 +119,6 @@ export class AuthenticationService {
       .catch(err => err.message);
   }
 
-  profile() { return this.user.map(user => user.profile); }
-
   resetPassword(email: string) {
     return this.angularFireAuth.auth.sendPasswordResetEmail(email).
     then(() => {
