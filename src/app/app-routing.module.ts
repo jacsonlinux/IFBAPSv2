@@ -38,10 +38,9 @@ const APP_ROUTES: Routes = [
   { path: '**',
     component: PageNotFoundComponent
   }
-  // { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(APP_ROUTES/*, {useHash: true}*/)],
+  imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

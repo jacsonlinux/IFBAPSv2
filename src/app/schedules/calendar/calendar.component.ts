@@ -1,13 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
 import {
   CalendarDateFormatter,
-  CalendarDayViewBeforeRenderEvent,
   CalendarEvent,
   CalendarEventTimesChangedEvent
 } from 'angular-calendar';
 import 'rxjs/add/operator/filter';
 import {DOCUMENT, Location} from '@angular/common';
-import { isSameMonth, isSameDay } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { CustomDateFormatter } from './utils/CustomDateFormatter';
@@ -18,16 +16,6 @@ import { Schedule } from '../../class/Schedule';
 import {MzMediaService, MzToastService} from 'ngx-materialize';
 import {AppService} from '../../app.service';
 import {User} from '../../class/User';
-
-function getTimezoneOffsetString(date: Date): string {
-  const timezoneOffset = date.getTimezoneOffset();
-  const hoursOffset = String(
-    Math.floor(Math.abs(timezoneOffset / 60))
-  ).padStart(2, '0');
-  const minutesOffset = String(Math.abs(timezoneOffset % 60)).padEnd(2, '0');
-  const direction = timezoneOffset > 0 ? '-' : '+';
-  return `T00:00:00${direction}${hoursOffset}:${minutesOffset}`;
-}
 
 @Component({
   selector: 'app-calendar',
@@ -65,13 +53,7 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen = false;
 
-  clickedDate: Date;
-
-  clickedColumn: number;
-
   refresh: Subject<any> = new Subject();
-
-  private readonly darkThemeClass = 'dark-theme';
 
   public modalOptions: Materialize.ModalOptions = {
     inDuration: 150,
@@ -98,34 +80,12 @@ export class CalendarComponent implements OnInit {
     this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
   }
 
-  optionModalValue(value: boolean) {
-    // console.log(value);
-    /*if (value) {
-      this.schedulesService.deleteSchedule('this.scheduleID')
-        .then(res => { if (res) {
-          // this.toastService.show('Scheduling deleted!', 3000, 'red white-text');
-        }})
-        .catch(err => err.message);
-    }*/
-  }
-
   dayClicked({date, events}: {
     date: Date;
     events: Array<CalendarEvent<{ schedule: Schedule }>>;
   }): void {
     console.log(date);
     this.schedulesService.changeDate(date);
-    /*if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
-    }*/
   }
 
   fetchEvents(): void {
@@ -193,8 +153,6 @@ export class CalendarComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     console.log({event, action});
-    /*this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });*/
   }
 
   eventClicked(schedule: CalendarEvent<{ schedule: Schedule }>): void {
@@ -214,16 +172,6 @@ export class CalendarComponent implements OnInit {
       .catch(err => err.message);
 
   }
-
-  /*optionModalValue(value: boolean) {
-    if (value) {
-      this.schedulesService.deleteSchedule(this.scheduleID)
-        .then(res => { if (res) {
-          this.toastService.show('Scheduling deleted!', 3000, 'red white-text');
-        }})
-        .catch(err => err.message);
-    }
-  }*/
 
   ngOnInit() {
     this.authenticationService.user.subscribe(res => this.user = res );

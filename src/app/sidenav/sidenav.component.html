@@ -7,82 +7,21 @@
     [closeOnClick]="true">
     <mz-sidenav-header>
       <div class="user-view">
-       <!-- <span class="red-text"><i>{{(authenticationService.user | async)?.profile | uppercase}}</i></span>-->
         <img alt="img_user" class="circle avatar" src="{{(authenticationService.user | async)?.photoURL}}">
         <div class="white-text name">{{(authenticationService.user | async)?.displayName}}</div>
-        <!--<div class="white-text name">{{(authenticationService.user | async)?.profile}}</div>-->
         <div class="grey-text email">{{(authenticationService.user | async)?.email}}</div>
       </div>
     </mz-sidenav-header>
     <mz-sidenav-divider></mz-sidenav-divider>
-
     <mz-sidenav-link>
       <a routerLink="/home" class="waves-effect"><i mz-icon-mdi [align]="'left'" [icon]="'home'"></i>Home</a>
     </mz-sidenav-link>
-    <!--<mz-sidenav-collapsible [onClose]="" [onOpen]="">
-
-      <mz-sidenav-collapsible-header>
-        <i mz-icon-mdi [align]="'right'" [icon]="'calendar-clock'"></i>Schedule
-      </mz-sidenav-collapsible-header>
-
-      <mz-sidenav-collapsible-content>
-        <mz-sidenav-link>
-          <a href="#" class="waves-effect">First Link</a>
-        </mz-sidenav-link>
-        <mz-sidenav-link>
-          <a href="#" class="waves-effect">Second Link</a>
-        </mz-sidenav-link>
-      </mz-sidenav-collapsible-content>
-
-    </mz-sidenav-collapsible>
--->
     <mz-sidenav-link>
       <a routerLink="/schedules" class="waves-effect"><i mz-icon-mdi [align]="'left'" [icon]="'calendar-clock'"></i>Schedules</a>
     </mz-sidenav-link>
-    <!--    <mz-sidenav-link>-->
-    <!--      &lt;!&ndash;<a routerLink="/laboratories" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'lan'"></i>Laboratories</a>&ndash;&gt;-->
-    <!--      <a routerLink="#" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'lan'"></i>Laboratories</a>-->
-    <!--    </mz-sidenav-link>-->
-    <!--    <mz-sidenav-link *ngIf="(authenticationService.user | async)?.profile == 'server'">-->
-    <!--      <a routerLink="/schedule" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'calendar-clock'"></i>Schedule</a>-->
-    <!--    </mz-sidenav-link>-->
-    <!--    <mz-sidenav-link *ngIf="(authenticationService.user | async)?.profile == 'server'">-->
-    <!--    <a routerLink="/request-software" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'microsoft'"></i>Solicitar Software</a>-->
-    <!--    </mz-sidenav-link>-->
-    <!--    <mz-sidenav-link *ngIf="(authenticationService.user | async)?.profile == 'server'">-->
-    <!--    <a routerLink="computer-repair" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'wrench'"></i>Solicitar Reparo</a>-->
-    <!--    </mz-sidenav-link>-->
-    <!--    <mz-sidenav-link *ngIf="(authenticationService.user | async)?.profile == 'server'">-->
-    <!--      <a routerLink="/maintenance" class="waves-effect"><i mz-icon-mdi [align]="'right'" [icon]="'wrench'"></i>Manutenção</a>-->
-    <!--    </mz-sidenav-link>-->
     <mz-sidenav-divider></mz-sidenav-divider>
     <mz-sidenav-link>
       <a (click)="logOut()"><i mz-icon-mdi [align]="'left'" [icon]="'logout'"></i>Logout</a>
     </mz-sidenav-link>
-    <!--<mz-sidenav-link>
-      <div style="padding: 0 32px 0 32px; position: absolute; bottom: 55px">
-        <mz-checkbox-container>
-          <input mz-checkbox
-                 [(ngModel)]="checkboxValue"
-                 [label]="'Dark theme'"
-                 [filledIn]="true"
-                 id="darkTheme"
-                 type="checkbox">
-        </mz-checkbox-container>
-      </div>
-
-
-
-
-    </mz-sidenav-link>-->
   </mz-sidenav>
-  <!-- <button
-     mz-button
-     [id]="'btn-sidenav'"
-     [flat]="false"
-     [float]="true"
-     class="orange sidenav-button"
-     [large]="true">
-     <i mz-icon-mdi [size]="'24px'" class="grey-darken3-text" [icon]="'menu'"></i>
-   </button>-->
 </div>
