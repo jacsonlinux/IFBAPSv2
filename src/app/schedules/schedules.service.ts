@@ -4,8 +4,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
-export interface Laboratory { name: string; maintenance: boolean; computers: any; applications: any; }
-
 export interface Schedule {
   title: any;
   start: any;
@@ -22,35 +20,11 @@ export interface Place {
   status: boolean;
 }
 
-export interface User {
-  displayName: string;
-  email: string;
-  photoURL: string;
-  profile: string;
-}
-
-export interface Computer {
-  active: boolean;
-  data: object;
-}
-
-export interface Application {
-  name: string;
-  version: string;
-}
-
 @Injectable()
 export class SchedulesService {
 
-  private computerSource = new BehaviorSubject(null);
-
-  private subtitleSource = new BehaviorSubject(null);
-
   private selectedDate = new BehaviorSubject(null);
   currentDate = this.selectedDate.asObservable();
-
-  laboratoryCollection: AngularFirestoreCollection<any>;
-  laboratories: Observable<any>;
 
   scheduleCollection: AngularFirestoreCollection<any>;
   schedules: Observable<any>;
@@ -58,22 +32,8 @@ export class SchedulesService {
   placeCollection: AngularFirestoreCollection<any>;
   places: Observable<any>;
 
-  computerCollection: AngularFirestoreCollection<any>;
-  computers: Observable<any>;
-
-  applicationCollection: AngularFirestoreCollection<any>;
-  applications: Observable<any>;
-
   placeDoc: AngularFirestoreDocument<any>;
   place: Observable<any>;
-
-  userDoc: AngularFirestoreDocument<any>;
-  user: Observable<any>;
-
-  computerDoc: AngularFirestoreDocument<any>;
-
-  laboratoryDoc: AngularFirestoreDocument<any>;
-  laboratory: Observable<any>;
 
   constructor( private angularFirestore: AngularFirestore ) { console.log('SchedulesService'); }
 
