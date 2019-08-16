@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DetailComponent } from './detail/detail.component';
-import { ListComponent } from './list/list.component';
 import { NewComponent } from './new/new.component';
 import { SchedulesComponent } from './schedules.component';
-import { FilterComponent } from './filter/filter.component';
 import { SchedulesService } from './schedules.service';
 import { SchedulesRoutingModule } from './schedules-routing.module';
 import { PlaceComponent } from './place/place.component';
@@ -38,11 +35,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
-    DetailComponent,
-    ListComponent,
     NewComponent,
     SchedulesComponent,
-    FilterComponent,
     PlaceComponent,
     CalendarComponent
   ],

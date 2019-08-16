@@ -1,8 +1,8 @@
 {
   "name": "Instituto Federal da Bahia",
   "short_name": "IFBAPS",
-  "theme_color": "#455a64",
-  "background_color": "#263238",
+  "theme_color": "#272727",
+  "background_color": "#121212",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

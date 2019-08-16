@@ -1,19 +1,7 @@
 <div class="container" *ngIf="showForm; else showSpinner">
-
-  <!--  <div class="blue-grey-text" style="margin-top: 20px; margin-bottom: 20px">
-      <div [align]="'left'">{{dateSchedule | date: 'fullDate'}}
-        <i mz-icon-mdi style="position: relative; top: -8px"
-           [align]="'right'"
-           class="blue-grey-text"
-           [icon]="'calendar-clock'"
-           [size]="'24px'">
-        </i>
-      </div>
-    </div>-->
   <mz-input-container>
-    <div class="blue-grey-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
+    <div class="grey-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
   </mz-input-container>
-
   <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
     <mz-timepicker-container>
       <input mz-timepicker

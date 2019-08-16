@@ -15,18 +15,3 @@ $large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
 $small-and-down: "only screen and (max-width : #{$small-screen})" !default;
 $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
-
-//colors
-
-/*#607d8b blue-grey
-#546e7a blue-grey darken-1
-#455a64 blue-grey darken-2
-#37474f blue-grey darken-3
-#263238 blue-grey darken-4
-*/
-
-//$primary-color: #607d8b;
-//$secondary-color: #455a64; // darken-2
-//$ternary-color: #263238; // darken-4
-
-// ==========================================================================
