@@ -11,7 +11,8 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private authenticationService: AuthenticationService, private appService: AppService, private router: Router ) { console.log('HomeComponent'); }
+  constructor( private authenticationService: AuthenticationService,
+               private appService: AppService, private router: Router ) { console.log('HomeComponent'); }
 
   ngOnInit() {
     this.authenticationService.user

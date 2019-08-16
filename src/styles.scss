@@ -2,8 +2,7 @@
 
 @import '~angular-calendar/scss/angular-calendar.scss';
 
-* {
-  font-family: Arial, sans-serif }
+* { }
 
 .preloader-container {
   position: absolute;
@@ -23,11 +22,6 @@
   flex-direction: column;
 }
 
-.indicator {
-  background-color: orange !important;
-  height: 3px !important;
-}
-
 .dropdown-content li>a, .dropdown-content li>span {
   color: #a0a2a3 !important;
   background-color: #37474f !important;
@@ -36,17 +30,6 @@
 .dropdown-content {
   background-color: transparent !important;
   border-radius: 5px !important;
-}
-
-.switch label input[type=checkbox]:checked+.lever {
-  background-color: #ffcc80 !important;
-}
-.switch label input[type=checkbox]:checked+.lever:after {
-  background-color: orange  !important;
-}
-
-.switch label {
-  font-size: medium !important;
 }
 
 .collection {
@@ -85,21 +68,6 @@ mz-radio-button-container p label{
   margin-right: 50px !important;
 }
 
-.collapsible-header {
-  color: orange !important;
-  background: #212121 !important;
-  border-bottom: 1px solid #424242 !important;
-}
-.collapsible{
-  border: none !important;
-}
-.collapsible-body {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-  background-color: #424242!important;
-  border-bottom: 1px solid orange !important;
-}
-
 .brand-logo{
   font-size: medium !important;
 }
@@ -134,7 +102,7 @@ thead {
   $bg-dark-ternary: #373737;
   $bg-active: #37474f;
   $text-color: #eceff1;
-  $border-color: #455a64;
+  $border-color: #373737;
 
   @include cal-theme(
       (

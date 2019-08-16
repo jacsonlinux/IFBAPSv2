@@ -4,10 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ServerGuard } from '../guard/server.guard';
 
 import { SchedulesComponent } from './schedules.component';
-import { ListComponent } from './list/list.component';
-import { DetailComponent } from './detail/detail.component';
 import { NewComponent } from './new/new.component';
-import { FilterComponent } from './filter/filter.component';
 import { PlaceComponent } from './place/place.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
@@ -23,24 +20,11 @@ const SCHEDULES_ROUTES: Routes = [
         data: {title: 'SCHEDULE CALENDAR' },
         component: CalendarComponent
       },
-      { path: ':id/list',
-        data: {title: 'ALL SCHEDULE' },
-        component: ListComponent
-      },
       { path: ':id/new',
         component: NewComponent,
         data: {title: 'NEW SCHEDULE'},
         canActivate: [ServerGuard]
-      },
-      { path: 'detail/:id',
-        component: DetailComponent,
-        data: {title: 'SCHEDULE DETAIL'}
-      },
-      { path: ':id/filter',
-        component: FilterComponent,
-        data: {title: 'MY SCHEDULE'},
-        canActivate: [ServerGuard]
-      },
+      }
     ]
   }
 ];
