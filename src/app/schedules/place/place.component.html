@@ -8,6 +8,11 @@
     class="waves-effect waves-light">
     <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue"></i>
     <div class="title">{{place.data.code}}</div>
-    <div class="grey-text">{{place.data.description}}</div>
+    <div class="grey-text">{{place.data.description }}&nbsp;</div>
+    <div *ngIf="place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" [size]="'24px'" class="green-text"></i></div>
+    <div *ngIf="!place.data.status" class="secondary-content"><i mz-icon-mdi [icon]="'close-circle-outline'" [size]="'24px'" class="orange-text"></i></div>
   </mz-collection-item>
 </mz-collection>
+
+<!--<mz-collection-item (click)="getSubtitle(place.data.name)" *ngFor="let place of places | async" mz-collection-link routerLink="{{place.id}}/list" [avatar]="true" class="waves-effect waves-light">-->
+<!--<i mz-icon-mdi [icon]="'calendar-check'" [align]="'left'" [size]="''" style="margin-right: 5px !important;"></i>-->

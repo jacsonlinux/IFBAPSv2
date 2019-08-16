@@ -21,6 +21,7 @@ export class CalendarHeaderComponent {
     this.smallResolution = this.mediaService.isActive('s'); // small screen resolution
     this.largeResolution = this.mediaService.isActive('gt-s'); // small screen resolution
     this.show = false;
+    this.filterActive = false;
   }
 
   @Input() view;
