@@ -7,6 +7,7 @@ import { Schedule } from '../../class/Schedule';
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs-compat/Subscription';
+import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
 
 @Component({
   selector: 'app-new',
@@ -31,9 +32,11 @@ export class NewComponent implements OnInit, OnDestroy {
   errorMessageResources = {
     start: {
       required: 'Start time is required',
+      invalidPeriod: 'Start must be greater than or equal to current time'
     },
     end: {
       required: 'End time is required',
+      invalidPeriod: 'Start must be greater than or equal to start time'
     },
     title: {
       required: 'Title is required',
@@ -48,8 +51,6 @@ export class NewComponent implements OnInit, OnDestroy {
   showForm: boolean;
 
   dateSchedule;
-  start;
-  end;
 
   subscription: Subscription;
 
@@ -77,17 +78,24 @@ export class NewComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.scheduleForm = this.formBuilder.group({
-      start: [null, Validators.compose([
-        Validators.required,
-
-      ])],
-      end: [null, Validators.compose([
-        Validators.required
-      ])],
-      activityTitle: [null, Validators.compose( [
-        Validators.required
-      ])]
-    });
+        start: [null, Validators.compose([
+          Validators.required
+        ])],
+        end: [null, Validators.compose([
+          Validators.required
+        ])],
+        activityTitle: [null, Validators.compose( [
+          Validators.required
+        ])]
+      },
+      {
+        validator: InvalidPeriod(
+          'start',
+          'end',
+          `${this.dateSchedule}`
+        )
+      }
+    );
   }
 
   validatePeriod(periodForCheck, periods): boolean {
@@ -126,15 +134,15 @@ export class NewComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const data = this.scheduleForm.value;
-    this.start = new Date(this.dateSchedule + ' ' + data.start + ':00');
-    this.end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
-    if (this.start >= this.end) {
+    const start = new Date(this.dateSchedule + ' ' + data.start + ':00');
+    const end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
+    if (start >= end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red white-text');
       this.scheduleForm.reset();
     } else {
       this.showForm = false;
-      this.schedule.start = this.start;
-      this.schedule.end = this.end;
+      this.schedule.start = start;
+      this.schedule.end = end;
       this.schedule.title = data.activityTitle.text;
       const schedule = {
         end: this.schedule.end,
@@ -178,7 +186,6 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.buildForm();
     this.showForm = true;
     this.scheduleService.currentDate.subscribe(date => {
       if (date === null) {
@@ -194,6 +201,8 @@ export class NewComponent implements OnInit, OnDestroy {
     });
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.dateSchedule);
+    this.buildForm();
   }
 
 }
