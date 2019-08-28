@@ -12,7 +12,7 @@ import {
   MzButtonModule,
   MzCheckboxModule,
   MzCollectionModule,
-  MzDatepickerModule,
+  MzDatepickerModule, MzFeatureDiscoveryModule,
   MzIconMdiModule,
   MzIconModule,
   MzInputModule,
@@ -32,6 +32,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { UtilsModule} from './calendar/utils/module';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './calendar/calendar.component';
+
+import {MatFormFieldModule, MatInputModule, MatStepperModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,11 @@ import { CalendarComponent } from './calendar/calendar.component';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    UtilsModule
+    UtilsModule,
+    MzFeatureDiscoveryModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [ SchedulesService ]
 })

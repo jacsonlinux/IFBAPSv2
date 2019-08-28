@@ -7,6 +7,7 @@
   (viewDateChange)="fetchEvents()"
   (viewChange)="fetchEvents()">
 </mwl-utils-calendar-header>
+
 <div *ngIf="events$ | async; let events else loading;">
   <div style="margin-bottom: 57px" [ngSwitch]="view">
     <mwl-calendar-month-view
@@ -15,28 +16,18 @@
       [events]="events"
       (eventTimesChanged)="eventTimesChanged($event)"
       [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="viewDate = $event.day.date; view = 'day'; dayClicked($event.day)"
-    >
-      >
+      (dayClicked)="viewDate = $event.day.date; dayClicked($event.day)">
     </mwl-calendar-month-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [refresh]="refresh"
-      [viewDate]="viewDate"
-      [events]="events"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      (eventClicked)="eventClicked($event.event); modal.openModal()"
-    >
-    </mwl-calendar-day-view>
   </div>
 </div>
+
 <mz-modal
-  #modal
-  class="blue-grey-text"
-  [fullscreen]="smallResolution | async"
-  [fixedFooter]="true"
-  [bottomSheet]="smallResolution | async"
-  [options]="modalOptions"
+    #modal
+    class="blue-grey-text"
+    [fullscreen]="smallResolution | async"
+    [fixedFooter]="true"
+    [bottomSheet]="smallResolution | async"
+    [options]="modalOptions"
 >
   <mz-modal-header>
     <h5>{{schedule.title}}</h5>
@@ -55,6 +46,7 @@
     <button class="blue-grey-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>CLOSE</button>
   </mz-modal-footer>
 </mz-modal>
+
 <ng-template #loading>
   <div class="center-jack-container">
     <mz-spinner
@@ -63,3 +55,23 @@
     </mz-spinner>
   </div>
 </ng-template>
+
+<!--<mz-input-container>
+  <div class="fixed-action-btn">
+    <button
+      type="button"
+      id="info-button"
+      (click)="featureDiscovery.open()"
+      mz-button
+      [flat]="false"
+      [large]="true"
+      [float]="true"
+      class="blue">
+      <i mz-icon-mdi [size]="'36px'" [icon]="'information-outline'"></i>
+    </button>
+    <mz-feature-discovery class="blue darken-4" [targetId]="'info-button'" #featureDiscovery>
+      <h5>Warning</h5>
+      <p>Register only for IFBA servers. If you are a regular user, enter your social account by <a href="!#">clicking here!</a></p>
+    </mz-feature-discovery>
+  </div>
+</mz-input-container>-->

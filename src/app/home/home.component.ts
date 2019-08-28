@@ -11,9 +11,14 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private authenticationService: AuthenticationService, private appService: AppService, private router: Router ) { console.log('HomeComponent'); }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private appService: AppService,
+    private router: Router ) { console.log('HomeComponent');
+  }
 
   ngOnInit() {
+
     this.authenticationService.user
       .filter(user => !!user) // filter null
       .take(1) // take first real user
@@ -21,13 +26,9 @@ export class HomeComponent implements OnInit {
         if (user) { }
       });
 
-
-    console.log(this.router.url);
-
-    if (this.router.url === '/home') {
+    /*if (this.router.url === '/home') {
       this.appService.changePlaceTitle('HOME');
-    }
-
+    }*/
 
   }
 

@@ -16,16 +16,17 @@ import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
-  activityOptions = [
-    { text: 'Culture,music, arts, literature' },
-    { text: 'Health care, pharmaceutical, and medical sector' },
-    { text: 'Manufacturing industries' },
-    { text: 'Telecommunications and information technology' },
-    { text: 'Transport, shipping, trucking and infrastructures' },
-    { text: 'Financial services' },
-    { text: 'Research, science, biotechnology, etc.' },
-    { text: 'Media and film industry' },
-  ];
+  // isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+
+  classes;
+
+  courses;
+
+  subjects;
+  items;
 
   schedule = new Schedule();
 
@@ -42,7 +43,32 @@ export class NewComponent implements OnInit, OnDestroy {
       required: 'Title is required',
       maxlength: 'It can not be longer than 40 characters.',
     },
-    activityTitle: {
+    course: {
+      required: 'Course is required',
+    },
+    class: {
+      required: 'Class is required',
+    },
+    nstudent: {
+      required: 'Number of students required',
+    },
+    nteam: {
+      required: 'Number of students required',
+    },
+    subject: {
+      required: 'Subject required',
+    },
+    firstCtrl: {
+      required: 'Subject required',
+    },
+    secondCtrl: {
+      required: 'Subject required',
+    },
+    thirdCtrl: {
+      required: 'Subject required',
+    },
+    activity: {
+      maxlength: 'It can not be longer than 48 characters.',
       required: 'Activity is required.',
     },
   };
@@ -84,7 +110,23 @@ export class NewComponent implements OnInit, OnDestroy {
         end: [null, Validators.compose([
           Validators.required
         ])],
-        activityTitle: [null, Validators.compose( [
+        activity: [null, Validators.compose( [
+          Validators.required,
+          Validators.maxLength(64)
+        ])],
+        course: [null, Validators.compose([
+          Validators.required
+        ])],
+        class: [null, Validators.compose([
+          Validators.required
+        ])],
+        nteam: [null, Validators.compose([
+          Validators.required
+        ])],
+        nstudent: [null, Validators.compose([
+          Validators.required
+        ])],
+        subject: [null, Validators.compose([
           Validators.required
         ])]
       },
@@ -186,6 +228,17 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
+    this.thirdFormGroup = this.formBuilder.group({
+      thirdCtrl: ['', Validators.required]
+    });
+
     this.showForm = true;
     this.scheduleService.currentDate.subscribe(date => {
       if (date === null) {
@@ -201,7 +254,23 @@ export class NewComponent implements OnInit, OnDestroy {
     });
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.dateSchedule);
+
+    this.scheduleService.getCourses().forEach(res => {
+      this.courses = res;
+    });
+
+    this.scheduleService.getClasses().forEach(res => {
+      this.classes = res;
+    });
+
+    this.scheduleService.getSubjects().forEach(res => {
+      this.subjects = res;
+    });
+
+    this.scheduleService.getItems().forEach(res => {
+      this.items = res;
+    });
+
     this.buildForm();
   }
 

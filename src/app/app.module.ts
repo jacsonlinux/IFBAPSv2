@@ -28,8 +28,7 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -62,7 +61,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     MzSwitchModule,
     MzCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]

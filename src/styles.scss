@@ -28,6 +28,7 @@
 }
 
 .dropdown-content {
+  position: relative !important;
   background-color: transparent !important;
   border-radius: 5px !important;
 }
@@ -222,9 +223,9 @@ mwl-calendar-week-view-hour-segment {
   touch-action: auto !important;
 }
 
-.grecaptcha-badge {
+/*.grecaptcha-badge {
   display: none !important;
-}
+}*/
 
 ::-webkit-scrollbar {
   width: 8px !important;
@@ -248,3 +249,65 @@ mwl-calendar-week-view-hour-segment {
   position: fixed !important;
   bottom: 0 !important;
 }
+
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*
+.mat-stepper-horizontal-line {
+  border-top-width: 1px;
+  border-top-style: solid;
+  //flex: auto;
+  flex: none !important;
+  height: 0;
+  margin: 0 -16px;
+  min-width: 32px;
+}
+.mat-horizontal-stepper-header::after, .mat-horizontal-stepper-header::before, .mat-stepper-horizontal-line {
+  border-top-color: rgba(0,0,0,.12);
+}
+*/
+
+.mat-horizontal-content-container {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+
+
+.mat-step-header .mat-step-label.mat-step-label-active {
+  color: #f1f1f1 !important;
+}
+
+.mat-step-header .mat-step-label, .mat-step-header .mat-step-optional {
+  color: grey !important;
+}
+
+.mat-stepper-horizontal, .mat-stepper-vertical {
+  background-color: transparent !important;
+  color: #f1f1f1 !important;
+}
+
+.mat-horizontal-stepper-header .mat-step-icon {
+  margin-right: 8px !important;
+  flex: none !important;
+}
+.mat-step-header .mat-step-icon {
+  background-color: grey !important;
+  color: #fff !important;
+}
+
+.mat-step-icon {
+   border-radius: 50% !important;
+   height: 50px !important;
+   width: 50px !important;
+   flex-shrink: 0 !important;
+   position: relative !important;
+ }
+
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: green !important;
+  color: #fff !important;
+}
+
+
+/*style="position: fixed; top: 23px; right: 23px;"*/
