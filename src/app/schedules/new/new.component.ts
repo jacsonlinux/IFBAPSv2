@@ -20,6 +20,7 @@ export class NewComponent implements OnInit, OnDestroy {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
 
   classes;
 
@@ -59,13 +60,16 @@ export class NewComponent implements OnInit, OnDestroy {
       required: 'Subject required',
     },
     firstCtrl: {
-      required: 'Subject required',
+      required: 'Class data required',
     },
     secondCtrl: {
-      required: 'Subject required',
+      required: 'Material required',
     },
     thirdCtrl: {
-      required: 'Subject required',
+      required: 'Equipment required',
+    },
+    fourthCtrl: {
+      required: 'Reagents required',
     },
     activity: {
       maxlength: 'It can not be longer than 48 characters.',
@@ -234,9 +238,11 @@ export class NewComponent implements OnInit, OnDestroy {
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-
     this.thirdFormGroup = this.formBuilder.group({
       thirdCtrl: ['', Validators.required]
+    });
+    this.fourthFormGroup = this.formBuilder.group({
+      fourthCtrl: ['', Validators.required]
     });
 
     this.showForm = true;

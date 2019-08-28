@@ -1,8 +1,13 @@
+<mz-input-container>
+  <div class="orange-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
+</mz-input-container>
+<br/>
+<br/>
 <mat-horizontal-stepper [linear]="true" #stepper>
 
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="scheduleForm" >
-      <ng-template matStepLabel>Data</ng-template>
+      <ng-template matStepLabel>Class data</ng-template>
       <div class="row">
         <mz-timepicker-container class="col l3 m3 s3">
           <input mz-timepicker
@@ -96,21 +101,21 @@
           </select>
         </mz-select-container>
       </div>
-     <div class="fixed-action-btn">
-       <mz-input-container>
-         <button
-           mz-button
-           [flat]="true"
-           [large]="true"
-           [float]="true"
-           class="blue"
-           matStepperNext>Next</button>
-       </mz-input-container>
-     </div>
+      <div class="fixed-action-btn">
+        <mz-input-container>
+          <button
+            mz-button
+            [flat]="true"
+            [large]="true"
+            [float]="true"
+            class="blue"
+            matStepperNext>Next</button>
+        </mz-input-container>
+      </div>
     </form>
   </mat-step>
 
-  <!--<mat-step [stepControl]="secondFormGroup">
+  <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Equipment</ng-template>
       <mat-form-field>
@@ -121,21 +126,44 @@
         <button mz-button matStepperNext>Next</button>
       </div>
     </form>
-  </mat-step>-->
+  </mat-step>
 
-  <!--<mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Reagents</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mz-button matStepperPrevious>Back</button> &nbsp;
+        <button mz-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Material</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mz-button matStepperPrevious>Back</button> &nbsp;
+        <button mz-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
     <div>
       <button mz-button matStepperPrevious>Back</button> &nbsp;
       <button mz-button (click)="stepper.reset()">Reset</button>
     </div>
-  </mat-step>-->
+  </mat-step>
 
 </mat-horizontal-stepper>
-
-
-
 
 
 
