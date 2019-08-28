@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 import { CustomDateFormatter } from './utils/CustomDateFormatter';
 import { colors} from './utils/colors';
 import { SchedulesService } from '../schedules.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Schedule } from '../../class/Schedule';
 import {MzMediaService, MzToastService} from 'ngx-materialize';
 import {AppService} from '../../app.service';
@@ -69,6 +69,7 @@ export class CalendarComponent implements OnInit {
     private mediaService: MzMediaService,
     private schedulesService: SchedulesService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private authenticationService: AuthenticationService,
     private location: Location,
     private toastService: MzToastService,
@@ -86,6 +87,7 @@ export class CalendarComponent implements OnInit {
   }): void {
     console.log(date);
     this.schedulesService.changeDate(date);
+    this.router.navigate([`schedules/${this.placeID}/new`]).catch(err => err.message);
   }
 
   fetchEvents(): void {

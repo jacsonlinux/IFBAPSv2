@@ -67,7 +67,7 @@
           <i mz-icon-mdi [icon]="'calendar-month'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
-      <mz-navbar-item>
+      <!--<mz-navbar-item>
         <button
           *ngIf="filterActive && user?.profile !== 'public'"
           mz-button
@@ -90,12 +90,10 @@
         >
           <i mz-icon-mdi [rotate]="'180'"  [icon]="'filter-variant'" [size]="'24px'" ></i>
         </button>
-      </mz-navbar-item>
+      </mz-navbar-item>-->
     </mz-navbar-item-container>
   </mz-navbar>
 </div>
-
-
 
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">

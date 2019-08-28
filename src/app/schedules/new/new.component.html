@@ -1,8 +1,154 @@
-<div class="container" *ngIf="showForm; else showSpinner">
-  <mz-input-container>
-    <div class="grey-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
-  </mz-input-container>
-  <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" novalidate>
+<mat-horizontal-stepper [linear]="true" #stepper>
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="scheduleForm" >
+      <ng-template matStepLabel>Data</ng-template>
+      <div class="row">
+        <mz-timepicker-container class="col l3 m3 s3">
+          <input mz-timepicker
+                 required
+                 mz-validation
+                 autocomplete="off"
+                 [label]="'Start time'"
+                 [options]="timepickerOptions"
+                 id="start"
+                 type="text"
+                 formControlName="start"
+                 [errorMessageResource]="errorMessageResources.start">
+        </mz-timepicker-container >
+        <mz-timepicker-container class="col l3 m3 s3">
+          <input mz-timepicker
+                 required
+                 mz-validation
+                 autocomplete="off"
+                 label="End time"
+                 [options]="timepickerOptions"
+                 id="end"
+                 type="text"
+                 formControlName="end"
+                 [errorMessageResource]="errorMessageResources.end">
+        </mz-timepicker-container>
+        <mz-input-container class="col l3 m3 s3">
+          <input mz-input
+                 required
+                 mz-validation
+                 autocomplete="off"
+                 [label]="'Nº students'"
+                 id="nstudent"
+                 type="number"
+                 formControlName="nstudent"
+                 [errorMessageResource]="errorMessageResources.nstudent">
+        </mz-input-container>
+        <mz-input-container class="col l3 m3 s3">
+          <input mz-input
+                 required
+                 mz-validation
+                 autocomplete="off"
+                 [label]="'Nº team'"
+                 id="nteam"
+                 type="number"
+                 formControlName="nteam"
+                 [errorMessageResource]="errorMessageResources.nteam">
+        </mz-input-container>
+      </div>
+      <div class="row">
+        <mz-select-container class="col l6 m6 s6">
+          <select mz-select mz-validation required
+                  id="subject"
+                  formControlName="subject"
+                  [errorMessageResource]="errorMessageResources.subject"
+                  [label]="'Subject'"
+                  [placeholder]="'Choose your subject'">
+            <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.data.name | uppercase }}</option>
+          </select>
+        </mz-select-container>
+        <mz-input-container class="col l6 m6 s6">
+          <input required
+                 mz-validation
+                 autocomplete="off"
+                 mz-input
+                 [label]="'Activity'"
+                 id="activity"
+                 type="text"
+                 [errorMessageResource]="errorMessageResources.activity"
+                 formControlName="activity">
+        </mz-input-container>
+      </div>
+      <div class="row">
+        <mz-select-container class="col l6 m6 s6">
+          <select mz-select mz-validation required
+                  id="course"
+                  formControlName="course"
+                  [errorMessageResource]="errorMessageResources.course"
+                  [label]="'Course'"
+                  [placeholder]="'Choose your course'">
+            <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
+          </select>
+        </mz-select-container>
+        <mz-select-container class="col l6 m6 s6">
+          <select mz-select mz-validation required
+                  id="class"
+                  formControlName="class"
+                  [errorMessageResource]="errorMessageResources.class"
+                  [label]="'Class'"
+                  [placeholder]="'Choose your class'">
+            <option *ngFor="let grade of classes" [ngValue]="grade.id">{{ grade.data.name | uppercase }}</option>
+          </select>
+        </mz-select-container>
+      </div>
+     <div class="fixed-action-btn">
+       <mz-input-container>
+         <button
+           mz-button
+           [flat]="true"
+           [large]="true"
+           [float]="true"
+           class="blue"
+           matStepperNext>Next</button>
+       </mz-input-container>
+     </div>
+    </form>
+  </mat-step>
+
+  <!--<mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Equipment</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mz-button matStepperPrevious>Back</button> &nbsp;
+        <button mz-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>-->
+
+  <!--<mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mz-button matStepperPrevious>Back</button> &nbsp;
+      <button mz-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>-->
+
+</mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+<!--<div *ngIf="showForm; else showSpinner">
+  <form [formGroup]="scheduleForm"
+        (ngSubmit)="onSubmit()"
+        novalidate >
+    <mz-input-container>
+      <div class="orange-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
+    </mz-input-container>
     <mz-timepicker-container>
       <input mz-timepicker
              required
@@ -27,27 +173,80 @@
              formControlName="end"
              [errorMessageResource]="errorMessageResources.end">
     </mz-timepicker-container>
-    <mz-select-container >
+    <mz-input-container>
+      <input mz-input
+             required
+             mz-validation
+             autocomplete="off"
+             [label]="'Activity'"
+             id="activity"
+             type="text"
+             formControlName="activity"
+             [errorMessageResource]="errorMessageResources.activity">
+    </mz-input-container>
+    <mz-select-container>
       <select mz-select mz-validation required
-              id="activityTitle"
-              formControlName="activityTitle"
-              [errorMessageResource]="errorMessageResources.activityTitle"
-              [label]="'Activity'"
-              [placeholder]="'Choose your activity'">
-        <option *ngFor="let activityOption of activityOptions" [ngValue]="activityOption">{{ activityOption.text }}</option>
+              id="subject"
+              formControlName="subject"
+              [errorMessageResource]="errorMessageResources.subject"
+              [label]="'Subject'"
+              [placeholder]="'Choose your subject'">
+        <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.data.name | uppercase }}</option>
       </select>
     </mz-select-container>
-    <div style="height: 3px"></div>
-    <mz-input-container *ngIf="!scheduleForm.valid; else btn">
+    <mz-select-container>
+      <select mz-select mz-validation required
+              id="course"
+              formControlName="course"
+              [errorMessageResource]="errorMessageResources.course"
+              [label]="'Course'"
+              [placeholder]="'Choose your course'">
+        <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
+      </select>
+    </mz-select-container>
+    <mz-select-container>
+      <select mz-select mz-validation required
+              id="class"
+              formControlName="class"
+              [errorMessageResource]="errorMessageResources.class"
+              [label]="'Class'"
+              [placeholder]="'Choose your class'">
+        <option *ngFor="let grade of classes" [ngValue]="grade.id">{{ grade.data.name | uppercase }}</option>
+      </select>
+    </mz-select-container>
+    <mz-input-container>
+      <input mz-input
+             required
+             mz-validation
+             autocomplete="off"
+             [label]="'Nº students'"
+             id="nstudent"
+             type="number"
+             formControlName="nstudent"
+             [errorMessageResource]="errorMessageResources.nstudent">
+    </mz-input-container>
+    <mz-input-container>
+      <input mz-input
+             required
+             mz-validation
+             autocomplete="off"
+             [label]="'Nº team'"
+             id="nteam"
+             type="number"
+             formControlName="nteam"
+             [errorMessageResource]="errorMessageResources.nteam">
+    </mz-input-container>
+    <mz-input-container>
       <button
+        class="green white-text"
         mz-button
         [flat]="false"
         [large]="false"
         [float]="false"
         [disabled]="!scheduleForm.valid"
-        type="button">New</button>
+        type="submit">New</button>
     </mz-input-container>
-    <ng-template #btn>
+    &lt;!&ndash;<ng-template #btn>
       <mz-input-container>
         <button
           class="green white-text"
@@ -58,7 +257,7 @@
           [disabled]="!scheduleForm.valid"
           type="submit">New</button>
       </mz-input-container>
-    </ng-template>
+    </ng-template>&ndash;&gt;
   </form>
 </div>
 <ng-template #showSpinner>
@@ -68,4 +267,4 @@
       [size]="'medium'">
     </mz-spinner>
   </div>
-</ng-template>
+</ng-template>-->
