@@ -250,29 +250,10 @@ mwl-calendar-week-view-hour-segment {
   bottom: 0 !important;
 }
 
-//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-/*
-.mat-stepper-horizontal-line {
-  border-top-width: 1px;
-  border-top-style: solid;
-  //flex: auto;
-  flex: none !important;
-  height: 0;
-  margin: 0 -16px;
-  min-width: 32px;
-}
-.mat-horizontal-stepper-header::after, .mat-horizontal-stepper-header::before, .mat-stepper-horizontal-line {
-  border-top-color: rgba(0,0,0,.12);
-}
-*/
-
 .mat-horizontal-content-container {
   padding: 0 !important;
   background: transparent !important;
 }
-
-
 
 .mat-step-header .mat-step-label.mat-step-label-active {
   color: #f1f1f1 !important;
@@ -289,8 +270,9 @@ mwl-calendar-week-view-hour-segment {
 
 .mat-horizontal-stepper-header .mat-step-icon {
   margin-right: 8px !important;
-  flex: none !important;
+  // flex: none !important;
 }
+
 .mat-step-header .mat-step-icon {
   background-color: grey !important;
   color: #fff !important;
@@ -309,5 +291,3 @@ mwl-calendar-week-view-hour-segment {
   color: #fff !important;
 }
 
-
-/*style="position: fixed; top: 23px; right: 23px;"*/

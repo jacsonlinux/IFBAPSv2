@@ -3,13 +3,14 @@
 </mz-input-container>
 <br/>
 <br/>
-<mat-horizontal-stepper [linear]="true" #stepper>
+
+<mat-horizontal-stepper [linear]="false" #stepper>
 
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" >
       <ng-template matStepLabel>Class data</ng-template>
       <div class="row">
-        <mz-timepicker-container class="col l3 m3 s3">
+        <mz-timepicker-container class="col l3 m3 s6">
           <input mz-timepicker
                  required
                  mz-validation
@@ -18,10 +19,10 @@
                  [options]="timepickerOptions"
                  id="start"
                  type="text"
-                 formControlName="firstCtrl"
+                 formControlName="start"
                  [errorMessageResource]="errorMessageResources.start">
         </mz-timepicker-container >
-        <mz-timepicker-container class="col l3 m3 s3">
+        <mz-timepicker-container class="col l3 m3 s6">
           <input mz-timepicker
                  required
                  mz-validation
@@ -30,10 +31,10 @@
                  [options]="timepickerOptions"
                  id="end"
                  type="text"
-                 formControlName="firstCtrl"
+                 formControlName="end"
                  [errorMessageResource]="errorMessageResources.end">
         </mz-timepicker-container>
-        <mz-input-container class="col l3 m3 s3">
+        <mz-input-container class="col l3 m3 s6">
           <input mz-input
                  required
                  mz-validation
@@ -41,10 +42,10 @@
                  [label]="'Nº students'"
                  id="nstudent"
                  type="number"
-                 formControlName="firstCtrl"
+                 formControlName="nstudent"
                  [errorMessageResource]="errorMessageResources.nstudent">
         </mz-input-container>
-        <mz-input-container class="col l3 m3 s3">
+        <mz-input-container class="col l3 m3 s6">
           <input mz-input
                  required
                  mz-validation
@@ -52,22 +53,22 @@
                  [label]="'Nº team'"
                  id="nteam"
                  type="number"
-                 formControlName="firstCtrl"
+                 formControlName="nteam"
                  [errorMessageResource]="errorMessageResources.nteam">
         </mz-input-container>
       </div>
       <div class="row">
-        <mz-select-container class="col l6 m6 s6">
+        <mz-select-container class="col l6 m6 s12">
           <select mz-select mz-validation required
                   id="subject"
-                  formControlName="firstCtrl"
+                  formControlName="subject"
                   [errorMessageResource]="errorMessageResources.subject"
                   [label]="'Subject'"
                   [placeholder]="'Choose your subject'">
             <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.data.name | uppercase }}</option>
           </select>
         </mz-select-container>
-        <mz-input-container class="col l6 m6 s6">
+        <mz-input-container class="col l6 m6 s12">
           <input required
                  mz-validation
                  autocomplete="off"
@@ -76,24 +77,24 @@
                  id="activity"
                  type="text"
                  [errorMessageResource]="errorMessageResources.activity"
-                 formControlName="firstCtrl">
+                 formControlName="activity">
         </mz-input-container>
       </div>
       <div class="row">
-        <mz-select-container class="col l6 m6 s6">
+        <mz-select-container class="col l6 m6 s12">
           <select mz-select mz-validation required
                   id="course"
-                  formControlName="firstCtrl"
+                  formControlName="course"
                   [errorMessageResource]="errorMessageResources.course"
                   [label]="'Course'"
                   [placeholder]="'Choose your course'">
             <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
           </select>
         </mz-select-container>
-        <mz-select-container class="col l6 m6 s6">
+        <mz-select-container class="col l6 m6 s12">
           <select mz-select mz-validation required
                   id="class"
-                  formControlName="firstCtrl"
+                  formControlName="class"
                   [errorMessageResource]="errorMessageResources.class"
                   [label]="'Class'"
                   [placeholder]="'Choose your class'">
@@ -118,16 +119,55 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Equipment</ng-template>
-      <mat-form-field>
-        <input
-          required
-          matInput
-          placeholder="Address"
-          formControlName="secondCtrl">
-      </mat-form-field>
-      <div>
-        <button mz-button matStepperPrevious>Back</button> &nbsp;
-        <button mz-button matStepperNext>Next</button>
+      <!--<div class="row">
+        <mz-input-container class="col l3 m3 s6">
+          <input mz-input
+                 required
+                 mz-validation
+                 autocomplete="off"
+                 [label]="'Nº students'"
+                 id="secondCtrl"
+                 type="text"
+                 formControlName="secondCtrl"
+                 [errorMessageResource]="errorMessageResources.nstudent">
+        </mz-input-container>
+      </div>-->
+
+      <mz-collection>
+        <mz-collection-item
+          *ngFor="let item of items | async"
+          mz-collection-link
+          [avatar]="true"
+          class="waves-effect waves-light">
+          <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue"></i>
+          <div class="title">{{item.data.description}}</div>
+          <!--<div class="grey-text">{{place.data.description}}</div>-->
+        </mz-collection-item>
+      </mz-collection>
+
+
+
+
+
+      <div class="fixed-action-btn">
+        <mz-input-container>
+          <button
+            mz-button
+            [flat]="true"
+            [large]="true"
+            [float]="true"
+            class="blue"
+            matStepperNext>Next</button>
+        </mz-input-container>
+        <mz-input-container>
+          <button
+            mz-button
+            [flat]="true"
+            [large]="true"
+            [float]="true"
+            class="blue"
+            matStepperPrevious>Back</button>
+        </mz-input-container>
       </div>
     </form>
   </mat-step>

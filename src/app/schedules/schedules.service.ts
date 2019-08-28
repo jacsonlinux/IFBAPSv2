@@ -140,7 +140,7 @@ export class SchedulesService {
   getItems() {
     this.itemCollection = this.angularFirestore
       .collection<Item>('items', ref => ref
-        .orderBy('name'));
+        .orderBy('description'));
 
     this.items = this.itemCollection
       .snapshotChanges().map(actions => {

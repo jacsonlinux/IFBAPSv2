@@ -16,16 +16,13 @@ import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
-  // isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
 
   classes;
-
   courses;
-
   subjects;
   items;
 
@@ -78,6 +75,7 @@ export class NewComponent implements OnInit, OnDestroy {
   };
 
   scheduleForm: FormGroup;
+
   showForm: boolean;
 
   dateSchedule;
@@ -104,48 +102,6 @@ export class NewComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
   ) {
     console.log('NewComponent');
-  }
-
-  buildForm() {
-    this.scheduleForm = this.formBuilder.group({
-        firstCtrl: ['', Validators.required],
-        secondCtrl: ['', Validators.required],
-        thirdCtrl: ['', Validators.required],
-        fourthCtrl: ['', Validators.required],
-        start: [null, Validators.compose([
-          Validators.required
-        ])],
-        end: [null, Validators.compose([
-          Validators.required
-        ])],
-        activity: [null, Validators.compose( [
-          Validators.required,
-          Validators.maxLength(64)
-        ])],
-        course: [null, Validators.compose([
-          Validators.required
-        ])],
-        class: [null, Validators.compose([
-          Validators.required
-        ])],
-        nteam: [null, Validators.compose([
-          Validators.required
-        ])],
-        nstudent: [null, Validators.compose([
-          Validators.required
-        ])],
-        subject: [null, Validators.compose([
-          Validators.required
-        ])]
-      },
-      {
-        validator: InvalidPeriod(
-          'start',
-          'end',
-          `${this.dateSchedule}`
-        )
-      }
-    );
   }
 
   validatePeriod(periodForCheck, periods): boolean {
@@ -235,20 +191,49 @@ export class NewComponent implements OnInit, OnDestroy {
     // this.subscription.unsubscribe();
   }
 
-  ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
-    });
-    this.fourthFormGroup = this.formBuilder.group({
-      fourthCtrl: ['', Validators.required]
-    });
+  buildForm() {
+    this.scheduleForm = this.formBuilder.group({
+        firstCtrl: ['', Validators.required],
+        secondCtrl: ['', Validators.required],
+        thirdCtrl: ['', Validators.required],
+        fourthCtrl: ['', Validators.required],
+        start: [null, Validators.compose([
+          Validators.required
+        ])],
+        end: [null, Validators.compose([
+          Validators.required
+        ])],
+        activity: [null, Validators.compose( [
+          Validators.required,
+          Validators.maxLength(64)
+        ])],
+        course: [null, Validators.compose([
+          Validators.required
+        ])],
+        class: [null, Validators.compose([
+          Validators.required
+        ])],
+        nteam: [null, Validators.compose([
+          Validators.required
+        ])],
+        nstudent: [null, Validators.compose([
+          Validators.required
+        ])],
+        subject: [null, Validators.compose([
+          Validators.required
+        ])]
+      },
+      {
+        validator: InvalidPeriod(
+          'start',
+          'end',
+          `${this.dateSchedule}`
+        )
+      }
+    );
+  }
 
+  ngOnInit() {
     this.showForm = true;
     this.scheduleService.currentDate.subscribe(date => {
       if (date === null) {
@@ -264,24 +249,42 @@ export class NewComponent implements OnInit, OnDestroy {
     });
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.scheduleService.getCourses().forEach(res => {
       this.courses = res;
     });
-
     this.scheduleService.getClasses().forEach(res => {
       this.classes = res;
     });
-
     this.scheduleService.getSubjects().forEach(res => {
       this.subjects = res;
     });
-
-    this.scheduleService.getItems().forEach(res => {
+    /*this.scheduleService.getItems().forEach(res => {
       this.items = res;
+    });*/
+
+    this.items = this.scheduleService.getItems().map(res => res);
+
+    this.firstFormGroup = this.formBuilder.group({
+      start: ['', Validators.required],
+      end: ['', Validators.required],
+      activity: ['', Validators.required],
+      course: ['', Validators.required],
+      class: ['', Validators.required],
+      nteam: ['', Validators.required],
+      nstudent: ['', Validators.required],
+      subject: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      thirdCtrl: ['', Validators.required]
+    });
+    this.fourthFormGroup = this.formBuilder.group({
+      fourthCtrl: ['', Validators.required]
     });
 
-    this.buildForm();
+    // this.buildForm();
 
   }
 
