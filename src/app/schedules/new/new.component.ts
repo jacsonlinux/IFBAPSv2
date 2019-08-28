@@ -108,6 +108,10 @@ export class NewComponent implements OnInit, OnDestroy {
 
   buildForm() {
     this.scheduleForm = this.formBuilder.group({
+        firstCtrl: ['', Validators.required],
+        secondCtrl: ['', Validators.required],
+        thirdCtrl: ['', Validators.required],
+        fourthCtrl: ['', Validators.required],
         start: [null, Validators.compose([
           Validators.required
         ])],
@@ -278,6 +282,7 @@ export class NewComponent implements OnInit, OnDestroy {
     });
 
     this.buildForm();
+
   }
 
 }

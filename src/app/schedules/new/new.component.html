@@ -6,7 +6,7 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
 
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="scheduleForm" >
+    <form [formGroup]="firstFormGroup" >
       <ng-template matStepLabel>Class data</ng-template>
       <div class="row">
         <mz-timepicker-container class="col l3 m3 s3">
@@ -18,7 +18,7 @@
                  [options]="timepickerOptions"
                  id="start"
                  type="text"
-                 formControlName="start"
+                 formControlName="firstCtrl"
                  [errorMessageResource]="errorMessageResources.start">
         </mz-timepicker-container >
         <mz-timepicker-container class="col l3 m3 s3">
@@ -30,7 +30,7 @@
                  [options]="timepickerOptions"
                  id="end"
                  type="text"
-                 formControlName="end"
+                 formControlName="firstCtrl"
                  [errorMessageResource]="errorMessageResources.end">
         </mz-timepicker-container>
         <mz-input-container class="col l3 m3 s3">
@@ -41,7 +41,7 @@
                  [label]="'Nº students'"
                  id="nstudent"
                  type="number"
-                 formControlName="nstudent"
+                 formControlName="firstCtrl"
                  [errorMessageResource]="errorMessageResources.nstudent">
         </mz-input-container>
         <mz-input-container class="col l3 m3 s3">
@@ -52,7 +52,7 @@
                  [label]="'Nº team'"
                  id="nteam"
                  type="number"
-                 formControlName="nteam"
+                 formControlName="firstCtrl"
                  [errorMessageResource]="errorMessageResources.nteam">
         </mz-input-container>
       </div>
@@ -60,7 +60,7 @@
         <mz-select-container class="col l6 m6 s6">
           <select mz-select mz-validation required
                   id="subject"
-                  formControlName="subject"
+                  formControlName="firstCtrl"
                   [errorMessageResource]="errorMessageResources.subject"
                   [label]="'Subject'"
                   [placeholder]="'Choose your subject'">
@@ -76,14 +76,14 @@
                  id="activity"
                  type="text"
                  [errorMessageResource]="errorMessageResources.activity"
-                 formControlName="activity">
+                 formControlName="firstCtrl">
         </mz-input-container>
       </div>
       <div class="row">
         <mz-select-container class="col l6 m6 s6">
           <select mz-select mz-validation required
                   id="course"
-                  formControlName="course"
+                  formControlName="firstCtrl"
                   [errorMessageResource]="errorMessageResources.course"
                   [label]="'Course'"
                   [placeholder]="'Choose your course'">
@@ -93,7 +93,7 @@
         <mz-select-container class="col l6 m6 s6">
           <select mz-select mz-validation required
                   id="class"
-                  formControlName="class"
+                  formControlName="firstCtrl"
                   [errorMessageResource]="errorMessageResources.class"
                   [label]="'Class'"
                   [placeholder]="'Choose your class'">
@@ -119,7 +119,11 @@
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Equipment</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input
+          required
+          matInput
+          placeholder="Address"
+          formControlName="secondCtrl">
       </mat-form-field>
       <div>
         <button mz-button matStepperPrevious>Back</button> &nbsp;
@@ -129,10 +133,10 @@
   </mat-step>
 
   <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="secondFormGroup">
+    <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Reagents</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input matInput placeholder="Address" formControlName="thirdCtrl" required>
       </mat-form-field>
       <div>
         <button mz-button matStepperPrevious>Back</button> &nbsp;
@@ -142,10 +146,10 @@
   </mat-step>
 
   <mat-step [stepControl]="fourthFormGroup">
-    <form [formGroup]="secondFormGroup">
+    <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Material</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input matInput placeholder="Address" formControlName="fourthCtrl" required>
       </mat-form-field>
       <div>
         <button mz-button matStepperPrevious>Back</button> &nbsp;
