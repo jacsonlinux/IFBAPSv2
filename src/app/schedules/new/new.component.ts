@@ -82,6 +82,10 @@ export class NewComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
+  // autocomplete: { data: { [key: string]: string } };
+  autocompleteMaterial;
+  autocompleteReagents;
+
   public timepickerOptions: Pickadate.TimeOptions = {
     default: 'now',
     fromnow: 0,
@@ -258,11 +262,22 @@ export class NewComponent implements OnInit, OnDestroy {
     this.scheduleService.getSubjects().forEach(res => {
       this.subjects = res;
     });
-    /*this.scheduleService.getItems().forEach(res => {
-      this.items = res;
-    });*/
 
-    this.items = this.scheduleService.getItems().map(res => res);
+    this.scheduleService.getItems().subscribe(items => {
+        const data = {};
+        for (const entry of items) {
+          data[entry.data.description] = null;
+        }
+        this.autocompleteMaterial = {data};
+      });
+
+    this.scheduleService.getReagents().subscribe(reagents => {
+      const data = {};
+      for (const entry of reagents) {
+        data[entry.data.reagent] = null;
+      }
+      this.autocompleteReagents = {data};
+    });
 
     this.firstFormGroup = this.formBuilder.group({
       start: ['', Validators.required],
@@ -284,6 +299,7 @@ export class NewComponent implements OnInit, OnDestroy {
       fourthCtrl: ['', Validators.required]
     });
 
+    //
     // this.buildForm();
 
   }
