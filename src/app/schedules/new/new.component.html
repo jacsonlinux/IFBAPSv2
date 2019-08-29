@@ -1,13 +1,34 @@
-<mz-input-container>
-  <div class="orange-text" [align]="'right'">{{dateSchedule | date: 'fullDate'}}</div>
-</mz-input-container>
-<br/>
-<br/>
 
-<mat-horizontal-stepper [linear]="false" #stepper>
 
+
+
+
+
+
+<div class="row large-text">
+  <div class="right"
+       style="padding: 20px 0 10px 0; border: 1px solide">
+    <a  class="orange-text" routerLink="../calendar">
+      {{dateSchedule | date: 'fullDate'}}
+      <i mz-icon-mdi
+         [icon]="'calendar-month'"
+         [size]="'16px'" >
+      </i>
+    </a>
+  </div>
+</div>
+
+
+<mat-horizontal-stepper  [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" >
+    <form
+      style="
+          margin-top: 20px;
+          border-radius: 3px;
+          padding: 10px 10px 10px 10px;
+            border: 1px solid #515151;
+            "
+      [formGroup]="firstFormGroup" >
       <ng-template matStepLabel>Class data</ng-template>
       <div class="row">
         <mz-timepicker-container class="col l3 m3 s6">
@@ -102,92 +123,93 @@
           </select>
         </mz-select-container>
       </div>
-      <div class="fixed-action-btn">
-        <mz-input-container>
-          <button
-            mz-button
-            [flat]="true"
-            [large]="true"
-            [float]="true"
-            class="blue"
-            matStepperNext>Next</button>
-        </mz-input-container>
-      </div>
+      <mz-input-container>
+        <button
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="false"
+          class="blue"
+          matStepperNext>Next</button>
+      </mz-input-container>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Equipment</ng-template>
-      <!--<div class="row">
-        <mz-input-container class="col l3 m3 s6">
-          <input mz-input
-                 required
-                 mz-validation
-                 autocomplete="off"
-                 [label]="'Nº students'"
-                 id="secondCtrl"
-                 type="text"
-                 formControlName="secondCtrl"
-                 [errorMessageResource]="errorMessageResources.nstudent">
-        </mz-input-container>
-      </div>-->
-
-      <mz-collection>
-        <mz-collection-item
-          *ngFor="let item of items | async"
-          mz-collection-link
-          [avatar]="true"
-          class="waves-effect waves-light">
-          <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue"></i>
-          <div class="title">{{item.data.description}}</div>
-          <!--<div class="grey-text">{{place.data.description}}</div>-->
-        </mz-collection-item>
-      </mz-collection>
-
-
-
-
-
-      <div class="fixed-action-btn">
-        <mz-input-container>
-          <button
-            mz-button
-            [flat]="true"
-            [large]="true"
-            [float]="true"
-            class="blue"
-            matStepperNext>Next</button>
-        </mz-input-container>
-        <mz-input-container>
-          <button
-            mz-button
-            [flat]="true"
-            [large]="true"
-            [float]="true"
-            class="blue"
-            matStepperPrevious>Back</button>
-        </mz-input-container>
-      </div>
+      <ng-template matStepLabel>Material</ng-template>
+      <mz-input-container>
+        <i mz-icon-mdi
+           mz-input-prefix
+           [icon]="'magnify'">
+        </i>
+        <input
+          mz-input
+          type="text"
+          [label]="'Search'"
+          [autocomplete]="autocompleteMaterial"
+          id="material">
+      </mz-input-container>
+      <mz-input-container>
+        <button
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="false"
+          class="blue"
+          matStepperNext>Next</button>
+      </mz-input-container>
+      <mz-input-container>
+        <button
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="false"
+          class="blue"
+          matStepperPrevious>Back</button>
+      </mz-input-container>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Reagents</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="thirdCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mz-button matStepperPrevious>Back</button> &nbsp;
-        <button mz-button matStepperNext>Next</button>
-      </div>
+      <mz-input-container>
+        <i mz-icon-mdi
+           mz-input-prefix
+           [icon]="'magnify'">
+        </i>
+        <input
+          mz-input
+          type="text"
+          [label]="'Search'"
+          [autocomplete]="autocompleteReagents"
+          id="reagents">
+      </mz-input-container>
+      <mz-input-container>
+        <button
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="false"
+          class="blue"
+          matStepperNext>Next</button>
+      </mz-input-container>
+      <mz-input-container>
+        <button
+          mz-button
+          [flat]="true"
+          [large]="true"
+          [float]="false"
+          class="blue"
+          matStepperPrevious>Back</button>
+      </mz-input-container>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="fourthFormGroup">
     <form [formGroup]="fourthFormGroup">
-      <ng-template matStepLabel>Material</ng-template>
+      <ng-template matStepLabel>Equipment</ng-template>
       <mat-form-field>
         <input matInput placeholder="Address" formControlName="fourthCtrl" required>
       </mat-form-field>
@@ -208,10 +230,6 @@
   </mat-step>
 
 </mat-horizontal-stepper>
-
-
-
-
 
 
 <!--<div *ngIf="showForm; else showSpinner">

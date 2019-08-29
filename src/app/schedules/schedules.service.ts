@@ -37,6 +37,11 @@ export interface Item {
   exist: boolean;
 }
 
+export interface Reagents {
+  name: string;
+  exist: boolean;
+}
+
 @Injectable()
 export class SchedulesService {
 
@@ -75,6 +80,13 @@ export class SchedulesService {
 
   itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
+
+
+  reagentCollection: AngularFirestoreCollection<any>;
+  reagents: Observable<any>;
+
+  reagentDoc: AngularFirestoreDocument<any>;
+  reagent: Observable<any>;
 
   constructor( private angularFirestore: AngularFirestore ) { console.log('SchedulesService'); }
 
@@ -151,6 +163,22 @@ export class SchedulesService {
         });
       });
     return this.items;
+  }
+
+  getReagents() {
+    this.reagentCollection = this.angularFirestore
+      .collection<Reagents>('reagents', ref => ref
+        .orderBy('reagent'));
+
+    this.reagents = this.reagentCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Reagents;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
+      });
+    return this.reagents;
   }
 
   getCourses() {
