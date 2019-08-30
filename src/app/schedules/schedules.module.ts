@@ -9,7 +9,7 @@ import { PlaceComponent } from './place/place.component';
 
 import {
   MzBadgeModule,
-  MzButtonModule,
+  MzButtonModule, MzCardModule,
   MzCheckboxModule,
   MzCollectionModule,
   MzDatepickerModule, MzFeatureDiscoveryModule,
@@ -73,7 +73,8 @@ import {MatFormFieldModule, MatInputModule, MatStepperModule} from '@angular/mat
     MzFeatureDiscoveryModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MzCardModule
   ],
   providers: [ SchedulesService ]
 })
