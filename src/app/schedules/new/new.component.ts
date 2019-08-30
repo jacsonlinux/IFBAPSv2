@@ -31,11 +31,11 @@ export class NewComponent implements OnInit, OnDestroy {
   errorMessageResources = {
     start: {
       required: 'Start time is required',
-      invalidPeriod: 'Start must be greater than or equal to current time'
+      invalidPeriod: 'Start must be greater than current time'
     },
     end: {
       required: 'End time is required',
-      invalidPeriod: 'Start must be greater than or equal to start time'
+      invalidPeriod: 'End must be greater than start time'
     },
     title: {
       required: 'Title is required',
@@ -55,6 +55,9 @@ export class NewComponent implements OnInit, OnDestroy {
     },
     subject: {
       required: 'Subject required',
+    },
+    item: {
+      required: 'Item required',
     },
     firstCtrl: {
       required: 'Class data required',
@@ -82,11 +85,14 @@ export class NewComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  // autocomplete: { data: { [key: string]: string } };
   autocompleteMaterial;
   autocompleteReagents;
 
-  public timepickerOptions: Pickadate.TimeOptions = {
+  hasMaterial = false;
+
+  arrMaterial = [];
+
+  public timePickerOptions: Pickadate.TimeOptions = {
     default: 'now',
     fromnow: 0,
     twelvehour: false,
@@ -196,7 +202,7 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   buildForm() {
-    this.scheduleForm = this.formBuilder.group({
+    /*this.scheduleForm = this.formBuilder.group({
         firstCtrl: ['', Validators.required],
         secondCtrl: ['', Validators.required],
         thirdCtrl: ['', Validators.required],
@@ -234,7 +240,38 @@ export class NewComponent implements OnInit, OnDestroy {
           `${this.dateSchedule}`
         )
       }
-    );
+    );*/
+    this.firstFormGroup = this.formBuilder.group({
+      start: ['', Validators.required],
+      end: ['', Validators.required],
+      activity: ['', Validators.required],
+      course: ['', Validators.required],
+      class: ['', Validators.required],
+      nteam: ['', Validators.required],
+      nstudent: ['', Validators.required],
+      subject: ['', Validators.required]
+    }, {
+      validator: InvalidPeriod(
+        'start',
+        'end',
+        `${this.dateSchedule}`
+      )
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required],
+      item: ['', Validators.required],
+      hasMaterial: [this.hasMaterial]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      thirdCtrl: ['', Validators.required]
+    });
+    this.fourthFormGroup = this.formBuilder.group({
+      fourthCtrl: ['', Validators.required]
+    });
+  }
+  getMaterial(item) {
+    console.log(item);
+    this.arrMaterial.push(item);
   }
 
   ngOnInit() {
@@ -253,24 +290,23 @@ export class NewComponent implements OnInit, OnDestroy {
     });
     this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
-    this.scheduleService.getCourses().forEach(res => {
-      this.courses = res;
+    this.scheduleService.getCourses().subscribe(courses => {
+      this.courses = courses;
     });
-    this.scheduleService.getClasses().forEach(res => {
-      this.classes = res;
+    this.scheduleService.getClasses().subscribe(classes => {
+      this.classes = classes;
     });
-    this.scheduleService.getSubjects().forEach(res => {
-      this.subjects = res;
+    this.scheduleService.getSubjects().subscribe(subjects => {
+      this.subjects = subjects;
     });
-
     this.scheduleService.getItems().subscribe(items => {
-        const data = {};
-        for (const entry of items) {
-          data[entry.data.description] = null;
-        }
-        this.autocompleteMaterial = {data};
-      });
-
+      this.items = items;
+      /*const data = {};
+      for (const entry of items) {
+        data[entry.data.description] = null;
+      }
+      this.autocompleteMaterial = {data};*/
+    });
     this.scheduleService.getReagents().subscribe(reagents => {
       const data = {};
       for (const entry of reagents) {
@@ -278,30 +314,7 @@ export class NewComponent implements OnInit, OnDestroy {
       }
       this.autocompleteReagents = {data};
     });
-
-    this.firstFormGroup = this.formBuilder.group({
-      start: ['', Validators.required],
-      end: ['', Validators.required],
-      activity: ['', Validators.required],
-      course: ['', Validators.required],
-      class: ['', Validators.required],
-      nteam: ['', Validators.required],
-      nstudent: ['', Validators.required],
-      subject: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
-    });
-    this.fourthFormGroup = this.formBuilder.group({
-      fourthCtrl: ['', Validators.required]
-    });
-
-    //
-    // this.buildForm();
-
+    this.buildForm();
   }
 
 }
