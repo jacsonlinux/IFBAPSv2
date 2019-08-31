@@ -168,14 +168,16 @@
                       formControlName="item"
                       [errorMessageResource]="errorMessageResources.item"
                       [label]="'Item'"
-                      [placeholder]="'Choose your item'">
+                      [placeholder]="'Choose your item'"
+                      [(ngModel)]="selectValue">
                 <option
                   *ngFor="let item of items"
-                  [ngValue]="item.id">
+                  [ngValue]="item">
                   {{ item.data.description | uppercase }}
                 </option>
               </select>
               <button
+                (click)="getMaterial(selectValue)"
                 mz-button
                 [flat]="false"
                 [float]="false">
@@ -184,8 +186,9 @@
             </mz-select-container>
             <div
               class="col l6 m6 s12">
+              Selected value:
               <p *ngFor="let item of arrMaterial; index as i;">
-                {{item}}
+                {{item.data.description}}
                 {{i}}
               </p>
             </div>
