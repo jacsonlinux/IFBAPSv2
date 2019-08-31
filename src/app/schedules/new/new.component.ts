@@ -16,6 +16,8 @@ import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
+  selectValue = [{}];
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -269,6 +271,7 @@ export class NewComponent implements OnInit, OnDestroy {
       fourthCtrl: ['', Validators.required]
     });
   }
+
   getMaterial(item) {
     console.log(item);
     this.arrMaterial.push(item);
