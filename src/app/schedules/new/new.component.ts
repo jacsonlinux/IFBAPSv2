@@ -77,6 +77,9 @@ export class NewComponent implements OnInit, OnDestroy {
       maxlength: 'It can not be longer than 48 characters.',
       required: 'Activity is required.',
     },
+    quantityMaterial: {
+      required: 'Required',
+    },
   };
 
   scheduleForm: FormGroup;
@@ -104,17 +107,6 @@ export class NewComponent implements OnInit, OnDestroy {
     autoclose: false,
     ampmclickable: true
   };
-
-
-  public modalOptions: Materialize.ModalOptions = {
-    inDuration: 150,
-    outDuration: 150,
-    dismissible: false,
-    opacity: 0.5,
-    startingTop: '30%',
-    endingTop: '20%'
-  };
-
 
   constructor(
     private scheduleService: SchedulesService,
@@ -271,8 +263,9 @@ export class NewComponent implements OnInit, OnDestroy {
         )
       });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
+      // secondCtrl: ['', Validators.required],
       item: ['', Validators.required],
+      quantityMaterial: ['', Validators.required],
       hasMaterial: [this.hasMaterial]
     });
     this.thirdFormGroup = this.formBuilder.group({
@@ -295,7 +288,8 @@ export class NewComponent implements OnInit, OnDestroy {
 
   clearItem() {
     this.secondFormGroup.controls.item.reset();
-   }
+    this.secondFormGroup.controls.quantityMaterial.reset();   
+  }
 
   ngOnInit() {
     this.showForm = true;
