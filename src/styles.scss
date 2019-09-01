@@ -22,17 +22,6 @@
   flex-direction: column;
 }
 
-.dropdown-content li>a, .dropdown-content li>span {
-  color: #a0a2a3 !important;
-  background-color: #37474f !important;
-}
-
-.dropdown-content {
-  position: relative !important;
-  background-color: transparent !important;
-  border-radius: 5px !important;
-}
-
 .collection {
   border: none !important;
 }
@@ -47,6 +36,7 @@
   color: #b0bec5 !important;
 }
 .collection .collection-item {
+  // padding-left: 5px !important;
   background-color: transparent !important;
   border-bottom: 1px solid #37474f !important;
 }
@@ -56,6 +46,13 @@ mz-collection-item {
 }
 mz-collection a {
   padding: 0 !important;
+}
+
+mz-collection-header .collection-header {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  // padding: 10px 20px !important;
+  text-align: right !important;
 }
 
 .brand-logo{
@@ -251,6 +248,7 @@ mwl-calendar-week-view-hour-segment {
 }
 
 .mat-horizontal-content-container {
+  overflow: visible !important;
   padding: 0 !important;
   background: transparent !important;
 }
@@ -291,3 +289,32 @@ mwl-calendar-week-view-hour-segment {
   color: #fff !important;
 }
 
+.dropdown-content li>a, .dropdown-content li>span {
+  color: #a0a2a3 !important;
+  background-color: #37474f !important;
+}
+
+.dropdown-content {
+  position: absolute !important;
+  z-index: 100 !important;
+  background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+.fixed-action-btn-left {
+  position: fixed;
+  left: 23px;
+  bottom: 23px;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 997;
+}
+
+.fixed-action-btn-right {
+  position: fixed;
+  right: 23px;
+  bottom: 23px;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 997;
+}

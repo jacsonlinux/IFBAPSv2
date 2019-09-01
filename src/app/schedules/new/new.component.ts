@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MzToastService } from 'ngx-materialize';
 import { SchedulesService } from '../schedules.service';
 import { Schedule } from '../../class/Schedule';
@@ -16,7 +16,7 @@ import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
-  selectValue = [{}];
+  selectItem;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -105,6 +105,17 @@ export class NewComponent implements OnInit, OnDestroy {
     ampmclickable: true
   };
 
+
+  public modalOptions: Materialize.ModalOptions = {
+    inDuration: 150,
+    outDuration: 150,
+    dismissible: false,
+    opacity: 0.5,
+    startingTop: '30%',
+    endingTop: '20%'
+  };
+
+
   constructor(
     private scheduleService: SchedulesService,
     private formBuilder: FormBuilder,
@@ -153,7 +164,7 @@ export class NewComponent implements OnInit, OnDestroy {
   onSubmit() {
     const data = this.scheduleForm.value;
     const start = new Date(this.dateSchedule + ' ' + data.start + ':00');
-    const end = new  Date(this.dateSchedule + ' ' + data.end + ':00');
+    const end = new Date(this.dateSchedule + ' ' + data.end + ':00');
     if (start >= end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red white-text');
       this.scheduleForm.reset();
@@ -253,12 +264,12 @@ export class NewComponent implements OnInit, OnDestroy {
       nstudent: ['', Validators.required],
       subject: ['', Validators.required]
     }, {
-      validator: InvalidPeriod(
-        'start',
-        'end',
-        `${this.dateSchedule}`
-      )
-    });
+        validator: InvalidPeriod(
+          'start',
+          'end',
+          `${this.dateSchedule}`
+        )
+      });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required],
       item: ['', Validators.required],
@@ -272,10 +283,19 @@ export class NewComponent implements OnInit, OnDestroy {
     });
   }
 
-  getMaterial(item) {
-    console.log(item);
+  addItem(item: object) {
+    console.log('ITEM ADD:', item);
     this.arrMaterial.push(item);
+    this.clearItem();
   }
+
+  delItem(item: object) {
+    console.log('ITEM DEL:', item);
+  }
+
+  clearItem() {
+    this.secondFormGroup.controls.item.reset();
+   }
 
   ngOnInit() {
     this.showForm = true;
@@ -291,7 +311,7 @@ export class NewComponent implements OnInit, OnDestroy {
         ).toDateString();
       }
     });
-    this.authenticationService.user.subscribe(user => this.schedule.user = user.uid );
+    this.authenticationService.user.subscribe(user => this.schedule.user = user.uid);
     this.schedule.place = this.activatedRoute.snapshot.paramMap.get('id');
     this.scheduleService.getCourses().subscribe(courses => {
       this.courses = courses;
@@ -315,7 +335,7 @@ export class NewComponent implements OnInit, OnDestroy {
       for (const entry of reagents) {
         data[entry.data.reagent] = null;
       }
-      this.autocompleteReagents = {data};
+      this.autocompleteReagents = { data };
     });
     this.buildForm();
   }
