@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MzToastService } from 'ngx-materialize';
-import { SchedulesService } from '../schedules.service';
-import { Schedule } from '../../class/Schedule';
-import { AuthenticationService } from '../../authentication/authentication.service';
-import { Location } from '@angular/common';
-import { Subscription } from 'rxjs-compat/Subscription';
-import { InvalidPeriod } from '../../_helpers/InvalidPeriod';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MzToastService} from 'ngx-materialize';
+import {SchedulesService} from '../schedules.service';
+import {Schedule} from '../../class/Schedule';
+import {AuthenticationService} from '../../authentication/authentication.service';
+import {Location} from '@angular/common';
+import {Subscription} from 'rxjs-compat/Subscription';
+import {InvalidPeriod} from '../../_helpers/InvalidPeriod';
 
 @Component({
   selector: 'app-new',
@@ -272,7 +272,9 @@ export class NewComponent implements OnInit, OnDestroy {
     this.fourthFormGroup = this.formBuilder.group({
       fourthCtrl: ['', Validators.required]
     });
-    this.secondFormGroup.get('hasMaterial')
+
+    this.secondFormGroup
+      .get('hasMaterial')
       .valueChanges.subscribe((checked: boolean) => {
       if (!checked) {
         this.arrMaterial = [];
@@ -280,13 +282,16 @@ export class NewComponent implements OnInit, OnDestroy {
     });
   }
 
-  addItem(item: object) {
+  addItem(item) {
     this.arrMaterial.push(item);
     this.secondFormGroup.controls.item.reset();
   }
 
-  delItem(item: object) {
-    console.log('ITEM DEL:', item);
+  delItem(item) {
+    const index = this.arrMaterial.indexOf(item);
+    if (index !== -1) {
+      this.arrMaterial.splice(index, 1);
+    }
   }
 
   ngOnInit() {
