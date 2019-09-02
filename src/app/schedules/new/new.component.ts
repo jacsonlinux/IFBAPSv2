@@ -8,7 +8,6 @@ import {AuthenticationService} from '../../authentication/authentication.service
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs-compat/Subscription';
 import {InvalidPeriod} from '../../_helpers/InvalidPeriod';
-import {log} from 'util';
 
 @Component({
   selector: 'app-new',
@@ -77,10 +76,7 @@ export class NewComponent implements OnInit, OnDestroy {
     activity: {
       maxlength: 'It can not be longer than 48 characters.',
       required: 'Activity is required.',
-    },
-    quantityMaterial: {
-      required: 'Required',
-    },
+    }
   };
 
   scheduleForm: FormGroup;
@@ -263,10 +259,12 @@ export class NewComponent implements OnInit, OnDestroy {
         `${this.dateSchedule}`
       )
     });
+
     this.secondFormGroup = this.formBuilder.group({
       item: ['', Validators.required],
       hasMaterial: [this.hasMaterial]
     });
+
     this.thirdFormGroup = this.formBuilder.group({
       thirdCtrl: ['', Validators.required]
     });
@@ -281,6 +279,7 @@ export class NewComponent implements OnInit, OnDestroy {
         this.arrMaterial = [];
       }
     });
+
   }
 
   addItem(item) {
