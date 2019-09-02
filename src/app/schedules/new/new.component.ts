@@ -8,6 +8,7 @@ import {AuthenticationService} from '../../authentication/authentication.service
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs-compat/Subscription';
 import {InvalidPeriod} from '../../_helpers/InvalidPeriod';
+import {log} from 'util';
 
 @Component({
   selector: 'app-new',
@@ -283,14 +284,21 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   addItem(item) {
-    this.arrMaterial.push(item);
-    this.secondFormGroup.controls.item.reset();
+    const index = this.arrMaterial.indexOf(item);
+    if (index > -1) {
+      this.toastService.show('Not added', 2000, 'orange darken-4 white-text center');
+    } else {
+      this.arrMaterial.push(item);
+      this.secondFormGroup.controls.item.reset();
+      this.toastService.show('Item added', 2000, 'green darken-4 white-text center');
+    }
   }
 
   delItem(item) {
     const index = this.arrMaterial.indexOf(item);
     if (index !== -1) {
       this.arrMaterial.splice(index, 1);
+      this.toastService.show('Item removed', 2000, 'red darken-4 white-text center');
     }
   }
 
