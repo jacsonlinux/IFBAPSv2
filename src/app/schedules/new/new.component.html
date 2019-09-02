@@ -11,51 +11,51 @@
           <div class="row">
             <mz-timepicker-container class="col l3 m3 s12">
               <input autocomplete="off" mz-timepicker required mz-validation autocomplete="off" [label]="'Start time'"
-                [options]="timePickerOptions" id="start" type="text" formControlName="start"
-                [errorMessageResource]="errorMessageResources.start">
+                     [options]="timePickerOptions" id="start" type="text" formControlName="start"
+                     [errorMessageResource]="errorMessageResources.start">
             </mz-timepicker-container>
             <mz-timepicker-container class="col l3 m3 s12">
               <input autocomplete="off" mz-timepicker required mz-validation autocomplete="off" label="End time"
-                [options]="timePickerOptions" id="end" type="text" formControlName="end"
-                [errorMessageResource]="errorMessageResources.end">
+                     [options]="timePickerOptions" id="end" type="text" formControlName="end"
+                     [errorMessageResource]="errorMessageResources.end">
             </mz-timepicker-container>
             <mz-input-container class="col l3 m3 s12">
               <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Nº students'"
-                id="nstudent" type="number" formControlName="nstudent"
-                [errorMessageResource]="errorMessageResources.nstudent">
+                     id="nstudent" type="number" formControlName="nstudent"
+                     [errorMessageResource]="errorMessageResources.nstudent">
             </mz-input-container>
             <mz-input-container class="col l3 m3 s12">
               <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Nº team'"
-                id="nteam" type="number" formControlName="nteam" [errorMessageResource]="errorMessageResources.nteam">
+                     id="nteam" type="number" formControlName="nteam" [errorMessageResource]="errorMessageResources.nteam">
             </mz-input-container>
           </div>
           <div class="row">
             <mz-select-container class="col l6 m6 s12">
               <select mz-select mz-validation required id="subject" formControlName="subject"
-                [errorMessageResource]="errorMessageResources.subject" [label]="'Subject'"
-                [placeholder]="'Choose your subject'">
+                      [errorMessageResource]="errorMessageResources.subject" [label]="'Subject'"
+                      [placeholder]="'Choose your subject'">
                 <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.data.name | uppercase }}
                 </option>
               </select>
             </mz-select-container>
             <mz-input-container class="col l6 m6 s12">
               <input autocomplete="off" required mz-validation autocomplete="off" mz-input [label]="'Activity'"
-                id="activity" type="text" [errorMessageResource]="errorMessageResources.activity"
-                formControlName="activity">
+                     id="activity" type="text" [errorMessageResource]="errorMessageResources.activity"
+                     formControlName="activity">
             </mz-input-container>
           </div>
           <div class="row">
             <mz-select-container class="col l6 m6 s12">
               <select mz-select mz-validation required id="course" formControlName="course"
-                [errorMessageResource]="errorMessageResources.course" [label]="'Course'"
-                [placeholder]="'Choose your course'">
+                      [errorMessageResource]="errorMessageResources.course" [label]="'Course'"
+                      [placeholder]="'Choose your course'">
                 <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
               </select>
             </mz-select-container>
             <mz-select-container class="col l6 m6 s12">
               <select mz-select mz-validation required id="class" formControlName="class"
-                [errorMessageResource]="errorMessageResources.class" [label]="'Class'"
-                [placeholder]="'Choose your class'">
+                      [errorMessageResource]="errorMessageResources.class" [label]="'Class'"
+                      [placeholder]="'Choose your class'">
                 <option *ngFor="let grade of classes" [ngValue]="grade.id">{{ grade.data.name | uppercase }}</option>
               </select>
             </mz-select-container>
@@ -69,8 +69,8 @@
         </button>
       </mz-input-container>
       <mz-input-container>
-        <button [disabled]="!firstFormGroup.valid" mz-button [flat]="false" [large]="false" [float]="false"
-          class="right" matStepperNext>
+        <button mz-button [flat]="false" [large]="false" [float]="false"
+                class="right" matStepperNext>
           <i mz-icon-mdi [icon]="'arrow-right-bold'">
           </i>
         </button>
@@ -81,75 +81,74 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
-      <mz-card class="grey darken-4" [horizontal]="true" [hoverable]="true">
-        <mz-card-title>
+      <mz-card class="grey darken-4"
+               [horizontal]="true"
+               [hoverable]="true">
+        <mz-card-title class="orange-text">
           <mz-checkbox-container>
-            <input autocomplete="off" mz-checkbox id="checkbox-material" formControlName="hasMaterial" type="checkbox"
-              [filledIn]="true" [label]="'Need some material?'">
+            <input autocomplete="off"
+                   mz-checkbox
+                   id="checkbox"
+                   formControlName="hasMaterial"
+                   type="checkbox"
+                   [filledIn]="true"
+                   [label]="'Need some material?'">
           </mz-checkbox-container>
         </mz-card-title>
-        <mz-card-content *ngIf="secondFormGroup.controls['hasMaterial'].value">
-
+        <mz-card-content
+          *ngIf="secondFormGroup.controls['hasMaterial'].value">
           <div class="row">
-           
-            <div class="col l6 m6 s12">
-
-              <div class="left col l10 m10 s10">
-                <mz-select-container>
-                  <select mz-select mz-validation required id="item" formControlName="item"
-                    [errorMessageResource]="errorMessageResources.item" [label]="'Item'"
-                    [placeholder]="'Choose your item'" [(ngModel)]="selectItem">
-                    <option *ngFor="let item of items" [ngValue]="item">
-                      {{ item.data.description | uppercase }}
-                    </option>
-                  </select>
-                </mz-select-container>
-              </div>
-
-              <div class="right col l2 m2 s2">
-                <mz-input-container>
-                    <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Quantity'"
-                    id="quantityMaterial" type="number" formControlName="quantityMaterial" [errorMessageResource]="errorMessageResources.quantityMaterial">
-                </mz-input-container>
-              </div>
-
-              <button style="width: 100%" *ngIf="selectItem != null" (click)="addItem(selectItem)" mz-button
-                [flat]="false" [float]="false">
+            <mz-select-container class="col l12 m12 s12">
+              <select mz-select
+                      mz-validation
+                      required id="item"
+                      formControlName="item"
+                      [errorMessageResource]="errorMessageResources.item" [label]="'Item'"
+                      [placeholder]="'Choose your item'"
+                      [(ngModel)]="selectItem">
+                <option *ngFor="let item of items" [ngValue]="item">
+                  {{ item.data.description | uppercase }}
+                </option>
+              </select>
+            </mz-select-container>
+          </div>
+          <div class="row">
+            <mz-input-container class="col l12 m12 s12">
+              <button [disabled]="!secondFormGroup.valid" style="width: 100%" (click)="addItem(selectItem)" mz-button
+                      [flat]="false" [float]="false">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
-
-              </div>
-
-
-
-            <div class="col l6 m6 s12" *ngIf="arrMaterial?.length > 0"
-              style="border: 1px solid #333333; border-radius: 5px">
-              <mz-collection>
-                <mz-collection-header class="orange-text">Material</mz-collection-header>
-                <mz-collection-item class="jack" *ngFor="let item of arrMaterial">
-                  {{item.data.description | uppercase}}
-                  <a (click)="delItem(item)" mz-secondary-content>
-                    <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
-                  </a>
-                </mz-collection-item>
-              </mz-collection>
-            </div>
-
-
-
-
+            </mz-input-container>
           </div>
+        </mz-card-content>
+      </mz-card>
+      <mz-card class="grey darken-4"
+               *ngIf="arrMaterial?.length > 0"
+               [horizontal]="true"
+               [hoverable]="true">
+        <mz-card-title class="orange-text">
+          Selected material
+        </mz-card-title>
+        <mz-card-content>
+          <mz-collection>
+            <mz-collection-item *ngFor="let item of arrMaterial">
+              {{item.data.description | uppercase}}
+              <a (click)="delItem(item)" mz-secondary-content>
+                <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
+              </a>
+            </mz-collection-item>
+          </mz-collection>
         </mz-card-content>
       </mz-card>
       <mz-input-container>
         <button [disabled]="secondFormGroup.valid" mz-button [flat]="false" [large]="false" [float]="false"
-          class=" left" matStepperPrevious>
+                class=" left" matStepperPrevious>
           <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
         </button>
       </mz-input-container>
       <mz-input-container>
-        <button [disabled]="!secondFormGroup.valid" mz-button [flat]="false" [large]="false" [float]="false"
-          class=" right" matStepperNext>
+        <button mz-button [flat]="false" [large]="false" [float]="false"
+                class=" right" matStepperNext>
           <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
         </button>
       </mz-input-container>
@@ -163,7 +162,7 @@
         <i mz-icon-mdi mz-input-prefix [icon]="'magnify'">
         </i>
         <input autocomplete="off" mz-input type="text" [label]="'Search'" [autocomplete]="autocompleteReagents"
-          id="reagents">
+               id="reagents">
       </mz-input-container>
       <mz-input-container>
         <button mz-button [flat]="false" [large]="false" [float]="false" class="blue" matStepperNext>Next</button>
@@ -198,8 +197,10 @@
 
 </mat-horizontal-stepper>
 
-
-
+<!--<mz-input-container [inline]="true">
+                 <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Quantity'"
+                        id="quantityMaterial" type="number" formControlName="quantityMaterial" [errorMessageResource]="errorMessageResources.quantityMaterial">
+               </mz-input-container>-->
 
 <!-- <mz-modal #modal >
   <mz-modal-content>
@@ -210,8 +211,46 @@
   </mz-modal-footer>
 </mz-modal> -->
 
-
-
+<!--<mz-card class="grey darken-4" [horizontal]="true" [hoverable]="true">
+        <mz-card-title class="orange-text">
+          <mz-checkbox-container>
+            <input autocomplete="off" mz-checkbox id="checkbox-material" formControlName="hasMaterial" type="checkbox"
+                   [filledIn]="true" [label]="'Need some material?'">
+          </mz-checkbox-container>
+        </mz-card-title>
+        <mz-card-content *ngIf="secondFormGroup.controls['hasMaterial'].value">
+          <div class="row">
+            <div class="col l6 m6 s12" >
+              <mz-select-container>
+                <select mz-select mz-validation required id="item" formControlName="item"
+                        [errorMessageResource]="errorMessageResources.item" [label]="'Item'"
+                        [placeholder]="'Choose your item'" [(ngModel)]="selectItem">
+                  <option *ngFor="let item of items" [ngValue]="item">
+                    {{ item.data.description | uppercase }}
+                  </option>
+                </select>
+              </mz-select-container>
+              <mz-input-container>
+                <button [disabled]="!secondFormGroup.valid" style="width: 100%" (click)="addItem(selectItem)" mz-button
+                        [flat]="false" [float]="false">
+                  <i mz-icon-mdi [icon]="'plus'"></i>
+                </button>
+              </mz-input-container>
+            </div>
+            <div class="col l6 m6 s12" *ngIf="arrMaterial?.length > 0">
+              <mz-collection>
+                &lt;!&ndash;<mz-collection-header class="orange-text">Material</mz-collection-header>&ndash;&gt;
+                <mz-collection-item *ngFor="let item of arrMaterial">
+                  {{item.data.description | uppercase}}
+                  <a (click)="delItem(item)" mz-secondary-content>
+                    <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
+                  </a>
+                </mz-collection-item>
+              </mz-collection>
+            </div>
+          </div>
+        </mz-card-content>
+      </mz-card>-->
 
 <!--<mz-input-container>
   &lt;!&ndash;<i mz-icon-mdi
