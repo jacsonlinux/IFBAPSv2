@@ -48,6 +48,10 @@ mz-collection a {
   padding: 0 !important;
 }
 
+.modal {
+  background: #272727 !important;
+}
+
 /*mz-collection-header .collection-header {
   background-color: transparent !important;
   border-bottom: none !important;
@@ -278,8 +282,8 @@ mwl-calendar-week-view-hour-segment {
 
 .mat-step-icon {
    border-radius: 50% !important;
-   height: 50px !important;
-   width: 50px !important;
+   height: 40px !important;
+   width: 40px !important;
    flex-shrink: 0 !important;
    position: relative !important;
  }

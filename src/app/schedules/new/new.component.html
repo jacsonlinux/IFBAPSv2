@@ -46,7 +46,9 @@
           </div>
           <div class="row">
             <mz-select-container class="col l6 m6 s12">
-              <select mz-select mz-validation required id="course" formControlName="course"
+              <select mz-select
+                      mz-validation required id="course"
+                      formControlName="course"
                       [errorMessageResource]="errorMessageResources.course" [label]="'Course'"
                       [placeholder]="'Choose your course'">
                 <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
@@ -81,6 +83,7 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
+
       <mz-card class="grey darken-4"
                [horizontal]="true"
                [hoverable]="true">
@@ -114,7 +117,10 @@
           </div>
           <div class="row">
             <mz-input-container class="col l12 m12 s12">
-              <button [disabled]="!secondFormGroup.valid" style="width: 100%" (click)="addItem(selectItem)" mz-button
+              <button [disabled]="!secondFormGroup.valid"
+                      style="width: 100%"
+                      (click)="modal.openModal()"
+                      mz-button
                       [flat]="false" [float]="false">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
@@ -122,6 +128,7 @@
           </div>
         </mz-card-content>
       </mz-card>
+
       <mz-card class="grey darken-4"
                *ngIf="arrMaterial?.length"
                [horizontal]="true"
@@ -140,6 +147,7 @@
           </mz-collection>
         </mz-card-content>
       </mz-card>
+
       <mz-input-container>
         <button [disabled]="secondFormGroup.valid" mz-button [flat]="false" [large]="false" [float]="false"
                 class=" left" matStepperPrevious>
@@ -152,6 +160,7 @@
           <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
         </button>
       </mz-input-container>
+
     </form>
   </mat-step>
 
@@ -196,6 +205,32 @@
   </mat-step>
 
 </mat-horizontal-stepper>
+
+
+<mz-modal class="red" #modal>
+  <mz-modal-header>
+    Quantity
+  </mz-modal-header>
+  <mz-modal-content>
+    <mz-input-container class="col l3 m3 s12">
+      <input autocomplete="off"
+             mz-input
+             required
+             autocomplete="off"
+             [label]="'Quantity'"
+             id="quantity"
+             type="number"
+             >
+    </mz-input-container>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button
+      (click)="addItem(selectItem)"
+      mz-button
+      [flat]="true"
+      mz-modal-close>OK</button>
+  </mz-modal-footer>
+</mz-modal>
 
 <!--<mz-input-container [inline]="true">
                  <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Quantity'"
