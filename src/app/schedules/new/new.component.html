@@ -83,7 +83,6 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
-
       <mz-card class="grey darken-4"
                [horizontal]="true"
                [hoverable]="true">
@@ -128,7 +127,6 @@
           </div>
         </mz-card-content>
       </mz-card>
-
       <mz-card class="grey darken-4"
                *ngIf="arrMaterial?.length"
                [horizontal]="true"
@@ -140,6 +138,9 @@
           <mz-collection>
             <mz-collection-item *ngFor="let item of arrMaterial">
               {{item.data.description | uppercase}}
+              <a mz-secondary-content>
+                {{item.quantity}}
+              </a>
               <a (click)="delItem(item)" mz-secondary-content>
                 <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
               </a>
@@ -147,7 +148,6 @@
           </mz-collection>
         </mz-card-content>
       </mz-card>
-
       <mz-input-container>
         <button [disabled]="secondFormGroup.valid" mz-button [flat]="false" [large]="false" [float]="false"
                 class=" left" matStepperPrevious>
@@ -160,7 +160,6 @@
           <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
         </button>
       </mz-input-container>
-
     </form>
   </mat-step>
 
@@ -206,30 +205,35 @@
 
 </mat-horizontal-stepper>
 
-
-<mz-modal class="red" #modal>
-  <mz-modal-header>
-    Quantity
-  </mz-modal-header>
+<mz-modal #modal [options]="modalOptions">
   <mz-modal-content>
-    <mz-input-container class="col l3 m3 s12">
-      <input autocomplete="off"
-             mz-input
-             required
-             autocomplete="off"
-             [label]="'Quantity'"
-             id="quantity"
-             type="number"
-             >
-    </mz-input-container>
+    <div class="row">
+      <mz-input-container>
+        <input #quantity
+               value="1"
+               min="1"
+               max="99"
+               autocomplete="off"
+               mz-input
+               [label]="'Quantity'"
+               id="quantity"
+               type="number"
+        >
+      </mz-input-container>
+    </div>
+    <div class="row">
+      <mz-input-container>
+        <button
+          style="width: 100%"
+          (click)="addItem(selectItem, quantity.value)"
+          mz-button
+          class="grey"
+          [flat]="true"
+          [large]="true"
+          mz-modal-close>OK</button>
+      </mz-input-container>
+    </div>
   </mz-modal-content>
-  <mz-modal-footer>
-    <button
-      (click)="addItem(selectItem)"
-      mz-button
-      [flat]="true"
-      mz-modal-close>OK</button>
-  </mz-modal-footer>
 </mz-modal>
 
 <!--<mz-input-container [inline]="true">

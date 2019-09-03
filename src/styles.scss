@@ -50,7 +50,13 @@ mz-collection a {
 
 .modal {
   background: #272727 !important;
+  width: 20% !important;
 }
+
+.modal .modal-footer {
+  display: none !important;
+}
+
 
 /*mz-collection-header .collection-header {
   background-color: transparent !important;
