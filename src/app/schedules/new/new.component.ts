@@ -105,6 +105,13 @@ export class NewComponent implements OnInit, OnDestroy {
     ampmclickable: true
   };
 
+  public modalOptions: Materialize.ModalOptions = {
+    dismissible: false,
+    opacity: .5,
+    inDuration: 100,
+    outDuration: 100
+  };
+
   constructor(
     private scheduleService: SchedulesService,
     private formBuilder: FormBuilder,
@@ -282,11 +289,13 @@ export class NewComponent implements OnInit, OnDestroy {
 
   }
 
-  addItem(item) {
+  addItem(item, quantity: number) {
     const index = this.arrMaterial.indexOf(item);
     if (index > -1) {
       this.toastService.show('Not added', 2000, 'orange darken-4 white-text center');
     } else {
+      item.quantity = quantity;
+      console.log(item);
       this.arrMaterial.push(item);
       this.secondFormGroup.controls.item.reset();
       this.toastService.show('Item added', 2000, 'green darken-4 white-text center');
