@@ -38,19 +38,20 @@
 .collection .collection-item {
   // padding-left: 5px !important;
   background-color: transparent !important;
-  border-bottom: 1px solid #37474f !important;
+  border-bottom: 1px solid #272727 !important;
 }
 
 mz-collection-item {
   background-color: transparent !important;
 }
+
 mz-collection a {
   padding: 0 !important;
 }
 
 .modal {
   background: #272727 !important;
-  width: 20% !important;
+  width:200px !important;
 }
 
 .modal .modal-footer {
@@ -240,6 +241,7 @@ mwl-calendar-week-view-hour-segment {
 
 ::-webkit-scrollbar-track {
   border: 1px solid #37474f !important;
+  background: #212121;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -301,7 +303,7 @@ mwl-calendar-week-view-hour-segment {
 
 .dropdown-content li>a, .dropdown-content li>span {
   color: #a0a2a3 !important;
-  background-color: #37474f !important;
+  background-color: #121212 !important;
 }
 
 .dropdown-content {
