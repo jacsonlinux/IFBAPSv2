@@ -26,9 +26,9 @@ export class HomeComponent implements OnInit {
         if (user) { }
       });
 
-    /*if (this.router.url === '/home') {
+    if (this.router.url === '/home') {
       this.appService.changePlaceTitle('HOME');
-    }*/
+    }
 
   }
 
