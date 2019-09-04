@@ -301,16 +301,12 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   addItem(item) {
-    // console.log(item);
-    // console.log(this.arrItems);
-    const index = this.arrItems
-      .findIndex(x => x.description === item.description);
-    console.log(index);
-   //  this.arrItems.push(item);
 
-
-
-    /*if (index !== -1) {
+    /*const index = this.arrItems
+      .findIndex(res => {
+        return res.description === item.description;
+      });
+    if (index > -1) {
       this.toastService.show(
         'Not added',
         2000,
@@ -324,16 +320,31 @@ export class NewComponent implements OnInit, OnDestroy {
         'green darken-4 white-text center');
     }*/
 
+    /*const index = this.arrItems
+      .findIndex(res => {
+        return res.description === item.description;
+      });
+    if (index > -1) {
+      this.toastService.show(
+        'Not added',
+        2000,
+        'orange darken-4 white-text center');
+    } else {
+      this.arrItems.push(item);
+      this.secondFormGroup.controls.item.reset();
+      this.toastService.show(
+        'Item added',
+        2000,
+        'green darken-4 white-text center');
+    }*/
   }
 
   delItem(item) {
-    console.log(item);
     const index = this.arrItems.indexOf(item);
-    console.log(index);
-    /*if (index !== -1) {
+    if (index !== -1) {
       this.arrItems.splice(index, 1);
       this.toastService.show('Item removed', 2000, 'red darken-4 white-text center');
-    }*/
+    }
   }
 
   ngOnInit() {
@@ -378,9 +389,6 @@ export class NewComponent implements OnInit, OnDestroy {
       this.autocompleteReagents = { data, limit: 10 };
     });
     this.buildForm();
-    this.arrItems = [
-      {description: 'ALMOFARIZ PESTILO 120 ML PORCELANA', quantity: 1}
-    ];
   }
 
 }
