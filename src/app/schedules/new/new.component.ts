@@ -18,6 +18,8 @@ export class NewComponent implements OnInit, OnDestroy {
 
   selectItem;
 
+  selectReagent;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -27,6 +29,7 @@ export class NewComponent implements OnInit, OnDestroy {
   courses;
   subjects;
   items;
+  reagents;
 
   schedule = new Schedule();
 
@@ -61,6 +64,9 @@ export class NewComponent implements OnInit, OnDestroy {
     item: {
       required: 'Item required',
     },
+    reagent: {
+      required: 'Reagent required',
+    },
     firstCtrl: {
       required: 'Class data required',
     },
@@ -87,12 +93,14 @@ export class NewComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  autocompleteMaterial;
+  autocompleteItems;
   autocompleteReagents;
 
-  hasMaterial = false;
+  needMaterial = false;
 
-  arrMaterial = [];
+  needReagent = false;
+
+  arrItems = [];
 
   public timePickerOptions: Pickadate.TimeOptions = {
     default: 'now',
@@ -269,45 +277,63 @@ export class NewComponent implements OnInit, OnDestroy {
 
     this.secondFormGroup = this.formBuilder.group({
       item: ['', Validators.required],
-      hasMaterial: [this.hasMaterial]
+      needMaterial: [this.needMaterial]
     });
 
     this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      needReagent: [this.needReagent]
     });
+
+
+
     this.fourthFormGroup = this.formBuilder.group({
       fourthCtrl: ['', Validators.required]
     });
 
     this.secondFormGroup
-      .get('hasMaterial')
+      .get('needMaterial')
       .valueChanges.subscribe((checked: boolean) => {
       if (!checked) {
-        this.arrMaterial = [];
+        this.arrItems = [];
       }
     });
 
   }
 
-  addItem(item, quantity: number) {
-    const index = this.arrMaterial.indexOf(item);
-    if (index > -1) {
-      this.toastService.show('Not added', 2000, 'orange darken-4 white-text center');
+  addItem(item) {
+    // console.log(item);
+    // console.log(this.arrItems);
+    const index = this.arrItems
+      .findIndex(x => x.description === item.description);
+    console.log(index);
+   //  this.arrItems.push(item);
+
+
+
+    /*if (index !== -1) {
+      this.toastService.show(
+        'Not added',
+        2000,
+        'orange darken-4 white-text center');
     } else {
-      item.quantity = quantity;
-      console.log(item);
-      this.arrMaterial.push(item);
+      this.arrItems.push(item);
       this.secondFormGroup.controls.item.reset();
-      this.toastService.show('Item added', 2000, 'green darken-4 white-text center');
-    }
+      this.toastService.show(
+        'Item added',
+        2000,
+        'green darken-4 white-text center');
+    }*/
+
   }
 
   delItem(item) {
-    const index = this.arrMaterial.indexOf(item);
-    if (index !== -1) {
-      this.arrMaterial.splice(index, 1);
+    console.log(item);
+    const index = this.arrItems.indexOf(item);
+    console.log(index);
+    /*if (index !== -1) {
+      this.arrItems.splice(index, 1);
       this.toastService.show('Item removed', 2000, 'red darken-4 white-text center');
-    }
+    }*/
   }
 
   ngOnInit() {
@@ -337,23 +363,29 @@ export class NewComponent implements OnInit, OnDestroy {
     });
     this.scheduleService.getItems().subscribe(items => {
       this.items = items;
-      /*const data = {};
+      const data = {};
       for (const entry of items) {
-        data[entry.data.description] = null;
+        data[entry.data.description.toUpperCase()] = null;
       }
-      this.autocompleteMaterial = {data};*/
+      this.autocompleteItems = { data, limit: 10};
     });
     this.scheduleService.getReagents().subscribe(reagents => {
+      this.reagents = reagents;
       const data = {};
       for (const entry of reagents) {
-        data[entry.data.reagent] = null;
+        data[entry.data.reagent.toUpperCase()] = null;
       }
-      this.autocompleteReagents = { data };
+      this.autocompleteReagents = { data, limit: 10 };
     });
     this.buildForm();
+    this.arrItems = [
+      {description: 'ALMOFARIZ PESTILO 120 ML PORCELANA', quantity: 1}
+    ];
   }
 
 }
+
+
 
 /*import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -450,9 +482,9 @@ export class NewComponent implements OnInit, OnDestroy {
   autocompleteMaterial;
   autocompleteReagents;
 
-  hasMaterial = false;
+  needMaterial = false;
 
-  arrMaterial = [];
+  arrItems = [];
 
   public timePickerOptions: Pickadate.TimeOptions = {
     default: 'now',
@@ -623,7 +655,7 @@ export class NewComponent implements OnInit, OnDestroy {
       // secondCtrl: ['', Validators.required],
       // quantityMaterial: ['', Validators.required],
       item: ['', Validators.required],
-      hasMaterial: [this.hasMaterial]
+      needMaterial: [this.needMaterial]
     });
     this.thirdFormGroup = this.formBuilder.group({
       thirdCtrl: ['', Validators.required]
@@ -635,12 +667,12 @@ export class NewComponent implements OnInit, OnDestroy {
 
   addItem(item: object) {
     console.log('ITEM ADD:', item);
-    this.arrMaterial.push(item);
+    this.arrItems.push(item);
     this.secondFormGroup.controls.item.reset();
   }
 
   clearArr() {
-    this.arrMaterial = [];
+    this.arrItems = [];
   }
 
   delItem(item: object) {
