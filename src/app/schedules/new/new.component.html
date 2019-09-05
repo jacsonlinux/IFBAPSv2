@@ -420,11 +420,55 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mz-button matStepperPrevious>Back</button> &nbsp;
-      <button mz-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <mz-card
+      class="grey darken-4"
+      [horizontal]="true"
+      [hoverable]="true" >
+      <mz-card-title class="orange-text">
+        <span class="right small grey-text">You are now done!</span>
+        {{dateSchedule | date: 'fullDate'}}
+      </mz-card-title>
+
+
+      <mz-card-content>
+        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+          <p>START: {{firstFormGroup.controls['start'].value}}</p>
+          <p>END: {{firstFormGroup.controls['end'].value}}</p>
+          <p>Nº STUDENT{{firstFormGroup.controls['nstudent'].value}}</p>
+          <p>Nº TEAM{{firstFormGroup.controls['nteam'].value}}</p>
+          <p>SUBJECT: {{firstFormGroup.controls['subject'].value}}</p>
+          <p>ACTIVITY{{firstFormGroup.controls['activity'].value}}</p>
+          <p>COURSE: {{firstFormGroup.controls['course'].value}}</p>
+          <p>CLASS: {{firstFormGroup.controls['class'].value}}</p>
+        </div>
+
+        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+          <p *ngFor="let item of arrItems">
+            {{item["description"] | uppercase}} - {{item["quantity"]}}
+          </p>
+        </div>
+
+        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+          <p *ngFor="let reagent of arrReagents">
+            {{reagent["description"] | uppercase}} - {{reagent["quantity"]}} - {{reagent["concentration"]}}
+          </p>
+        </div>
+
+        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+          <p *ngFor="let equipment of arrEquipments">
+            {{equipment["description"] | uppercase}} - {{equipment["quantity"]}}
+          </p>
+        </div>
+
+      </mz-card-content>
+
+
+
+    </mz-card>
+    <mz-input-container>
+      <button mz-button [flat]="false" [large]="false" [float]="false" matStepperPrevious>Back</button> &nbsp;
+      <button mz-button [flat]="false" [large]="false" [float]="false" (click)="stepper.reset()">Reset</button>
+    </mz-input-container>
   </mat-step>
 </mat-horizontal-stepper>
 
