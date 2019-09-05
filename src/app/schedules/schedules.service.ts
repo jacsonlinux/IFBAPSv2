@@ -42,6 +42,11 @@ export interface Reagents {
   exist: boolean;
 }
 
+export interface Equipment {
+  description: string;
+  exist: boolean;
+}
+
 @Injectable()
 export class SchedulesService {
 
@@ -81,12 +86,17 @@ export class SchedulesService {
   itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
 
+  equipmentCollection: AngularFirestoreCollection<any>;
+  equipments: Observable<any>;
+
+  equipmentDoc: AngularFirestoreDocument<any>;
+  equipment: Observable<any>;
 
   reagentCollection: AngularFirestoreCollection<any>;
   reagents: Observable<any>;
 
   reagentDoc: AngularFirestoreDocument<any>;
-  description: Observable<any>;
+  reagent: Observable<any>;
 
   constructor( private angularFirestore: AngularFirestore ) { console.log('SchedulesService'); }
 
@@ -168,7 +178,7 @@ export class SchedulesService {
   getReagents() {
     this.reagentCollection = this.angularFirestore
       .collection<Reagents>('reagents', ref => ref
-        .orderBy('reagent'));
+        .orderBy('description'));
 
     this.reagents = this.reagentCollection
       .snapshotChanges().map(actions => {
@@ -179,6 +189,22 @@ export class SchedulesService {
         });
       });
     return this.reagents;
+  }
+
+  getEquipaments() {
+    this.equipmentCollection = this.angularFirestore
+      .collection<Equipment>('equipments', ref => ref
+        .orderBy('description'));
+
+    this.equipments = this.equipmentCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Equipment;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
+      });
+    return this.equipments;
   }
 
   getCourses() {
@@ -198,20 +224,20 @@ export class SchedulesService {
   }
 
   getClasses() {
-  this.classCollection = this.angularFirestore
-    .collection<Class>('classes', ref => ref
-      .orderBy('name'));
+    this.classCollection = this.angularFirestore
+      .collection<Class>('classes', ref => ref
+        .orderBy('name'));
 
-  this.classes = this.classCollection
-    .snapshotChanges().map(actions => {
-      return actions.map(res => {
-        const data = res.payload.doc.data() as Class;
-        const id = res.payload.doc.id;
-        return { id, data };
+    this.classes = this.classCollection
+      .snapshotChanges().map(actions => {
+        return actions.map(res => {
+          const data = res.payload.doc.data() as Class;
+          const id = res.payload.doc.id;
+          return { id, data };
+        });
       });
-    });
-  return this.classes;
-}
+    return this.classes;
+  }
 
   getSubjects() {
     this.subjectCollection = this.angularFirestore
@@ -282,6 +308,20 @@ export class SchedulesService {
     this.placeDoc = this.angularFirestore.doc('places/' + placeID);
     this.place = this.placeDoc.valueChanges();
     return this.place;
+  }
+
+  addEquipment() {
+    const equipments = [
+      {description: 'FALTA EUIPAMENTO AKI', exist: true},
+    ];
+    for (const entry of equipments) {
+      console.log(entry);
+      this.angularFirestore
+        .collection('equipments')
+        .add(entry)
+        .then(() => true)
+        .catch(err => err.message);
+    }
   }
 
   addItems() {

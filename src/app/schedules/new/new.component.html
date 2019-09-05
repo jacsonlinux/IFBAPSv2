@@ -1,5 +1,4 @@
 <mat-horizontal-stepper [linear]="false" #stepper>
-
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Class data</ng-template>
@@ -79,7 +78,6 @@
       </mz-input-container>
     </form>
   </mat-step>
-
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
@@ -133,7 +131,6 @@
                            autocomplete="off"
                            mz-input
                            [label]="'Quantity'"
-                           id="quantity"
                            type="number"
                     >
                   </mz-input-container>
@@ -188,15 +185,9 @@
       </mz-input-container>
     </form>
   </mat-step>
-
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Reagents</ng-template>
-
-
-
-
-
       <mz-card class="grey darken-4"
                [horizontal]="true"
                [hoverable]="true">
@@ -219,64 +210,90 @@
                  mz-input-prefix
                  [icon]="'magnify'"></i>
               <input autocomplete="off"
+                     formControlName="reagent"
+                     #reagent
+                     (select)="selectReagent"
                      mz-input
                      type="text"
                      [label]="'Search'"
                      [autocomplete]="autocompleteReagents"
-                     id="reagents">
+                     id="reagent">
             </mz-input-container>
-            <!--<mz-select-container class="col l12 m12 s12">
-              <select mz-select
-                      mz-validation
-                      required id="reagent"
-                      formControlName="reagent"
-                      [errorMessageResource]="errorMessageResources.reagent"
-                      [label]="'Reagent'"
-                      [placeholder]="'Choose your item'"
-                      [(ngModel)]="selectReagent">
-                <option *ngFor="let reagent of reagents" [ngValue]="reagent">
-                  {{ reagent.data.description | uppercase }}
-                </option>
-              </select>
-            </mz-select-container>-->
             <mz-input-container class="col l1 m12 s12">
               <button [disabled]="!thirdFormGroup.valid"
-                      (click)="modal.openModal()"
+                      (click)="modalReagent.openModal()"
                       mz-button
                       [flat]="false" [float]="true">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
             </mz-input-container>
+            <mz-modal #modalReagent [options]="modalOptions">
+              <mz-modal-content>
+                <div class="row">
+                  <mz-input-container>
+                    <input #quantity
+                           value="1"
+                           min="1"
+                           max="9999"
+                           autocomplete="off"
+                           mz-input
+                           [label]="'Quantity'"
+                           type="number"
+                    >
+                  </mz-input-container>
+                  <mz-select-container>
+                    <select
+                        #concentration
+                        mz-select
+                        required
+                        id="concentration">
+                      <option value="P.A.">P.A. </option>
+                      <option value="MOL.L">MOL.L </option>
+                    </select>
+                  </mz-select-container>
+                </div>
+                <div class="row">
+                  <mz-input-container>
+                    <button
+                      style="width: 100%"
+                      (click)="addReagent(
+                      {
+                      description: reagent.value,
+                      quantity: quantity.valueAsNumber,
+                      concentration: concentration.value
+                      })"
+                      mz-button
+                      [flat]="false"
+                      [float]="false"
+                      [large]="false"
+                      mz-modal-close>OK</button>
+                  </mz-input-container>
+                </div>
+              </mz-modal-content>
+            </mz-modal>
           </div>
         </mz-card-content>
       </mz-card>
-
-
-
-
-
-
-      <!--<mz-card class="grey darken-4"
-               *ngIf="arrItems?.length"
+      <mz-card class="grey darken-4"
+               *ngIf="arrReagents?.length"
                [horizontal]="true"
                [hoverable]="true">
         <mz-card-title class="orange-text">
-          Selected material
+          Selected reagent
         </mz-card-title>
         <mz-card-content>
           <mz-collection>
-            <mz-collection-item *ngFor="let item of arrItems">
-              <div class="grey darken-3 quantity">{{item.quantity}}</div>
-              {{item.data.description | uppercase}}
-              <a (click)="delItem(item)" mz-secondary-content>
+            <mz-collection-item *ngFor="let reagent of arrReagents">
+              {{reagent["description"] | uppercase}}
+              <div class="grey darken-3 quantity">{{reagent["quantity"]}}</div>
+              <div class="orange darken-3 concentration">{{reagent["concentration"]}}</div>
+              <a (click)="delReagent(reagent)" mz-secondary-content>
                 <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
               </a>
             </mz-collection-item>
           </mz-collection>
         </mz-card-content>
-      </mz-card>-->
-
-
+      </mz-card>
       <mz-input-container>
         <button mz-button [flat]="false" [large]="false" [float]="false"
                 class=" left" matStepperPrevious>
@@ -289,26 +306,118 @@
           <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
         </button>
       </mz-input-container>
-
-
-
-
     </form>
   </mat-step>
-
   <mat-step [stepControl]="fourthFormGroup">
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Equipment</ng-template>
-      <mat-form-field>
-        <input autocomplete="off" matInput placeholder="Address" formControlName="fourthCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mz-button matStepperPrevious>Back</button> &nbsp;
-        <button mz-button matStepperNext>Next</button>
-      </div>
+      <mz-card class="grey darken-4"
+               [horizontal]="true"
+               [hoverable]="true">
+        <mz-card-title class="orange-text">
+          <mz-checkbox-container>
+            <input autocomplete="off"
+                   mz-checkbox
+                   id="needEquipment"
+                   formControlName="needEquipment"
+                   type="checkbox"
+                   [filledIn]="true"
+                   [label]="'Need some equipment?'">
+          </mz-checkbox-container>
+        </mz-card-title>
+        <mz-card-content
+          *ngIf="fourthFormGroup
+          .controls['needEquipment'].value">
+          <div class="row">
+            <mz-input-container class="col l11 m12 s12">
+              <i mz-icon-mdi
+                 mz-input-prefix
+                 [icon]="'magnify'"></i>
+              <input autocomplete="off"
+                     formControlName="equipment"
+                     #equipment
+                     (select)="selectEquipment"
+                     mz-input
+                     type="text"
+                     [label]="'Search'"
+                     [autocomplete]="autocompleteEquipments"
+                     id="equipment">
+            </mz-input-container>
+            <mz-input-container class="col l1 m12 s12">
+              <button [disabled]="!fourthFormGroup.valid"
+                      (click)="modalEquipment.openModal()"
+                      mz-button
+                      [flat]="false" [float]="true">
+                <i mz-icon-mdi [icon]="'plus'"></i>
+              </button>
+            </mz-input-container>
+            <mz-modal #modalEquipment [options]="modalOptions">
+              <mz-modal-content>
+                <div class="row">
+                  <mz-input-container>
+                    <input #quantity
+                           value="1"
+                           min="1"
+                           max="99"
+                           autocomplete="off"
+                           mz-input
+                           [label]="'Quantity'"
+                           type="number"
+                    >
+                  </mz-input-container>
+                </div>
+                <div class="row">
+                  <mz-input-container>
+                    <button
+                      style="width: 100%"
+                      (click)="addEquipment({
+                      description: equipment.value,
+                      quantity: quantity.valueAsNumber})"
+                      mz-button
+                      [flat]="false"
+                      [float]="false"
+                      [large]="false"
+                      mz-modal-close>OK</button>
+                  </mz-input-container>
+                </div>
+              </mz-modal-content>
+            </mz-modal>
+          </div>
+        </mz-card-content>
+      </mz-card>
+      <mz-card class="grey darken-4"
+               *ngIf="arrEquipments?.length"
+               [horizontal]="true"
+               [hoverable]="true">
+        <mz-card-title class="orange-text">
+          Selected equipment
+        </mz-card-title>
+        <mz-card-content>
+          <mz-collection>
+            <mz-collection-item *ngFor="let equipment of arrEquipments">
+              {{equipment["description"] | uppercase}}
+              <div class="grey darken-3 quantity">{{equipment["quantity"]}}</div>
+              <a (click)="delEquipment(equipment)" mz-secondary-content>
+                <i class="red-text" mz-icon-mdi [icon]="'minus-circle-outline'"></i>
+              </a>
+            </mz-collection-item>
+          </mz-collection>
+        </mz-card-content>
+      </mz-card>
+      <mz-input-container>
+        <button mz-button [flat]="false" [large]="false" [float]="false"
+                class=" left" matStepperPrevious>
+          <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
+        </button>
+      </mz-input-container>
+      <mz-input-container>
+        <button mz-button [flat]="false" [large]="false" [float]="false"
+                class=" right" matStepperNext>
+          <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
+        </button>
+      </mz-input-container>
     </form>
   </mat-step>
-
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
@@ -317,7 +426,6 @@
       <button mz-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
-
 </mat-horizontal-stepper>
 
 
@@ -663,14 +771,11 @@
     </div>
   </mz-modal-content>
 </mz-modal>-->
-
 <!---->
-
 <!--<mz-input-container [inline]="true">
                  <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Quantity'"
                         id="quantityMaterial" type="number" formControlName="quantityMaterial" [errorMessageResource]="errorMessageResources.quantityMaterial">
                </mz-input-container>-->
-
 <!-- <mz-modal #modal >
   <mz-modal-content>
     asdads
@@ -679,7 +784,6 @@
     <button (click)="addItem()" class="red-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>OK</button>
   </mz-modal-footer>
 </mz-modal> -->
-
 <!--<mz-card class="grey darken-4" [horizontal]="true" [hoverable]="true">
         <mz-card-title class="orange-text">
           <mz-checkbox-container>
@@ -720,7 +824,6 @@
           </div>
         </mz-card-content>
       </mz-card>-->
-
 <!--<mz-input-container>
   &lt;!&ndash;<i mz-icon-mdi
      mz-input-prefix
