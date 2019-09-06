@@ -1,5 +1,6 @@
-<mat-horizontal-stepper [linear]="false" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+<mat-horizontal-stepper [linear]="true" #stepper>
+
+  <mat-step [stepControl]="!firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Class data</ng-template>
       <mz-card class="grey darken-4 " [horizontal]="true" [hoverable]="true">
@@ -38,8 +39,14 @@
               </select>
             </mz-select-container>
             <mz-input-container class="col l6 m6 s12">
-              <input autocomplete="off" required mz-validation autocomplete="off" mz-input [label]="'Activity'"
-                     id="activity" type="text" [errorMessageResource]="errorMessageResources.activity"
+              <input autocomplete="off"
+                     [value]="firstFormGroup.controls['activity'].value.toUpperCase()"
+                     required
+                     mz-validation
+                     mz-input [label]="'Activity'"
+                     id="activity"
+                     type="text"
+                     [errorMessageResource]="errorMessageResources.activity"
                      formControlName="activity">
             </mz-input-container>
           </div>
@@ -61,23 +68,27 @@
               </select>
             </mz-select-container>
           </div>
+          <!--<div class="row">
+            <mz-input-container
+              class="col l12 s12 m12">
+              <button mz-button
+                      [flat]="true"
+                      [large]="false"
+                      [float]="false"
+                      class="blue right"
+                      matStepperNext>
+                <i mz-icon-mdi
+                   class="white-text"
+                   [icon]="'arrow-right'">
+                </i>
+              </button>
+            </mz-input-container>
+          </div>-->
         </mz-card-content>
       </mz-card>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false" class=" left" routerLink="../calendar">
-          <i mz-icon-mdi [icon]="'calendar-month'">
-          </i>
-        </button>
-      </mz-input-container>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class="right" matStepperNext>
-          <i mz-icon-mdi [icon]="'arrow-right-bold'">
-          </i>
-        </button>
-      </mz-input-container>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
@@ -89,6 +100,7 @@
             <input autocomplete="off"
                    mz-checkbox
                    id="needMaterial"
+                   mz-validation
                    formControlName="needMaterial"
                    type="checkbox"
                    [filledIn]="true"
@@ -124,14 +136,15 @@
               <mz-modal-content>
                 <div class="row">
                   <mz-input-container>
-                    <input #quantity
-                           value="1"
-                           min="1"
-                           max="99"
-                           autocomplete="off"
-                           mz-input
-                           [label]="'Quantity'"
-                           type="number"
+                    <input
+                      mz-validation
+                      formControlName="quantity"
+                      min="1"
+                      max="99"
+                      autocomplete="off"
+                      mz-input
+                      [label]="'Quantity'"
+                      type="number"
                     >
                   </mz-input-container>
                 </div>
@@ -139,7 +152,7 @@
                   <mz-input-container>
                     <button
                       style="width: 100%"
-                      (click)="addItem({description: item.value, quantity: quantity.valueAsNumber})"
+                      (click)="addItem({description: item.value, quantity: secondFormGroup.controls['quantity'].value})"
                       mz-button
                       [flat]="false"
                       [float]="false"
@@ -150,6 +163,32 @@
               </mz-modal-content>
             </mz-modal>
           </div>
+          <!--<div class="row">
+            <mz-input-container class="col l12 m12 s12">
+              <button mz-button
+                      [flat]="true"
+                      [large]="false"
+                      [float]="false"
+                      class="left blue"
+                      matStepperPrevious>
+                <i mz-icon-mdi
+                   class="white-text"
+                   [icon]="'arrow-left'"></i>
+              </button>
+            </mz-input-container>
+            <mz-input-container class="col l12 m12 s12">
+              <button mz-button
+                      [flat]="true"
+                      [large]="false"
+                      [float]="false"
+                      class="right blue"
+                      matStepperNext>
+                <i mz-icon-mdi
+                   class="white-text"
+                   [icon]="'arrow-right'"></i>
+              </button>
+            </mz-input-container>
+          </div>-->
         </mz-card-content>
       </mz-card>
       <mz-card class="grey darken-4"
@@ -171,20 +210,9 @@
           </mz-collection>
         </mz-card-content>
       </mz-card>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" left" matStepperPrevious>
-          <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
-        </button>
-      </mz-input-container>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" right" matStepperNext>
-          <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
-        </button>
-      </mz-input-container>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Reagents</ng-template>
@@ -308,6 +336,7 @@
       </mz-input-container>
     </form>
   </mat-step>
+
   <mat-step [stepControl]="fourthFormGroup">
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Equipment</ng-template>
@@ -418,6 +447,7 @@
       </mz-input-container>
     </form>
   </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <mz-card
@@ -428,49 +458,60 @@
         <span class="right small grey-text">You are now done!</span>
         {{dateSchedule | date: 'fullDate'}}
       </mz-card-title>
-
-
       <mz-card-content>
-        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
-          <p>START: {{firstFormGroup.controls['start'].value}}</p>
-          <p>END: {{firstFormGroup.controls['end'].value}}</p>
-          <p>Nº STUDENT{{firstFormGroup.controls['nstudent'].value}}</p>
-          <p>Nº TEAM{{firstFormGroup.controls['nteam'].value}}</p>
-          <p>SUBJECT: {{firstFormGroup.controls['subject'].value}}</p>
-          <p>ACTIVITY{{firstFormGroup.controls['activity'].value}}</p>
-          <p>COURSE: {{firstFormGroup.controls['course'].value}}</p>
-          <p>CLASS: {{firstFormGroup.controls['class'].value}}</p>
+        <div class="displayInfo">
+          <h5>Data schedule</h5>
+          <p><b>START:</b>{{firstFormGroup.controls['start'].value}}</p>
+          <p><b>END:</b>{{firstFormGroup.controls['end'].value}}</p>
+          <p><b>Nº STUDENT:</b>{{firstFormGroup.controls['nstudent'].value}}</p>
+          <p><b>Nº TEAM:</b>{{firstFormGroup.controls['nteam'].value}}</p>
+          <p><b>SUBJECT:</b>{{firstFormGroup.controls['subject'].value}}</p>
+          <p><b>ACTIVITY:</b>{{firstFormGroup.controls['activity'].value}}</p>
+          <p><b>COURSE:</b>{{firstFormGroup.controls['course'].value}}</p>
+          <p><b>CLASS:</b>{{firstFormGroup.controls['class'].value}}</p>
         </div>
-
-        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+        <div class="displayInfo">
+          <h5>Material</h5>
           <p *ngFor="let item of arrItems">
             {{item["description"] | uppercase}} - {{item["quantity"]}}
           </p>
         </div>
-
-        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+        <div class="displayInfo">
+          <h5>Reagent</h5>
           <p *ngFor="let reagent of arrReagents">
             {{reagent["description"] | uppercase}} - {{reagent["quantity"]}} - {{reagent["concentration"]}}
           </p>
         </div>
-
-        <div style="border: 1px solid grey; border-radius: 5px; padding: 10px">
+        <div class="displayInfo">
+          <h5>Equipment</h5>
           <p *ngFor="let equipment of arrEquipments">
             {{equipment["description"] | uppercase}} - {{equipment["quantity"]}}
           </p>
         </div>
-
       </mz-card-content>
-
-
-
     </mz-card>
     <mz-input-container>
-      <button mz-button [flat]="false" [large]="false" [float]="false" matStepperPrevious>Back</button> &nbsp;
-      <button mz-button [flat]="false" [large]="false" [float]="false" (click)="stepper.reset()">Reset</button>
+      <button mz-button
+              [flat]="false"
+              [large]="false"
+              [float]="false"
+              matStepperPrevious>Back</button> &nbsp;
+      <button mz-button
+              [flat]="false"
+              [large]="false"
+              [float]="false"
+              (click)="stepper.reset()">Reset</button> &nbsp;
+      <button mz-button
+              [flat]="false"
+              [large]="false"
+              [float]="false"
+              (click)="onSubmit()">Send</button>
     </mz-input-container>
   </mat-step>
+
 </mat-horizontal-stepper>
+
+
 
 
 
@@ -815,7 +856,6 @@
     </div>
   </mz-modal-content>
 </mz-modal>-->
-<!---->
 <!--<mz-input-container [inline]="true">
                  <input autocomplete="off" mz-input required mz-validation autocomplete="off" [label]="'Quantity'"
                         id="quantityMaterial" type="number" formControlName="quantityMaterial" [errorMessageResource]="errorMessageResources.quantityMaterial">
