@@ -93,9 +93,9 @@ export class NewComponent implements OnInit, OnDestroy {
   autocompleteReagents;
   autocompleteEquipments;
 
-  needMaterial = false;
-  needReagent = false;
-  needEquipment = false;
+  /*needMaterial;
+  needReagent;
+  needEquipment;*/
 
   arrItems = [];
   arrReagents = [];
@@ -274,16 +274,17 @@ export class NewComponent implements OnInit, OnDestroy {
       )
     });
     this.secondFormGroup = this.formBuilder.group({
-      item: ['', Validators.required],
-      needMaterial: [this.needMaterial]
+      needMaterial: [false],
+      item: [''],
+      quantity: [''],
     });
     this.thirdFormGroup = this.formBuilder.group({
       reagent: ['', Validators.required],
-      needReagent: [this.needReagent]
+      needReagent: [false]
     });
     this.fourthFormGroup = this.formBuilder.group({
       equipment: ['', Validators.required],
-      needEquipment: [this.needEquipment]
+      needEquipment: [false]
 
     });
 
@@ -311,7 +312,6 @@ export class NewComponent implements OnInit, OnDestroy {
       }
     });
 
-
   }
 
   findKey(obj, value) {
@@ -330,6 +330,8 @@ export class NewComponent implements OnInit, OnDestroy {
           return res.description === item.description;
         });
       if (index > -1) {
+        this.secondFormGroup.controls.item.reset();
+        this.secondFormGroup.controls.quantity.reset();
         this.toastService.show(
           'Already added',
           2000,
@@ -337,6 +339,7 @@ export class NewComponent implements OnInit, OnDestroy {
       } else {
         this.arrItems.push(item);
         this.secondFormGroup.controls.item.reset();
+        this.secondFormGroup.controls.quantity.reset();
         this.toastService.show(
           'Item added',
           2000,
@@ -477,7 +480,6 @@ export class NewComponent implements OnInit, OnDestroy {
       }
       this.autocompleteReagents = { data, limit: 10 };
     });
-
     this.scheduleService.getEquipaments().subscribe(res => {
       this.equipments = res;
       const data = {};
@@ -486,8 +488,6 @@ export class NewComponent implements OnInit, OnDestroy {
       }
       this.autocompleteEquipments = { data, limit: 10};
     });
-
-
     this.buildForm();
   }
 
