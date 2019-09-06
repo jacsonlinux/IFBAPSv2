@@ -98,7 +98,7 @@ export class CalendarComponent implements OnInit {
           id: schedule.id,
           start: new Date(schedule.data.start.toDate()),
           end: new Date(schedule.data.end.toDate()),
-          title: schedule.data.title,
+          activity: schedule.data.activity,
           color: colors.yellow,
           resizable: {
             beforeStart: false,
@@ -122,7 +122,7 @@ export class CalendarComponent implements OnInit {
           id: schedule.id,
           start: new Date(schedule.data.start.toDate()),
           end: new Date(schedule.data.end.toDate()),
-          title: schedule.data.title,
+          activity: schedule.data.activity,
           color: colors.blue,
           resizable: {
             beforeStart: true,
@@ -160,7 +160,7 @@ export class CalendarComponent implements OnInit {
   eventClicked(schedule: CalendarEvent<{ schedule: Schedule }>): void {
     this.schedule.user = schedule.user;
     this.schedule.place = schedule.place;
-    this.schedule.title = schedule.title;
+    this.schedule.activity = schedule.activity;
     this.schedule.start = schedule.start;
     this.schedule.end = schedule.end;
     this.schedule.id = schedule.id;
