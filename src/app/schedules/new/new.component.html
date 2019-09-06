@@ -1,6 +1,6 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper>
 
-  <mat-step [stepControl]="!firstFormGroup">
+  <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Class data</ng-template>
       <mz-card class="grey darken-4 " [horizontal]="true" [hoverable]="true">
@@ -31,10 +31,18 @@
           </div>
           <div class="row">
             <mz-select-container class="col l6 m6 s12">
-              <select mz-select mz-validation required id="subject" formControlName="subject"
-                      [errorMessageResource]="errorMessageResources.subject" [label]="'Subject'"
-                      [placeholder]="'Choose your subject'">
-                <option *ngFor="let subject of subjects" [ngValue]="subject.id">{{ subject.data.name | uppercase }}
+              <select
+                mz-select
+                mz-validation
+                required
+                id="subject"
+                formControlName="subject"
+                [errorMessageResource]="errorMessageResources.subject" [label]="'Subject'"
+                [placeholder]="'Choose your subject'">
+                <option
+                  *ngFor="let subject of subjects"
+                  [ngValue]="subject.data.name">
+                  {{ subject.data.name | uppercase }}
                 </option>
               </select>
             </mz-select-container>
@@ -52,19 +60,34 @@
           </div>
           <div class="row">
             <mz-select-container class="col l6 m6 s12">
-              <select mz-select
-                      mz-validation required id="course"
-                      formControlName="course"
-                      [errorMessageResource]="errorMessageResources.course" [label]="'Course'"
-                      [placeholder]="'Choose your course'">
-                <option *ngFor="let course of courses" [ngValue]="course.id">{{ course.data.name | uppercase }}</option>
+              <select
+                mz-select
+                mz-validation
+                required id="course"
+                formControlName="course"
+                [errorMessageResource]="errorMessageResources.course" [label]="'Course'"
+                [placeholder]="'Choose your course'">
+                <option
+                  *ngFor="let course of courses"
+                  [ngValue]="course.data.name">
+                  {{course.data.name | uppercase }}
+                </option>
               </select>
             </mz-select-container>
             <mz-select-container class="col l6 m6 s12">
-              <select mz-select mz-validation required id="class" formControlName="class"
-                      [errorMessageResource]="errorMessageResources.class" [label]="'Class'"
-                      [placeholder]="'Choose your class'">
-                <option *ngFor="let grade of classes" [ngValue]="grade.id">{{ grade.data.name | uppercase }}</option>
+              <select
+                mz-select
+                mz-validation
+                required
+                id="class"
+                formControlName="class"
+                [errorMessageResource]="errorMessageResources.class" [label]="'Class'"
+                [placeholder]="'Choose your class'">
+                <option
+                  *ngFor="let grade of classes"
+                  [ngValue]="grade.data.name">
+                  {{ grade.data.name | uppercase }}
+                </option>
               </select>
             </mz-select-container>
           </div>
@@ -92,9 +115,10 @@
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Material</ng-template>
-      <mz-card class="grey darken-4"
-               [horizontal]="true"
-               [hoverable]="true">
+      <mz-card
+        class="grey darken-4"
+        [horizontal]="true"
+        [hoverable]="true">
         <mz-card-title class="orange-text">
           <mz-checkbox-container>
             <input autocomplete="off"
@@ -117,7 +141,6 @@
               <input autocomplete="off"
                      formControlName="item"
                      #item
-                     (select)="selectItem"
                      mz-input
                      type="text"
                      [label]="'Search'"
@@ -125,10 +148,10 @@
                      id="item">
             </mz-input-container>
             <mz-input-container class="col l1 m12 s12">
-              <button [disabled]="!secondFormGroup.valid"
-                      (click)="modal.openModal()"
-                      mz-button
-                      [flat]="false" [float]="true">
+              <button
+                (click)="modal.openModal()"
+                mz-button
+                [flat]="false" [float]="true">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
             </mz-input-container>
@@ -240,7 +263,6 @@
               <input autocomplete="off"
                      formControlName="reagent"
                      #reagent
-                     (select)="selectReagent"
                      mz-input
                      type="text"
                      [label]="'Search'"
@@ -248,10 +270,10 @@
                      id="reagent">
             </mz-input-container>
             <mz-input-container class="col l1 m12 s12">
-              <button [disabled]="!thirdFormGroup.valid"
-                      (click)="modalReagent.openModal()"
-                      mz-button
-                      [flat]="false" [float]="true">
+              <button
+                (click)="modalReagent.openModal()"
+                mz-button
+                [flat]="false" [float]="true">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
             </mz-input-container>
@@ -259,22 +281,26 @@
               <mz-modal-content>
                 <div class="row">
                   <mz-input-container>
-                    <input #quantity
-                           value="1"
-                           min="1"
-                           max="9999"
-                           autocomplete="off"
-                           mz-input
-                           [label]="'Quantity'"
-                           type="number"
+                    <input
+                      formControlName="quantity"
+                      mz-validation
+                      required
+                      #quantity
+                      min="1"
+                      max="9999"
+                      autocomplete="off"
+                      mz-input
+                      [label]="'Quantity'"
+                      type="number"
                     >
                   </mz-input-container>
                   <mz-select-container>
                     <select
                         #concentration
+                        mz-validation
+                        formControlName="concentration"
                         mz-select
-                        required
-                        id="concentration">
+                        required>
                       <option value="P.A.">P.A. </option>
                       <option value="MOL.L">MOL.L </option>
                     </select>
@@ -287,8 +313,8 @@
                       (click)="addReagent(
                       {
                       description: reagent.value,
-                      quantity: quantity.valueAsNumber,
-                      concentration: concentration.value
+                      quantity: thirdFormGroup.controls['quantity'].value,
+                      concentration: thirdFormGroup.controls['concentration'].value
                       })"
                       mz-button
                       [flat]="false"
@@ -300,6 +326,18 @@
               </mz-modal-content>
             </mz-modal>
           </div>
+          <!--<mz-input-container>
+            <button mz-button [flat]="false" [large]="false" [float]="false"
+                    class=" left" matStepperPrevious>
+              <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
+            </button>
+          </mz-input-container>
+          <mz-input-container>
+            <button mz-button [flat]="false" [large]="false" [float]="false"
+                    class=" right" matStepperNext>
+              <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
+            </button>
+          </mz-input-container>-->
         </mz-card-content>
       </mz-card>
       <mz-card class="grey darken-4"
@@ -322,18 +360,6 @@
           </mz-collection>
         </mz-card-content>
       </mz-card>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" left" matStepperPrevious>
-          <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
-        </button>
-      </mz-input-container>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" right" matStepperNext>
-          <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
-        </button>
-      </mz-input-container>
     </form>
   </mat-step>
 
@@ -355,8 +381,7 @@
           </mz-checkbox-container>
         </mz-card-title>
         <mz-card-content
-          *ngIf="fourthFormGroup
-          .controls['needEquipment'].value">
+          *ngIf="fourthFormGroup.controls['needEquipment'].value">
           <div class="row">
             <mz-input-container class="col l11 m12 s12">
               <i mz-icon-mdi
@@ -365,7 +390,6 @@
               <input autocomplete="off"
                      formControlName="equipment"
                      #equipment
-                     (select)="selectEquipment"
                      mz-input
                      type="text"
                      [label]="'Search'"
@@ -373,10 +397,10 @@
                      id="equipment">
             </mz-input-container>
             <mz-input-container class="col l1 m12 s12">
-              <button [disabled]="!fourthFormGroup.valid"
-                      (click)="modalEquipment.openModal()"
-                      mz-button
-                      [flat]="false" [float]="true">
+              <button
+                (click)="modalEquipment.openModal()"
+                mz-button
+                [flat]="false" [float]="true">
                 <i mz-icon-mdi [icon]="'plus'"></i>
               </button>
             </mz-input-container>
@@ -412,6 +436,18 @@
               </mz-modal-content>
             </mz-modal>
           </div>
+          <!--<mz-input-container>
+            <button mz-button [flat]="false" [large]="false" [float]="false"
+                    class=" left" matStepperPrevious>
+              <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
+            </button>
+          </mz-input-container>
+          <mz-input-container>
+            <button mz-button [flat]="false" [large]="false" [float]="false"
+                    class=" right" matStepperNext>
+              <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
+            </button>
+          </mz-input-container>-->
         </mz-card-content>
       </mz-card>
       <mz-card class="grey darken-4"
@@ -433,18 +469,6 @@
           </mz-collection>
         </mz-card-content>
       </mz-card>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" left" matStepperPrevious>
-          <i mz-icon-mdi [icon]="'arrow-left-bold'"></i>
-        </button>
-      </mz-input-container>
-      <mz-input-container>
-        <button mz-button [flat]="false" [large]="false" [float]="false"
-                class=" right" matStepperNext>
-          <i mz-icon-mdi [icon]="'arrow-right-bold'"></i>
-        </button>
-      </mz-input-container>
     </form>
   </mat-step>
 
@@ -461,14 +485,14 @@
       <mz-card-content>
         <div class="displayInfo">
           <h5>Data schedule</h5>
-          <p><b>START:</b>{{firstFormGroup.controls['start'].value}}</p>
-          <p><b>END:</b>{{firstFormGroup.controls['end'].value}}</p>
-          <p><b>Nº STUDENT:</b>{{firstFormGroup.controls['nstudent'].value}}</p>
-          <p><b>Nº TEAM:</b>{{firstFormGroup.controls['nteam'].value}}</p>
-          <p><b>SUBJECT:</b>{{firstFormGroup.controls['subject'].value}}</p>
-          <p><b>ACTIVITY:</b>{{firstFormGroup.controls['activity'].value}}</p>
-          <p><b>COURSE:</b>{{firstFormGroup.controls['course'].value}}</p>
-          <p><b>CLASS:</b>{{firstFormGroup.controls['class'].value}}</p>
+          <p><b>START:&nbsp;</b>{{firstFormGroup.controls['start'].value}}</p>
+          <p><b>END:&nbsp;</b>{{firstFormGroup.controls['end'].value}}</p>
+          <p><b>Nº STUDENT:&nbsp;</b>{{firstFormGroup.controls['nstudent'].value}}</p>
+          <p><b>Nº TEAM:&nbsp;</b>{{firstFormGroup.controls['nteam'].value}}</p>
+          <p><b>SUBJECT:&nbsp;</b>{{firstFormGroup.controls['subject'].value | uppercase}}</p>
+          <p><b>ACTIVITY:&nbsp;</b>{{firstFormGroup.controls['activity'].value | uppercase}}</p>
+          <p><b>COURSE:&nbsp;</b>{{firstFormGroup.controls['course'].value | uppercase}}</p>
+          <p><b>CLASS:&nbsp;</b>{{firstFormGroup.controls['class'].value | uppercase}}</p>
         </div>
         <div class="displayInfo">
           <h5>Material</h5>
@@ -489,36 +513,21 @@
           </p>
         </div>
       </mz-card-content>
+      <mz-card-action>
+        <mz-input-container>
+          <button
+            mz-button
+            class="green white-text right"
+            [flat]="true"
+            [large]="true"
+            [float]="false"
+            (click)="onSubmit()">finish</button>
+        </mz-input-container>
+      </mz-card-action>
     </mz-card>
-    <mz-input-container>
-      <button mz-button
-              [flat]="false"
-              [large]="false"
-              [float]="false"
-              matStepperPrevious>Back</button> &nbsp;
-      <button mz-button
-              [flat]="false"
-              [large]="false"
-              [float]="false"
-              (click)="stepper.reset()">Reset</button> &nbsp;
-      <button mz-button
-              [flat]="false"
-              [large]="false"
-              [float]="false"
-              (click)="onSubmit()">Send</button>
-    </mz-input-container>
   </mat-step>
 
 </mat-horizontal-stepper>
-
-
-
-
-
-
-
-
-
 
 <!--
 <mat-horizontal-stepper [linear]="false" #stepper>

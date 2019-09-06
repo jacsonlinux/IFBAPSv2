@@ -16,14 +16,12 @@ import {InvalidPeriod} from '../../_helpers/InvalidPeriod';
 })
 export class NewComponent implements OnInit, OnDestroy {
 
-  selectItem;
-  selectReagent;
-  selectEquipment;
-
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
+
+  scheduleForm: FormGroup;
 
   classes;
   courses;
@@ -84,18 +82,13 @@ export class NewComponent implements OnInit, OnDestroy {
       required: 'Activity is required.',
     }
   };
-  scheduleForm: FormGroup;
   showForm: boolean;
   dateSchedule;
   subscription: Subscription;
 
-  autocompleteItems;
-  autocompleteReagents;
-  autocompleteEquipments;
-
-  /*needMaterial;
-  needReagent;
-  needEquipment;*/
+  autocompleteItems: {data: {}, limit: number};
+  autocompleteReagents: {data: {}, limit: number};
+  autocompleteEquipments: {data: {}, limit: number};
 
   arrItems = [];
   arrReagents = [];
@@ -165,9 +158,17 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const data = this.scheduleForm.value;
-    const start = new Date(this.dateSchedule + ' ' + data.start + ':00');
-    const end = new Date(this.dateSchedule + ' ' + data.end + ':00');
+    const data = this.firstFormGroup.value;
+
+    console.log(data);
+    console.log(this.arrItems);
+    console.log(this.arrReagents);
+    console.log(this.arrEquipments);
+
+    const start = new Date(
+      this.dateSchedule + ' ' + data.start + ':00');
+    const end = new Date(
+      this.dateSchedule + ' ' + data.end + ':00');
     if (start >= end) {
       this.toastService.show('Start can not be greater than or equal to end', 5000, 'red white-text');
       this.scheduleForm.reset();
@@ -175,15 +176,16 @@ export class NewComponent implements OnInit, OnDestroy {
       this.showForm = false;
       this.schedule.start = start;
       this.schedule.end = end;
-      this.schedule.title = data.activityTitle.text;
+      this.schedule.activity = data.activity;
       const schedule = {
         end: this.schedule.end,
         place: this.schedule.place,
         start: this.schedule.start,
         user: this.schedule.user,
-        title: this.schedule.title
+        activity: this.schedule.activity
       };
-      this.subscription = this.scheduleService.validateSchedule(schedule)
+      this.subscription = this.scheduleService
+        .validateSchedule(schedule)
         .subscribe(schedules => {
           if (schedules.length === 0) {
             this.newSchedule(schedule);
@@ -218,45 +220,6 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   buildForm() {
-    /*this.scheduleForm = this.formBuilder.group({
-        firstCtrl: ['', Validators.required],
-        secondCtrl: ['', Validators.required],
-        thirdCtrl: ['', Validators.required],
-        fourthCtrl: ['', Validators.required],
-        start: [null, Validators.compose([
-          Validators.required
-        ])],
-        end: [null, Validators.compose([
-          Validators.required
-        ])],
-        activity: [null, Validators.compose( [
-          Validators.required,
-          Validators.maxLength(64)
-        ])],
-        course: [null, Validators.compose([
-          Validators.required
-        ])],
-        class: [null, Validators.compose([
-          Validators.required
-        ])],
-        nteam: [null, Validators.compose([
-          Validators.required
-        ])],
-        nstudent: [null, Validators.compose([
-          Validators.required
-        ])],
-        subject: [null, Validators.compose([
-          Validators.required
-        ])]
-      },
-      {
-        validator: InvalidPeriod(
-          'start',
-          'end',
-          `${this.dateSchedule}`
-        )
-      }
-    );*/
     this.firstFormGroup = this.formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required],
@@ -279,13 +242,15 @@ export class NewComponent implements OnInit, OnDestroy {
       quantity: [''],
     });
     this.thirdFormGroup = this.formBuilder.group({
-      reagent: ['', Validators.required],
-      needReagent: [false]
+      needReagent: [false],
+      reagent: [''],
+      quantity: [''],
+      concentration: ['']
     });
     this.fourthFormGroup = this.formBuilder.group({
-      equipment: ['', Validators.required],
-      needEquipment: [false]
-
+      needEquipment: [false],
+      equipment: [''],
+      quantity: ['']
     });
 
     this.secondFormGroup
@@ -363,8 +328,11 @@ export class NewComponent implements OnInit, OnDestroy {
     }
   }
 
-  addReagent(reagent) {
-    if (this.findKey(this.autocompleteReagents.data, reagent.description)) {
+  addReagent(reagent: {description, quantity, concentration}) {
+    if (this.findKey(
+      this.autocompleteReagents.data,
+      reagent.description)
+    ) {
       const index = this.arrReagents
         .findIndex(res => {
           return res.description === reagent.description;
@@ -402,7 +370,7 @@ export class NewComponent implements OnInit, OnDestroy {
     }
   }
 
-  addEquipment(equipment) {
+  addEquipment(equipment: {description, quantity}) {
     if (this.findKey(
       this.autocompleteEquipments.data,
       equipment.description)) {

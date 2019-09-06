@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 export interface Schedule {
-  title: any;
+  activity: any;
   start: any;
   end: any;
   place: any;
