@@ -314,7 +314,7 @@ export class NewComponent implements OnInit, OnDestroy {
 
   }
 
-  findKey(obj, value) {
+  findKey(obj: object, value: string) {
     for (const key in obj) {
       if (key === value) {
         return true;
@@ -323,7 +323,8 @@ export class NewComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  addItem(item) {
+  addItem(item: {description, quantity}) {
+    console.log(item);
     if (this.findKey(this.autocompleteItems.data, item.description)) {
       const index = this.arrItems
         .findIndex(res => {
