@@ -1,4 +1,4 @@
-<mwl-utils-calendar-header
+<!--<mwl-utils-calendar-header
   [filterActive]="filterActive"
   [user]="user"
   [(view)]="view"
@@ -18,6 +18,47 @@
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="viewDate = $event.day.date; dayClicked($event.day)">
     </mwl-calendar-month-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [refresh]="refresh"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event); modal.openModal()"
+    >
+    </mwl-calendar-day-view>
+  </div>
+</div>-->
+
+<mwl-utils-calendar-header
+  [filterActive]="filterActive"
+  [user]="user"
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  (filter)="fetchUserEvents()"
+  (viewDateChange)="fetchEvents()"
+  (viewChange)="fetchEvents()">
+</mwl-utils-calendar-header>
+<div class="container" *ngIf="events$ | async; let events else loading;">
+  <div style="margin-bottom: 57px" [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="viewDate = $event.day.date; view = 'day'; dayClicked($event.day)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [refresh]="refresh"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="eventClicked($event.event); modal.openModal()"
+    >
+    </mwl-calendar-day-view>
   </div>
 </div>
 
@@ -42,11 +83,12 @@
     <small class="right blue-grey darken-4 grey-text" style="margin-top: 10px; padding: 3px 10px 3px 10px; border-radius: 10px;">SID: {{schedule.id}}</small>
   </mz-modal-content>
   <mz-modal-footer>
-    <button (click)="cancelSchedule(schedule.id)" *ngIf="user?.uid === schedule.user" class="red-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>DELETE</button>
+<!--
+    <button (click)="cancelSchedule(schedule.id)" *ngIf="user?.uid === schedule.user" class="red-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>CANCEL</button>
+-->
     <button class="blue-grey-text" mz-button [flat]="true" [large]="false" [float]="false" mz-modal-close>CLOSE</button>
   </mz-modal-footer>
 </mz-modal>
-
 <ng-template #loading>
   <div class="center-jack-container">
     <mz-spinner
