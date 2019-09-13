@@ -23,7 +23,6 @@ export class NewComponent implements OnInit, OnDestroy {
 
   scheduleForm: FormGroup;
 
-  classes;
   courses;
   subjects;
   items;
@@ -35,7 +34,6 @@ export class NewComponent implements OnInit, OnDestroy {
     { slug: 'P.A.', text: 'P.A.' }
   ];
 
-
   schedule = new Schedule();
   errorMessageResources = {
     start: {
@@ -45,56 +43,15 @@ export class NewComponent implements OnInit, OnDestroy {
     end: {
       required: 'End time is required',
       invalidPeriod: 'End must be greater than start time'
-    },
-    title: {
-      required: 'Title is required',
-      maxlength: 'It can not be longer than 40 characters.',
-    },
-    course: {
-      required: 'Course is required',
-    },
-    class: {
-      required: 'Class is required',
-    },
-    nstudent: {
-      required: 'Number of students required',
-    },
-    nteam: {
-      required: 'Number of students required',
-    },
-    subject: {
-      required: 'Subject required',
-    },
-    item: {
-      required: 'Item required',
-    },
-    reagent: {
-      required: 'Reagent required',
-    },
-    firstCtrl: {
-      required: 'Class data required',
-    },
-    secondCtrl: {
-      required: 'Material required',
-    },
-    thirdCtrl: {
-      required: 'Equipment required',
-    },
-    fourthCtrl: {
-      required: 'Reagents required',
-    },
-    activity: {
-      maxlength: 'It can not be longer than 48 characters.',
-      required: 'Activity is required.',
     }
   };
   showForm: boolean;
   dateSchedule;
   subscription: Subscription;
 
-  autocompleteItems: {data: {}, limit: number};
-  autocompleteReagents: {data: {}, limit: number};
-  autocompleteEquipments: {data: {}, limit: number};
+  autocompleteItems: {data: {}, limit?: number};
+  autocompleteReagents: {data: {}, limit?: number};
+  autocompleteEquipments: {data: {}, limit?: number};
 
   arrItems = [];
   arrReagents = [];
@@ -229,12 +186,12 @@ export class NewComponent implements OnInit, OnDestroy {
     this.firstFormGroup = this.formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required],
-      activity: ['', Validators.required],
-      course: ['', Validators.required],
-      class: ['', Validators.required],
-      nteam: ['', Validators.required],
-      nstudent: ['', Validators.required],
-      subject: ['', Validators.required]
+      activity: [''],
+      course: [''],
+      class: [''],
+      nteam: [''],
+      nstudent: [''],
+      subject: ['']
     }, {
       validator: InvalidPeriod(
         'start',
@@ -405,9 +362,6 @@ export class NewComponent implements OnInit, OnDestroy {
     this.scheduleService.getCourses().subscribe(courses => {
       this.courses = courses;
     });
-    this.scheduleService.getClasses().subscribe(classes => {
-      this.classes = classes;
-    });
     this.scheduleService.getSubjects().subscribe(subjects => {
       this.subjects = subjects;
     });
@@ -419,7 +373,7 @@ export class NewComponent implements OnInit, OnDestroy {
           data[entry.data.description] = null;
         }
       }
-      this.autocompleteItems = { data, limit: 5};
+      this.autocompleteItems = {data};
     });
     this.scheduleService.getReagents().subscribe(reagents => {
       this.reagents = reagents;
@@ -429,7 +383,7 @@ export class NewComponent implements OnInit, OnDestroy {
           data[entry.data.description] = null;
         }
       }
-      this.autocompleteReagents = { data, limit: 5 };
+      this.autocompleteReagents = {data};
     });
     this.scheduleService.getEquipaments().subscribe(res => {
       this.equipments = res;
@@ -439,7 +393,7 @@ export class NewComponent implements OnInit, OnDestroy {
           data[entry.data.description] = null;
         }
       }
-      this.autocompleteEquipments = { data, limit: 5};
+      this.autocompleteEquipments = {data};
     });
     this.buildForm();
   }

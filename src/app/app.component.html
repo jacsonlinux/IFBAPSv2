@@ -3,11 +3,13 @@
   <app-sidenav></app-sidenav>
 </header>
 <main>
-  <div *ngIf="smallResolution | async">
+  <router-outlet></router-outlet>
+
+  <!--<div *ngIf="smallResolution | async">
     <router-outlet></router-outlet>
   </div>
   <div *ngIf="largeResolution | async" class="container">
     <router-outlet></router-outlet>
-  </div>
+  </div>-->
 </main>
 <footer></footer>

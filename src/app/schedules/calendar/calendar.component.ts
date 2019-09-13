@@ -87,7 +87,7 @@ export class CalendarComponent implements OnInit {
   }): void {
     console.log(date);
     this.schedulesService.changeDate(date);
-    this.router.navigate([`schedules/${this.placeID}/new`]).catch(err => err.message);
+    // this.router.navigate([`schedules/${this.placeID}/new`]).catch(err => err.message);
   }
 
   fetchEvents(): void {

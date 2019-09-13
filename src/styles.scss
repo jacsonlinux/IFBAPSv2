@@ -48,6 +48,7 @@ mz-collection a {
   padding: 0 !important;
 }
 
+/*
 .modal {
   background: #272727 !important;
   width:200px !important;
@@ -56,6 +57,7 @@ mz-collection a {
 .modal .modal-footer {
   display: none !important;
 }
+*/
 
 /*mz-collection-header .collection-header {
   background-color: transparent !important;
@@ -288,8 +290,8 @@ mwl-calendar-week-view-hour-segment {
 
 .mat-step-icon {
   border-radius: 50% !important;
-  height: 30px !important;
-  width: 30px !important;
+  height: 50px !important;
+  width: 50px !important;
   flex-shrink: 0 !important;
   position: relative !important;
 }
@@ -300,15 +302,14 @@ mwl-calendar-week-view-hour-segment {
   font-weight: bold;
 }
 
-
-.mat-stepper-horizontal-line {
+/*.mat-stepper-horizontal-line {
   border-top-width: unset !important;
   border-top-style: none !important;
   flex: none !important;
   height: 0 !important;
   margin: 0 !important;
   min-width: 0 !important;
-}
+}*/
 
 .dropdown-content li>a, .dropdown-content li>span {
   color: #a0a2a3 !important;

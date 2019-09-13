@@ -1,6 +1,5 @@
-<div *ngIf="largeResolution | async">
-  <br/>
-  <mz-navbar [navbarClass]="'grey darken-4'">
+<div class="navbar-fixed-bottom" *ngIf="largeResolution | async">
+  <mz-navbar>
     <mz-navbar-item-container [align]="'left'">
       <mz-navbar-item>
         <button
@@ -45,14 +44,12 @@
     <mz-navbar-item-container [align]="'right'">
       <mz-navbar-item *ngIf="view == 'day' && user?.profile !== 'public'">
         <button
-          class="blue"
           routerLink="../new"
           mz-button
           [flat]="true"
           [large]="true"
-          [float]="true"
-        >
-          <i mz-icon-mdi class="blue-text" [icon]="'plus'" [size]="'24px'" ></i>
+          [float]="true" >
+          <i mz-icon-mdi [icon]="'plus'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
       <mz-navbar-item *ngIf="view == 'day'">
@@ -64,6 +61,7 @@
           (click)="viewChange.emit('month')"
           [class.active]="view === 'month'"
         >
+          <i mz-icon-mdi [icon]="'calendar-month'" [size]="'24px'" ></i>
           <i mz-icon-mdi [icon]="'calendar-month'" [size]="'24px'" ></i>
         </button>
       </mz-navbar-item>
@@ -94,7 +92,6 @@
     </mz-navbar-item-container>
   </mz-navbar>
 </div>
-
 <div *ngIf="smallResolution | async">
   <div class="navbar-fixed">
     <mz-navbar [navbarClass]="'grey darken-4'">
@@ -161,9 +158,8 @@
             mz-button
             [flat]="true"
             [large]="true"
-            [float]="true"
-          >
-            <i mz-icon-mdi class="blue-text" [icon]="'plus'" [size]="'16px'" ></i>
+            [float]="true" >
+            <i mz-icon-mdi [icon]="'plus'" [size]="'16px'" ></i>
           </button>
         </mz-navbar-item>
         <mz-navbar-item *ngIf="view == 'day'">
@@ -190,18 +186,18 @@
             <i mz-icon-mdi class="yellow-text" [icon]="'filter-variant'" [size]="'16px'" ></i>
           </button>
         </mz-navbar-item>
-        <mz-navbar-item>
-          <button
-            *ngIf="!filterActive && user?.profile !== 'public'"
-            mz-button
-            [flat]="true"
-            [large]="true"
-            [float]="true"
-            (click)="filter.emit()"
-          >
-            <i mz-icon-mdi [rotate]="'180'"  [icon]="'filter-variant'" [size]="'16px'" ></i>
-          </button>
-        </mz-navbar-item>
+        <!-- <mz-navbar-item>
+           <button
+             *ngIf="!filterActive && user?.profile !== 'public'"
+             mz-button
+             [flat]="true"
+             [large]="true"
+             [float]="true"
+             (click)="filter.emit()"
+           >
+             <i mz-icon-mdi [rotate]="'180'"  [icon]="'filter-variant'" [size]="'16px'" ></i>
+           </button>
+         </mz-navbar-item>-->
       </mz-navbar-item-container>
     </mz-navbar>
   </div>
