@@ -29,6 +29,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaintenenceComponent } from './maintenence/maintenence.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PrivacyPolicyComponent,
     SidenavComponent,
     TermsOfServiceComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    MaintenenceComponent
   ],
   imports: [
     BrowserModule,
