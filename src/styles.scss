@@ -36,7 +36,6 @@
   color: #b0bec5 !important;
 }
 .collection .collection-item {
-  // padding-left: 5px !important;
   background-color: transparent !important;
   border-bottom: 1px solid #272727 !important;
 }
@@ -57,7 +56,6 @@ mz-collection a {
 .modal .modal-footer {
   display: none !important;
 }
-
 
 /*mz-collection-header .collection-header {
   background-color: transparent !important;
@@ -289,16 +287,27 @@ mwl-calendar-week-view-hour-segment {
 }
 
 .mat-step-icon {
-   border-radius: 50% !important;
-   height: 50px !important;
-   width: 50px !important;
-   flex-shrink: 0 !important;
-   position: relative !important;
- }
+  border-radius: 50% !important;
+  height: 30px !important;
+  width: 30px !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+}
 
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
   background-color: #2196f3 !important;
   color: white !important;
+  font-weight: bold;
+}
+
+
+.mat-stepper-horizontal-line {
+  border-top-width: unset !important;
+  border-top-style: none !important;
+  flex: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
@@ -307,6 +316,7 @@ mwl-calendar-week-view-hour-segment {
 }
 
 .dropdown-content {
+  width: 100% !important;
   position: absolute !important;
   z-index: 100 !important;
   background-color: transparent !important;

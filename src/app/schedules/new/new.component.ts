@@ -30,6 +30,12 @@ export class NewComponent implements OnInit, OnDestroy {
   equipments;
   reagents;
 
+  concentrationOptions = [
+    { slug: 'Mol-l', text: 'Mol-l' },
+    { slug: 'P.A.', text: 'P.A.' }
+  ];
+
+
   schedule = new Schedule();
   errorMessageResources = {
     start: {
@@ -237,46 +243,18 @@ export class NewComponent implements OnInit, OnDestroy {
       )
     });
     this.secondFormGroup = this.formBuilder.group({
-      needMaterial: [false],
       item: [''],
       quantity: [''],
     });
     this.thirdFormGroup = this.formBuilder.group({
-      needReagent: [false],
       reagent: [''],
       quantity: [''],
       concentration: ['']
     });
     this.fourthFormGroup = this.formBuilder.group({
-      needEquipment: [false],
       equipment: [''],
       quantity: ['']
     });
-
-    this.secondFormGroup
-      .get('needMaterial')
-      .valueChanges.subscribe((checked: boolean) => {
-      if (!checked) {
-        this.arrItems = [];
-      }
-    });
-
-    this.thirdFormGroup
-      .get('needReagent')
-      .valueChanges.subscribe((checked: boolean) => {
-      if (!checked) {
-        this.arrReagents = [];
-      }
-    });
-
-    this.fourthFormGroup
-      .get('needEquipment')
-      .valueChanges.subscribe((checked: boolean) => {
-      if (!checked) {
-        this.arrEquipments = [];
-      }
-    });
-
   }
 
   findKey(obj: object, value: string) {
@@ -289,7 +267,6 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   addItem(item: {description, quantity}) {
-    console.log(item);
     if (this.findKey(this.autocompleteItems.data, item.description)) {
       const index = this.arrItems
         .findIndex(res => {
@@ -344,8 +321,9 @@ export class NewComponent implements OnInit, OnDestroy {
           'orange darken-4 white-text center');
       } else {
         this.arrReagents.push(reagent);
-        this.thirdFormGroup.controls.concentration.reset();
         this.thirdFormGroup.controls.reagent.reset();
+        this.thirdFormGroup.controls.concentration.reset();
+        this.thirdFormGroup.controls.quantity.reset();
         this.toastService.show(
           'Reagent added',
           2000,
@@ -371,9 +349,8 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   addEquipment(equipment: {description, quantity}) {
-    if (this.findKey(
-      this.autocompleteEquipments.data,
-      equipment.description)) {
+    console.log(equipment);
+    if (this.findKey(this.autocompleteEquipments.data, equipment.description)) {
       const index = this.arrEquipments
         .findIndex(res => {
           return res.description === equipment.description;
@@ -386,6 +363,7 @@ export class NewComponent implements OnInit, OnDestroy {
       } else {
         this.arrEquipments.push(equipment);
         this.fourthFormGroup.controls.equipment.reset();
+        this.fourthFormGroup.controls.quantity.reset();
         this.toastService.show(
           'Equipment added',
           2000,
@@ -437,27 +415,32 @@ export class NewComponent implements OnInit, OnDestroy {
       this.items = items;
       const data = {};
       for (const entry of items) {
-        data[entry.data.description.toUpperCase()] = null;
+        if (entry.data.exist) {
+          data[entry.data.description] = null;
+        }
       }
-      this.autocompleteItems = { data, limit: 10};
+      this.autocompleteItems = { data, limit: 5};
     });
     this.scheduleService.getReagents().subscribe(reagents => {
       this.reagents = reagents;
       const data = {};
       for (const entry of reagents) {
-        data[entry.data.description.toUpperCase()] = null;
+        if (entry.data.exist) {
+          data[entry.data.description] = null;
+        }
       }
-      this.autocompleteReagents = { data, limit: 10 };
+      this.autocompleteReagents = { data, limit: 5 };
     });
     this.scheduleService.getEquipaments().subscribe(res => {
       this.equipments = res;
       const data = {};
       for (const entry of this.equipments) {
-        data[entry.data.description.toUpperCase()] = null;
+        if (entry.data.exist) {
+          data[entry.data.description] = null;
+        }
       }
-      this.autocompleteEquipments = { data, limit: 10};
+      this.autocompleteEquipments = { data, limit: 5};
     });
     this.buildForm();
   }
-
 }
