@@ -38,7 +38,7 @@ const APP_ROUTES: Routes = [
   { path: 'maintenance',
     loadChildren: './maintenance/maintenance.module#MaintenanceModule',
     canActivate: [ AuthGuard],
-    data: {title: 'SCHEDULES'}
+    data: {title: 'MAINTENANCE'}
   },
   { path: '**',
     component: PageNotFoundComponent

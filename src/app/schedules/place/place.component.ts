@@ -22,9 +22,9 @@ export class PlaceComponent implements OnInit {
 
   ngOnInit() {
     this.places = this.schedulesService.getPlaces().map(res => res);
-    if (this.router.url === '/schedules') {
+    // if (this.router.url === '/schedules') {
       this.appService.changePlaceTitle('Scheduling Places');
-    }
+    // }
   }
 
 }

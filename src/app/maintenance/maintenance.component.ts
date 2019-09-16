@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-maintenence',
+  selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
   styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
 
-  constructor() { }
+  constructor() { console.log('MaintenanceComponent') }
 
   ngOnInit() {
   }
