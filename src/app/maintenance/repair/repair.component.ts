@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild, ViewEncapsulation, AfterViewInit} from '@a
 import {AppService} from '../../app.service';
 import {Router} from '@angular/router';
 import {QrScannerComponent} from 'angular2-qrscanner';
+import {MaintenanceService} from '../maintenance.service';
+import {makeClassTargetFilter} from '@angular/compiler-cli/ngcc/src/host/esm2015_host';
 
 @Component({
   selector: 'app-repair',
@@ -14,6 +16,7 @@ export class RepairComponent implements OnInit, AfterViewInit {
   @ViewChild(QrScannerComponent, {static: true}) qrScannerComponent: QrScannerComponent;
 
   constructor(
+    private maintenanceService: MaintenanceService,
     private appService: AppService, private router: Router
   ) { console.log('RepairComponent'); }
 
@@ -50,7 +53,10 @@ export class RepairComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.getDevice();
     this.qrScannerComponent.capturedQr.subscribe(result => {
+        console.log(result);
+        this.qrScannerComponent.stopScanning();
 
+        this.maintenanceService.addRepairRequest(M)
     });
   }
 
