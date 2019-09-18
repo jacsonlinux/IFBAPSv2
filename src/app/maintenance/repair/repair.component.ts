@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation, AfterViewInit} from '@angular/core';
 import {AppService} from '../../app.service';
 import {Router} from '@angular/router';
 import {QrScannerComponent} from 'angular2-qrscanner';
@@ -9,13 +9,16 @@ import {QrScannerComponent} from 'angular2-qrscanner';
   styleUrls: ['./repair.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RepairComponent implements OnInit {
+export class RepairComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent;
+  @ViewChild(QrScannerComponent, {static: true}) qrScannerComponent: QrScannerComponent;
 
   constructor(
     private appService: AppService, private router: Router
   ) { console.log('RepairComponent'); }
+
+  getDevice() {
+  }
 
   ngOnInit() {
     this.appService.changePlaceTitle('Repair');
@@ -47,6 +50,11 @@ export class RepairComponent implements OnInit {
     this.qrScannerComponent.capturedQr.subscribe(result => {
       console.log(result);
     });
+  }
+
+  ngAfterViewInit() {
+    this.getDevice();
+
   }
 
 }
