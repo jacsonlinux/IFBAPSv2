@@ -18,11 +18,6 @@ export class RepairComponent implements OnInit, AfterViewInit {
   ) { console.log('RepairComponent'); }
 
   getDevice() {
-  }
-
-  ngOnInit() {
-    this.appService.changePlaceTitle('Repair');
-
     this.qrScannerComponent.getMediaDevices().then(devices => {
       console.log(devices);
       const videoDevices: MediaDeviceInfo[] = [];
@@ -34,7 +29,7 @@ export class RepairComponent implements OnInit, AfterViewInit {
       if (videoDevices.length > 0) {
         let choosenDev;
         for (const dev of videoDevices) {
-          if (dev.label.includes('front')) {
+          if (dev.label.includes('back')) {
             choosenDev = dev;
             break;
           }
@@ -46,15 +41,17 @@ export class RepairComponent implements OnInit, AfterViewInit {
         }
       }
     });
+  }
 
-    this.qrScannerComponent.capturedQr.subscribe(result => {
-      console.log(result);
-    });
+  ngOnInit() {
+    this.appService.changePlaceTitle('Repair');
   }
 
   ngAfterViewInit() {
     this.getDevice();
-
+    this.qrScannerComponent.capturedQr.subscribe(result => {
+      console.log(result);
+    });
   }
 
 }

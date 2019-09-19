@@ -1,7 +1,20 @@
-<qr-scanner
+<div class="center">
+  <i mz-icon-mdi [icon]="'qrcode-scan'" class="orange-text" [size]="'36px'"></i>
+  <div class="orange-text">
+    <p>Focalize o <b>QRCode</b> disponível no gabinete do computador.</p>
+  </div>
+  <qr-scanner
+    [debug]="false"
+    [canvasWidth]="128"
+    [canvasHeight]="128"
+    [stopAfterScan]="false"
+    [updateTime]="2000">
+  </qr-scanner>
+</div>
+<!--<qr-scanner
   [debug]="true"
   [canvasWidth]="1080"
   [canvasHeight]="720"
   [stopAfterScan]="true"
   [updateTime]="500" >
-</qr-scanner>
+</qr-scanner>-->

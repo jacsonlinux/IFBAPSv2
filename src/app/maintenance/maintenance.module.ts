@@ -5,13 +5,15 @@ import { RepairComponent } from './repair/repair.component';
 import { MaintenanceService } from "./maintenance.service";
 import { MaintenanceRoutingModule } from "./maintenance-routing.module";
 import { NgQrScannerModule } from 'angular2-qrscanner';
+import {MzIconMdiModule} from "ngx-materialize";
 
 @NgModule({
   declarations: [MaintenanceComponent, RepairComponent],
   imports: [
     CommonModule,
     MaintenanceRoutingModule,
-    NgQrScannerModule
+    NgQrScannerModule,
+    MzIconMdiModule
   ],
   providers: [MaintenanceService]
 })
