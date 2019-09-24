@@ -50,6 +50,7 @@ export class RepairComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.getDevice();
     this.qrScannerComponent.capturedQr.subscribe(result => {
+
     });
   }
 
