@@ -3,18 +3,13 @@
   <div class="orange-text">
     <p>Focalize o <b>QRCode</b> disponível no gabinete do computador.</p>
   </div>
-  <qr-scanner
-    [debug]="false"
-    [canvasWidth]="128"
-    [canvasHeight]="128"
-    [stopAfterScan]="false"
-    [updateTime]="2000">
-  </qr-scanner>
+  <div style="alignment: center; width: 200px; height: 200px;">
+    <qr-scanner
+      [debug]="true"
+      [canvasWidth]="128"
+      [canvasHeight]="128"
+      [stopAfterScan]="true"
+      [updateTime]="2000">
+    </qr-scanner>
+  </div>
 </div>
-<!--<qr-scanner
-  [debug]="true"
-  [canvasWidth]="1080"
-  [canvasHeight]="720"
-  [stopAfterScan]="true"
-  [updateTime]="500" >
-</qr-scanner>-->
