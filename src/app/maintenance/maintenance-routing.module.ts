@@ -5,12 +5,17 @@ import { ServerGuard } from '../guard/server.guard';
 
 import {MaintenanceComponent} from "./maintenance.component";
 import {RepairComponent} from "./repair/repair.component";
+import {PlaceComponent} from "./place/place.component";
 
 const MAINTENANCE_ROUTES: Routes = [
   {
     path: '', component: MaintenanceComponent,
     children : [
       { path: '',
+        data: {title: 'PLACE' },
+        component: PlaceComponent
+      },
+      { path: ':id',
         data: {title: 'REPAIR' },
         component: RepairComponent
       }

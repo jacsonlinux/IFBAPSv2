@@ -4,16 +4,20 @@ import { MaintenanceComponent } from './maintenance.component';
 import { RepairComponent } from './repair/repair.component';
 import { MaintenanceService } from "./maintenance.service";
 import { MaintenanceRoutingModule } from "./maintenance-routing.module";
-import { NgQrScannerModule } from 'angular2-qrscanner';
-import {MzIconMdiModule} from "ngx-materialize";
+import {MzCollectionModule, MzIconMdiModule, MzSpinnerModule, MzToastModule} from "ngx-materialize";
+import { ZXingScannerModule } from "@zxing/ngx-scanner";
+import { PlaceComponent } from './place/place.component';
 
 @NgModule({
-  declarations: [MaintenanceComponent, RepairComponent],
+  declarations: [MaintenanceComponent, RepairComponent, PlaceComponent],
   imports: [
     CommonModule,
     MaintenanceRoutingModule,
-    NgQrScannerModule,
-    MzIconMdiModule
+    MzIconMdiModule,
+    ZXingScannerModule,
+    MzSpinnerModule,
+    MzToastModule,
+    MzCollectionModule
   ],
   providers: [MaintenanceService]
 })

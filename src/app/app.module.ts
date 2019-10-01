@@ -29,8 +29,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {NgQrScannerModule} from 'angular2-qrscanner';
-
 
 @NgModule({
   declarations: [
@@ -63,8 +61,7 @@ import {NgQrScannerModule} from 'angular2-qrscanner';
     MzSwitchModule,
     MzCheckboxModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgQrScannerModule
+    ReactiveFormsModule
   ],
   providers: [ AuthGuard, ServerGuard, Title],
   bootstrap: [ AppComponent ]
