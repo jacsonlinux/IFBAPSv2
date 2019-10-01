@@ -1,14 +1,22 @@
-<div class="center">
-  <i mz-icon-mdi [icon]="'qrcode-scan'" class="orange-text" [size]="'36px'"></i>
-  <div class="orange-text">
-    <p>Focalize o <b>QRCode</b> disponível no gabinete do computador.</p>
-  </div>
-  <!--<div style="alignment: center; width: 200px; height: 200px;">-->
-    <qr-scanner
-      [debug]="true"
-      [canvasWidth]="1080"
-      [canvasHeight]="720"
-      [stopAfterScan]="true"
-      [updateTime]="2000">
-    </qr-scanner>
+<!--<qr-scanner
+  [debug]="false"
+  [canvasWidth]="1080"
+  [canvasHeight]="720"
+  [stopAfterScan]="true"
+  [updateTime]="500">
+</qr-scanner>-->
+<!--<zxing-scanner [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>-->
+
+<div class="container" *ngIf="!showSpinner; else spinner">
+  <zxing-scanner
+    (scanSuccess)="scanSuccess($event)">
+  </zxing-scanner>
 </div>
+<ng-template #spinner>
+  <div class="center-jack-container">
+    <mz-spinner
+      [color]="'blue'"
+      [size]="'medium'">
+    </mz-spinner>
+  </div>
+</ng-template>
