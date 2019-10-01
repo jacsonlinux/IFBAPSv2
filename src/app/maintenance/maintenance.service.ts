@@ -65,12 +65,11 @@ export class MaintenanceService {
       .where('maintenance', '==', true)
       .get()
       .then(documentSnapshot => {
-        console.log(documentSnapshot.empty);
-        /*if (documentSnapshot.docs[0].exists) {
-          console.log(documentSnapshot.docs[0].data())
-        } else {
+        if (documentSnapshot.empty) {
           console.log('This document does not exist in the database.');
-        }*/
+        } else {
+          this.repairComputer(laboratoryID, documentSnapshot.docs[0].id);
+        }
       })
       .catch(err => err.message);
 
