@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {MaintenanceService} from "../maintenance.service";
-import {AppService} from "../../app.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MzToastService} from "ngx-materialize";
+import { Component, OnInit } from '@angular/core';
+import { MaintenanceService } from "../maintenance.service";
+import { AppService } from "../../app.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MzToastService } from "ngx-materialize";
 
 @Component({
   selector: 'app-repair',
@@ -22,66 +22,41 @@ export class RepairComponent implements OnInit {
 
   ) { console.log('RepairComponent'); }
 
-  ngOnInit() {
+  ngOnInit() { this.showSpinner = false; /*this.test();*/ }
 
-    this.showSpinner = false;
-
-    /*this.maintenanceService
-      .getComputer('n8xca2iUgarDgt9nB9Pj', '4C4C4544-0044-3610-8033-C6C04F305931')
-      .subscribe(res => {
-        console.log(res);
-      });*/
-
-    this.maintenanceService
-      .repairComputer(
-        'n8xca2iUgarDgt9nB9Pj',
-        '4C4C4544-0044-3610-8033-C6C04F305931');
-  }
+  /*test() {
+      this.showSpinner = !this.showSpinner;
+      const laboratoryID = this.activatedRoute.snapshot.params.id;
+      this.maintenanceService
+        .repairComputer(`${laboratoryID}`, '4C4C4544-0044-3610-8033-C6C04F305931')
+        .then(res => {
+          if (res) {
+            this.showSpinner = !this.showSpinner;
+            this.router.navigate(['home']).catch(err => err.message);
+            this.toastService.show('Open call successfully.', 5000, 'green white-text center');
+          } else {
+            this.showSpinner = !this.showSpinner;
+            this.toastService.show('the document does not exist or is already in maintenance.', 5000, 'red darken-3 white-text center');
+          }
+        })
+        .catch(err => err.message);
+  }*/
 
   scanSuccess(uuid) {
-    // 4C4C4544-0044-3610-8033-C6C04F305931
-    // n8xca2iUgarDgt9nB9Pj
-    /*const laboratoryID = this.activatedRoute.snapshot.params['id'];
+    this.showSpinner = !this.showSpinner;
+    const laboratoryID = this.activatedRoute.snapshot.params.id;
     this.maintenanceService
-      .getComputer(`${laboratoryID}`, `${uuid}`)
-      .subscribe(res => {
-        const data = res[0].data;
-        this.showSpinner = !this.showSpinner;
-        if (res.data()) {
-          if (res.data().maintenance === true) {
-            this.showSpinner = !this.showSpinner;
-            this.toastService.show('An open call to this computer already exists.', 4000, 'orange darken-3 white-text center');
-          } else {
-            this.maintenanceService.repairUpdate(laboratoryID, uuid)
-              .then(() => {
-              this.router.navigate(['laboratories/' + laboratoryID]).catch(err => err.message);
-              this.toastService.show('Open call successfully.', 4000, 'green white-text center');
-            } )
-              .catch(err => err.message);
-          }
+      .repairComputer(`${laboratoryID}`, `${uuid}`)
+      .then(res => {
+        if(res) {
+          this.showSpinner = !this.showSpinner;
+          this.router.navigate(['home']).catch(err => err.message);
+          this.toastService.show('Open call successfully.', 5000, 'green white-text center');
         } else {
           this.showSpinner = !this.showSpinner;
-          this.toastService.show('This document does not exist in the database.', 4000, 'red darken-3 withe-text center');
+          this.toastService.show('the document does not exist or is already in maintenance.', 5000, 'red darken-3 white-text center');
         }
-      });*/
-
-    /*this.maintenanceService.getComputer(laboratoryID, uuid).then(res => {
-      this.showSpinner = !this.showSpinner;
-      if (res.data()) {
-        if (res.data().maintenance === true) {
-          this.showSpinner = !this.showSpinner;
-          this.toastService.show('An open call to this computer already exists.', 4000, 'orange darken-3 white-text center');
-        } else {
-          this.maintenanceService.repairUpdate(laboratoryID, uuid).then(() => {
-            this.router.navigate(['laboratories/' + laboratoryID]).catch(err => err.message);
-            this.toastService.show('Open call successfully.', 4000, 'green white-text center');
-          } ).catch(err => err.message);
-        }
-      } else {
-        this.showSpinner = !this.showSpinner;
-        this.toastService.show('This document does not exist in the database.', 4000, 'red darken-3 withe-text center');
-      }
-    }).catch(err => err.message);*/
+      })
+      .catch(err => err.message);
   }
-
 }

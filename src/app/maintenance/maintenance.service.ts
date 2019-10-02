@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import {Schedule} from "../schedules/schedules.service";
 
 export interface Laboratory {
   block: string;
@@ -23,7 +22,6 @@ export interface Place {
   email: string;
   status: boolean;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -51,38 +49,49 @@ export class MaintenanceService {
     private angularFirestore: AngularFirestore
   ) { console.log('MaintenanceService'); }
 
-
-
-  repairComputer(laboratoryID: string, uuid: string) {
+  repairComputer(laboratory: string, uuid: string) {
 
     this.computerCollection = this.angularFirestore
       .collection<Computer>('laboratories')
-      .doc(laboratoryID)
+      .doc(laboratory)
       .collection('computers');
 
-    this.computerCollection.ref
+    return this.computerCollection.ref
       .where('system.uuid', '==', uuid)
-      .where('maintenance', '==', true)
       .get()
       .then(documentSnapshot => {
         if (documentSnapshot.empty) {
-          console.log('This document does not exist in the database.');
+          return false;
         } else {
-          this.repairComputer(laboratoryID, documentSnapshot.docs[0].id);
+          return this.computerCollection.ref
+            .where('maintenance', '==', false)
+            .get()
+            .then(documentSnapshot => {
+              if (documentSnapshot.empty) {
+                return false;
+              } else {
+                const computer = documentSnapshot.docs[0].id;
+                return this.repairUpdate(`${laboratory}`, `${computer}`, true)
+                  .then(res => res)
+                  .catch(err => err.message);
+              }
+            })
+            .catch(err => err.message);
         }
       })
       .catch(err => err.message);
-
   }
 
-
-  repairUpdate(laboratoryID: string, computerID: string) {
+  repairUpdate(laboratory: string, computer: string, maintenance: boolean) {
     this.computerDoc = this.angularFirestore
       .collection<Laboratory>('laboratories')
-      .doc(laboratoryID)
+      .doc(laboratory)
       .collection<Computer>('computers')
-      .doc(computerID);
-    return this.computerDoc.update({maintenance: true}).then(() => true).catch(err => err.message);
+      .doc(computer);
+    return this.computerDoc
+      .update({maintenance: maintenance})
+      .then(() => true)
+      .catch(err => err.message);
   }
 
 
