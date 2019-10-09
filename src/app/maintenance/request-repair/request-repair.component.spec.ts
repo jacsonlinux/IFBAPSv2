@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepairComponent } from './repair.component';
+import { RequestRepairComponent } from './request-repair.component';
 
-describe('RepairComponent', () => {
-  let component: RepairComponent;
-  let fixture: ComponentFixture<RepairComponent>;
+describe('RequestRepairComponent', () => {
+  let component: RequestRepairComponent;
+  let fixture: ComponentFixture<RequestRepairComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RepairComponent ]
+      declarations: [ RequestRepairComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepairComponent);
+    fixture = TestBed.createComponent(RequestRepairComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

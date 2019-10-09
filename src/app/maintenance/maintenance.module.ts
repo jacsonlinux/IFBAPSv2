@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaintenanceComponent } from './maintenance.component';
-import { RepairComponent } from './repair/repair.component';
-import { MaintenanceService } from "./maintenance.service";
-import { MaintenanceRoutingModule } from "./maintenance-routing.module";
-import {MzCollectionModule, MzIconMdiModule, MzSpinnerModule, MzToastModule} from "ngx-materialize";
-import { ZXingScannerModule } from "@zxing/ngx-scanner";
-import { PlaceComponent } from './place/place.component';
+import { MaintenanceService } from './maintenance.service';
+import { MaintenanceRoutingModule } from './maintenance-routing.module';
+import {
+  MzButtonModule,
+  MzCollapsibleModule,
+  MzCollectionModule,
+  MzIconMdiModule,
+  MzModalModule,
+  MzSpinnerModule,
+  MzToastModule
+} from 'ngx-materialize';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ComputerDetailsComponent } from './computer-details/computer-details.component';
+import { LaboratoryComponent } from './laboratory/laboratory.component';
+import { RequestRepairComponent } from './request-repair/request-repair.component';
+import { ComputerListComponent } from './computer-list/computer-list.component';
 
 @NgModule({
-  declarations: [MaintenanceComponent, RepairComponent, PlaceComponent],
+  declarations: [MaintenanceComponent, ComputerDetailsComponent, LaboratoryComponent, RequestRepairComponent, ComputerListComponent],
   imports: [
     CommonModule,
     MaintenanceRoutingModule,
@@ -17,7 +27,10 @@ import { PlaceComponent } from './place/place.component';
     ZXingScannerModule,
     MzSpinnerModule,
     MzToastModule,
-    MzCollectionModule
+    MzCollectionModule,
+    MzModalModule,
+    MzButtonModule,
+    MzCollapsibleModule
   ],
   providers: [MaintenanceService]
 })

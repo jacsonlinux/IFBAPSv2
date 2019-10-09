@@ -48,16 +48,14 @@ mz-collection a {
   padding: 0 !important;
 }
 
-/*
 .modal {
   background: #272727 !important;
-  width:200px !important;
+  // width:200px !important;
 }
 
-.modal .modal-footer {
+/*.modal .modal-footer {
   display: none !important;
-}
-*/
+}*/
 
 /*mz-collection-header .collection-header {
   background-color: transparent !important;
@@ -340,4 +338,19 @@ mwl-calendar-week-view-hour-segment {
   padding-top: 15px;
   margin-bottom: 0;
   z-index: 997;
+}
+
+.collapsible-header {
+  color: grey !important;
+  background: #212121 !important;
+  border-bottom: 1px solid #424242 !important;
+}
+.collapsible{
+  border: none !important;
+}
+.collapsible-body {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  background-color: #424242!important;
+  border-bottom: 1px solid orange !important;
 }

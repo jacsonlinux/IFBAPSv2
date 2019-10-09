@@ -1,0 +1,20 @@
+<div class="container">
+  <mz-collection>
+    <mz-collection-item
+      mz-collection-link
+      *ngFor="let computer of computers | async" [avatar]="true"
+      (click)="getComputer(computer['data'])"
+      routerLink="../computer-details"
+      class="waves-effect waves-light">
+
+      <i *ngIf="computer['data']['active']; else active" mz-avatar mz-icon-mdi [icon]="'desktop-classic'" class="green-text grey darken-3"></i>
+      <ng-template #active><i mz-avatar mz-icon-mdi [icon]="'desktop-classic'" class="grey-text grey darken-3"></i></ng-template>
+
+      <div>{{computer['data']['system']['manufacturer']}}&nbsp;{{computer['data']['system']['model']}}</div>
+      <div class="grey-text small-text">{{computer['data']['system']['uuid']}}</div>
+
+      <div *ngIf="computer['data']['maintenance']; else maintenance" class="secondary-content"><i mz-icon-mdi [icon]="'progress-wrench'" class="orange-text"></i></div>
+      <ng-template #maintenance><div class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" class="green-text"></i></div></ng-template>
+    </mz-collection-item>
+  </mz-collection>
+</div>
