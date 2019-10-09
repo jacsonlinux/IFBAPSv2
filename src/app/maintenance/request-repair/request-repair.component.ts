@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MaintenanceService } from "../maintenance.service";
-import { AppService } from "../../app.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MzToastService } from "ngx-materialize";
+import {MaintenanceService} from '../maintenance.service';
+import {AppService} from '../../app.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MzToastService} from 'ngx-materialize';
 
 @Component({
-  selector: 'app-repair',
-  templateUrl: './repair.component.html',
-  styleUrls: ['./repair.component.scss']
+  selector: 'app-request-repair',
+  templateUrl: './request-repair.component.html',
+  styleUrls: ['./request-repair.component.scss']
 })
-export class RepairComponent implements OnInit {
+export class RequestRepairComponent implements OnInit {
 
   showSpinner: boolean;
+
+  laboratoryID;
 
   constructor(
     private maintenanceService: MaintenanceService,
@@ -22,7 +24,9 @@ export class RepairComponent implements OnInit {
 
   ) { console.log('RepairComponent'); }
 
-  ngOnInit() { this.showSpinner = false; /*this.test();*/ }
+  ngOnInit() {
+    this.laboratoryID = this.activatedRoute.snapshot.params.id;
+    this.showSpinner = false; /*this.test();*/ }
 
   /*test() {
       this.showSpinner = !this.showSpinner;
@@ -44,11 +48,11 @@ export class RepairComponent implements OnInit {
 
   scanSuccess(uuid) {
     this.showSpinner = !this.showSpinner;
-    const laboratoryID = this.activatedRoute.snapshot.params.id;
+
     this.maintenanceService
-      .repairComputer(`${laboratoryID}`, `${uuid}`)
+      .repairComputer(`${this.laboratoryID}`, `${uuid}`)
       .then(res => {
-        if(res) {
+        if (res) {
           this.showSpinner = !this.showSpinner;
           this.router.navigate(['home']).catch(err => err.message);
           this.toastService.show('Open call successfully.', 5000, 'green white-text center');
@@ -59,4 +63,5 @@ export class RepairComponent implements OnInit {
       })
       .catch(err => err.message);
   }
+
 }
