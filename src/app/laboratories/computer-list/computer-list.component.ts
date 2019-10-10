@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
-import { MaintenanceService } from '../maintenance.service';
+import { LaboratoriesService } from '../laboratories.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class ComputerListComponent implements OnInit {
   computer;
 
   constructor(
-    private maintenanceService: MaintenanceService,
+    private laboratoriesService: LaboratoriesService,
     private appService: AppService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -24,9 +24,9 @@ export class ComputerListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.computers = this.maintenanceService.getComputers(this.activatedRoute.snapshot.params.id).map(res => res );
+    this.computers = this.laboratoriesService.getComputers(this.activatedRoute.snapshot.params.id).map(res => res );
 
-    this.maintenanceService.currentComputer.subscribe(computer => this.computer = computer);
+    this.laboratoriesService.currentComputer.subscribe(computer => this.computer = computer);
 
     // this.appService.changePlaceTitle('REPAIRS');
 
@@ -34,7 +34,7 @@ export class ComputerListComponent implements OnInit {
 
   getComputer(computer) {
     console.log(computer)
-    this.maintenanceService.changeComputer(computer);
+    this.laboratoriesService.changeComputer(computer);
   }
 
   getTitle(lab) {}

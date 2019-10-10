@@ -29,7 +29,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {TechnicalGuard} from './guard/technical.guard';
+import { TechnicalGuard } from './guard/technical.guard';
 
 @NgModule({
   declarations: [
