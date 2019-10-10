@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { MaintenanceService } from '../maintenance.service';
+import { LaboratoriesService } from '../laboratories.service';
 
 @Component({
   selector: 'app-computer-details',
@@ -12,12 +12,12 @@ export class ComputerDetailsComponent implements OnInit {
   computer;
 
   constructor(
-    private maintenanceService: MaintenanceService,
+    private laboratoriesService: LaboratoriesService,
     private location: Location,
   ) { }
 
   ngOnInit() {
-    this.maintenanceService.currentComputer.subscribe(computer => {
+    this.laboratoriesService.currentComputer.subscribe(computer => {
       if (computer === null) { this.location.back(); } else {
         this.computer = computer;
       }

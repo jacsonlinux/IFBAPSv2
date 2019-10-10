@@ -35,10 +35,10 @@ const APP_ROUTES: Routes = [
     canActivate: [ AuthGuard],
     data: {title: 'SCHEDULES'}
   },
-  { path: 'maintenance',
-    loadChildren: './maintenance/maintenance.module#MaintenanceModule',
+  { path: 'laboratories',
+    loadChildren: './laboratories/laboratories.module#LaboratoriesModule',
     canActivate: [ AuthGuard],
-    data: {title: 'MAINTENANCE'}
+    data: {title: 'LABORATORIES'}
   },
   { path: '**',
     component: PageNotFoundComponent

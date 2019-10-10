@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MaintenanceService} from '../maintenance.service';
+import {AuthenticationService} from '../../authentication/authentication.service';
+import {LaboratoriesService} from '../laboratories.service';
 import {AppService} from '../../app.service';
 import {Router} from '@angular/router';
-import {AuthenticationService} from '../../authentication/authentication.service';
 
 @Component({
-  selector: 'app-laboratory',
-  templateUrl: './laboratory.component.html',
-  styleUrls: ['./laboratory.component.scss']
+  selector: 'app-laboratory-list',
+  templateUrl: './laboratory-list.component.html',
+  styleUrls: ['./laboratory-list.component.scss']
 })
-export class LaboratoryComponent implements OnInit {
+export class LaboratoryListComponent implements OnInit {
 
   laboratories;
 
@@ -17,7 +17,7 @@ export class LaboratoryComponent implements OnInit {
 
   constructor(
     public authenticationService: AuthenticationService,
-    private maintenanceService: MaintenanceService,
+    private laboratoriesService: LaboratoriesService,
     private appService: AppService,
     private router: Router) {
     console.log('PlaceComponent');
@@ -28,7 +28,7 @@ export class LaboratoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.laboratories = this.maintenanceService.getLaboratories().map(res => res);
+    this.laboratories = this.laboratoriesService.getLaboratories().map(res => res);
     this.appService.changePlaceTitle('LABORATORIES');
     /*if (this.router.url === '/maintenance') {
       this.appService.changePlaceTitle('LABORATORIES');

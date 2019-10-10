@@ -20,7 +20,7 @@ export interface ComputerId extends Computer { id: string; }
 @Injectable({
   providedIn: 'root'
 })
-export class MaintenanceService {
+export class LaboratoriesService {
 
   private computerSource = new BehaviorSubject(null);
   currentComputer = this.computerSource.asObservable();
@@ -41,7 +41,7 @@ export class MaintenanceService {
     private angularFirestore: AngularFirestore
   ) { console.log('MaintenanceService'); }
 
-  repairComputer(laboratory: string, uuid: string) {
+  repairComputer(laboratory: string, uuid: string, comment: string) {
 
     this.computerCollection = this.angularFirestore
       .collection<Computer>('laboratories')
@@ -74,7 +74,7 @@ export class MaintenanceService {
       .catch(err => err.message);
   }
 
-  repairUpdate(laboratory: string, computer: string, maintenance: boolean) {
+  repairUpdate(laboratory: string, computer: string, maintenance: boolean, comment?: string) {
     this.computerDoc = this.angularFirestore
       .collection<Laboratory>('laboratories')
       .doc(laboratory)

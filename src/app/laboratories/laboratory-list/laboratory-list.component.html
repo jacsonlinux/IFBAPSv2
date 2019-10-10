@@ -26,7 +26,6 @@
       <div class="title">{{laboratory.data.code}}</div>
       <div class="grey-text">{{laboratory.data.description}}</div>
       <div class="secondary-content" *ngFor="let computers of laboratory['computers'] | async; index as i; last as isLast">
-
         <div *ngIf="isLast && i+1 === 1" class="orange-text"><i mz-icon-mdi [icon]="'numeric-1'" ></i></div>
         <div *ngIf="isLast && i+1 === 2" class="orange-text"><i mz-icon-mdi [icon]="'numeric-2'" ></i></div>
         <div *ngIf="isLast && i+1 === 3" class="orange-text"><i mz-icon-mdi [icon]="'numeric-3'" ></i></div>
@@ -37,9 +36,6 @@
         <div *ngIf="isLast && i+1 === 7" class="orange-text"><i mz-icon-mdi [icon]="'numeric-8'" ></i></div>
         <div *ngIf="isLast && i+1 === 9" class="orange-text"><i mz-icon-mdi [icon]="'numeric-9'" ></i></div>
         <div *ngIf="isLast && i+1 > 9" class="orange-text"><i mz-icon-mdi [icon]="'numeric-9-plus'" ></i></div>
-
-
-
       </div>
     </mz-collection-item>
   </mz-collection>

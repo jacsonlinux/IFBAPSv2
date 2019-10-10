@@ -121,16 +121,20 @@ thead {
   color: $text-color;
 
   .card {
-    border-color: $border-color;
+    border-color: $border-color !important;
   }
 
   .card-header {
-    background-color: $bg-dark-secondary;
+    background-color: $bg-dark-secondary !important;
   }
 
   .card-body {
-    background-color: $bg-dark-primary;
+    background-color: $bg-dark-primary !important;
   }
+
+  /*mz-card {
+    background-color: $border-color !important;
+  }*/
 
   .nav-tabs {
     border-bottom-color: $border-color;
@@ -254,7 +258,7 @@ mwl-calendar-week-view-hour-segment {
   z-index: 99 !important;
   width: 100% !important;
   position: fixed !important;
-  bottom: 0 !important;
+  bottom: 5px !important;
 }
 
 .mat-horizontal-content-container {
@@ -311,7 +315,7 @@ mwl-calendar-week-view-hour-segment {
 
 .dropdown-content li>a, .dropdown-content li>span {
   color: #a0a2a3 !important;
-  background-color: #121212 !important;
+  background-color: #222222 !important;
 }
 
 .dropdown-content {

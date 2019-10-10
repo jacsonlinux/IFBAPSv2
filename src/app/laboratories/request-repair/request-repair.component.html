@@ -1,0 +1,63 @@
+<div class="container" *ngIf="!showComment; else comment">
+  <zxing-scanner
+    (scanSuccess)="scanSuccess($event)">
+  </zxing-scanner>
+</div>
+<ng-template #comment>
+  <div class="container" *ngIf="!showSpinner; else spinner">
+    <mz-card class="grey darken-4">
+      <mz-card-content>
+        <form [formGroup]="repairForm" novalidate>
+          <mz-textarea-container>
+          <textarea mz-textarea
+                    mz-validation
+                    required
+                    formControlName="comment"
+                    [label]="'Comment'"
+                    autocomplete="off"
+                    [errorMessageResource]="errorMessageResources.comment"
+                    id="comment"></textarea>
+          </mz-textarea-container>
+          <mz-checkbox-container class="right-align">
+            <input required mz-validation mz-checkbox
+                   id="agree"
+                   formControlName="agree"
+                   type="checkbox"
+                   [filledIn]="true"
+                   [label]="'I agree with the terms.'">
+          </mz-checkbox-container>
+          <mz-input-container *ngIf="!repairForm.valid; else btn">
+            <button
+              mz-button
+              [flat]="false"
+              [large]="false"
+              [float]="false"
+              [disabled]="!repairForm.valid"
+              type="button"
+            >send</button>
+          </mz-input-container>
+          <ng-template #btn>
+            <mz-input-container>
+              <button
+                class="green white-text"
+                mz-button
+                [flat]="false"
+                [large]="false"
+                [float]="false"
+                [disabled]="!repairForm.valid"
+                (click)="onSubmit()">send</button>
+            </mz-input-container>
+          </ng-template>
+        </form>
+      </mz-card-content>
+    </mz-card>
+  </div>
+</ng-template>
+<ng-template #spinner>
+  <div class="center-jack-container">
+    <mz-spinner
+      [color]="'blue'"
+      [size]="'medium'">
+    </mz-spinner>
+  </div>
+</ng-template>

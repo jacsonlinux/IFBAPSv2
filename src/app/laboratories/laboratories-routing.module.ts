@@ -1,32 +1,32 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {MaintenanceComponent} from './maintenance.component';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '../guard/auth.guard';
-import {LaboratoryComponent} from './laboratory/laboratory.component';
-import {RequestRepairComponent} from './request-repair/request-repair.component';
+import {NgModule} from '@angular/core';
+import {LaboratoriesComponent} from './laboratories.component';
 import {ComputerListComponent} from './computer-list/computer-list.component';
+import {RequestRepairComponent} from './request-repair/request-repair.component';
 import {ComputerDetailsComponent} from './computer-details/computer-details.component';
+import {LaboratoryListComponent} from './laboratory-list/laboratory-list.component';
 
-const MAINTENANCE_ROUTES: Routes = [
+const LABORATORIES_ROUTES: Routes = [
   {
-    path: '', component: MaintenanceComponent,
+    path: '', component: LaboratoriesComponent,
     children : [
-      { path: 'laboratory',
+      { path: 'laboratory-list',
         data: {title: 'LABORATORIES' },
-        component: LaboratoryComponent,
+        component: LaboratoryListComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'laboratory/:id/computer-list',
+      { path: 'laboratory-list/:id/computer-list',
         data: {title: 'COMPUTER LIST' },
         component: ComputerListComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'laboratory/:id/request-repair',
+      { path: 'laboratory-list/:id/request-repair',
         data: {title: 'REQUEST REPAIR' },
         component: RequestRepairComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'laboratory/:id/computer-details',
+      { path: 'laboratory-list/:id/computer-details',
         data: {title: 'COMPUTER DETAIL' },
         component: ComputerDetailsComponent,
         canActivate: [ AuthGuard ]
@@ -35,7 +35,7 @@ const MAINTENANCE_ROUTES: Routes = [
   }
 ];
 @NgModule({
-  imports: [ RouterModule.forChild(MAINTENANCE_ROUTES) ],
+  imports: [ RouterModule.forChild(LABORATORIES_ROUTES) ],
   exports: [ RouterModule ]
 })
-export class MaintenanceRoutingModule { }
+export class LaboratoriesRoutingModule { }
