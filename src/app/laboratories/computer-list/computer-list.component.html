@@ -13,7 +13,7 @@
       <div>{{computer['data']['system']['manufacturer']}}&nbsp;{{computer['data']['system']['model']}}</div>
       <div class="grey-text small-text">{{computer['data']['cpu']['brand']}}</div>
 
-      <div *ngIf="computer['data']['maintenance']; else maintenance" class="secondary-content"><i mz-icon-mdi [icon]="'progress-wrench'" class="orange-text"></i></div>
+      <div *ngIf="computer['data']['maintenance']['status']; else maintenance" class="secondary-content"><i mz-icon-mdi [icon]="'progress-wrench'" class="orange-text"></i></div>
       <ng-template #maintenance><div class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" class="green-text"></i></div></ng-template>
     </mz-collection-item>
   </mz-collection>

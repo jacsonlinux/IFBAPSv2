@@ -1,0 +1,14 @@
+:host zxing-scanner::ng-deep {
+  max-height: 50vh;
+  width: 50vw;
+  object-fit: contain;
+}
+
+.center-jack{
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

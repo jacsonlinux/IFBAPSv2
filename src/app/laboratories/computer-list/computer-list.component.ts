@@ -28,12 +28,12 @@ export class ComputerListComponent implements OnInit {
 
     this.laboratoriesService.currentComputer.subscribe(computer => this.computer = computer);
 
-    // this.appService.changePlaceTitle('REPAIRS');
+    this.appService.changePlaceTitle('COMPUTERS LIST');
 
   }
 
   getComputer(computer) {
-    console.log(computer)
+    console.log(computer);
     this.laboratoriesService.changeComputer(computer);
   }
 
