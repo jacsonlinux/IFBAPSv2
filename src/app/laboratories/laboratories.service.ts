@@ -72,7 +72,7 @@ export class LaboratoriesService {
                 })
                 .catch(err => err.message);
             } else  {
-              return {status: 2, message: 'Equipment already under maintenance'};
+              return {status: 2, message: 'There is an open call for this equipment'};
             }
           }
         } else {
@@ -107,7 +107,7 @@ export class LaboratoriesService {
     this.computerCollection = this.angularFirestore
       .collection<Laboratory>('laboratories')
       .doc(laboratory)
-      .collection<Computer>('computers', ref => ref.orderBy('maintenance'));
+      .collection<Computer>('computers');
 
     this.computers = this.computerCollection
       .snapshotChanges().map(actions => {
