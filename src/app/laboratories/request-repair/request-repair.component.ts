@@ -4,6 +4,7 @@ import {AppService} from '../../app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MzToastService} from 'ngx-materialize';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-request-repair',
@@ -19,6 +20,7 @@ export class RequestRepairComponent implements OnInit {
   showComment: boolean;
 
   laboratoryID;
+  userID;
 
   uuid;
 
@@ -36,6 +38,7 @@ export class RequestRepairComponent implements OnInit {
   };
 
   constructor(
+    public authenticationService: AuthenticationService,
     private laboratoriesService: LaboratoriesService,
     private appService: AppService,
     private router: Router,
@@ -47,6 +50,7 @@ export class RequestRepairComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.authenticationService.user.subscribe(res => this.userID = res.uid);
     this.laboratoryID = this.activatedRoute.snapshot.params.id;
     this.showSpinner = false;
     this.showComment = false;
@@ -70,18 +74,19 @@ export class RequestRepairComponent implements OnInit {
 
   onSubmit() {
     this.showSpinner = !this.showSpinner;
-    const comment = this.repairForm.value;
+    const data = this.repairForm.value;
+
     this.laboratoriesService
-      .repairComputer(`${this.laboratoryID}`, `${this.uuid}`, `${comment}`)
+      .repairComputer(`${this.laboratoryID}`, `${this.uuid}`, `${data.comment}`, `${this.userID}`)
       .then(res => {
-        if (res) {
-          this.showSpinner = !this.showSpinner;
-          this.router.navigate(['home']).catch(err => err.message);
-          this.toastService.show('Open call successfully.', 5000, 'green white-text center');
-        } else {
-          this.router.navigate(['laboratories/laboratory-list']).catch(err => err.message);
-          this.showSpinner = !this.showSpinner;
-          this.toastService.show('The document does not exist or is already in maintenance.', 5000, 'red darken-3 white-text center');
+        this.showSpinner = !this.showSpinner;
+        this.router.navigate(['home']).catch(err => err.message);
+        if (res.status === 1) {
+          this.toastService.show(`${res.message}`, 5000, 'green white-text center');
+        } else if (res.status === 2 ) {
+          this.toastService.show(`${res.message}`, 5000, 'yellow darken-3 white-text center');
+        } else if (res.status === 3) {
+          this.toastService.show(`${res.message}`, 5000, 'red darken-3 white-text center');
         }
       })
       .catch(err => err.message);

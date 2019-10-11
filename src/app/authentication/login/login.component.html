@@ -10,8 +10,7 @@
     </div>
   </header>
   <form [formGroup]="logInForm" novalidate>
-
-    <mz-input-container>
+    <!--<mz-input-container>
       <input mz-input mz-validation required
              id="email"
              formControlName="email"
@@ -19,8 +18,8 @@
              autocomplete="off"
              [errorMessageResource]="errorMessageResources.email"
              [label]="'Email'" />
-    </mz-input-container>
-    <mz-input-container >
+    </mz-input-container>-->
+    <!--<mz-input-container >
       <input mz-input mz-validation required
              id="password"
              formControlName="password"
@@ -28,8 +27,8 @@
              autocomplete="off"
              [errorMessageResource]="errorMessageResources.password"
              [label]="'Password'" />
-    </mz-input-container>
-    <mz-input-container *ngIf="!logInForm.valid; else btn">
+    </mz-input-container>-->
+    <!--<mz-input-container *ngIf="!logInForm.valid; else btn">
       <button
         mz-button
         [flat]="false"
@@ -38,8 +37,7 @@
         [disabled]="!logInForm.valid"
         type="button"
       >log In</button>
-    </mz-input-container>
-
+    </mz-input-container>-->
     <mz-input-container>
       <button
         mz-button
@@ -50,12 +48,11 @@
         (click)="logInGoogle()"
       >sign in with google</button>
     </mz-input-container>
-
-    <mz-input-container>
+    <!--<mz-input-container>
       <a class="grey-text left" routerLink="../registration">Sign up here!</a>
       <a class="grey-text right" routerLink="../forgot-password">Forgot password?</a>
-    </mz-input-container>
-    <ng-template #btn>
+    </mz-input-container>-->
+    <!--<ng-template #btn>
       <mz-input-container>
         <button
           (click)="captchaRef.execute()"
@@ -67,15 +64,14 @@
           [disabled]="!logInForm.valid"
           type="submit">log in</button>
       </mz-input-container>
-    </ng-template>
-    <re-captcha
+    </ng-template>-->
+    <!--<re-captcha
       theme="dark"
       #captchaRef="reCaptcha"
       siteKey="6LevM7UUAAAAAP26cW0Hn4j31GWa-teO9iutE8T7"
       size="invisible"
       (resolved)="$event && onSubmit($event)"
-    ></re-captcha>
-
+    ></re-captcha>-->
   </form>
     <div class="footer">
       <mz-dropdown
