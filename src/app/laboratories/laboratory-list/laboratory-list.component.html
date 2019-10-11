@@ -1,7 +1,7 @@
-<div class="container">
+
   <mz-collection *ngIf="(authenticationService.user | async)?.email !== 'jacsonlinux@gmail.com'; else technical">
     <mz-collection-item
-      (click)="clickPlace(laboratory.data.description)"
+      (click)="getLaboratory({'id': laboratory.id, 'data': laboratory.data})"
       *ngFor="let laboratory of laboratories | async"
       mz-collection-link
       routerLink="{{laboratory.id}}/request-repair"
@@ -12,11 +12,11 @@
       <div class="grey-text">{{laboratory.data.description}}</div>
     </mz-collection-item>
   </mz-collection>
-</div>
+
 <ng-template #technical>
   <mz-collection>
     <mz-collection-item
-      (click)="clickPlace(laboratory.data.description)"
+      (click)="getLaboratory({'id': laboratory.id, 'data': laboratory.data})"
       *ngFor="let laboratory of laboratories | async"
       mz-collection-link
       routerLink="{{laboratory.id}}/computer-list"

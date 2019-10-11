@@ -25,6 +25,9 @@ export class LaboratoriesService {
   private computerSource = new BehaviorSubject(null);
   currentComputer = this.computerSource.asObservable();
 
+  private laboratorySource = new BehaviorSubject(null);
+  currentLaboratory = this.laboratorySource.asObservable();
+
   laboratoryCollection: AngularFirestoreCollection<any>;
   laboratories: Observable<any>;
 
@@ -80,6 +83,36 @@ export class LaboratoriesService {
         }
       })
       .catch(err => err.message);
+  }
+
+  repair(laboratory, uuid) {
+
+    this.computerDoc = this.angularFirestore
+      .collection<Laboratory>('laboratories')
+      .doc(laboratory)
+      .collection<Computer>('computers')
+      .doc(uuid);
+
+    return this.computerDoc
+      .ref
+      .get()
+      .then(documentSnapshot => {
+        if (documentSnapshot.exists) {
+
+          return this.computerDoc
+            .update({maintenance: {status: false}})
+            .then(() => {
+              return {status: 1, message: 'Close call successfully' };
+            } )
+            .catch(err => err.message);
+
+        } else {
+          return {status: 2, message: 'Document does not exist in database'};
+        }
+      })
+      .catch(err => err.message);
+
+
   }
 
   getLaboratories() {
@@ -138,6 +171,10 @@ export class LaboratoriesService {
 
   changeComputer(computer) {
     this.computerSource.next(computer);
+  }
+
+  changeLaboratory(laboratory) {
+    this.laboratorySource.next(laboratory);
   }
 
 }

@@ -1,5 +1,18 @@
-<div class="container">
   <mz-collapsible *ngIf="computer" mode="accordion" [popout]="false">
+    <mz-collapsible-item *ngIf="computer?.maintenance?.status">
+      <mz-collapsible-item-header>
+        <i mz-icon-mdi [icon]="'arrow-collapse-vertical'"></i>MAINTENANCE
+      </mz-collapsible-item-header>
+      <mz-collapsible-item-body>
+        <p>Comment: </p>
+        <p class="grey darken-4 grey-text" style="border-radius: 5px; padding: 5px">
+          {{computer.maintenance.comment}}</p>
+        <p>
+          <i mz-icon-mdi [icon]="'at'" class="grey-text" [size]="'16px'" [align]="'left'"></i>
+          {{computer.maintenance.user}}</p>
+        <button (click)="repair(computer.system.uuid)" mz-button [float]="false" [flat]="true" [large]="false" class="green white-text">repair</button>
+      </mz-collapsible-item-body>
+    </mz-collapsible-item>
     <mz-collapsible-item>
       <mz-collapsible-item-header>
         <i mz-icon-mdi [icon]="'arrow-collapse-vertical'"></i>BASEBOARD
@@ -212,4 +225,3 @@
       </mz-collapsible-item-body>
     </mz-collapsible-item>
   </mz-collapsible>
-</div>

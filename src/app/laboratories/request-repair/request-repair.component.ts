@@ -50,7 +50,7 @@ export class RequestRepairComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.authenticationService.user.subscribe(res => this.userID = res.uid);
+    this.authenticationService.user.subscribe(res => this.userID = res.email);
     this.laboratoryID = this.activatedRoute.snapshot.params.id;
     this.showSpinner = false;
     this.showComment = false;

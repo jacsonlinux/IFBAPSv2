@@ -23,8 +23,9 @@ export class LaboratoryListComponent implements OnInit {
     console.log('PlaceComponent');
   }
 
-  clickPlace(place) {
-    this.appService.changePlaceTitle(`${place}`);
+  getLaboratory(laboratory) {
+    this.appService.changePlaceTitle(`${laboratory.data.description}`);
+    this.laboratoriesService.changeLaboratory(laboratory);
   }
 
   ngOnInit() {
