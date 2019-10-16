@@ -6,6 +6,7 @@ import {ComputerListComponent} from './computer-list/computer-list.component';
 import {RequestRepairComponent} from './request-repair/request-repair.component';
 import {ComputerDetailsComponent} from './computer-details/computer-details.component';
 import {LaboratoryListComponent} from './laboratory-list/laboratory-list.component';
+import {RepairListComponent} from './repair-list/repair-list.component';
 
 const LABORATORIES_ROUTES: Routes = [
   {
@@ -16,7 +17,12 @@ const LABORATORIES_ROUTES: Routes = [
         component: LaboratoryListComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'laboratory-list/:id/computer-list',
+      { path: 'repair-list',
+        data: {title: 'REPAIR LIST' },
+        component: RepairListComponent,
+        canActivate: [ AuthGuard ]
+      },
+      { path: 'computer-list',
         data: {title: 'COMPUTER LIST' },
         component: ComputerListComponent,
         canActivate: [ AuthGuard ]
@@ -26,7 +32,7 @@ const LABORATORIES_ROUTES: Routes = [
         component: RequestRepairComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'laboratory-list/:id/computer-details',
+      { path: 'computer-details',
         data: {title: 'COMPUTER DETAIL' },
         component: ComputerDetailsComponent,
         canActivate: [ AuthGuard ]
@@ -39,3 +45,9 @@ const LABORATORIES_ROUTES: Routes = [
   exports: [ RouterModule ]
 })
 export class LaboratoriesRoutingModule { }
+
+/*{ path: 'laboratory-list/:id/computer-details',
+  data: {title: 'COMPUTER DETAIL' },
+  component: ComputerDetailsComponent,
+  canActivate: [ AuthGuard ]
+}*/

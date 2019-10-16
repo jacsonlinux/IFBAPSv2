@@ -40,8 +40,12 @@ export class LoginComponent implements OnInit {
   }
 
   logInGoogle() {
+    this.showFormLogin = false;
     this.authenticationService.logInGoogle()
-      .then(() => {this.router.navigate(['/home']); })
+      .then(() => {this.router.navigate(['/home'])
+        .then(() => this.showFormLogin = true)
+        .catch(err => err.message);
+      })
       .catch(err => err.message );
   }
 

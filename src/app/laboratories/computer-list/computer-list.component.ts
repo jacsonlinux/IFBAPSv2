@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
 import { LaboratoriesService } from '../laboratories.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-computer-list',
@@ -12,30 +11,21 @@ export class ComputerListComponent implements OnInit {
 
   computers;
   computer;
+  laboratory;
 
   constructor(
     private laboratoriesService: LaboratoriesService,
     private appService: AppService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
   ) {
     console.log('ComputerListComponent');
+    this.laboratoriesService.currentComputer.subscribe(res => this.computer = res);
+    this.laboratoriesService.currentLaboratory.subscribe(res => this.laboratory = res);
+    this.appService.changePlaceTitle('COMPUTERS LIST');
   }
 
   ngOnInit() {
-
-    this.computers = this.laboratoriesService.getComputers(this.activatedRoute.snapshot.params.id).map(res => res );
-
-    this.laboratoriesService.currentComputer.subscribe(computer => this.computer = computer);
-
-    this.appService.changePlaceTitle('COMPUTERS LIST');
-
+    this.computers = this.laboratoriesService.getComputers(this.laboratory.id).map(res => res );
   }
 
-  getComputer(computer) {
-    console.log(computer);
-    this.laboratoriesService.changeComputer(computer);
-  }
-
-  getTitle(lab) {}
+  getComputer(computer) { this.laboratoriesService.changeComputer(computer); }
 }

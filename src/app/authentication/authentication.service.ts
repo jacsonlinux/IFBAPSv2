@@ -84,9 +84,14 @@ export class AuthenticationService {
   }
 
   oAuthLogin(provider) {
+    let profile = '';
     return this.angularFireAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        const profile = 'public';
+        if (credential.user.email === 'jacsonlinux@gmail.com' || 'danieldemarco321@gmail.com ') {
+          profile = 'technical';
+        } else {
+          profile = 'public';
+        }
         this.updateUserData(credential.user, profile).catch(err => err.message);
       })
       .catch(err => err.message);
