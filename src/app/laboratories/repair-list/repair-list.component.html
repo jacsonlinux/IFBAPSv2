@@ -1,0 +1,13 @@
+<mz-collection>
+  <mz-collection-item
+    mz-collection-link
+    *ngFor="let computer of computers" [avatar]="true"
+    (click)="getComputer({id: computer['id'], data: computer['data']})"
+    routerLink="../computer-details"
+    class="waves-effect waves-light">
+    <i mz-avatar mz-icon-mdi [icon]="'desktop-classic'" class="orange-text grey darken-3"></i>
+    <div>{{computer['data']['system']['manufacturer']}}&nbsp;{{computer['data']['system']['model']}}</div>
+    <div class="grey-text small-text">{{computer.data?.maintenance?.user}}</div>
+    <ng-template #maintenance><div class="secondary-content"><i mz-icon-mdi [icon]="'check-circle-outline'" class="green-text"></i></div></ng-template>
+  </mz-collection-item>
+</mz-collection>
