@@ -1,25 +1,23 @@
-
-  <mz-collection *ngIf="(authenticationService.user | async)?.email !== 'jacsonlinux@gmail.com'; else technical">
-    <mz-collection-item
-      (click)="getLaboratory({'id': laboratory.id, 'data': laboratory.data})"
-      *ngFor="let laboratory of laboratories | async"
-      mz-collection-link
-      routerLink="{{laboratory.id}}/request-repair"
-      [avatar]="true"
-      class="waves-effect waves-light">
-      <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue-text grey darken-3"></i>
-      <div class="title">{{laboratory.data.code}}</div>
-      <div class="grey-text">{{laboratory.data.description}}</div>
-    </mz-collection-item>
-  </mz-collection>
-
+<mz-collection *ngIf="(authenticationService.user | async)?.profile !== 'technical'; else technical">
+  <mz-collection-item
+    (click)="getLaboratory({'id': laboratory['id'], 'data': laboratory['data']})"
+    *ngFor="let laboratory of laboratories | async"
+    mz-collection-link
+    routerLink="{{laboratory.id}}/request-repair"
+    [avatar]="true"
+    class="waves-effect waves-light">
+    <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="blue-text grey darken-3"></i>
+    <div class="title">{{laboratory.data.code}}</div>
+    <div class="grey-text">{{laboratory.data.description}}</div>
+  </mz-collection-item>
+</mz-collection>
 <ng-template #technical>
   <mz-collection>
     <mz-collection-item
-      (click)="getLaboratory({'id': laboratory.id, 'data': laboratory.data})"
+      (click)="getLaboratory({id: laboratory['id'], data: laboratory['data']})"
       *ngFor="let laboratory of laboratories | async"
       mz-collection-link
-      routerLink="{{laboratory.id}}/computer-list"
+      routerLink="../computer-list"
       [avatar]="true"
       class="waves-effect waves-light">
       <i mz-avatar mz-icon-mdi [icon]="'map-marker'" class="green-text grey darken-3"></i>

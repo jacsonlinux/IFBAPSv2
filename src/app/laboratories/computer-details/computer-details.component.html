@@ -1,16 +1,16 @@
   <mz-collapsible *ngIf="computer" mode="accordion" [popout]="false">
-    <mz-collapsible-item *ngIf="computer?.maintenance?.status">
+    <mz-collapsible-item *ngIf="computer.data?.maintenance?.status">
       <mz-collapsible-item-header>
         <i mz-icon-mdi [icon]="'arrow-collapse-vertical'"></i>MAINTENANCE
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
         <p>Comment: </p>
         <p class="grey darken-4 grey-text" style="border-radius: 5px; padding: 5px">
-          {{computer.maintenance.comment}}</p>
+          {{computer.data.maintenance.comment}}</p>
         <p>
           <i mz-icon-mdi [icon]="'at'" class="grey-text" [size]="'16px'" [align]="'left'"></i>
-          {{computer.maintenance.user}}</p>
-        <button (click)="repair(computer.system.uuid)" mz-button [float]="false" [flat]="true" [large]="false" class="green white-text">repair</button>
+          {{computer.data.maintenance.user}}</p>
+        <button (click)="repair(computer.data.system.uuid)" mz-button [float]="false" [flat]="true" [large]="false" class="green white-text">repair</button>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>
@@ -20,23 +20,23 @@
       <mz-collapsible-item-body>
         <p>
           <i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
-          AssetTag - {{computer.baseboard.assetTag}}
+          AssetTag - {{computer.data.baseboard.assetTag}}
         </p>
         <p>
           <i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
-          Manufacturer - {{computer.baseboard.manufacturer}}
+          Manufacturer - {{computer.data.baseboard.manufacturer}}
         </p>
         <p>
           <i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
-          Model - {{computer.baseboard.model}}
+          Model - {{computer.data.baseboard.model}}
         </p>
         <p>
           <i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
-          Serial - {{computer.baseboard.serial}}
+          Serial - {{computer.data.baseboard.serial}}
         </p>
         <p>
           <i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
-          Version - {{computer.baseboard.version}}
+          Version - {{computer.data.baseboard.version}}
         </p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
@@ -46,10 +46,10 @@
         BIOS
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Release Date - {{computer.bios.releaseDate}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Revision - {{computer.bios.revision}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Vendor - {{computer.bios.vendor}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Version - {{computer.bios.version}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Release Date - {{computer.data.bios.releaseDate}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Revision - {{computer.data.bios.revision}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Vendor - {{computer.data.bios.vendor}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Version - {{computer.data.bios.version}}</p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>
@@ -58,26 +58,26 @@
         CPU
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Brand - {{computer.cpu.brand}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Brand - {{computer.data.cpu.brand}}</p>
         <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>
           Cache -
-          {{computer.cpu.cache['l1d']}},
-          {{computer.cpu.cache['l1i']}},
-          {{computer.cpu.cache['l2']}},
-          {{computer.cpu.cache['l3']}}
+          {{computer.data.cpu.cache['l1d']}},
+          {{computer.data.cpu.cache['l1i']}},
+          {{computer.data.cpu.cache['l2']}},
+          {{computer.data.cpu.cache['l3']}}
         </p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Cores - {{computer.cpu.cores}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Family - {{computer.cpu.family}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Flags - {{computer.cpu.flags}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Manufacturer - {{computer.cpu.manufacturer}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Model - {{computer.cpu.model}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Revision - {{computer.cpu.revision}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed - {{computer.cpu.speed}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed Max.{{computer.cpu.speedmax}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed Min.{{computer.cpu.speedmin}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Stepping - {{computer.cpu.stepping}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Vendor - {{computer.cpu.vendor}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Voltagem - {{computer.cpu.voltagem}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Cores - {{computer.data.cpu.cores}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Family - {{computer.data.cpu.family}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Flags - {{computer.data.cpu.flags}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Manufacturer - {{computer.data.cpu.manufacturer}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Model - {{computer.data.cpu.model}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Revision - {{computer.data.cpu.revision}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed - {{computer.data.cpu.speed}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed Max.{{computer.data.cpu.speedmax}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Speed Min.{{computer.data.cpu.speedmin}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Stepping - {{computer.data.cpu.stepping}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Vendor - {{computer.data.cpu.vendor}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Voltagem - {{computer.data.cpu.voltagem}}</p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>
@@ -86,7 +86,7 @@
         NET
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <div *ngFor="let device of computer.net; let i = index">
+        <div *ngFor="let device of computer.data.net; let i = index">
           <b class="orange-text">Interface - {{i}} </b>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>IFACE - {{device.iface}}</p>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>IPv4 Address - {{device.ip4}}</p>
@@ -102,7 +102,7 @@
         DISK
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <div *ngFor="let disk of computer.diskLayout; let i = index">
+        <div *ngFor="let disk of computer.data.diskLayout; let i = index">
           <b class="orange-text">Disk - {{i}}</b>
           <p ><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Bytes Per Sector - {{disk.bytesPerSector}}</p>
           <p ><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Firmware Revision - {{disk.firmwareRevision}}</p>
@@ -126,7 +126,7 @@
         GRAPHICS
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <div *ngFor="let controller of computer.graphics.controllers, let i = index">
+        <div *ngFor="let controller of computer.data.graphics.controllers, let i = index">
           <b class="orange-text">Controller - {{i}}</b>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Bus - {{controller.bus}}</p>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Model - {{controller.model}}</p>
@@ -134,7 +134,7 @@
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>VRAM - {{controller.vram}}</p>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>VRAM Dynamic - {{controller.vramDynamic}}</p>
         </div>
-        <div *ngFor="let display of computer.graphics.displays; let i = index">
+        <div *ngFor="let display of computer.data.graphics.displays; let i = index">
           <b class="orange-text">Display - {{i}}</b>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Builtin - {{display.builtin}}</p>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Connection - {{display.connection}}</p>
@@ -154,7 +154,7 @@
         MEMORY RAM
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <div *ngFor="let slot of computer.memLayout; let i = index">
+        <div *ngFor="let slot of computer.data.memLayout; let i = index">
           <b class="orange-text">Slot - {{i}} </b>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Bank - {{slot.bank}}</p>
           <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Size - {{slot.size}}</p>
@@ -176,22 +176,22 @@
         VERSIONS
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Kernel - {{computer.versions.kernel}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>OpenSSL - {{computer.versions.openssl}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Node- {{computer.versions.node}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>V8 - {{computer.versions.v8}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>NPM - {{computer.versions.npm}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Yarn - {{computer.versions.yarn}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>PM2 - {{computer.versions.pm2}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Gulp - {{computer.versions.gulp}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Grunt - {{computer.versions.grunt}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Git - {{computer.versions.git}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>TSC - {{computer.versions.tsc}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>MySql - {{computer.versions.mysql}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Redis - {{computer.versions.redis}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>MongoDB - {{computer.versions.mongodb}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>NgInx - {{computer.versions.nginx}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>PHP - {{computer.versions.php}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Kernel - {{computer.data.versions.kernel}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>OpenSSL - {{computer.data.versions.openssl}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Node- {{computer.data.versions.node}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>V8 - {{computer.data.versions.v8}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>NPM - {{computer.data.versions.npm}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Yarn - {{computer.data.versions.yarn}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>PM2 - {{computer.data.versions.pm2}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Gulp - {{computer.data.versions.gulp}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Grunt - {{computer.data.versions.grunt}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Git - {{computer.data.versions.git}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>TSC - {{computer.data.versions.tsc}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>MySql - {{computer.data.versions.mysql}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Redis - {{computer.data.versions.redis}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>MongoDB - {{computer.data.versions.mongodb}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>NgInx - {{computer.data.versions.nginx}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>PHP - {{computer.data.versions.php}}</p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>
@@ -200,14 +200,14 @@
         O. SYSTEM
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Platform - {{computer.os.platform}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Distro - {{computer.os.distro}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Release - {{computer.os.release}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Codename - {{computer.os.codename}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Kernel - {{computer.os.kernel}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Arch - {{computer.os.arch}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Hostname - {{computer.os.hostname}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Logofile - {{computer.os.logofile}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Platform - {{computer.data.os.platform}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Distro - {{computer.data.os.distro}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Release - {{computer.data.os.release}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Codename - {{computer.data.os.codename}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Kernel - {{computer.data.os.kernel}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Arch - {{computer.data.os.arch}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Hostname - {{computer.data.os.hostname}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Logofile - {{computer.data.os.logofile}}</p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>
@@ -216,12 +216,12 @@
         SYSTEM
       </mz-collapsible-item-header>
       <mz-collapsible-item-body>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Manufacturer - {{computer.system.manufacturer}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Model - {{computer.system.model}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Version- {{computer.system.version}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Serial - {{computer.system.serial}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>UUID - {{computer.system.uuid}}</p>
-        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>SKU - {{computer.system.sku}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Manufacturer - {{computer.data.system.manufacturer}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Model - {{computer.data.system.model}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Version- {{computer.data.system.version}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>Serial - {{computer.data.system.serial}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>UUID - {{computer.data.system.uuid}}</p>
+        <p><i mz-icon-mdi [icon]="'menu-right'" [size]="'16px'" [align]="'left'"></i>SKU - {{computer.data.system.sku}}</p>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
   </mz-collapsible>

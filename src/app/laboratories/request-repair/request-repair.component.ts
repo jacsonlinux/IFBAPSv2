@@ -21,6 +21,8 @@ export class RequestRepairComponent implements OnInit {
 
   laboratoryID;
   userID;
+  userEmail;
+  userPhoto;
 
   uuid;
 
@@ -50,7 +52,8 @@ export class RequestRepairComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.authenticationService.user.subscribe(res => this.userID = res.email);
+    this.authenticationService.user.subscribe(res => this.userEmail = res.email);
+    this.authenticationService.user.subscribe(res => this.userPhoto = res.photoURL);
     this.laboratoryID = this.activatedRoute.snapshot.params.id;
     this.showSpinner = false;
     this.showComment = false;
@@ -77,7 +80,7 @@ export class RequestRepairComponent implements OnInit {
     const data = this.repairForm.value;
 
     this.laboratoriesService
-      .repairComputer(`${this.laboratoryID}`, `${this.uuid}`, `${data.comment}`, `${this.userID}`)
+      .repairComputer(`${this.laboratoryID}`, `${this.uuid}`, `${data.comment}`, `${this.userEmail}`)
       .then(res => {
         this.showSpinner = !this.showSpinner;
         this.router.navigate(['home']).catch(err => err.message);

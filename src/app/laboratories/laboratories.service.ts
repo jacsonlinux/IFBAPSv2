@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from '@angular/fire/firestore';
 
 export interface Laboratory {
   block: string;
@@ -40,10 +44,21 @@ export class LaboratoriesService {
   laboratoryDoc: AngularFirestoreDocument<any>;
   laboratory: Observable<any>;
 
-  constructor(
-    private angularFirestore: AngularFirestore
-  ) { console.log('MaintenanceService'); }
+  constructor(private angularFirestore: AngularFirestore ) { console.log('MaintenanceService'); }
 
+  getComputerInMaintenance() {
+    const collection = this.angularFirestore
+      .collectionGroup('computers', ref => ref
+        .where('maintenance.status', '==', true));
+    this.computers = collection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Computer;
+        const id = a.payload.doc.id;
+        return { id, data };
+      });
+    });
+    return this.computers;
+  }
 
   repairComputer(laboratory: string, uuid: string, comment: string, user: string) {
 
