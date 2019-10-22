@@ -7,6 +7,7 @@ import {RequestRepairComponent} from './request-repair/request-repair.component'
 import {ComputerDetailsComponent} from './computer-details/computer-details.component';
 import {LaboratoryListComponent} from './laboratory-list/laboratory-list.component';
 import {RepairListComponent} from './repair-list/repair-list.component';
+import {ComputerScanComponent} from './computer-scan/computer-scan.component';
 
 const LABORATORIES_ROUTES: Routes = [
   {
@@ -35,6 +36,11 @@ const LABORATORIES_ROUTES: Routes = [
       { path: 'computer-details',
         data: {title: 'COMPUTER DETAIL' },
         component: ComputerDetailsComponent,
+        canActivate: [ AuthGuard ]
+      },
+      { path: 'computer-scan',
+        data: {title: 'COMPUTER SCAN' },
+        component: ComputerScanComponent,
         canActivate: [ AuthGuard ]
       }
     ]

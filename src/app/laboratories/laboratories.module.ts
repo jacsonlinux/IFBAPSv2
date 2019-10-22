@@ -19,10 +19,11 @@ import {LaboratoriesComponent} from './laboratories.component';
 import {LaboratoryListComponent} from './laboratory-list/laboratory-list.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { RepairListComponent } from './repair-list/repair-list.component';
+import { ComputerScanComponent } from './computer-scan/computer-scan.component';
 
 @NgModule({
 
-  declarations: [LaboratoriesComponent, ComputerDetailsComponent, RequestRepairComponent, ComputerListComponent, LaboratoryListComponent, RepairListComponent],
+  declarations: [LaboratoriesComponent, ComputerDetailsComponent, RequestRepairComponent, ComputerListComponent, LaboratoryListComponent, RepairListComponent, ComputerScanComponent],
   imports: [
     CommonModule,
     LaboratoriesRoutingModule,

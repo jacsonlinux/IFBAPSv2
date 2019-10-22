@@ -31,7 +31,7 @@ export class RequestRepairComponent implements OnInit {
   errorMessageResources = {
     comment: {
       required: 'Comment is required.',
-      minlength: 'Cannot be less than 50 characters.',
+      minlength: 'Cannot be less than 20 characters.',
       maxlength: 'It can not be longer than 100 characters.'
     },
     agree: {
@@ -63,7 +63,7 @@ export class RequestRepairComponent implements OnInit {
     this.repairForm = this.formBuilder.group({
       comment: [null, Validators.compose([
         Validators.required,
-        Validators.minLength(50),
+        Validators.minLength(20),
         Validators.maxLength(100)
       ])],
       agree: [this.agree]

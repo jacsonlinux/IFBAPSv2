@@ -1,0 +1,9 @@
+<div class="container center-jack">
+  <div class="row center grey-text">
+    <p>QR code scan</p>
+    <i mz-icon-mdi [icon]="'qrcode-scan'" class="orange-text"></i>
+  </div>
+  <zxing-scanner
+    (scanSuccess)="scanSuccess($event)">
+  </zxing-scanner>
+</div>

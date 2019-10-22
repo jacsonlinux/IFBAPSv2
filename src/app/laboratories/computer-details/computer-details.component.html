@@ -10,7 +10,8 @@
         <p>
           <i mz-icon-mdi [icon]="'at'" class="grey-text" [size]="'16px'" [align]="'left'"></i>
           {{computer.data.maintenance.user}}</p>
-        <button (click)="repair(computer.data.system.uuid)" mz-button [float]="false" [flat]="true" [large]="false" class="green white-text">repair</button>
+        <button routerLink="../computer-scan" mz-button [float]="false" [flat]="true" [large]="false" class="green white-text">scan</button>
+        <button (click)="repair(computer.data.system.uuid)" mz-button [float]="false" [flat]="true" [large]="false" class="right blue white-text">repair</button>
       </mz-collapsible-item-body>
     </mz-collapsible-item>
     <mz-collapsible-item>

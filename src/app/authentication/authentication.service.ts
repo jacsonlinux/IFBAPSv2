@@ -87,7 +87,7 @@ export class AuthenticationService {
     let profile = '';
     return this.angularFireAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        if (credential.user.email === 'jacsonlinux@gmail.com' || 'danieldemarco321@gmail.com') {
+        if ((credential.user.email === 'jacsonlinux@gmail.com') || (credential.user.email === 'danieldemarco321@gmail.com')) {
           profile = 'technical';
         } else {
           profile = 'public';
