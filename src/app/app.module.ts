@@ -22,7 +22,7 @@ import { AuthGuard } from './guard/auth.guard';
 import {
   MzButtonModule, MzCheckboxModule, MzDropdownModule, MzFeatureDiscoveryModule, MzIconMdiModule, MzInputModule,
   MzMediaModule, MzNavbarModule,
-  MzSidenavModule, MzSpinnerModule, MzSwitchModule
+  MzSidenavModule, MzSpinnerModule, MzSwitchModule, MzToastModule
 } from 'ngx-materialize';
 
 import { AngularFireModule } from '@angular/fire';
@@ -30,6 +30,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TechnicalGuard } from './guard/technical.guard';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { MessagingService } from './messaging.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { TechnicalGuard } from './guard/technical.guard';
     MzNavbarModule,
     MzSpinnerModule,
     MzSidenavModule,
+    MzToastModule,
     MzDropdownModule,
     MzMediaModule,
     MzInputModule,
@@ -58,13 +61,14 @@ import { TechnicalGuard } from './guard/technical.guard';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
+    AngularFireMessagingModule,
     AppRoutingModule,
     MzSwitchModule,
     MzCheckboxModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ AuthGuard, TechnicalGuard, ServerGuard, Title],
+  providers: [ AuthGuard, TechnicalGuard, ServerGuard, Title, MessagingService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -109,7 +109,7 @@ export class AuthenticationService {
       profile
     };
     return userRef
-      .set(data)
+      .set(data, {merge: true})
       .then(() => 'Document successfully written!')
       .catch(err => err.message);
   }
